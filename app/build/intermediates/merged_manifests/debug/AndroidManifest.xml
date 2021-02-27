@@ -197,7 +197,9 @@
             android:taskAffinity="com.ztk.lock"
             android:theme="@style/LockScreenTheme" />
 
-        <receiver android:name="com.xzh.musicnotification.view.MusicWidget" >
+        <service android:name="com.xzh.musicnotification.service.PlayServiceV2" />
+
+        <receiver android:name="com.xzh.widget.MusicWidget" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -206,8 +208,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/music_widget_info" />
         </receiver>
-
-        <service android:name="com.xzh.musicnotification.service.PlayServiceV2" />
 
         <activity
             android:name="com.xzh.varydesktopicons.VaryDesktopIconsActivity"

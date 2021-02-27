@@ -88,7 +88,10 @@ public class MusicNotificationV2 {
                     .setCustomContentView(mSmallRemoteViews);
 
             if (config != null && config.get("icon") != null) {
-                builder.setSmallIcon(Icon.createWithBitmap(ImageUtils.GetLocalOrNetBitmap(config.getString("icon"))));
+                Bitmap bitmap = ImageUtils.GetLocalOrNetBitmap(config.getString("icon"));
+                if (bitmap != null) {
+                    builder.setSmallIcon(Icon.createWithBitmap(bitmap));
+                }
             }
 
             mNotification = builder.build();
@@ -104,18 +107,10 @@ public class MusicNotificationV2 {
         String packageName = mContext.getPackageName();
 
         mSmallRemoteViews = new RemoteViews(packageName, R.layout.notification_small_layout);
-        mSmallRemoteViews.setTextViewText(R.id.title_view, "songName");
-        mSmallRemoteViews.setTextViewText(R.id.tip_view, "artistsName");
-        mSmallRemoteViews.setImageViewResource(R.id.next_view, R.mipmap.note_btn_next_white);
+        mSmallRemoteViews.setTextViewText(R.id.title_view, "开启美好的一天");
 
         mRemoteViews = new RemoteViews(packageName, R.layout.notification_big_layout);
-        mRemoteViews.setTextViewText(R.id.title_view, "songName");
-        mRemoteViews.setTextViewText(R.id.tip_view, "artistsName");
-
-        mRemoteViews.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_love_white);
-        mRemoteViews.setImageViewResource(R.id.play_view, R.mipmap.note_btn_play_white);
-        mRemoteViews.setImageViewResource(R.id.previous_view, R.mipmap.note_btn_pre_white);
-        mRemoteViews.setImageViewResource(R.id.next_view, R.mipmap.note_btn_next_white);
+        mRemoteViews.setTextViewText(R.id.title_view, "开启美好的一天");
 
         PendingIntentInfo.addOnClickPendingIntents(mRemoteViews, mContext,
                 //点击播放按钮要发送的广播

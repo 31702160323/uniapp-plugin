@@ -104,7 +104,10 @@ public class MusicNotificationModule extends UniModule {
 
     @UniJSMethod(uiThread = false)
     public void playOrPause(JSONObject options) {
-        if (mServiceV2 != null) mServiceV2.playOrPause(options.getBoolean("playing"));
+//        if (mServiceV2 != null) mServiceV2.playOrPause(options.getBoolean("playing"));
+        Intent intent = new Intent(PlayServiceV2.NotificationReceiver.ACTION_STATUS_BAR);
+        intent.putExtra(PlayServiceV2.NotificationReceiver.EXTRA, PlayServiceV2.NotificationReceiver.EXTRA_PLAY);
+        intent.putExtra("playing", options.getBoolean("playing"));
     }
 
     @UniJSMethod(uiThread = false)

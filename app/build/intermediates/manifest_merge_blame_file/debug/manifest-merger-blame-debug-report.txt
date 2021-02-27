@@ -357,27 +357,27 @@
 198            android:theme="@style/LockScreenTheme" />
 198-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:13-51
 199
-200        <receiver android:name="com.xzh.musicnotification.view.MusicWidget" >
-200-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:9-30:20
-200-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:19-76
-201            <intent-filter>
-201-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:23:13-25:29
-202                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-202-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:17-84
-202-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:25-81
-203            </intent-filter>
-204
-205            <meta-data
-205-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:27:13-29:61
-206                android:name="android.appwidget.provider"
-206-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:28:17-58
-207                android:resource="@xml/music_widget_info" />
-207-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:29:17-58
-208        </receiver>
-209
-210        <service android:name="com.xzh.musicnotification.service.PlayServiceV2" />
-210-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:32:9-83
-210-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:32:18-80
+200        <service android:name="com.xzh.musicnotification.service.PlayServiceV2" />
+200-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:9-83
+200-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:18-80
+201
+202        <receiver android:name="com.xzh.widget.MusicWidget" >
+202-->[widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:12:9-20:20
+202-->[widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:12:19-60
+203            <intent-filter>
+203-->[widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:13:13-15:29
+204                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+204-->[widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:14:17-84
+204-->[widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:14:25-81
+205            </intent-filter>
+206
+207            <meta-data
+207-->[widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:17:13-19:61
+208                android:name="android.appwidget.provider"
+208-->[widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:18:17-58
+209                android:resource="@xml/music_widget_info" />
+209-->[widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:19:17-58
+210        </receiver>
 211
 212        <activity
 212-->[:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-41:20
