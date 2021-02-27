@@ -10,7 +10,8 @@ MERGED from [msa_mdid_1.0.13.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\b0
 MERGED from [uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\87fb0862f41002dc90f4195a29744297\uniapp-v8-release\AndroidManifest.xml:20:1-37:12
 MERGED from [com.android.support:multidex:1.0.2] D:\xu\.gradle\caches\transforms-2\files-2.1\e4a82643ad98586b76417c3c65a791f3\multidex-1.0.2\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-v4:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\39d32ed3c5b2614c8b2516bcce734346\support-v4-28.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-35:12
+MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-25:12
+MERGED from [widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:2:1-23:12
 MERGED from [:filepicker] D:\htmlFile\UniPlugin-Hello-AS\filepicker\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-12:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\384c481b110fe6da039624c0bab7e154\appcompat-v7-28.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:recyclerview-v7:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\1f3b2a0ab93102f90a1522a7376cec51\recyclerview-v7-28.0.0\AndroidManifest.xml:17:1-22:12
@@ -125,8 +126,10 @@ MERGED from [lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files
 MERGED from [lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\8f0bbd6d339623f4b657bdca201df683\lib.5plus.base-release\AndroidManifest.xml:158:5-241:19
 MERGED from [uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\87fb0862f41002dc90f4195a29744297\uniapp-v8-release\AndroidManifest.xml:29:5-35:19
 MERGED from [uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\87fb0862f41002dc90f4195a29744297\uniapp-v8-release\AndroidManifest.xml:29:5-35:19
-MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-33:19
-MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-33:19
+MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-23:19
+MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-23:19
+MERGED from [widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:11:5-21:19
+MERGED from [widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:11:5-21:19
 MERGED from [com.github.bumptech.glide:glide:4.9.0] D:\xu\.gradle\caches\transforms-2\files-2.1\2beb0005435e53af0c6dff807ee6f688\glide-4.9.0\AndroidManifest.xml:10:5-20
 MERGED from [com.github.bumptech.glide:glide:4.9.0] D:\xu\.gradle\caches\transforms-2\files-2.1\2beb0005435e53af0c6dff807ee6f688\glide-4.9.0\AndroidManifest.xml:10:5-20
 MERGED from [:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-42:19
@@ -249,6 +252,8 @@ MERGED from [com.android.support:support-v4:28.0.0] D:\xu\.gradle\caches\transfo
 MERGED from [com.android.support:support-v4:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\39d32ed3c5b2614c8b2516bcce734346\support-v4-28.0.0\AndroidManifest.xml:20:5-44
 MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:7:5-9:41
+MERGED from [widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:7:5-9:41
 MERGED from [:filepicker] D:\htmlFile\UniPlugin-Hello-AS\filepicker\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:filepicker] D:\htmlFile\UniPlugin-Hello-AS\filepicker\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\384c481b110fe6da039624c0bab7e154\appcompat-v7-28.0.0\AndroidManifest.xml:20:5-44
@@ -503,26 +508,26 @@ ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification
 		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-48
 	android:name
 		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-68
-receiver#com.xzh.musicnotification.view.MusicWidget
-ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:9-30:20
-	android:name
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:19-76
-intent-filter#action:name:android.appwidget.action.APPWIDGET_UPDATE
-ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:23:13-25:29
-action#android.appwidget.action.APPWIDGET_UPDATE
-ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:17-84
-	android:name
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:25-81
-meta-data#android.appwidget.provider
-ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:27:13-29:61
-	android:resource
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:29:17-58
-	android:name
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:28:17-58
 service#com.xzh.musicnotification.service.PlayServiceV2
-ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:32:9-83
+ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:9-83
 	android:name
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:32:18-80
+		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:18-80
+receiver#com.xzh.widget.MusicWidget
+ADDED from [widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:12:9-20:20
+	android:name
+		ADDED from [widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:12:19-60
+intent-filter#action:name:android.appwidget.action.APPWIDGET_UPDATE
+ADDED from [widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:13:13-15:29
+action#android.appwidget.action.APPWIDGET_UPDATE
+ADDED from [widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:14:17-84
+	android:name
+		ADDED from [widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:14:25-81
+meta-data#android.appwidget.provider
+ADDED from [widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:17:13-19:61
+	android:resource
+		ADDED from [widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:19:17-58
+	android:name
+		ADDED from [widget-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4f788e54996c3dad4280223f92d850e3\widget-release\AndroidManifest.xml:18:17-58
 activity#com.xzh.varydesktopicons.VaryDesktopIconsActivity
 ADDED from [:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-41:20
 	android:enabled

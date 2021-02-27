@@ -1,7 +1,7 @@
 # compiler: R8
 # compiler_version: 2.0.99
 # min_api: 26
-# pg_map_id: aa9d960
+# pg_map_id: 7433319
 # common_typos_disable
 android.arch.core.executor.ArchTaskExecutor -> android.arch.core.a.a:
     android.arch.core.executor.ArchTaskExecutor sInstance -> c
@@ -36027,21 +36027,22 @@ com.xzh.filepicker.BuildConfig -> com.xzh.filepicker.BuildConfig:
     7:7:void <clinit>() -> <clinit>
     6:6:void <init>() -> <init>
 com.xzh.filepicker.FilePickerModule -> com.xzh.filepicker.FilePickerModule:
-    107:107:void <clinit>() -> <clinit>
+    121:121:void <clinit>() -> <clinit>
     18:18:void <init>() -> <init>
-    22:34:void filterSortFileByName(io.dcloud.feature.uniapp.bridge.UniJSCallback) -> filterSortFileByName
-    115:115:java.lang.String getFileDate(java.io.File) -> getFileDate
-    91:103:java.lang.String getFileSize(java.io.File) -> getFileSize
+    22:33:void filterSortFileByName(io.dcloud.feature.uniapp.bridge.UniJSCallback) -> filterSortFileByName
+    37:48:void filterSortFileByName(java.lang.String,io.dcloud.feature.uniapp.bridge.UniJSCallback) -> filterSortFileByName
+    129:129:java.lang.String getFileDate(java.io.File) -> getFileDate
+    105:117:java.lang.String getFileSize(java.io.File) -> getFileSize
 com.xzh.filepicker.FilePickerModule$FileInfo -> com.xzh.filepicker.FilePickerModule$FileInfo:
-    36:36:void <init>(com.xzh.filepicker.FilePickerModule) -> <init>
-    55:55:java.lang.String getFileDate() -> getFileDate
-    43:43:java.lang.String getFileName() -> getFileName
-    47:47:java.lang.String getFileSize() -> getFileSize
-    51:51:java.lang.String getFileType() -> getFileType
-    74:75:com.xzh.filepicker.FilePickerModule$FileInfo setFileDate(java.lang.String) -> setFileDate
-    59:60:com.xzh.filepicker.FilePickerModule$FileInfo setFileName(java.lang.String) -> setFileName
-    64:65:com.xzh.filepicker.FilePickerModule$FileInfo setFileSize(java.lang.String) -> setFileSize
-    69:70:com.xzh.filepicker.FilePickerModule$FileInfo setFileType(java.lang.String) -> setFileType
+    50:50:void <init>(com.xzh.filepicker.FilePickerModule) -> <init>
+    69:69:java.lang.String getFileDate() -> getFileDate
+    57:57:java.lang.String getFileName() -> getFileName
+    61:61:java.lang.String getFileSize() -> getFileSize
+    65:65:java.lang.String getFileType() -> getFileType
+    88:89:com.xzh.filepicker.FilePickerModule$FileInfo setFileDate(java.lang.String) -> setFileDate
+    73:74:com.xzh.filepicker.FilePickerModule$FileInfo setFileName(java.lang.String) -> setFileName
+    78:79:com.xzh.filepicker.FilePickerModule$FileInfo setFileSize(java.lang.String) -> setFileSize
+    83:84:com.xzh.filepicker.FilePickerModule$FileInfo setFileType(java.lang.String) -> setFileType
 com.xzh.musicnotification.BuildConfig -> com.xzh.musicnotification.BuildConfig:
     7:7:void <clinit>() -> <clinit>
     6:6:void <init>() -> <init>
@@ -36108,47 +36109,46 @@ com.xzh.musicnotification.MusicNotificationModule$SongBean -> com.xzh.musicnotif
     241:247:void <init>() -> <init>
 com.xzh.musicnotification.notification.MusicNotificationV2 -> com.xzh.musicnotification.notification.MusicNotificationV2:
     21:21:void <init>() -> <init>
-    197:198:void cancel() -> cancel
-    188:194:void favour(boolean) -> favour
+    200:201:void cancel() -> cancel
+    191:197:void favour(boolean) -> favour
     33:33:com.xzh.musicnotification.notification.MusicNotificationV2 getInstance() -> getInstance
-    201:201:android.app.Notification getNotification() -> getNotification
-    44:98:void initNotification(java.lang.Object,com.alibaba.fastjson.JSONObject) -> initNotification
-    104:137:void initRemoteViews() -> initRemoteViews
-    172:180:void playOrPause(boolean) -> playOrPause
-    145:164:void updateSong(com.alibaba.fastjson.JSONObject) -> updateSong
+    204:204:android.app.Notification getNotification() -> getNotification
+    44:101:void initNotification(java.lang.Object,com.alibaba.fastjson.JSONObject) -> initNotification
+    107:140:void initRemoteViews() -> initRemoteViews
+    175:183:void playOrPause(boolean) -> playOrPause
+    148:167:void updateSong(com.alibaba.fastjson.JSONObject) -> updateSong
 com.xzh.musicnotification.notification.MusicNotificationV2$SingletonHolder -> com.xzh.musicnotification.notification.MusicNotificationV2$SingletonHolder:
     37:37:void <clinit>() -> <clinit>
     36:36:void <init>() -> <init>
     36:36:com.xzh.musicnotification.notification.MusicNotificationV2 access$000() -> access$000
 com.xzh.musicnotification.service.PlayServiceV2 -> com.xzh.musicnotification.service.PlayServiceV2:
     35:45:void <init>() -> <init>
-    35:35:com.xzh.musicnotification.service.PlayServiceV2 access$000() -> access$000
-    35:35:void access$100(android.content.Intent) -> access$100
-    166:168:void addCallback(java.lang.String,io.dcloud.feature.uniapp.bridge.UniJSCallback) -> addCallback
-    180:189:void cencel() -> cencel
-    150:159:void favour(boolean) -> favour
-    171:171:com.alibaba.fastjson.JSONObject getSongData() -> getSongData
-    259:265:void handleCommandIntent(android.content.Intent) -> handleCommandIntent
+    35:35:void access$000(android.content.Intent) -> access$000
+    35:35:com.xzh.musicnotification.service.PlayServiceV2 access$100() -> access$100
+    169:171:void addCallback(java.lang.String,io.dcloud.feature.uniapp.bridge.UniJSCallback) -> addCallback
+    183:192:void cencel() -> cencel
+    153:162:void favour(boolean) -> favour
+    174:174:com.alibaba.fastjson.JSONObject getSongData() -> getSongData
+    262:268:void handleCommandIntent(android.content.Intent) -> handleCommandIntent
     104:105:void initNotification(com.alibaba.fastjson.JSONObject) -> initNotification
     108:121:void initWidget() -> initWidget
-    162:163:void lock(boolean) -> lock
+    165:166:void lock(boolean) -> lock
     85:85:android.os.IBinder onBind(android.content.Intent) -> onBind
     64:75:void onCreate() -> onCreate
     90:96:void onDestroy() -> onDestroy
     100:101:void onNotificationInit() -> onNotificationInit
     79:79:int onStartCommand(android.content.Intent,int,int) -> onStartCommand
-    138:147:void playOrPause(boolean) -> playOrPause
-    175:176:void setActivity(com.xzh.musicnotification.LockActivityV2) -> setActivity
+    141:150:void playOrPause(boolean) -> playOrPause
+    178:179:void setActivity(com.xzh.musicnotification.LockActivityV2) -> setActivity
     48:54:java.lang.ref.WeakReference startMusicService(android.content.Context) -> startMusicService
     58:60:void stopMusicService(android.content.Context) -> stopMusicService
-    124:135:void update(com.alibaba.fastjson.JSONObject) -> update
+    124:138:void update(com.alibaba.fastjson.JSONObject) -> update
 com.xzh.musicnotification.service.PlayServiceV2$NotificationReceiver -> com.xzh.musicnotification.service.PlayServiceV2$NotificationReceiver:
-    195:195:void <clinit>() -> <clinit>
-    194:201:void <init>() -> <init>
-    205:255:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    197:204:void <init>() -> <init>
+    208:258:void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.xzh.musicnotification.service.PlayServiceV2$ServiceBinder -> com.xzh.musicnotification.service.PlayServiceV2$ServiceBinder:
-    267:267:void <init>(com.xzh.musicnotification.service.PlayServiceV2) -> <init>
-    269:269:com.xzh.musicnotification.service.PlayServiceV2 getInstance() -> getInstance
+    270:270:void <init>(com.xzh.musicnotification.service.PlayServiceV2) -> <init>
+    272:272:com.xzh.musicnotification.service.PlayServiceV2 getInstance() -> getInstance
 com.xzh.musicnotification.utils.ImageUtils -> com.xzh.musicnotification.utils.ImageUtils:
     16:16:void <init>() -> <init>
     31:41:android.graphics.Bitmap GetLocalOrNetBitmap(java.lang.String) -> GetLocalOrNetBitmap
@@ -36166,12 +36166,6 @@ com.xzh.musicnotification.view.HintTextView -> com.xzh.musicnotification.view.Hi
     33:37:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
     57:69:void onDraw(android.graphics.Canvas) -> onDraw
     42:53:void onSizeChanged(int,int,int,int) -> onSizeChanged
-com.xzh.musicnotification.view.MusicWidget -> com.xzh.musicnotification.view.MusicWidget:
-    15:15:void <init>() -> <init>
-    56:58:void onDisabled(android.content.Context) -> onDisabled
-    47:50:void onEnabled(android.content.Context) -> onEnabled
-    38:41:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]) -> onUpdate
-    20:33:void updateAppWidget(android.content.Context,android.appwidget.AppWidgetManager,int) -> updateAppWidget
 com.xzh.musicnotification.view.SlidingFinishLayout -> com.xzh.musicnotification.view.SlidingFinishLayout:
     49:58:void <init>(android.content.Context) -> <init>
     53:58:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
@@ -36190,6 +36184,20 @@ com.xzh.varydesktopicons.VaryDesktopIconsModule -> com.xzh.varydesktopicons.Vary
     10:10:void <init>() -> <init>
     33:39:void setAlias() -> setAlias
     19:25:void setDefaultAlias() -> setDefaultAlias
+com.xzh.widget.BuildConfig -> com.xzh.widget.BuildConfig:
+    6:6:void <init>() -> <init>
+com.xzh.widget.MusicWidget -> com.xzh.widget.MusicWidget:
+    14:14:void <init>() -> <init>
+    87:89:void onDisabled(android.content.Context) -> onDisabled
+    78:81:void onEnabled(android.content.Context) -> onEnabled
+    63:64:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    69:72:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]) -> onUpdate
+    35:41:void openAppIntent(android.widget.RemoteViews,android.content.Context,com.xzh.widget.MusicWidget$PendingIntentInfo[]) -> openAppIntent
+    46:59:void updateAppWidget(android.content.Context,android.appwidget.AppWidgetManager,int) -> updateAppWidget
+com.xzh.widget.MusicWidget$PendingIntentInfo -> com.xzh.widget.MusicWidget$PendingIntentInfo:
+    20:23:void <init>(com.xzh.widget.MusicWidget,int,int) -> <init>
+    26:26:int getId() -> getId
+    30:30:int getIndex() -> getIndex
 dc.squareup.cookie.CookieCenter -> c.a.a.a:
     java.util.List providers -> a
     1:1:void <clinit>() -> <clinit>
