@@ -1,9 +1,7 @@
 package com.xzh.musicnotification.service;
 
 import android.app.Service;
-import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -13,16 +11,11 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.RemoteViews;
 
 import com.alibaba.fastjson.JSONObject;
 import com.taobao.weex.bridge.JSCallback;
 import com.xzh.musicnotification.LockActivityV2;
-import com.xzh.musicnotification.R;
 import com.xzh.musicnotification.notification.MusicNotificationV2;
-import com.xzh.musicnotification.utils.ImageUtils;
-import com.xzh.musicnotification.utils.PendingIntentInfo;
-import com.xzh.musicnotification.view.MusicWidget;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -36,8 +29,6 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
     private static PlayServiceV2 serviceV2;
     private JSONObject songData;
     private LockActivityV2 mActivityV2;
-    private AppWidgetManager mAppWidgetManager;
-    private RemoteViews musicWidgetView;
     private NotificationReceiver mReceiver;
 
     public boolean Favour = false;
@@ -65,13 +56,10 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         Log.d("MusicNotificationModule", "serviceV2 创建成功");
         serviceV2 = this;
         mReceiver = new NotificationReceiver();
-        mAppWidgetManager = AppWidgetManager.getInstance(this);
-        musicWidgetView = new RemoteViews(getPackageName(), R.layout.music_widget);
         final IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         filter.addAction(NotificationReceiver.ACTION_STATUS_BAR);
         registerReceiver(mReceiver, filter);
-        this.initWidget();
     }
 
     @Override
@@ -90,7 +78,6 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         super.onDestroy();
         Log.d("MusicNotificationModule", "serviceV2 销毁成功");
         serviceV2 = null;
-        this.cencel();
         unregisterReceiver(mReceiver);
         MusicNotificationV2.getInstance().cancel();
     }
@@ -104,32 +91,12 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         MusicNotificationV2.getInstance().initNotification(this, config);
     }
 
-    private void initWidget(){
-        PendingIntentInfo.addOnClickPendingIntents(musicWidgetView, this,
-                //点击播放按钮要发送的广播
-                new PendingIntentInfo(R.id.play_view, 1,PlayServiceV2.NotificationReceiver.EXTRA_PLAY),
-                //点击上一首按钮要发送的广播
-                new PendingIntentInfo(R.id.previous_view, 2,PlayServiceV2.NotificationReceiver.EXTRA_PRE),
-                //点击下一首按钮要发送的广播
-                new PendingIntentInfo(R.id.next_view, 3,PlayServiceV2.NotificationReceiver.EXTRA_NEXT),
-                //点击收藏按钮要发送的广播
-                new PendingIntentInfo(R.id.favourite_view, 4,PlayServiceV2.NotificationReceiver.EXTRA_FAV)
-        );
-
-        // Instruct the widget manager to update the widget
-        mAppWidgetManager.updateAppWidget(new ComponentName(this, MusicWidget.class), musicWidgetView);
-    }
-
     public void update(JSONObject options){
         songData = options;
         Favour = options.getBoolean("favour");
         if (mActivityV2 != null) mActivityV2.updateUI(options);
 
         this.favour(Favour);
-        musicWidgetView.setTextViewText(R.id.title_view, options.getString("songName"));
-        musicWidgetView.setTextViewText(R.id.tip_view, options.getString("artistsName"));
-        musicWidgetView.setImageViewBitmap(R.id.image_view, ImageUtils.GetLocalOrNetBitmap(String.valueOf(options.getString("picUrl"))));
-        mAppWidgetManager.updateAppWidget(new ComponentName(this, MusicWidget.class), musicWidgetView);
 
         MusicNotificationV2.getInstance().updateSong(options);
     }
@@ -137,24 +104,12 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
     public void playOrPause(boolean playing){
         Playing = playing;
         if (mActivityV2 != null) mActivityV2.playOrPause(playing);
-        if (playing) {
-            musicWidgetView.setImageViewResource(R.id.play_view, R.mipmap.note_btn_pause_white);
-        } else {
-            musicWidgetView.setImageViewResource(R.id.play_view, R.mipmap.note_btn_play_white);
-        }
-        mAppWidgetManager.updateAppWidget(new ComponentName(this, MusicWidget.class), musicWidgetView);
         MusicNotificationV2.getInstance().playOrPause(playing);
     }
 
     public void favour(boolean isFavour){
         Favour = isFavour;
         if (mActivityV2 != null) mActivityV2.favour(isFavour);
-        if (isFavour) {
-            musicWidgetView.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_loved);
-        } else {
-            musicWidgetView.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_love_white);
-        }
-        mAppWidgetManager.updateAppWidget(new ComponentName(this, MusicWidget.class), musicWidgetView);
         MusicNotificationV2.getInstance().favour(isFavour);
     }
 
@@ -175,24 +130,11 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         mActivityV2 = activityV2;
     }
 
-    private void cencel(){
-        //打开应用
-        PendingIntentInfo.openAppIntent(musicWidgetView, this,
-                new PendingIntentInfo(R.id.play_view, 1),
-                new PendingIntentInfo(R.id.previous_view, 2),
-                new PendingIntentInfo(R.id.next_view, 3),
-                new PendingIntentInfo(R.id.favourite_view, 4)
-        );
-
-        // Instruct the widget manager to update the widget
-        mAppWidgetManager.updateAppWidget(new ComponentName(this, MusicWidget.class), musicWidgetView);
-    }
-
     /**
      * 接收Notification发送的广播
      */
     public static class NotificationReceiver extends BroadcastReceiver {
-        public static final String ACTION_STATUS_BAR = serviceV2.getPackageName() + ".NOTIFICATION_ACTIONS";
+        public static final String ACTION_STATUS_BAR = "com.xzh.musicnotification.service.PlayServiceV2.NotificationReceiver.NOTIFICATION_ACTIONS";
         public static final String EXTRA = "extra";
         public static final String EXTRA_PLAY = "play_pause";
         public static final String EXTRA_NEXT = "play_next";
@@ -214,8 +156,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
             JSCallback object = null;
             switch (extra) {
                 case EXTRA_PLAY:
-                    serviceV2.Playing = !serviceV2.Playing;
-                    serviceV2.playOrPause(serviceV2.Playing);
+                    serviceV2.playOrPause(intent.getBooleanExtra("playing", false));
                     if (serviceV2.mCallback.get(EXTRA_PLAY) != null) {
                         object = serviceV2.mCallback.get(EXTRA_PLAY);
                         break;
