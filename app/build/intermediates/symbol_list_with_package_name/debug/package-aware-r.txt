@@ -598,6 +598,7 @@ dimen tooltip_precise_anchor_threshold
 dimen tooltip_vertical_padding
 dimen tooltip_y_offset_non_touch
 dimen tooltip_y_offset_touch
+dimen widget_margin
 drawable abc_ab_share_pack_mtrl_alpha
 drawable abc_action_bar_item_background_material
 drawable abc_btn_borderless_material
@@ -685,6 +686,7 @@ drawable abc_vector_test
 drawable ad_dcloud_main_ad_tag
 drawable ad_dcloud_main_skip_bg
 drawable ad_dcloud_main_skip_shape
+drawable bg_radius
 drawable dcloud_about_buttons_bg
 drawable dcloud_about_buttons_button_bg
 drawable dcloud_actionsheet_bottom_normal
@@ -1088,6 +1090,7 @@ layout dcloud_streamapp_custom_dialog_layout
 layout dcloud_tabbar_item
 layout dcloud_tabbar_mid
 layout dcloud_weex_debug_progress
+layout music_widget
 layout notification_action
 layout notification_action_tombstone
 layout notification_big_layout
@@ -1159,6 +1162,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string add_widget
 string app_name
 string bg
 string dcloud_choose_an_action
@@ -1603,3 +1607,4 @@ styleable View android_theme android_focusable paddingEnd paddingStart theme
 styleable ViewBackgroundHelper android_background backgroundTint backgroundTintMode
 styleable ViewStubCompat android_id android_layout android_inflatedId
 xml dcloud_file_provider
+xml music_widget_info
