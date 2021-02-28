@@ -1,7 +1,7 @@
 # compiler: R8
 # compiler_version: 2.0.99
 # min_api: 26
-# pg_map_id: 3f3cb0e
+# pg_map_id: 6b6c945
 # common_typos_disable
 android.arch.core.executor.ArchTaskExecutor -> android.arch.core.a.a:
     android.arch.core.executor.ArchTaskExecutor sInstance -> c
@@ -36054,7 +36054,7 @@ com.xzh.musicnotification.LockActivityV2 -> com.xzh.musicnotification.LockActivi
     28:28:android.widget.TextView access$300(com.xzh.musicnotification.LockActivityV2) -> access$300
     28:28:android.widget.ImageView access$400(com.xzh.musicnotification.LockActivityV2) -> access$400
     28:28:android.widget.ImageView access$500(com.xzh.musicnotification.LockActivityV2) -> access$500
-    213:218:void favour(boolean) -> favour
+    213:221:void favour(boolean) -> favour
     78:97:void fullScreen(android.app.Activity) -> fullScreen
     100:114:void initView() -> initView
     155:155:void onBackPressed() -> onBackPressed
@@ -36078,9 +36078,9 @@ com.xzh.musicnotification.LockActivityV2$3$1 -> com.xzh.musicnotification.LockAc
     191:191:void <init>(com.xzh.musicnotification.LockActivityV2$3,android.graphics.Bitmap) -> <init>
     194:198:void run() -> run
 com.xzh.musicnotification.LockActivityV2$TimeChangeReceiver -> com.xzh.musicnotification.LockActivityV2$TimeChangeReceiver:
-    220:220:void <init>(com.xzh.musicnotification.LockActivityV2) -> <init>
-    220:220:void <init>(com.xzh.musicnotification.LockActivityV2,com.xzh.musicnotification.LockActivityV2$1) -> <init>
-    224:224:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    223:223:void <init>(com.xzh.musicnotification.LockActivityV2) -> <init>
+    223:223:void <init>(com.xzh.musicnotification.LockActivityV2,com.xzh.musicnotification.LockActivityV2$1) -> <init>
+    227:227:void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.xzh.musicnotification.MusicNotificationModule -> com.xzh.musicnotification.MusicNotificationModule:
     30:30:void <init>() -> <init>
     30:30:com.xzh.musicnotification.service.PlayServiceV2 access$000(com.xzh.musicnotification.MusicNotificationModule) -> access$000
@@ -36191,10 +36191,10 @@ com.xzh.widget.MusicWidget -> com.xzh.widget.MusicWidget:
     127:137:android.graphics.Bitmap GetLocalOrNetBitmap(java.lang.String) -> GetLocalOrNetBitmap
     68:75:void addOnClickPendingIntents(android.widget.RemoteViews,android.content.Context,com.xzh.widget.MusicWidget$PendingIntentInfo[]) -> addOnClickPendingIntents
     96:111:void initWidget(android.content.Context) -> initWidget
-    212:214:void onDisabled(android.content.Context) -> onDisabled
-    203:206:void onEnabled(android.content.Context) -> onEnabled
-    143:189:void onReceive(android.content.Context,android.content.Intent) -> onReceive
-    194:197:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]) -> onUpdate
+    210:212:void onDisabled(android.content.Context) -> onDisabled
+    201:204:void onEnabled(android.content.Context) -> onEnabled
+    143:187:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    192:195:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]) -> onUpdate
     59:65:void openAppIntent(android.widget.RemoteViews,android.content.Context,com.xzh.widget.MusicWidget$PendingIntentInfo[]) -> openAppIntent
     80:93:void updateAppWidget(android.content.Context,android.appwidget.AppWidgetManager,int) -> updateAppWidget
 com.xzh.widget.MusicWidget$PendingIntentInfo -> com.xzh.widget.MusicWidget$PendingIntentInfo:
