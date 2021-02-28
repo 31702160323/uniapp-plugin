@@ -66,7 +66,7 @@ public class MusicWidget extends AppWidgetProvider {
 
     public void addOnClickPendingIntents(RemoteViews views, Context context, PendingIntentInfo... pendingIntentInfoList) {
         for (PendingIntentInfo item : pendingIntentInfoList) {
-            Intent playIntent = new Intent("com.xzh.musicnotification.service.PlayServiceV2$NotificationReceiver.NOTIFICATION_ACTIONS");
+            Intent playIntent = new Intent(context.getPackageName() + ".NOTIFICATION_ACTIONS");
             playIntent.putExtra("extra",
                     item.getEXTRA());
             views.setOnClickPendingIntent(item.getId(),
@@ -141,7 +141,10 @@ public class MusicWidget extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        if (intent == null || !"com.xzh.widget.MusicWidget".equals(intent.getAction())) {
+        if (intent == null ||
+                !"com.xzh.widget.MusicWidget".equals(intent.getAction()) ||
+                !context.getPackageName().equals(intent.getStringExtra("packageName"))
+        ) {
             return;
         }
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.music_widget);

@@ -34,7 +34,7 @@ repositories {
 }
 
 dependencies {
-//    implementation project(path: ':widget')
+    implementation project(path: ':widget')
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     compileOnly fileTree(include: ['uniapp-v8-release.aar'], dir: '../app/libs')
 

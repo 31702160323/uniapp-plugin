@@ -28,6 +28,7 @@ import static com.xzh.musicnotification.notification.MusicNotificationV2.NOTIFIC
 
 public class PlayServiceV2 extends Service implements MusicNotificationV2.NotificationHelperListener {
     public static final int FLAGS = 0x01000000;
+    public final String COM_XZH_WIDGET_MUSIC_WIDGET = "com.xzh.widget.MusicWidget";
     private static PlayServiceV2 serviceV2;
     private JSONObject songData;
     private LockActivityV2 mActivityV2;
@@ -59,9 +60,10 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         Log.d("MusicNotificationModule", "serviceV2 创建成功");
         serviceV2 = this;
 
-        Intent intent = new Intent("com.xzh.widget.MusicWidget");
+        Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
         intent.addFlags(FLAGS);
         intent.putExtra("type", "initWidget");
+        intent.putExtra("packageName", getPackageName());
         sendBroadcast(intent);
 
         mReceiver = new NotificationReceiver();
@@ -89,9 +91,10 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         Log.d("MusicNotificationModule", "serviceV2 销毁成功");
         serviceV2 = null;
 
-        Intent intent = new Intent("com.xzh.widget.MusicWidget");
+        Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
         intent.addFlags(FLAGS);
         intent.putExtra("type", "destroy");
+        intent.putExtra("packageName", getPackageName());
         sendBroadcast(intent);
 
         unregisterReceiver(mReceiver);
@@ -116,9 +119,10 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
 
         this.favour(Favour);
 
-        Intent intent = new Intent("com.xzh.widget.MusicWidget");
+        Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
         intent.addFlags(FLAGS);
         intent.putExtra("type", "update");
+        intent.putExtra("packageName", getPackageName());
         intent.putExtra("songName", options.getString("songName"));
         intent.putExtra("artistsName", options.getString("artistsName"));
         intent.putExtra("picUrl", options.getString("picUrl"));
@@ -132,9 +136,10 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         Playing = playing;
         if (mActivityV2 != null) mActivityV2.playOrPause(playing);
 
-        Intent intent = new Intent("com.xzh.widget.MusicWidget");
+        Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
         intent.addFlags(FLAGS);
         intent.putExtra("type", "playOrPause");
+        intent.putExtra("packageName", getPackageName());
         intent.putExtra("playing", playing);
         sendBroadcast(intent);
 
@@ -147,9 +152,10 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
             Favour = isFavour;
             if (mActivityV2 != null) mActivityV2.favour(isFavour);
 
-            Intent intent = new Intent("com.xzh.widget.MusicWidget");
+            Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
             intent.addFlags(FLAGS);
             intent.putExtra("type", "favour");
+            intent.putExtra("packageName", getPackageName());
             intent.putExtra("favour", isFavour);
             sendBroadcast(intent);
 
@@ -178,7 +184,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
      * 接收Notification发送的广播
      */
     public static class NotificationReceiver extends BroadcastReceiver {
-        public static final String ACTION_STATUS_BAR = "com.xzh.musicnotification.service.PlayServiceV2$NotificationReceiver.NOTIFICATION_ACTIONS";
+        public static final String ACTION_STATUS_BAR = serviceV2.getPackageName() + ".NOTIFICATION_ACTIONS";
         public static final String EXTRA = "extra";
         public static final String EXTRA_PLAY = "play_pause";
         public static final String EXTRA_NEXT = "play_next";
