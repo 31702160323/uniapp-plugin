@@ -1,5 +1,6 @@
 package com.xzh.musicnotification.service;
 
+import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -91,25 +92,68 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         MusicNotificationV2.getInstance().initNotification(this, config);
     }
 
+    @SuppressLint("WrongConstant")
     public void update(JSONObject options){
         songData = options;
         Favour = options.getBoolean("favour");
         if (mActivityV2 != null) mActivityV2.updateUI(options);
 
         this.favour(Favour);
+//        musicWidgetView.setTextViewText(R.id.title_view, options.getString("songName"));
+//        musicWidgetView.setTextViewText(R.id.tip_view, options.getString("artistsName"));
+//        musicWidgetView.setImageViewBitmap(R.id.image_view, ImageUtils.GetLocalOrNetBitmap(String.valueOf(options.getString("picUrl"))));
+//        mAppWidgetManager.updateAppWidget(new ComponentName(this, MusicWidget.class), musicWidgetView);
+
+        Intent intent = new Intent("com.xzh.widget.MusicWidget");
+        intent.addFlags(0x01000000);
+        intent.putExtra("type", "update");
+        intent.putExtra("songName", options.getString("songName"));
+        intent.putExtra("artistsName", options.getString("artistsName"));
+        intent.putExtra("picUrl", options.getString("picUrl"));
+        sendBroadcast(intent);
 
         MusicNotificationV2.getInstance().updateSong(options);
     }
 
+    @SuppressLint("WrongConstant")
     public void playOrPause(boolean playing){
         Playing = playing;
         if (mActivityV2 != null) mActivityV2.playOrPause(playing);
+//        if (playing) {
+//            musicWidgetView.setImageViewResource(R.id.play_view, R.mipmap.note_btn_pause_white);
+//        } else {
+//            musicWidgetView.setImageViewResource(R.id.play_view, R.mipmap.note_btn_play_white);
+//        }
+//        mAppWidgetManager.updateAppWidget(new ComponentName(this, MusicWidget.class), musicWidgetView);
+
+        Intent intent = new Intent("com.xzh.widget.MusicWidget");
+        intent.addFlags(0x01000000);
+        intent.putExtra("type", "playOrPause");
+        intent.putExtra("playing", playing);
+        sendBroadcast(intent);
+
         MusicNotificationV2.getInstance().playOrPause(playing);
     }
 
+    @SuppressLint("WrongConstant")
     public void favour(boolean isFavour){
         Favour = isFavour;
         if (mActivityV2 != null) mActivityV2.favour(isFavour);
+//        if (isFavour) {
+//            musicWidgetView.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_loved);
+//        } else {
+//            musicWidgetView.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_love_white);
+//        }
+//        mAppWidgetManager.updateAppWidget(new ComponentName(this, MusicWidget.class), musicWidgetView);
+
+        Log.d("FilePickerModule", "favour: " + isFavour);
+
+        Intent intent = new Intent("com.xzh.widget.MusicWidget");
+        intent.addFlags(0x01000000);
+        intent.putExtra("type", "favour");
+        intent.putExtra("favour", isFavour);
+        sendBroadcast(intent);
+
         MusicNotificationV2.getInstance().favour(isFavour);
     }
 
@@ -119,7 +163,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
 
     public void addCallback(String key, UniJSCallback callback){
         if (callback == null) return;
-         mCallback.put(key, callback);
+        mCallback.put(key, callback);
     }
 
     public JSONObject getSongData() {
@@ -134,7 +178,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
      * 接收Notification发送的广播
      */
     public static class NotificationReceiver extends BroadcastReceiver {
-        public static final String ACTION_STATUS_BAR = "com.xzh.musicnotification.service.PlayServiceV2.NotificationReceiver.NOTIFICATION_ACTIONS";
+        public static final String ACTION_STATUS_BAR = "com.xzh.musicnotification.service.PlayServiceV2$NotificationReceiver.NOTIFICATION_ACTIONS";
         public static final String EXTRA = "extra";
         public static final String EXTRA_PLAY = "play_pause";
         public static final String EXTRA_NEXT = "play_next";
@@ -156,7 +200,8 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
             JSCallback object = null;
             switch (extra) {
                 case EXTRA_PLAY:
-                    serviceV2.playOrPause(intent.getBooleanExtra("playing", false));
+                    serviceV2.Playing = !serviceV2.Playing;
+                    serviceV2.playOrPause(serviceV2.Playing);
                     if (serviceV2.mCallback.get(EXTRA_PLAY) != null) {
                         object = serviceV2.mCallback.get(EXTRA_PLAY);
                         break;

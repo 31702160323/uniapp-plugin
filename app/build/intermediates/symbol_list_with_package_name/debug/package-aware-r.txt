@@ -1164,7 +1164,6 @@ string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string add_widget
 string app_name
-string appwidget_text
 string bg
 string dcloud_choose_an_action
 string dcloud_gallery_app_name
