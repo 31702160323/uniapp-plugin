@@ -112,6 +112,11 @@ public class MusicNotificationV2 {
         mRemoteViews = new RemoteViews(packageName, R.layout.notification_big_layout);
         mRemoteViews.setTextViewText(R.id.title_view, "开启美好的一天");
 
+        mRemoteViews.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_love_white);
+        mRemoteViews.setImageViewResource(R.id.play_view, R.mipmap.note_btn_play_white);
+        mRemoteViews.setImageViewResource(R.id.previous_view, R.mipmap.note_btn_pre_white);
+        mRemoteViews.setImageViewResource(R.id.next_view, R.mipmap.note_btn_next_white);
+
         PendingIntentInfo.addOnClickPendingIntents(mRemoteViews, mContext,
                 //点击播放按钮要发送的广播
                 new PendingIntentInfo(R.id.play_view, 1,PlayServiceV2.NotificationReceiver.EXTRA_PLAY),

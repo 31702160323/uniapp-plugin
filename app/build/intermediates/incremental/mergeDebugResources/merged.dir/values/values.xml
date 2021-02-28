@@ -270,9 +270,8 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with <ns1:g example="Mail" id="application_name">%s</ns1:g></string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <string name="add_widget">Add widget</string>
+    <string name="add_widget">开启美好的一天</string>
     <string name="app_name">uni原生插件</string>
-    <string name="appwidget_text">EXAMPLE</string>
     <string name="bg">背景图</string>
     <string name="dcloud_choose_an_action">选择操作</string>
     <string name="dcloud_gallery_app_name">@string/app_name</string>

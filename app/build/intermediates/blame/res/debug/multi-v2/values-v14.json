@@ -4,7 +4,7 @@
             "outputFile": "D:\\htmlFile\\UniPlugin-Hello-AS\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v14\\values-v14.xml",
             "map": [
                 {
-                    "source": "D:\\xu\\.gradle\\caches\\transforms-2\\files-2.1\\4f788e54996c3dad4280223f92d850e3\\widget-release\\res\\values-v14\\values-v14.xml",
+                    "source": "D:\\htmlFile\\UniPlugin-Hello-AS\\widget\\build\\intermediates\\packaged_res\\debug\\values-v14\\values-v14.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
