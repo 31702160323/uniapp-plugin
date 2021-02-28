@@ -210,10 +210,13 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     }
 
     public void favour(boolean isFavour){
-        if (isFavour) {
-            favouriteView.setImageResource(R.mipmap.note_btn_loved);
-        } else {
-            favouriteView.setImageResource(R.mipmap.note_btn_love_white);
+        if (mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_FAV) != null) {
+            favouriteView.setVisibility(View.VISIBLE);
+            if (isFavour) {
+                favouriteView.setImageResource(R.mipmap.note_btn_loved);
+            } else {
+                favouriteView.setImageResource(R.mipmap.note_btn_love_white);
+            }
         }
     }
 
