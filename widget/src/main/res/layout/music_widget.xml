@@ -12,6 +12,7 @@
         android:layout_marginRight="10dp"
         android:layout_centerVertical="true"
         android:scaleType="fitXY"
+        android:background="#BDE7FA"
         android:contentDescription="@string/bg" />
 
     <LinearLayout
@@ -62,6 +63,7 @@
             android:gravity="center">
 
             <ImageButton
+                android:visibility="gone"
                 android:id="@+id/favourite_view"
                 android:layout_width="30dp"
                 android:layout_height="30dp"

@@ -27,6 +27,7 @@ import io.dcloud.feature.uniapp.bridge.UniJSCallback;
 import static com.xzh.musicnotification.notification.MusicNotificationV2.NOTIFICATION_ID;
 
 public class PlayServiceV2 extends Service implements MusicNotificationV2.NotificationHelperListener {
+    public static final int FLAGS = 0x01000000;
     private static PlayServiceV2 serviceV2;
     private JSONObject songData;
     private LockActivityV2 mActivityV2;
@@ -51,11 +52,18 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         context.stopService(intent);
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     public void onCreate() {
         super.onCreate();
         Log.d("MusicNotificationModule", "serviceV2 创建成功");
         serviceV2 = this;
+
+        Intent intent = new Intent("com.xzh.widget.MusicWidget");
+        intent.addFlags(FLAGS);
+        intent.putExtra("type", "initWidget");
+        sendBroadcast(intent);
+
         mReceiver = new NotificationReceiver();
         final IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_OFF);
@@ -74,11 +82,18 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         return new ServiceBinder();
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     public void onDestroy() {
         super.onDestroy();
         Log.d("MusicNotificationModule", "serviceV2 销毁成功");
         serviceV2 = null;
+
+        Intent intent = new Intent("com.xzh.widget.MusicWidget");
+        intent.addFlags(FLAGS);
+        intent.putExtra("type", "destroy");
+        sendBroadcast(intent);
+
         unregisterReceiver(mReceiver);
         MusicNotificationV2.getInstance().cancel();
     }
@@ -90,6 +105,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
 
     public void initNotification(JSONObject config) {
         MusicNotificationV2.getInstance().initNotification(this, config);
+        favour(Favour);
     }
 
     @SuppressLint("WrongConstant")
@@ -99,13 +115,9 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         if (mActivityV2 != null) mActivityV2.updateUI(options);
 
         this.favour(Favour);
-//        musicWidgetView.setTextViewText(R.id.title_view, options.getString("songName"));
-//        musicWidgetView.setTextViewText(R.id.tip_view, options.getString("artistsName"));
-//        musicWidgetView.setImageViewBitmap(R.id.image_view, ImageUtils.GetLocalOrNetBitmap(String.valueOf(options.getString("picUrl"))));
-//        mAppWidgetManager.updateAppWidget(new ComponentName(this, MusicWidget.class), musicWidgetView);
 
         Intent intent = new Intent("com.xzh.widget.MusicWidget");
-        intent.addFlags(0x01000000);
+        intent.addFlags(FLAGS);
         intent.putExtra("type", "update");
         intent.putExtra("songName", options.getString("songName"));
         intent.putExtra("artistsName", options.getString("artistsName"));
@@ -119,15 +131,9 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
     public void playOrPause(boolean playing){
         Playing = playing;
         if (mActivityV2 != null) mActivityV2.playOrPause(playing);
-//        if (playing) {
-//            musicWidgetView.setImageViewResource(R.id.play_view, R.mipmap.note_btn_pause_white);
-//        } else {
-//            musicWidgetView.setImageViewResource(R.id.play_view, R.mipmap.note_btn_play_white);
-//        }
-//        mAppWidgetManager.updateAppWidget(new ComponentName(this, MusicWidget.class), musicWidgetView);
 
         Intent intent = new Intent("com.xzh.widget.MusicWidget");
-        intent.addFlags(0x01000000);
+        intent.addFlags(FLAGS);
         intent.putExtra("type", "playOrPause");
         intent.putExtra("playing", playing);
         sendBroadcast(intent);
@@ -137,24 +143,18 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
 
     @SuppressLint("WrongConstant")
     public void favour(boolean isFavour){
-        Favour = isFavour;
-        if (mActivityV2 != null) mActivityV2.favour(isFavour);
-//        if (isFavour) {
-//            musicWidgetView.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_loved);
-//        } else {
-//            musicWidgetView.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_love_white);
-//        }
-//        mAppWidgetManager.updateAppWidget(new ComponentName(this, MusicWidget.class), musicWidgetView);
+        if (mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_FAV) != null) {
+            Favour = isFavour;
+            if (mActivityV2 != null) mActivityV2.favour(isFavour);
 
-        Log.d("FilePickerModule", "favour: " + isFavour);
+            Intent intent = new Intent("com.xzh.widget.MusicWidget");
+            intent.addFlags(FLAGS);
+            intent.putExtra("type", "favour");
+            intent.putExtra("favour", isFavour);
+            sendBroadcast(intent);
 
-        Intent intent = new Intent("com.xzh.widget.MusicWidget");
-        intent.addFlags(0x01000000);
-        intent.putExtra("type", "favour");
-        intent.putExtra("favour", isFavour);
-        sendBroadcast(intent);
-
-        MusicNotificationV2.getInstance().favour(isFavour);
+            MusicNotificationV2.getInstance().favour(isFavour);
+        }
     }
 
     public void lock(boolean locking) {

@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import com.alibaba.fastjson.JSONObject;
@@ -109,6 +110,8 @@ public class MusicNotificationV2 {
         mSmallRemoteViews = new RemoteViews(packageName, R.layout.notification_small_layout);
         mSmallRemoteViews.setTextViewText(R.id.title_view, "开启美好的一天");
 
+        mSmallRemoteViews.setImageViewResource(R.id.next_view, R.mipmap.note_btn_next_white);
+
         mRemoteViews = new RemoteViews(packageName, R.layout.notification_big_layout);
         mRemoteViews.setTextViewText(R.id.title_view, "开启美好的一天");
 
@@ -185,6 +188,7 @@ public class MusicNotificationV2 {
      * @param favourite 搜藏状态
      */
     public void favour(boolean favourite) {
+        mRemoteViews.setViewVisibility(R.id.favourite_view, View.VISIBLE);
         if (favourite) {
             mRemoteViews.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_loved);
         } else {
