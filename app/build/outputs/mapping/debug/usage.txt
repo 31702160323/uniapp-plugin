@@ -1280,6 +1280,7 @@ android.support.graphics.drawable.Animatable2Compat$AnimationCallback:
     android.graphics.drawable.Animatable2$AnimationCallback mPlatformCallback
 android.support.v7.widget.Toolbar$ExpandedActionViewMenuPresenter:
     public android.support.v7.view.menu.MenuView getMenuView(android.view.ViewGroup)
+    public void setCallback(android.support.v7.view.menu.MenuPresenter$Callback)
     public int getId()
     public android.os.Parcelable onSaveInstanceState()
     public void onRestoreInstanceState(android.os.Parcelable)
@@ -2530,8 +2531,6 @@ android.support.v7.widget.ThemeUtils:
     static final int[] ACTIVATED_STATE_SET
     static final int[] SELECTED_STATE_SET
     static final int[] NOT_PRESSED_OR_FOCUSED_STATE_SET
-bolts.BoltsExecutors:
-    private final java.util.concurrent.ScheduledExecutorService scheduled
 android.support.v7.view.menu.ListMenuItemView:
     private int mMenuType
 android.support.v7.view.StandaloneActionMode:
@@ -2545,8 +2544,6 @@ android.support.v7.app.AlertController$2:
 dc.squareup.okhttp3.internal.http2.Hpack$Writer:
     int headerTableSizeSetting
 bolts.Task:
-    public static final java.util.concurrent.ExecutorService BACKGROUND_EXECUTOR
-    public static final java.util.concurrent.Executor UI_THREAD_EXECUTOR
     private static bolts.Task TASK_CANCELLED
 android.support.v7.widget.RecyclerView$ItemAnimator$ItemHolderInfo:
     public int right
@@ -2566,6 +2563,9 @@ android.support.v7.app.AppCompatDelegateImpl$ActionBarDrawableToggleImpl:
     final synthetic android.support.v7.app.AppCompatDelegateImpl this$0
 android.support.v7.widget.ActivityChooserView$3:
     final synthetic android.support.v7.widget.ActivityChooserView this$0
+android.support.v7.widget.ActivityChooserModel:
+    public int getActivityIndex(android.content.pm.ResolveInfo)
+    public int getHistorySize()
 dc.squareup.okhttp3.internal.ws.RealWebSocket:
     static final synthetic boolean $assertionsDisabled
 dc.squareup.okhttp3.MediaType:
@@ -2718,6 +2718,12 @@ dc.squareup.okhttp3.Dispatcher:
     static final synthetic boolean $assertionsDisabled
 android.support.v7.widget.ActionMenuPresenter$OverflowMenuButton:
     private final float[] mTempPts
+android.support.v7.widget.ActivityChooserView$ActivityChooserViewAdapter:
+    public int measureContentWidth()
+    public void setMaxActivityCount(int)
+    public void setShowFooterView(boolean)
+    public int getHistorySize()
+    public void setShowDefaultActivity(boolean,boolean)
 android.support.v7.view.menu.BaseMenuPresenter:
     protected android.view.LayoutInflater mInflater
     private int mId
