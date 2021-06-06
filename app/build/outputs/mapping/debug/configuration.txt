@@ -266,7 +266,6 @@
 -keep class com.taobao.weex.WXGlobalEventReceiver { <init>(); }
 -keep class com.xzh.musicnotification.LockActivityV2 { <init>(); }
 -keep class com.xzh.musicnotification.service.PlayServiceV2 { <init>(); }
--keep class com.xzh.varydesktopicons.VaryDesktopIconsActivity { <init>(); }
 -keep class com.xzh.widget.MusicWidget { <init>(); }
 -keep class io.dcloud.PandoraEntry { <init>(); }
 -keep class io.dcloud.PandoraEntryActivity { <init>(); }
@@ -340,9 +339,6 @@
 # The proguard configuration file for the following section is D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
 
 # End of content from D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
-# The proguard configuration file for the following section is D:\htmlFile\UniPlugin-Hello-AS\filepicker\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
-
-# End of content from D:\htmlFile\UniPlugin-Hello-AS\filepicker\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
 # The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\65bf90c48b89b41813cde0a04f1b73cc\appcompat-v7-28.0.0\proguard.txt
 # Copyright (C) 2018 The Android Open Source Project
 #
@@ -400,9 +396,6 @@
 # Uncomment for DexGuard only
 #-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 # End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\9d51b4c1e0f136dc5738ce390dc5bf74\glide-4.9.0\proguard.txt
-# The proguard configuration file for the following section is D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
-
-# End of content from D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
 # The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\0c987097f99e7a4335b18a4229188bcc\support-media-compat-28.0.0\proguard.txt
 # Copyright (C) 2017 The Android Open Source Project
 #

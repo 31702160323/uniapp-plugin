@@ -24,6 +24,7 @@ public class FilePickerModule extends UniModule {
 //    public static final String TAG = FilePickerModule.class.getSimpleName();
     public static final int PICK_FILE = 1;
 
+    public static final String TXT = "text/plain";
     public static final String DOC = "application/msword";
     public static final String DOCX = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
     public static final String XLS = "application/vnd.ms-excel application/x-excel";
@@ -40,7 +41,7 @@ public class FilePickerModule extends UniModule {
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("*/*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);//多选
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{ DOC, DOCX, XLS, XLSX, PPT, PPTX, PDF });
+//        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{ TXT, DOC, DOCX, XLS, XLSX, PPT, PPTX, PDF });
         if (!(mUniSDKInstance.getContext() instanceof Activity)) {
             JSONObject callbackObject = new JSONObject();
             callbackObject.put("code", "1");

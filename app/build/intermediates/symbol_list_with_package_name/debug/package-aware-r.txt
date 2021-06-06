@@ -826,6 +826,7 @@ id blocking
 id bottom
 id bottom_content_layout
 id btn
+id btns_view
 id buttonPanel
 id cancel
 id cancel_action
@@ -911,7 +912,6 @@ id image_view
 id imgNoMedia
 id imgQueue
 id imgQueueMask
-id img_bg
 id info
 id italic
 id itemBadge
@@ -1116,7 +1116,6 @@ layout support_simple_spinner_dropdown_item
 layout webview_layout
 layout weex_recycler_layout
 mipmap icon
-mipmap logo
 mipmap note_btn_love_white
 mipmap note_btn_loved
 mipmap note_btn_next_white

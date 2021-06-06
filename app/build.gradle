@@ -60,6 +60,6 @@ dependencies {
     // 添加uni-app插件
     implementation project(path: ':musicNotification')
 //    implementation project(path: ':shortcuts')
-    implementation project(path: ':varyDesktopIcons')
-    implementation project(path: ':filepicker')
+//    implementation project(path: ':varyDesktopIcons')
+//    implementation project(path: ':filepicker')
 }
