@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -25,6 +26,8 @@ import com.xzh.musicnotification.service.PlayServiceV2;
 import com.xzh.musicnotification.utils.ImageUtils;
 import com.xzh.musicnotification.view.SlidingFinishLayout;
 
+import java.lang.ref.WeakReference;
+
 public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLayout.OnSlidingFinishListener, View.OnClickListener {
 
     private ImageView lockDate;
@@ -35,7 +38,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     private PlayServiceV2 mServiceV2;
     private ServiceConnection connection;
     private TimeChangeReceiver mReceiver;
-    private ImageView mBgImg;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
                 PlayServiceV2.ServiceBinder serviceBinder = (PlayServiceV2.ServiceBinder) iBinder;
                 mServiceV2 = serviceBinder.getInstance();
-                mServiceV2.setActivity(LockActivityV2.this);
+                mServiceV2.setActivity(new WeakReference<>(LockActivityV2.this));
                 updateUI(mServiceV2.getSongData());
             }
 
@@ -99,7 +102,6 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     private void initView() {
         SlidingFinishLayout vLockRoot = findViewById(R.id.lock_root);
         vLockRoot.setOnSlidingFinishListener(this);
-        mBgImg = findViewById(R.id.img_bg);
 
         lockDate = findViewById(R.id.iv_audio);
         tvAudioName = findViewById(R.id.tv_audio_name);
@@ -118,33 +120,40 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         JSONObject data = new JSONObject();
         data.put("success", "操作成功");
         data.put("code", 0);
-        JSCallback object = null;
 
-        if (view.getId() == R.id.previous_view) {
-            if (mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_PRE) != null) {
-                object = mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_PRE);
-            }
-        } else if (view.getId() == R.id.next_view) {
-            if (mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_NEXT) != null) {
-                object = mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_NEXT);
-            }
-        } else if (view.getId() == R.id.favourite_view) {
-            mServiceV2.Favour = !mServiceV2.Favour;
-            mServiceV2.favour(mServiceV2.Favour);
-            data.put("favourite", mServiceV2.Favour);
-            if (mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_FAV) != null) {
-                object = mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_FAV);
-            }
-        } else if (view.getId() == R.id.play_view) {
-            mServiceV2.Playing = !mServiceV2.Playing;
-            mServiceV2.playOrPause(mServiceV2.Playing);
-            if (mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_PLAY) != null) {
-                object = mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_PLAY);
-            }
-        } else {
-            data.put("success", "操作失败");
-            data.put("code", -1);
+        String EXTRA_TYPE = "";
+
+        final int viewId = view.getId();
+        final int[] ids = new int[]{ R.id.previous_view, R.id.next_view, R.id.favourite_view, R.id.play_view };
+        final String[] EXTRAS = new String[]{
+                PlayServiceV2.NotificationReceiver.EXTRA_PRE,
+                PlayServiceV2.NotificationReceiver.EXTRA_NEXT,
+                PlayServiceV2.NotificationReceiver.EXTRA_FAV,
+                PlayServiceV2.NotificationReceiver.EXTRA_PLAY
+        };
+
+        for (int i = 0; i < ids.length; i++) {
+            if (viewId != ids[i]) continue;
+            EXTRA_TYPE = EXTRAS[i];
         }
+
+        switch (EXTRA_TYPE) {
+            case PlayServiceV2.NotificationReceiver.EXTRA_FAV:
+                mServiceV2.Favour = !mServiceV2.Favour;
+                mServiceV2.favour(mServiceV2.Favour);
+                data.put("favourite", mServiceV2.Favour);
+                break;
+            case PlayServiceV2.NotificationReceiver.EXTRA_PLAY:
+                mServiceV2.Playing = !mServiceV2.Playing;
+                mServiceV2.playOrPause(mServiceV2.Playing);
+                break;
+            case "":
+                data.put("success", "操作失败");
+                data.put("code", -1);
+                break;
+        }
+
+        JSCallback object = mServiceV2.mCallback.get(EXTRA_TYPE);
         if (object != null) object.invokeAndKeepAlive(data);
     }
 
@@ -156,7 +165,6 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
     @Override
     protected void onDestroy() {
-        mServiceV2.setActivity(null);
         unbindService(connection);
         unregisterReceiver(mReceiver);
         super.onDestroy();
@@ -182,23 +190,12 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
                 }
                 favour(mServiceV2.Favour);
                 playOrPause(mServiceV2.Playing);
+
+                if (bitmap != null) bitmap.recycle();
+                bitmap = ImageUtils.GetLocalOrNetBitmap(options.getString("picUrl"));
+                if (bitmap != null) lockDate.setImageBitmap(bitmap);
             }
         });
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final Bitmap bitmap = ImageUtils.GetLocalOrNetBitmap(options.getString("picUrl"));
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (bitmap != null) {
-                            lockDate.setImageBitmap(bitmap);
-                            mBgImg.setImageBitmap(ImageUtils.doBlur(bitmap,100,false));
-                        }
-                    }
-                });
-            }
-        }).start();
     }
 
     public void playOrPause(boolean playing){

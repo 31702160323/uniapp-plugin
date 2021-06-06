@@ -11,13 +11,11 @@ MERGED from [uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\
 MERGED from [com.android.support:multidex:1.0.2] D:\xu\.gradle\caches\transforms-2\files-2.1\e45010e24d64d55505d73ea777b333af\multidex-1.0.2\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-v4:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\42e8282a5a3fd7c3b3f0d0595e2df3f6\support-v4-28.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-25:12
-MERGED from [:filepicker] D:\htmlFile\UniPlugin-Hello-AS\filepicker\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-12:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\65bf90c48b89b41813cde0a04f1b73cc\appcompat-v7-28.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:recyclerview-v7:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\9d587fb8cc0cb804af1cd50e3367561f\recyclerview-v7-28.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.facebook.fresco:fresco:1.13.0] D:\xu\.gradle\caches\transforms-2\files-2.1\29481d49fd7724fb53ea6e0f929c9eab\fresco-1.13.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.fresco:animated-gif:1.13.0] D:\xu\.gradle\caches\transforms-2\files-2.1\ef8ab90be3238996a0dd57cad3f005f1\animated-gif-1.13.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.github.bumptech.glide:glide:4.9.0] D:\xu\.gradle\caches\transforms-2\files-2.1\9d51b4c1e0f136dc5738ce390dc5bf74\glide-4.9.0\AndroidManifest.xml:2:1-12:12
-MERGED from [:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-44:12
 MERGED from [com.android.support:support-media-compat:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\0c987097f99e7a4335b18a4229188bcc\support-media-compat-28.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\fbfb7c7ced2dd9c7976f805e2a51d90e\support-fragment-28.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\31701eb015b15d8e281e57b98ad9b8fb\animated-vector-drawable-28.0.0\AndroidManifest.xml:17:1-22:12
@@ -130,8 +128,6 @@ MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotificatio
 MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-23:19
 MERGED from [com.github.bumptech.glide:glide:4.9.0] D:\xu\.gradle\caches\transforms-2\files-2.1\9d51b4c1e0f136dc5738ce390dc5bf74\glide-4.9.0\AndroidManifest.xml:10:5-20
 MERGED from [com.github.bumptech.glide:glide:4.9.0] D:\xu\.gradle\caches\transforms-2\files-2.1\9d51b4c1e0f136dc5738ce390dc5bf74\glide-4.9.0\AndroidManifest.xml:10:5-20
-MERGED from [:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-42:19
-MERGED from [:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-42:19
 MERGED from [com.android.support:support-compat:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\49dd2c14dcc57c7f4a0aa1d53483e871\support-compat-28.0.0\AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:support-compat:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\49dd2c14dcc57c7f4a0aa1d53483e871\support-compat-28.0.0\AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:versionedparcelable:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\12a7da1d020b5d39bae909480b3a5d2b\versionedparcelable-28.0.0\AndroidManifest.xml:22:5-23:19
@@ -252,8 +248,6 @@ MERGED from [com.android.support:support-v4:28.0.0] D:\xu\.gradle\caches\transfo
 MERGED from [com.android.support:support-v4:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\42e8282a5a3fd7c3b3f0d0595e2df3f6\support-v4-28.0.0\AndroidManifest.xml:20:5-44
 MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:filepicker] D:\htmlFile\UniPlugin-Hello-AS\filepicker\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:filepicker] D:\htmlFile\UniPlugin-Hello-AS\filepicker\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\65bf90c48b89b41813cde0a04f1b73cc\appcompat-v7-28.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:appcompat-v7:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\65bf90c48b89b41813cde0a04f1b73cc\appcompat-v7-28.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:recyclerview-v7:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\9d587fb8cc0cb804af1cd50e3367561f\recyclerview-v7-28.0.0\AndroidManifest.xml:20:5-44
@@ -264,8 +258,6 @@ MERGED from [com.facebook.fresco:animated-gif:1.13.0] D:\xu\.gradle\caches\trans
 MERGED from [com.facebook.fresco:animated-gif:1.13.0] D:\xu\.gradle\caches\transforms-2\files-2.1\ef8ab90be3238996a0dd57cad3f005f1\animated-gif-1.13.0\AndroidManifest.xml:5:5-7:41
 MERGED from [com.github.bumptech.glide:glide:4.9.0] D:\xu\.gradle\caches\transforms-2\files-2.1\9d51b4c1e0f136dc5738ce390dc5bf74\glide-4.9.0\AndroidManifest.xml:6:5-8:41
 MERGED from [com.github.bumptech.glide:glide:4.9.0] D:\xu\.gradle\caches\transforms-2\files-2.1\9d51b4c1e0f136dc5738ce390dc5bf74\glide-4.9.0\AndroidManifest.xml:6:5-8:41
-MERGED from [:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:support-media-compat:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\0c987097f99e7a4335b18a4229188bcc\support-media-compat-28.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-media-compat:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\0c987097f99e7a4335b18a4229188bcc\support-media-compat-28.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\fbfb7c7ced2dd9c7976f805e2a51d90e\support-fragment-28.0.0\AndroidManifest.xml:20:5-44
@@ -512,24 +504,6 @@ service#com.xzh.musicnotification.service.PlayServiceV2
 ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:9-83
 	android:name
 		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:18-80
-activity#com.xzh.varydesktopicons.VaryDesktopIconsActivity
-ADDED from [:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-41:20
-	android:enabled
-		ADDED from [:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-36
-	android:label
-		ADDED from [:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-45
-	android:hardwareAccelerated
-		ADDED from [:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:13-47
-	android:windowSoftInputMode
-		ADDED from [:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:13-55
-	android:configChanges
-		ADDED from [:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-92
-	android:icon
-		ADDED from [:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-40
-	android:theme
-		ADDED from [:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-52
-	android:name
-		ADDED from [:varyDesktopIcons] D:\htmlFile\UniPlugin-Hello-AS\varyDesktopIcons\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-77
 receiver#com.xzh.widget.MusicWidget
 ADDED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-21:20
 	android:name
