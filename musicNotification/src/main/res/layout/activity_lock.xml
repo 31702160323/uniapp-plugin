@@ -8,11 +8,12 @@
     tools:context=".LockActivityV2">
 
     <ImageView
-        android:id="@+id/img_bg"
+        android:id="@+id/iv_audio"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
         android:scaleType="centerCrop"
-        android:contentDescription="@string/bg" />
+        android:contentDescription="@string/img" />
 
     <TextClock
         android:id="@+id/lock_time"
@@ -40,20 +41,9 @@
         android:format24Hour="MM月dd日 EEEE"
         />
 
-    <ImageView
-        android:layout_below="@id/lock_date"
-        android:id="@+id/iv_audio"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/img" />
-
     <TextView
         android:id="@+id/tv_audio_name"
-        android:layout_below="@+id/iv_audio"
-        android:layout_marginTop="50dp"
+        android:layout_above="@id/tv_audio"
         android:layout_centerHorizontal="true"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
@@ -67,8 +57,9 @@
 
     <TextView
         android:id="@+id/tv_audio"
-        android:layout_below="@+id/tv_audio_name"
+        android:layout_above="@id/btns_view"
         android:layout_marginTop="6dp"
+        android:layout_marginBottom="50dp"
         android:layout_centerHorizontal="true"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -81,6 +72,7 @@
         android:textColor="#ffffff"/>
 
     <LinearLayout
+        android:id="@+id/btns_view"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="100dp"
         android:layout_width="match_parent"

@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import io.dcloud.feature.uniapp.bridge.UniJSCallback;
+import io.dcloud.feature.uniapp.utils.UniLogUtils;
 
 import static com.xzh.musicnotification.notification.MusicNotificationV2.NOTIFICATION_ID;
 
@@ -57,7 +58,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d("MusicNotificationModule", "serviceV2 创建成功");
+        UniLogUtils.i("XZH-musicNotification","serviceV2 创建成功");
         serviceV2 = this;
 
         Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
@@ -88,7 +89,6 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("MusicNotificationModule", "serviceV2 销毁成功");
         serviceV2 = null;
 
         Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
@@ -99,6 +99,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
 
         unregisterReceiver(mReceiver);
         MusicNotificationV2.getInstance().cancel();
+        UniLogUtils.i("XZH-musicNotification","serviceV2 消毁成功");
     }
 
     @Override
@@ -108,6 +109,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
 
     public void initNotification(JSONObject config) {
         MusicNotificationV2.getInstance().initNotification(this, config);
+        UniLogUtils.i("XZH-musicNotification","创建通知栏成功");
         favour(Favour);
     }
 
@@ -176,8 +178,8 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         return songData;
     }
 
-    public void setActivity(LockActivityV2 activityV2){
-        mActivityV2 = activityV2;
+    public void setActivity(WeakReference<LockActivityV2> activityV2){
+        mActivityV2 = activityV2.get();
     }
 
     /**
@@ -208,6 +210,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
                 case EXTRA_PLAY:
                     serviceV2.Playing = !serviceV2.Playing;
                     serviceV2.playOrPause(serviceV2.Playing);
+                    UniLogUtils.i("XZH-musicNotification","点击播放按钮");
                     if (serviceV2.mCallback.get(EXTRA_PLAY) != null) {
                         object = serviceV2.mCallback.get(EXTRA_PLAY);
                         break;
@@ -216,6 +219,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
                     data.put("code", -1);
                     break;
                 case EXTRA_PRE:
+                    UniLogUtils.i("XZH-musicNotification","点击上一首按钮");
                     if (serviceV2.mCallback.get(EXTRA_PRE) != null) {
                         object = serviceV2.mCallback.get(EXTRA_PRE);
                         break;
@@ -224,6 +228,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
                     data.put("code", -1);
                     break;
                 case EXTRA_NEXT:
+                    UniLogUtils.i("XZH-musicNotification","点击下一首按钮");
                     if (serviceV2.mCallback.get(EXTRA_NEXT) != null) {
                         object = serviceV2.mCallback.get(EXTRA_NEXT);
                         break;
@@ -234,6 +239,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
                 case EXTRA_FAV:
                     serviceV2.Favour = !serviceV2.Favour;
                     serviceV2.favour(serviceV2.Favour);
+                    UniLogUtils.i("XZH-musicNotification","点击搜藏按钮");
                     if (serviceV2.mCallback.get(EXTRA_FAV) != null) {
                         object = serviceV2.mCallback.get(EXTRA_FAV);
                         data.put("favourite", serviceV2.Favour);
