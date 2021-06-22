@@ -11,18 +11,16 @@ import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.alibaba.fastjson.JSONObject;
-import com.taobao.weex.bridge.JSCallback;
+import com.taobao.weex.WXSDKInstance;
 import com.xzh.musicnotification.LockActivityV2;
 import com.xzh.musicnotification.notification.MusicNotificationV2;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.WeakHashMap;
 
-import io.dcloud.feature.uniapp.bridge.UniJSCallback;
 import io.dcloud.feature.uniapp.utils.UniLogUtils;
 
 import static com.xzh.musicnotification.notification.MusicNotificationV2.NOTIFICATION_ID;
@@ -37,7 +35,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
 
     public boolean Favour = false;
     public boolean Playing = false;
-    public Map<String, UniJSCallback> mCallback = new WeakHashMap<>();
+    public WXSDKInstance mWXSDKInstance;
 
     public static WeakReference<Intent> startMusicService(Context context) {
         Intent intent = new Intent(context, PlayServiceV2.class);
@@ -60,12 +58,6 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         super.onCreate();
         UniLogUtils.i("XZH-musicNotification","serviceV2 创建成功");
         serviceV2 = this;
-
-        Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
-        intent.addFlags(FLAGS);
-        intent.putExtra("type", "initWidget");
-        intent.putExtra("packageName", getPackageName());
-        sendBroadcast(intent);
 
         mReceiver = new NotificationReceiver();
         final IntentFilter filter = new IntentFilter();
@@ -90,12 +82,6 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
     public void onDestroy() {
         super.onDestroy();
         serviceV2 = null;
-
-        Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
-        intent.addFlags(FLAGS);
-        intent.putExtra("type", "destroy");
-        intent.putExtra("packageName", getPackageName());
-        sendBroadcast(intent);
 
         unregisterReceiver(mReceiver);
         MusicNotificationV2.getInstance().cancel();
@@ -150,28 +136,25 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
 
     @SuppressLint("WrongConstant")
     public void favour(boolean isFavour){
-        if (mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_FAV) != null) {
-            Favour = isFavour;
-            if (mActivityV2 != null) mActivityV2.favour(isFavour);
+        Favour = isFavour;
+        if (mActivityV2 != null) mActivityV2.favour(isFavour);
 
-            Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
-            intent.addFlags(FLAGS);
-            intent.putExtra("type", "favour");
-            intent.putExtra("packageName", getPackageName());
-            intent.putExtra("favour", isFavour);
-            sendBroadcast(intent);
+        Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
+        intent.addFlags(FLAGS);
+        intent.putExtra("type", "favour");
+        intent.putExtra("packageName", getPackageName());
+        intent.putExtra("favour", isFavour);
+        sendBroadcast(intent);
 
-            MusicNotificationV2.getInstance().favour(isFavour);
-        }
+        MusicNotificationV2.getInstance().favour(isFavour);
     }
 
     public void lock(boolean locking) {
         mReceiver.lockActivity = locking;
     }
 
-    public void addCallback(String key, UniJSCallback callback){
-        if (callback == null) return;
-        mCallback.put(key, callback);
+    public void addWXSDKInstance(WXSDKInstance wXSDKInstance){
+        this.mWXSDKInstance = wXSDKInstance;
     }
 
     public JSONObject getSongData() {
@@ -202,54 +185,37 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
             if (lockActivity) handleCommandIntent(intent);
             String extra = intent.getStringExtra(EXTRA);
             if (extra == null) return;
-            JSONObject data = new JSONObject();
+            String eventName = "musicNotificationError";
+            Map<String, Object> data = new HashMap<>();
             data.put("success", "操作成功");
             data.put("code", 0);
-            JSCallback object = null;
             switch (extra) {
                 case EXTRA_PLAY:
                     serviceV2.Playing = !serviceV2.Playing;
                     serviceV2.playOrPause(serviceV2.Playing);
                     UniLogUtils.i("XZH-musicNotification","点击播放按钮");
-                    if (serviceV2.mCallback.get(EXTRA_PLAY) != null) {
-                        object = serviceV2.mCallback.get(EXTRA_PLAY);
-                        break;
-                    }
-                    data.put("success", "操作失败");
-                    data.put("code", -1);
+                    eventName = "musicNotificationPause";
                     break;
                 case EXTRA_PRE:
                     UniLogUtils.i("XZH-musicNotification","点击上一首按钮");
-                    if (serviceV2.mCallback.get(EXTRA_PRE) != null) {
-                        object = serviceV2.mCallback.get(EXTRA_PRE);
-                        break;
-                    }
-                    data.put("success", "操作失败");
-                    data.put("code", -1);
+                    eventName = "musicNotificationPrevious";
                     break;
                 case EXTRA_NEXT:
                     UniLogUtils.i("XZH-musicNotification","点击下一首按钮");
-                    if (serviceV2.mCallback.get(EXTRA_NEXT) != null) {
-                        object = serviceV2.mCallback.get(EXTRA_NEXT);
-                        break;
-                    }
-                    data.put("success", "操作失败");
-                    data.put("code", -1);
+                    eventName = "musicNotificationNext";
                     break;
                 case EXTRA_FAV:
                     serviceV2.Favour = !serviceV2.Favour;
                     serviceV2.favour(serviceV2.Favour);
                     UniLogUtils.i("XZH-musicNotification","点击搜藏按钮");
-                    if (serviceV2.mCallback.get(EXTRA_FAV) != null) {
-                        object = serviceV2.mCallback.get(EXTRA_FAV);
-                        data.put("favourite", serviceV2.Favour);
-                        break;
-                    }
+                    eventName = "musicNotificationFavourite";
+                    break;
+                default:
                     data.put("success", "操作失败");
                     data.put("code", -1);
                     break;
             }
-            if (object != null) object.invokeAndKeepAlive(data);
+            serviceV2.mWXSDKInstance.fireGlobalEventCallback(eventName, data);
         }
     }
 

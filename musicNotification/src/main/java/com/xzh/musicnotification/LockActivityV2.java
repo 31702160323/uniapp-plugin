@@ -7,13 +7,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,12 +22,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
-import com.taobao.weex.bridge.JSCallback;
 import com.xzh.musicnotification.service.PlayServiceV2;
 import com.xzh.musicnotification.utils.ImageUtils;
 import com.xzh.musicnotification.view.SlidingFinishLayout;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.Map;
+
+import io.dcloud.feature.uniapp.utils.UniLogUtils;
 
 public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLayout.OnSlidingFinishListener, View.OnClickListener {
 
@@ -108,6 +112,14 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         tvAudio = findViewById(R.id.tv_audio);
 
         favouriteView = findViewById(R.id.favourite_view);
+        try {
+            ApplicationInfo info = this.getPackageManager().getApplicationInfo(this.getPackageName(), PackageManager.GET_META_DATA);
+            boolean xzhFavour = info.metaData.getBoolean("xzh_favour");
+            UniLogUtils.i("XZH-musicNotification","xzh_favour" + xzhFavour);
+            if (xzhFavour) favouriteView.setVisibility(View.VISIBLE);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
         playView = findViewById(R.id.play_view);
         favouriteView.setOnClickListener(this);
         playView.setOnClickListener(this);
@@ -117,11 +129,11 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
     @Override
     public void onClick(View view) {
-        JSONObject data = new JSONObject();
+        String EXTRA_TYPE = "";
+        String eventName = "musicNotificationError";
+        Map<String, Object> data = new HashMap<>();
         data.put("success", "操作成功");
         data.put("code", 0);
-
-        String EXTRA_TYPE = "";
 
         final int viewId = view.getId();
         final int[] ids = new int[]{ R.id.previous_view, R.id.next_view, R.id.favourite_view, R.id.play_view };
@@ -138,23 +150,24 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         }
 
         switch (EXTRA_TYPE) {
+            case PlayServiceV2.NotificationReceiver.EXTRA_PLAY:
+                mServiceV2.Playing = !mServiceV2.Playing;
+                mServiceV2.playOrPause(mServiceV2.Playing);
+                eventName = "musicNotificationPause";
+                break;
             case PlayServiceV2.NotificationReceiver.EXTRA_FAV:
                 mServiceV2.Favour = !mServiceV2.Favour;
                 mServiceV2.favour(mServiceV2.Favour);
                 data.put("favourite", mServiceV2.Favour);
+                eventName = "musicNotificationFavourite";
                 break;
-            case PlayServiceV2.NotificationReceiver.EXTRA_PLAY:
-                mServiceV2.Playing = !mServiceV2.Playing;
-                mServiceV2.playOrPause(mServiceV2.Playing);
-                break;
-            case "":
+            default:
                 data.put("success", "操作失败");
                 data.put("code", -1);
                 break;
         }
 
-        JSCallback object = mServiceV2.mCallback.get(EXTRA_TYPE);
-        if (object != null) object.invokeAndKeepAlive(data);
+        mServiceV2.mWXSDKInstance.fireGlobalEventCallback(eventName, data);
     }
 
     /**
@@ -207,13 +220,10 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     }
 
     public void favour(boolean isFavour){
-        if (mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_FAV) != null) {
-            favouriteView.setVisibility(View.VISIBLE);
-            if (isFavour) {
-                favouriteView.setImageResource(R.mipmap.note_btn_loved);
-            } else {
-                favouriteView.setImageResource(R.mipmap.note_btn_love_white);
-            }
+        if (isFavour) {
+            favouriteView.setImageResource(R.mipmap.note_btn_loved);
+        } else {
+            favouriteView.setImageResource(R.mipmap.note_btn_love_white);
         }
     }
 
