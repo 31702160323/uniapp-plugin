@@ -6,6 +6,8 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -80,20 +82,7 @@ public class MusicWidget extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.music_widget);
 
         //打开应用
-        this.openAppIntent(views, context,
-                new PendingIntentInfo(R.id.image_view, 0),
-                new PendingIntentInfo(R.id.play_view, 1),
-                new PendingIntentInfo(R.id.previous_view, 2),
-                new PendingIntentInfo(R.id.next_view, 3),
-                new PendingIntentInfo(R.id.favourite_view, 4)
-        );
-
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
-    }
-
-    private void initWidget(Context context) {
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.music_widget);
+        this.openAppIntent(views, context, new PendingIntentInfo(R.id.image_view, 1));
         this.addOnClickPendingIntents(views, context,
                 //点击播放按钮要发送的广播
                 new PendingIntentInfo(R.id.play_view, 1, "play_pause"),
@@ -105,9 +94,18 @@ public class MusicWidget extends AppWidgetProvider {
                 new PendingIntentInfo(R.id.favourite_view, 4, "play_favourite")
         );
 
-        AppWidgetManager mAppWidgetManager = AppWidgetManager.getInstance(context);
+        try {
+            ApplicationInfo info = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            boolean xzhFavour = info.metaData.getBoolean("xzh_favour");
+            if (xzhFavour) {
+                views.setViewVisibility(R.id.favourite_view, View.VISIBLE);
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
         // Instruct the widget manager to update the widget
-        mAppWidgetManager.updateAppWidget(new ComponentName(context, MusicWidget.class), views);
+        appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
     /**
@@ -119,8 +117,7 @@ public class MusicWidget extends AppWidgetProvider {
      * @param path 图片路径
      * @return Bitmap
      */
-    public Bitmap GetLocalOrNetBitmap(String path) {
-        Bitmap bitmap;
+    public static Bitmap GetLocalOrNetBitmap(String path) {
         InputStream in;
         BufferedOutputStream out;
         try {
@@ -130,8 +127,15 @@ public class MusicWidget extends AppWidgetProvider {
             copy(in, out);
             out.flush();
             byte[] data = dataStream.toByteArray();
-            bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-            return bitmap;
+            //第一次采样
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            //二次采样开始//二次采样时我需要将图片加载出来显示，不能只加载图片的框架，因此inJustDecodeBounds属性要设置为false
+            options.inJustDecodeBounds = false;
+            //设置缩放比例
+            options.inSampleSize = 4;
+            options.inPreferredConfig = Bitmap.Config.ARGB_4444;
+            //加载图片并返回
+            return BitmapFactory.decodeByteArray(data, 0, data.length, options);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -153,7 +157,7 @@ public class MusicWidget extends AppWidgetProvider {
             case "update":
                 views.setTextViewText(R.id.title_view, intent.getStringExtra("songName"));
                 views.setTextViewText(R.id.tip_view, intent.getStringExtra("artistsName"));
-                views.setImageViewBitmap(R.id.image_view, this.GetLocalOrNetBitmap(intent.getStringExtra("picUrl")));
+                views.setImageViewBitmap(R.id.image_view, GetLocalOrNetBitmap(intent.getStringExtra("picUrl")));
                 break;
             case "playOrPause":
                 if (intent.getBooleanExtra("playing", false)) {
@@ -163,24 +167,11 @@ public class MusicWidget extends AppWidgetProvider {
                 }
                 break;
             case "favour":
-                views.setViewVisibility(R.id.favourite_view, View.VISIBLE);
                 if (intent.getBooleanExtra("favour", false)) {
                     views.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_loved);
                 } else {
                     views.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_love_white);
                 }
-                break;
-            case "initWidget":
-                initWidget(context);
-                break;
-            default:
-                this.openAppIntent(views, context,
-                        new PendingIntentInfo(R.id.image_view, 0),
-                        new PendingIntentInfo(R.id.play_view, 1),
-                        new PendingIntentInfo(R.id.previous_view, 2),
-                        new PendingIntentInfo(R.id.next_view, 3),
-                        new PendingIntentInfo(R.id.favourite_view, 4)
-                );
                 break;
         }
         mAppWidgetManager.updateAppWidget(new ComponentName(context, MusicWidget.class), views);

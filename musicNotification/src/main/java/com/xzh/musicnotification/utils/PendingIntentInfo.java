@@ -12,11 +12,6 @@ public class PendingIntentInfo {
     private int Index;
     private String EXTRA;
 
-    public PendingIntentInfo(int id, int index){
-        this.Id = id;
-        this.Index = index;
-    }
-
     public PendingIntentInfo(int id, int index, String EXTRA){
         this.Id = id;
         this.Index = index;
@@ -42,15 +37,6 @@ public class PendingIntentInfo {
                     item.getEXTRA());
             views.setOnClickPendingIntent( item.getId(),
                     PendingIntent.getBroadcast(context, item.getIndex(), playIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-        }
-    }
-
-    public static void openAppIntent(RemoteViews views, Context context, PendingIntentInfo... pendingIntentInfoList){
-        for (PendingIntentInfo item: pendingIntentInfoList) {
-            Intent intent = new Intent("io.dcloud.PandoraEntry");
-            intent.setClassName(context, "io.dcloud.PandoraEntryActivity");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            views.setOnClickPendingIntent(item.getId(), PendingIntent.getActivity(context, item.getIndex(), intent, PendingIntent.FLAG_UPDATE_CURRENT));
         }
     }
 }

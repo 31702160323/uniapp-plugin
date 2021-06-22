@@ -6,6 +6,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -13,6 +15,8 @@ import android.os.IBinder;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.NotificationManagerCompat;
+import android.util.ArrayMap;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -24,6 +28,7 @@ import io.dcloud.feature.uniapp.utils.UniLogUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.taobao.weex.WXSDKInstance;
 import com.xzh.musicnotification.service.PlayServiceV2;
 
 import static android.content.Context.BIND_AUTO_CREATE;
@@ -34,47 +39,41 @@ public class MusicNotificationModule extends UniModule {
 
     @UniJSMethod(uiThread = false)
     public void init(final JSONObject config, final UniJSCallback callback) {
-        try {
-            UniLogUtils.i("XZH-musicNotification","开始初始化");
-            Context context = mWXSDKInstance.getContext().getApplicationContext();
-            JSONObject data = new JSONObject();
-            if (config.get("path") == null) {
-                data.put("success", "path不能为空");
-                data.put("code", -3);
-                callback.invoke(data);
-                return;
-            }
-
-            if (config.get("icon") == null) {
-                data.put("success", "icon不能为空");
-                data.put("code", -4);
-                callback.invoke(data);
-                return;
-            }
-
-
-            connection = new ServiceConnection() {
-                @Override
-                public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                    mServiceV2 = ((PlayServiceV2.ServiceBinder) iBinder).getInstance();
-                    mServiceV2.initNotification(config);
-                    JSONObject data = new JSONObject();
-                    data.put("success", "设置歌曲信息成功");
-                    data.put("code", 0);
-                    UniLogUtils.i("XZH-musicNotification","初始化成功");
-                    callback.invoke(data);
-                }
-
-                @Override
-                public void onServiceDisconnected(ComponentName componentName) {
-
-                }
-            };
-            context.bindService(PlayServiceV2.startMusicService(context).get(), connection, BIND_AUTO_CREATE);
-        } catch (Exception e) {
-            e.printStackTrace();
-            UniLogUtils.e("XZH-musicNotification","初始化失败：" + e.getMessage());
+        Context context = mWXSDKInstance.getContext().getApplicationContext();
+        JSONObject data = new JSONObject();
+        if (config.get("path") == null) {
+            data.put("success", "path不能为空");
+            data.put("code", -3);
+            callback.invoke(data);
+            return;
         }
+
+        if (config.get("icon") == null) {
+            data.put("success", "icon不能为空");
+            data.put("code", -4);
+            callback.invoke(data);
+            return;
+        }
+
+        connection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                mServiceV2 = ((PlayServiceV2.ServiceBinder) iBinder).getInstance();
+                mServiceV2.initNotification(config);
+                mServiceV2.addWXSDKInstance(mWXSDKInstance);
+                JSONObject data = new JSONObject();
+                data.put("success", "设置歌曲信息成功");
+                data.put("code", 0);
+                UniLogUtils.i("XZH-musicNotification","初始化成功");
+                callback.invoke(data);
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName componentName) {
+
+            }
+        };
+        context.bindService(PlayServiceV2.startMusicService(context).get(), connection, BIND_AUTO_CREATE);
     }
 
     @UniJSMethod(uiThread = false)
@@ -122,26 +121,6 @@ public class MusicNotificationModule extends UniModule {
     public void cancel() {
         if (connection != null) mWXSDKInstance.getContext().getApplicationContext().unbindService(connection);
         PlayServiceV2.stopMusicService(mWXSDKInstance.getContext().getApplicationContext());
-    }
-
-    @UniJSMethod(uiThread = false)
-    public void playOrPauseCallback(UniJSCallback callback) {
-        if (mServiceV2 != null) mServiceV2.addCallback(PlayServiceV2.NotificationReceiver.EXTRA_PLAY, callback);
-    }
-
-    @UniJSMethod(uiThread = false)
-    public void lastCallback(UniJSCallback callback) {
-        if (mServiceV2 != null) mServiceV2.addCallback(PlayServiceV2.NotificationReceiver.EXTRA_PRE,callback);
-    }
-
-    @UniJSMethod(uiThread = false)
-    public void nextCallback(UniJSCallback callback) {
-        if (mServiceV2 != null) mServiceV2.addCallback(PlayServiceV2.NotificationReceiver.EXTRA_NEXT,callback);
-    }
-
-    @UniJSMethod(uiThread = false)
-    public void favourCallback(UniJSCallback callback) {
-        if (mServiceV2 != null) mServiceV2.addCallback(PlayServiceV2.NotificationReceiver.EXTRA_FAV,callback);
     }
 
     @UniJSMethod(uiThread = false)

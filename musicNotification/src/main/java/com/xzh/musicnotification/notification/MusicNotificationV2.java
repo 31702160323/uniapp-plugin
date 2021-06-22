@@ -6,6 +6,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
 import android.os.Build;
@@ -120,6 +122,16 @@ public class MusicNotificationV2 {
         mRemoteViews.setImageViewResource(R.id.previous_view, R.mipmap.note_btn_pre_white);
         mRemoteViews.setImageViewResource(R.id.next_view, R.mipmap.note_btn_next_white);
 
+        try {
+            ApplicationInfo info = this.mContext.getPackageManager().getApplicationInfo(this.mContext.getPackageName(), PackageManager.GET_META_DATA);
+            boolean xzhFavour = info.metaData.getBoolean("xzh_favour");
+            if (xzhFavour) {
+                mRemoteViews.setViewVisibility(R.id.favourite_view, View.VISIBLE);
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
         PendingIntentInfo.addOnClickPendingIntents(mRemoteViews, mContext,
                 //点击播放按钮要发送的广播
                 new PendingIntentInfo(R.id.play_view, 1,PlayServiceV2.NotificationReceiver.EXTRA_PLAY),
@@ -188,7 +200,6 @@ public class MusicNotificationV2 {
      * @param favourite 搜藏状态
      */
     public void favour(boolean favourite) {
-        mRemoteViews.setViewVisibility(R.id.favourite_view, View.VISIBLE);
         if (favourite) {
             mRemoteViews.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_loved);
         } else {
