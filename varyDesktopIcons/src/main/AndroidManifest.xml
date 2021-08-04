@@ -3,62 +3,62 @@
     package="com.xzh.varydesktopicons">
 
     <application>
-        <activity
-            android:name=".VaryDesktopIconsActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale"
-            android:enabled="false"
-            android:hardwareAccelerated="true"
-            android:icon="@mipmap/logo"
-            android:label="@string/app_name"
-            android:theme="@style/TranslucentTheme"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="hbuilder" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="image/*" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
 <!--        <activity-->
-<!--            android:enabled="false"-->
-<!--            android:name="io.dcloud.PandoraEntry">-->
-<!--        </activity>-->
-<!--        &lt;!&ndash;别名1，后面要加的话按这种样式加就行了，没有什么影响，只是注意要在代码中进行切换，不要直接在清单文件中切换。&ndash;&gt;-->
-<!--        <activity-alias-->
-<!--            android:name="PandoraEntry2"-->
-<!--            android:theme="@style/TranslucentTheme"-->
+<!--            android:name=".VaryDesktopIconsActivity"-->
 <!--            android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale"-->
+<!--            android:enabled="false"-->
 <!--            android:hardwareAccelerated="true"-->
-<!--            android:windowSoftInputMode="adjustResize"-->
-<!--            android:targetActivity="io.dcloud.PandoraEntry">-->
+<!--            android:icon="@mipmap/logo"-->
+<!--            android:label="@string/app_name"-->
+<!--            android:theme="@style/TranslucentTheme"-->
+<!--            android:windowSoftInputMode="adjustResize">-->
 <!--            <intent-filter>-->
-<!--                <data android:mimeType="image/*"/>-->
-<!--                <action android:name="android.intent.action.SEND"/>-->
-<!--                <category android:name="android.intent.category.DEFAULT"/>-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
+
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+
+<!--                <category android:name="android.intent.category.BROWSABLE" />-->
+
+<!--                <data android:scheme="hbuilder" />-->
 <!--            </intent-filter>-->
 <!--            <intent-filter>-->
-<!--                <data android:scheme="xzh" />-->
-<!--                <action android:name="android.intent.action.VIEW"/>-->
-
-<!--                <action android:name="android.intent.action.MAIN"/>-->
-<!--                <category android:name="android.intent.category.LAUNCHER"/>-->
-
-<!--                <category android:name="android.intent.category.DEFAULT"/>-->
-<!--                <category android:name="android.intent.category.BROWSABLE"/>-->
+<!--                <action android:name="android.intent.action.SEND" />-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--                <data android:mimeType="image/*" />-->
 <!--            </intent-filter>-->
-<!--        </activity-alias>-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+
+        <activity
+            android:enabled="false"
+            android:name="io.dcloud.PandoraEntry">
+        </activity>
+        <!--别名1，后面要加的话按这种样式加就行了，没有什么影响，只是注意要在代码中进行切换，不要直接在清单文件中切换。-->
+        <activity-alias
+            android:name="PandoraEntry2"
+            android:theme="@style/TranslucentTheme"
+            android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize"
+            android:targetActivity="io.dcloud.PandoraEntry">
+            <intent-filter>
+                <data android:mimeType="image/*"/>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="xzh" />
+                <action android:name="android.intent.action.VIEW"/>
+
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+        </activity-alias>
     </application>
 </manifest>

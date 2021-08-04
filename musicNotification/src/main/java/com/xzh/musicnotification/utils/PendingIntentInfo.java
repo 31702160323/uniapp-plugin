@@ -8,9 +8,9 @@ import android.widget.RemoteViews;
 import com.xzh.musicnotification.service.PlayServiceV2;
 
 public class PendingIntentInfo {
-    private int Id;
-    private int Index;
-    private String EXTRA;
+    private final int Id;
+    private final int Index;
+    private final String EXTRA;
 
     public PendingIntentInfo(int id, int index, String EXTRA){
         this.Id = id;

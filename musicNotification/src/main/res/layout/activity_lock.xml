@@ -81,8 +81,8 @@
 
         <ImageView
             android:id="@+id/previous_view"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:src="@mipmap/note_btn_pre_white"
@@ -90,8 +90,8 @@
 
         <ImageView
             android:id="@+id/play_view"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:src="@mipmap/note_btn_play_white"
@@ -99,8 +99,8 @@
 
         <ImageView
             android:id="@+id/next_view"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:src="@mipmap/note_btn_next_white"
@@ -109,8 +109,8 @@
         <ImageView
             android:visibility="gone"
             android:id="@+id/favourite_view"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:src="@mipmap/note_btn_love_white"

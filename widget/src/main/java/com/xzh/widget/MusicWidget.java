@@ -10,9 +10,11 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
+import android.widget.TextView;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -21,6 +23,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+import io.dcloud.feature.uniapp.utils.UniResourceUtils;
+
 import static com.facebook.common.internal.ByteStreams.copy;
 
 /**
@@ -28,9 +32,9 @@ import static com.facebook.common.internal.ByteStreams.copy;
  */
 public class MusicWidget extends AppWidgetProvider {
 
-    class PendingIntentInfo {
-        private int Id;
-        private int Index;
+    public static final class PendingIntentInfo {
+        private final int Id;
+        private final int Index;
         private String EXTRA;
 
         public PendingIntentInfo(int id, int index) {
@@ -82,7 +86,7 @@ public class MusicWidget extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.music_widget);
 
         //打开应用
-        this.openAppIntent(views, context, new PendingIntentInfo(R.id.image_view, 1));
+        this.openAppIntent(views, context, new PendingIntentInfo(R.id.image_view, 0));
         this.addOnClickPendingIntents(views, context,
                 //点击播放按钮要发送的广播
                 new PendingIntentInfo(R.id.play_view, 1, "play_pause"),
@@ -93,6 +97,10 @@ public class MusicWidget extends AppWidgetProvider {
                 //点击收藏按钮要发送的广播
                 new PendingIntentInfo(R.id.favourite_view, 4, "play_favourite")
         );
+
+        views.setInt(R.id.bg_view,"setBackgroundResource", android.R.color.white);
+        views.setInt(R.id.title_view,"setTextColor", Color.BLACK);
+        views.setInt(R.id.tip_view,"setTextColor", Color.GRAY);
 
         try {
             ApplicationInfo info = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
@@ -129,11 +137,10 @@ public class MusicWidget extends AppWidgetProvider {
             byte[] data = dataStream.toByteArray();
             //第一次采样
             BitmapFactory.Options options = new BitmapFactory.Options();
-            //二次采样开始//二次采样时我需要将图片加载出来显示，不能只加载图片的框架，因此inJustDecodeBounds属性要设置为false
             options.inJustDecodeBounds = false;
             //设置缩放比例
             options.inSampleSize = 4;
-            options.inPreferredConfig = Bitmap.Config.ARGB_4444;
+            options.inPreferredConfig = Bitmap.Config.RGB_565;
             //加载图片并返回
             return BitmapFactory.decodeByteArray(data, 0, data.length, options);
         } catch (IOException e) {
@@ -153,6 +160,20 @@ public class MusicWidget extends AppWidgetProvider {
         }
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.music_widget);
         AppWidgetManager mAppWidgetManager = AppWidgetManager.getInstance(context);
+
+        //打开应用
+        this.openAppIntent(views, context, new PendingIntentInfo(R.id.image_view, 0));
+        this.addOnClickPendingIntents(views, context,
+                //点击播放按钮要发送的广播
+                new PendingIntentInfo(R.id.play_view, 1, "play_pause"),
+                //点击上一首按钮要发送的广播
+                new PendingIntentInfo(R.id.previous_view, 2, "play_previous"),
+                //点击下一首按钮要发送的广播
+                new PendingIntentInfo(R.id.next_view, 3, "play_next"),
+                //点击收藏按钮要发送的广播
+                new PendingIntentInfo(R.id.favourite_view, 4, "play_favourite")
+        );
+
         switch (intent.getStringExtra("type")) {
             case "update":
                 views.setTextViewText(R.id.title_view, intent.getStringExtra("songName"));
@@ -173,13 +194,23 @@ public class MusicWidget extends AppWidgetProvider {
                     views.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_love_white);
                 }
                 break;
+            case "bg":
+                if (intent.getStringExtra("bg") != null) {
+                    views.setInt(R.id.bg_view,"setBackgroundColor", UniResourceUtils.getColor(intent.getStringExtra("bg")));
+                }
+                if (intent.getStringExtra("title") != null) {
+                    views.setInt(R.id.title_view,"setTextColor", UniResourceUtils.getColor(intent.getStringExtra("title")));
+                }
+                if (intent.getStringExtra("tip") != null) {
+                    views.setInt(R.id.tip_view,"setTextColor", UniResourceUtils.getColor(intent.getStringExtra("tip")));
+                }
+                break;
         }
         mAppWidgetManager.updateAppWidget(new ComponentName(context, MusicWidget.class), views);
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
@@ -189,8 +220,6 @@ public class MusicWidget extends AppWidgetProvider {
     @Override
     public void onEnabled(Context context) {
         // 在第一个 widget 被创建时，开启服务
-        Log.d("MusicNotificationModule", "onEnabled: 在第一个 widget 被创建时，开启服务");
-//        PlayServiceV2.startMusicService(context);
         super.onEnabled(context);
     }
 
@@ -198,8 +227,6 @@ public class MusicWidget extends AppWidgetProvider {
     @Override
     public void onDisabled(Context context) {
         // 在最后一个 widget 被删除时，终止服务
-        Log.d("MusicNotificationModule", "onDisabled: 在最后一个 widget 被删除时，终止服务");
-//        PlayServiceV2.stopMusicService(context);
     }
 }
 
