@@ -28,7 +28,7 @@ public class MusicNotificationV2 {
 
     private NotificationManager mNotificationManager;
     private Notification mNotification;
-    private RemoteViews mRemoteViews;
+    private RemoteViews mRemoteViews; // 大布局
     private RemoteViews mSmallRemoteViews; //小布局
     private Context mContext;
 
@@ -37,7 +37,7 @@ public class MusicNotificationV2 {
     }
 
     private static class SingletonHolder {
-        private static MusicNotificationV2 instance = new MusicNotificationV2();
+        private static final MusicNotificationV2 instance = new MusicNotificationV2();
     }
 
     /*
@@ -112,10 +112,10 @@ public class MusicNotificationV2 {
         mSmallRemoteViews = new RemoteViews(packageName, R.layout.notification_small_layout);
         mSmallRemoteViews.setTextViewText(R.id.title_view, "开启美好的一天");
 
-        mSmallRemoteViews.setImageViewResource(R.id.next_view, R.mipmap.note_btn_next_white);
-
         mRemoteViews = new RemoteViews(packageName, R.layout.notification_big_layout);
         mRemoteViews.setTextViewText(R.id.title_view, "开启美好的一天");
+
+        mSmallRemoteViews.setImageViewResource(R.id.next_view, R.mipmap.note_btn_next_white);
 
         mRemoteViews.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_love_white);
         mRemoteViews.setImageViewResource(R.id.play_view, R.mipmap.note_btn_play_white);
