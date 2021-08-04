@@ -2,7 +2,6 @@ package com.xzh.musicnotification.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -24,7 +23,6 @@ public class ImageUtils {
      * @return Bitmap
      */
     public static Bitmap GetLocalOrNetBitmap(String path) {
-        Bitmap bitmap;
         InputStream in;
         BufferedOutputStream out;
         try {
@@ -40,7 +38,7 @@ public class ImageUtils {
             options.inJustDecodeBounds = false;
             //设置缩放比例
             options.inSampleSize = 2;
-            options.inPreferredConfig = Bitmap.Config.ARGB_4444;
+            options.inPreferredConfig = Bitmap.Config.RGB_565;
             //加载图片并返回
             return BitmapFactory.decodeByteArray(data, 0, data.length, options);
         } catch (IOException e) {

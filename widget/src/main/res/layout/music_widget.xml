@@ -1,8 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_radius"
+    android:id="@+id/rl"
     android:padding="@dimen/widget_margin">
+
+    <TextView
+        android:id="@+id/bg_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <ImageView
         android:id="@+id/image_view"
@@ -33,7 +38,6 @@
             android:focusableInTouchMode="true"
             android:singleLine="true"
 
-            android:textColor="#333333"
             android:textSize="14sp"
             android:textStyle="bold"
             android:gravity="center_vertical"
@@ -51,7 +55,6 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:singleLine="true"
-            android:textColor="#999999"
             android:textSize="12sp"
             android:gravity="center_vertical"
 
@@ -63,47 +66,44 @@
             android:gravity="center">
 
             <ImageButton
-                android:visibility="gone"
                 android:id="@+id/favourite_view"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginEnd="15dp"
-                android:padding="5dp"
-                android:scaleType="fitXY"
                 android:background="@android:color/transparent"
-                android:src="@mipmap/note_btn_loved"
-                android:contentDescription="@string/favourite" />
+                android:contentDescription="@string/favourite"
+                android:scaleType="fitXY"
+                android:src="@mipmap/note_btn_love_white"
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/previous_view"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginEnd="15dp"
-                android:padding="5dp"
-                android:scaleType="fitXY"
                 android:background="@android:color/transparent"
-                android:src="@mipmap/note_btn_pre_white"
-                android:contentDescription="@string/previous" />
+                android:contentDescription="@string/previous"
+                android:scaleType="fitXY"
+                android:src="@mipmap/note_btn_pre_white" />
 
             <ImageButton
                 android:id="@+id/play_view"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_marginEnd="15dp"
-                android:scaleType="fitXY"
                 android:background="@android:color/transparent"
-                android:src="@mipmap/note_btn_play_white"
-                android:contentDescription="@string/play" />
+                android:contentDescription="@string/play"
+                android:scaleType="fitXY"
+                android:src="@mipmap/note_btn_play_white" />
 
             <ImageButton
                 android:id="@+id/next_view"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:padding="5dp"
-                android:scaleType="fitXY"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:background="@android:color/transparent"
-                android:src="@mipmap/note_btn_next_white"
-                android:contentDescription="@string/next" />
+                android:contentDescription="@string/next"
+                android:scaleType="fitXY"
+                android:src="@mipmap/note_btn_next_white" />
         </LinearLayout>
     </LinearLayout>
 

@@ -35,6 +35,15 @@
           "class": "com.xzh.filepicker.FilePickerModule"
         }
       ]
+    },
+    {
+      "plugins": [
+        {
+          "type": "module",
+          "name": "XZH-PictureSelector",
+          "class": "com.xzh.pictureselectoruni.PictureSelectorModule"
+        }
+      ]
     }
   ]
 }

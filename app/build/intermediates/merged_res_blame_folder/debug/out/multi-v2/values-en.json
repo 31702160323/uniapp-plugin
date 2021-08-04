@@ -4,7 +4,7 @@
             "outputFile": "D:\\htmlFile\\UniPlugin-Hello-AS\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en\\values-en.xml",
             "map": [
                 {
-                    "source": "D:\\xu\\.gradle\\caches\\transforms-2\\files-2.1\\400bf98e2b5971bf81e67c96ef9b9a2a\\lib.5plus.base-release\\res\\values-en\\values-en.xml",
+                    "source": "D:\\xu\\.gradle\\caches\\transforms-2\\files-2.1\\869af1f22b89ac512d34619d0f1ffbb1\\jetified-lib.5plus.base-release\\res\\values-en\\values-en.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

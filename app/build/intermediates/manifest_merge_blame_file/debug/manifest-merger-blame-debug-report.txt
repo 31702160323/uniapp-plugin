@@ -5,9 +5,9 @@
 5    android:versionName="1.0" >
 6
 7    <uses-sdk
-8        android:minSdkVersion="19"
+8        android:minSdkVersion="21"
 8-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
-9        android:targetSdkVersion="26" />
+9        android:targetSdkVersion="30" />
 9-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
 10
 11    <supports-screens
@@ -49,26 +49,26 @@
 28-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:22:5-69
 28-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:22:22-66
 29    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-29-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:18:5-79
-29-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:18:22-76
+29-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:18:5-79
+29-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:18:22-76
 30    <!--
 31    <uses-permission
 32        android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
 33    -->
 34    <!-- 华为修改角标需要设置权限 -->
 35    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" /> <!-- vivo 修改角标需要设置权限 -->
-35-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:24:5-91
-35-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:24:22-88
+35-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:24:5-91
+35-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:24:22-88
 36    <uses-permission android:name="com.vivo.notification.permission.BADGE_ICON" />
-36-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:26:5-83
-36-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:26:22-80
+36-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:26:5-83
+36-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:26:22-80
 37    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 38    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-38-->[msa_mdid_1.0.13.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\19afb6cead01945756615ee8536387d3\msa_mdid_1.0.13\AndroidManifest.xml:5:5-75
-38-->[msa_mdid_1.0.13.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\19afb6cead01945756615ee8536387d3\msa_mdid_1.0.13\AndroidManifest.xml:5:22-72
+38-->[msa_mdid_1.0.13.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\999b153a3359b9d73578b53cb2a63cd8\jetified-msa_mdid_1.0.13\AndroidManifest.xml:5:5-75
+38-->[msa_mdid_1.0.13.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\999b153a3359b9d73578b53cb2a63cd8\jetified-msa_mdid_1.0.13\AndroidManifest.xml:5:22-72
 39    <uses-permission android:name="com.asus.msa.SupplementaryDID.ACCESS" /> <!-- Barcode(二维码)  end -->
-39-->[msa_mdid_1.0.13.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\19afb6cead01945756615ee8536387d3\msa_mdid_1.0.13\AndroidManifest.xml:8:5-76
-39-->[msa_mdid_1.0.13.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\19afb6cead01945756615ee8536387d3\msa_mdid_1.0.13\AndroidManifest.xml:8:22-73
+39-->[msa_mdid_1.0.13.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\999b153a3359b9d73578b53cb2a63cd8\jetified-msa_mdid_1.0.13\AndroidManifest.xml:8:5-76
+39-->[msa_mdid_1.0.13.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\999b153a3359b9d73578b53cb2a63cd8\jetified-msa_mdid_1.0.13\AndroidManifest.xml:8:22-73
 40    <application
 40-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:25:5-87:19
 41        android:name="io.dcloud.application.DCloudApplication"
@@ -77,8 +77,8 @@
 42-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:27:9-35
 43        android:allowClearUserData="true"
 43-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:28:9-42
-44        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
-44-->[com.android.support:support-compat:28.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\49dd2c14dcc57c7f4a0aa1d53483e871\support-compat-28.0.0\AndroidManifest.xml:22:18-91
+44        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+44-->[androidx.core:core:1.5.0] D:\xu\.gradle\caches\transforms-2\files-2.1\5c4786bccfbaefa0f187e0e56044e26d\core-1.5.0\AndroidManifest.xml:24:18-86
 45        android:debuggable="true"
 45-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:32:9-34
 46        android:icon="@drawable/icon"
@@ -91,7 +91,7 @@
 49-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:33:9-35
 50        android:testOnly="true"
 51        android:usesCleartextTraffic="true" >
-51-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:161:9-44
+51-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:161:9-44
 52
 53        <!-- 应用入口 -->
 54        <activity
@@ -194,111 +194,111 @@
 103        </activity>
 104
 105        <service
-105-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:162:9-164:40
+105-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:162:9-164:40
 106            android:name="io.dcloud.common.adapter.io.MiniServerService"
-106-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:163:13-73
+106-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:163:13-73
 107            android:exported="false" />
-107-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:164:13-37
+107-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:164:13-37
 108
 109        <receiver
-109-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:166:9-172:20
+109-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:166:9-172:20
 110            android:name="io.dcloud.common.adapter.io.PushReceiver"
-110-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:167:13-68
+110-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:167:13-68
 111            android:exported="false" >
-111-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:168:13-37
+111-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:168:13-37
 112            <intent-filter>
-112-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:169:13-171:29
+112-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:169:13-171:29
 113                <action android:name="dcloud.push.broswer" />
-113-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:170:17-62
-113-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:170:25-59
+113-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:170:17-62
+113-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:170:25-59
 114            </intent-filter>
 115        </receiver>
 116
 117        <activity
-117-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:174:9-177:40
+117-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:174:9-177:40
 118            android:name="io.dcloud.imagepick.CustomGalleryActivity"
-118-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:175:13-69
+118-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:175:13-69
 119            android:exported="false"
-119-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:176:13-37
+119-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:176:13-37
 120            android:noHistory="true" />
-120-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:177:13-37
+120-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:177:13-37
 121        <activity
-121-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:178:9-182:58
+121-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:178:9-182:58
 122            android:name="io.dcloud.feature.nativeObj.photoview.PhotoActivity"
-122-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:179:13-79
+122-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:179:13-79
 123            android:exported="false"
-123-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:180:13-37
+123-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:180:13-37
 124            android:noHistory="false"
-124-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:181:13-38
+124-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:181:13-38
 125            android:theme="@style/DeviceDefault.Light" />
-125-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:182:13-55
+125-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:182:13-55
 126        <activity
-126-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:183:9-193:58
+126-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:183:9-193:58
 127            android:name="io.dcloud.WebAppActivity"
-127-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:184:13-52
+127-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:184:13-52
 128            android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale"
-128-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:185:13-92
+128-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:185:13-92
 129            android:hardwareAccelerated="true"
-129-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:186:13-47
+129-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:186:13-47
 130            android:icon="@drawable/dcloud_recent"
-130-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:187:13-51
+130-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:187:13-51
 131            android:label="@string/stream_my"
-131-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:188:13-46
+131-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:188:13-46
 132            android:launchMode="singleTask"
-132-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:189:13-44
+132-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:189:13-44
 133            android:screenOrientation="portrait"
-133-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:190:13-49
+133-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:190:13-49
 134            android:taskAffinity=":stream"
-134-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:191:13-43
+134-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:191:13-43
 135            android:theme="@style/DCloudTheme"
-135-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:192:13-47
+135-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:192:13-47
 136            android:windowSoftInputMode="adjustResize" />
-136-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:193:13-55
+136-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:193:13-55
 137        <activity
-137-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:194:9-200:75
+137-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:194:9-200:75
 138            android:name="io.dcloud.ProcessMediator"
-138-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:195:13-53
+138-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:195:13-53
 139            android:excludeFromRecents="true"
-139-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:196:13-46
+139-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:196:13-46
 140            android:exported="false"
-140-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:197:13-37
+140-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:197:13-37
 141            android:label="@string/app_name"
-141-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:198:13-45
+141-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:198:13-45
 142            android:launchMode="singleTop"
-142-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:199:13-43
+142-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:199:13-43
 143            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-143-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:200:13-72
+143-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:200:13-72
 144        <activity
-144-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:201:9-207:20
+144-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:201:9-207:20
 145            android:name="io.dcloud.WebviewActivity"
-145-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:202:13-53
+145-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:202:13-53
 146            android:exported="false"
-146-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:203:13-37
+146-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:203:13-37
 147            android:screenOrientation="portrait"
-147-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:204:13-49
+147-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:204:13-49
 148            android:theme="@style/ThemeNoTitleBar"
-148-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:205:13-51
+148-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:205:13-51
 149            android:windowSoftInputMode="adjustPan" >
-149-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:206:13-52
+149-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:206:13-52
 150        </activity>
 151
 152        <receiver
-152-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:209:9-220:20
+152-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:209:9-220:20
 153            android:name="io.dcloud.common.adapter.io.DownloadReceiver"
-153-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:210:13-72
+153-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:210:13-72
 154            android:exported="false" >
-154-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:211:13-37
+154-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:211:13-37
 155            <intent-filter>
-155-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:212:13-214:29
+155-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:212:13-214:29
 156                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
-156-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:213:17-82
-156-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:213:25-79
+156-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:213:17-82
+156-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:213:25-79
 157            </intent-filter>
 158            <intent-filter>
-158-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:215:13-219:29
+158-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:215:13-219:29
 159                <action android:name="android.intent.action.PACKAGE_ADDED" />
-159-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:216:17-78
-159-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:216:25-75
+159-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:216:17-78
+159-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:216:25-75
 160
 161                <data android:scheme="package" /> <!-- HERE! -->
 161-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:43:17-50
@@ -322,65 +322,122 @@
 178            android:value="io.dcloud.%APPID%|%APPID%|" />
 179        -->
 180        <meta-data
-180-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:238:9-240:35
+180-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:238:9-240:35
 181            android:name="android.max_aspect"
-181-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:239:13-46
+181-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:239:13-46
 182            android:value="2.4" />
-182-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\400bf98e2b5971bf81e67c96ef9b9a2a\lib.5plus.base-release\AndroidManifest.xml:240:13-32
+182-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\869af1f22b89ac512d34619d0f1ffbb1\jetified-lib.5plus.base-release\AndroidManifest.xml:240:13-32
 183
 184        <receiver
-184-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\e281e4e5cdeef46c75229a4477cbb44a\uniapp-v8-release\AndroidManifest.xml:30:9-34:20
+184-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\998708d1f229cf446f74e60201eaa79d\jetified-uniapp-v8-release\AndroidManifest.xml:30:9-34:20
 185            android:name="com.taobao.weex.WXGlobalEventReceiver"
-185-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\e281e4e5cdeef46c75229a4477cbb44a\uniapp-v8-release\AndroidManifest.xml:31:13-65
+185-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\998708d1f229cf446f74e60201eaa79d\jetified-uniapp-v8-release\AndroidManifest.xml:31:13-65
 186            android:enabled="true"
-186-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\e281e4e5cdeef46c75229a4477cbb44a\uniapp-v8-release\AndroidManifest.xml:32:13-35
+186-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\998708d1f229cf446f74e60201eaa79d\jetified-uniapp-v8-release\AndroidManifest.xml:32:13-35
 187            android:exported="false" >
-187-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\e281e4e5cdeef46c75229a4477cbb44a\uniapp-v8-release\AndroidManifest.xml:33:13-37
+187-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\998708d1f229cf446f74e60201eaa79d\jetified-uniapp-v8-release\AndroidManifest.xml:33:13-37
 188        </receiver>
 189
-190        <activity
-190-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-20:54
-191            android:name="com.xzh.musicnotification.LockActivityV2"
-191-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-68
-192            android:excludeFromRecents="true"
-192-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-46
+190        <provider
+190-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:14:9-22:20
+191            android:name="com.luck.picture.lib.PictureFileProvider"
+191-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:15:13-68
+192            android:authorities="com.HBuilder.UniPlugin.luckProvider"
+192-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:16:13-64
 193            android:exported="false"
-193-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-37
-194            android:launchMode="singleInstance"
-194-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:13-48
-195            android:noHistory="true"
-195-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-37
-196            android:screenOrientation="portrait"
-196-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-49
-197            android:taskAffinity="com.ztk.lock"
-197-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-48
-198            android:theme="@style/LockScreenTheme" />
-198-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:13-51
+193-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:17:13-37
+194            android:grantUriPermissions="true" >
+194-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:18:13-47
+195            <meta-data
+195-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:19:13-21:54
+196                android:name="android.support.FILE_PROVIDER_PATHS"
+196-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:20:17-67
+197                android:resource="@xml/file_paths" />
+197-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:21:17-51
+198        </provider>
 199
-200        <service android:name="com.xzh.musicnotification.service.PlayServiceV2" />
-200-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:9-83
-200-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:18-80
-201
-202        <receiver android:name="com.xzh.widget.MusicWidget" >
-202-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-21:20
-202-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:19-60
-203            <intent-filter>
-203-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-16:29
-204                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-204-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:17-84
-204-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:25-81
-205                <action android:name="com.xzh.widget.MusicWidget" />
-205-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:17-69
-205-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:25-66
-206            </intent-filter>
-207
-208            <meta-data
-208-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-20:61
-209                android:name="android.appwidget.provider"
-209-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:17-58
-210                android:resource="@xml/music_widget_info" />
-210-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:17-58
-211        </receiver>
-212    </application>
-213
-214</manifest>
+200        <activity
+200-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:24:9-26:77
+201            android:name="com.luck.picture.lib.PictureSelectorActivity"
+201-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:25:13-72
+202            android:configChanges="orientation|keyboardHidden|screenSize" />
+202-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:26:13-74
+203        <activity
+203-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:27:9-29:77
+204            android:name="com.luck.picture.lib.PictureSelectorWeChatStyleActivity"
+204-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:28:13-83
+205            android:configChanges="orientation|keyboardHidden|screenSize" />
+205-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:29:13-74
+206        <activity
+206-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:30:9-33:64
+207            android:name="com.luck.picture.lib.PictureSelectorCameraEmptyActivity"
+207-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:31:13-83
+208            android:configChanges="orientation|keyboardHidden|screenSize"
+208-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:32:13-74
+209            android:theme="@style/Picture.Theme.Translucent" />
+209-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:33:13-61
+210        <activity
+210-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:34:9-36:77
+211            android:name="com.luck.picture.lib.PictureCustomCameraActivity"
+211-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:35:13-76
+212            android:configChanges="orientation|keyboardHidden|screenSize" />
+212-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:36:13-74
+213        <activity
+213-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:37:9-39:77
+214            android:name="com.luck.picture.lib.PicturePreviewActivity"
+214-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:38:13-71
+215            android:configChanges="orientation|keyboardHidden|screenSize" />
+215-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:39:13-74
+216        <activity
+216-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:40:9-42:77
+217            android:name="com.luck.picture.lib.PictureSelectorPreviewWeChatStyleActivity"
+217-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:41:13-90
+218            android:configChanges="orientation|keyboardHidden|screenSize" />
+218-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:42:13-74
+219        <activity
+219-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:43:9-46:50
+220            android:name="com.luck.picture.lib.PictureVideoPlayActivity"
+220-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:44:13-73
+221            android:configChanges="orientation|keyboardHidden|screenSize"
+221-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:45:13-74
+222            android:screenOrientation="sensor" />
+222-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:46:13-47
+223        <activity
+223-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:47:9-49:77
+224            android:name="com.luck.picture.lib.PictureExternalPreviewActivity"
+224-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:48:13-79
+225            android:configChanges="orientation|keyboardHidden|screenSize" />
+225-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:49:13-74
+226        <activity
+226-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:50:9-52:77
+227            android:name="com.luck.picture.lib.PicturePlayAudioActivity"
+227-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:51:13-73
+228            android:configChanges="orientation|keyboardHidden|screenSize" />
+228-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:52:13-74
+229        <activity
+229-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:53:9-55:61
+230            android:name="com.yalantis.ucrop.UCropActivity"
+230-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:54:13-60
+231            android:theme="@style/Base.Theme.NoActionBar" />
+231-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:55:13-58
+232        <activity
+232-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:56:9-58:61
+233            android:name="com.yalantis.ucrop.PictureMultiCuttingActivity"
+233-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:57:13-74
+234            android:theme="@style/Base.Theme.NoActionBar" />
+234-->[io.github.lucksiege:pictureselector:v2.7.3-rc06] D:\xu\.gradle\caches\transforms-2\files-2.1\7fc053c22bc81149d8b173a95dd611ed\pictureselector-v2.7.3-rc06\AndroidManifest.xml:58:13-58
+235        <!--
+236        Service for holding metadata. Cannot be instantiated.
+237        Metadata will be merged from other manifests.
+238        -->
+239        <service
+239-->[androidx.camera:camera-core:1.1.0-alpha06] D:\xu\.gradle\caches\transforms-2\files-2.1\697f6a9e67721bb0bb5ad4b95a763d6d\camera-core-1.1.0-alpha06\AndroidManifest.xml:31:9-35:45
+240            android:name="androidx.camera.core.impl.MetadataHolderService"
+240-->[androidx.camera:camera-core:1.1.0-alpha06] D:\xu\.gradle\caches\transforms-2\files-2.1\697f6a9e67721bb0bb5ad4b95a763d6d\camera-core-1.1.0-alpha06\AndroidManifest.xml:32:13-75
+241            android:enabled="false"
+241-->[androidx.camera:camera-core:1.1.0-alpha06] D:\xu\.gradle\caches\transforms-2\files-2.1\697f6a9e67721bb0bb5ad4b95a763d6d\camera-core-1.1.0-alpha06\AndroidManifest.xml:33:13-36
+242            android:exported="false" />
+242-->[androidx.camera:camera-core:1.1.0-alpha06] D:\xu\.gradle\caches\transforms-2\files-2.1\697f6a9e67721bb0bb5ad4b95a763d6d\camera-core-1.1.0-alpha06\AndroidManifest.xml:34:13-37
+243    </application>
+244
+245</manifest>

@@ -153,8 +153,8 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         mReceiver.lockActivity = locking;
     }
 
-    public void addWXSDKInstance(WXSDKInstance wXSDKInstance){
-        this.mWXSDKInstance = wXSDKInstance;
+    public void addWXSDKInstance(WXSDKInstance WXSDKInstance){
+        this.mWXSDKInstance = WXSDKInstance;
     }
 
     public JSONObject getSongData() {
@@ -187,7 +187,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
             if (extra == null) return;
             String eventName = "musicNotificationError";
             Map<String, Object> data = new HashMap<>();
-            data.put("success", "操作成功");
+            data.put("message", "触发回调事件成功");
             data.put("code", 0);
             switch (extra) {
                 case EXTRA_PLAY:
@@ -211,8 +211,8 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
                     eventName = "musicNotificationFavourite";
                     break;
                 default:
-                    data.put("success", "操作失败");
-                    data.put("code", -1);
+                    data.put("message", "触发回调事件失败");
+                    data.put("code", -7);
                     break;
             }
             serviceV2.mWXSDKInstance.fireGlobalEventCallback(eventName, data);

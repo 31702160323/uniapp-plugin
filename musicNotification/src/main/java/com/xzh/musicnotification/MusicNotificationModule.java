@@ -1,13 +1,12 @@
 package com.xzh.musicnotification;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -15,65 +14,64 @@ import android.os.IBinder;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.NotificationManagerCompat;
-import android.util.ArrayMap;
-import android.util.Log;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xzh.musicnotification.service.PlayServiceV2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.dcloud.feature.uniapp.annotation.UniJSMethod;
 import io.dcloud.feature.uniapp.bridge.UniJSCallback;
 import io.dcloud.feature.uniapp.common.UniModule;
 import io.dcloud.feature.uniapp.utils.UniLogUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.taobao.weex.WXSDKInstance;
-import com.xzh.musicnotification.service.PlayServiceV2;
-
 import static android.content.Context.BIND_AUTO_CREATE;
 
-public class MusicNotificationModule extends UniModule {
+public class MusicNotificationModule extends UniModule implements ServiceConnection {
     private PlayServiceV2 mServiceV2;
-    private ServiceConnection connection;
+    private JSONObject mConfig;
+    private UniJSCallback mCallback;
 
     @UniJSMethod(uiThread = false)
-    public void init(final JSONObject config, final UniJSCallback callback) {
-        Context context = mWXSDKInstance.getContext().getApplicationContext();
+    public void init(JSONObject config, UniJSCallback callback) {
         JSONObject data = new JSONObject();
         if (config.get("path") == null) {
-            data.put("success", "path不能为空");
+            data.put("message", "path不能为空");
             data.put("code", -3);
             callback.invoke(data);
             return;
         }
 
         if (config.get("icon") == null) {
-            data.put("success", "icon不能为空");
+            data.put("message", "icon不能为空");
             data.put("code", -4);
             callback.invoke(data);
             return;
         }
 
-        connection = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                mServiceV2 = ((PlayServiceV2.ServiceBinder) iBinder).getInstance();
-                mServiceV2.initNotification(config);
-                mServiceV2.addWXSDKInstance(mWXSDKInstance);
-                JSONObject data = new JSONObject();
-                data.put("success", "设置歌曲信息成功");
-                data.put("code", 0);
-                UniLogUtils.i("XZH-musicNotification","初始化成功");
-                callback.invoke(data);
-            }
+        this.mConfig = config;
+        this.mCallback = callback;
 
-            @Override
-            public void onServiceDisconnected(ComponentName componentName) {
+        Context context = mWXSDKInstance.getContext().getApplicationContext();
+        context.bindService(PlayServiceV2.startMusicService(context).get(), this, BIND_AUTO_CREATE);
+    }
 
-            }
-        };
-        context.bindService(PlayServiceV2.startMusicService(context).get(), connection, BIND_AUTO_CREATE);
+    @Override
+    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+        mServiceV2 = ((PlayServiceV2.ServiceBinder) iBinder).getInstance();
+        mServiceV2.initNotification(this.mConfig);
+        mServiceV2.addWXSDKInstance(mWXSDKInstance);
+        JSONObject data = new JSONObject();
+        data.put("message", "设置歌曲信息成功");
+        data.put("code", 0);
+        UniLogUtils.i("XZH-musicNotification","初始化成功");
+        mCallback.invoke(data);
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName componentName) {
+
     }
 
     @UniJSMethod(uiThread = false)
@@ -81,22 +79,23 @@ public class MusicNotificationModule extends UniModule {
         UniLogUtils.i("XZH-musicNotification","更新UI");
         JSONObject data = new JSONObject();
         boolean isNotification;
+        Context context = mWXSDKInstance.getContext().getApplicationContext();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            isNotification = NotificationManagerCompat.from(mWXSDKInstance.getContext().getApplicationContext()).getImportance() != NotificationManager.IMPORTANCE_NONE;
+            isNotification = NotificationManagerCompat.from(context).getImportance() != NotificationManager.IMPORTANCE_NONE;
         } else {
-            isNotification = NotificationManagerCompat.from(mWXSDKInstance.getContext().getApplicationContext()).areNotificationsEnabled();
+            isNotification = NotificationManagerCompat.from(context).areNotificationsEnabled();
         }
         if (!isNotification) {
-            data.put("success", "没有通知栏权限");
+            data.put("message", "没有通知栏权限");
             data.put("code", -2);
             return data;
         }
         if (mServiceV2 != null) {
             mServiceV2.update(options);
-            data.put("success", "设置歌曲信息成功");
+            data.put("message", "设置歌曲信息成功");
             data.put("code", 0);
         } else {
-            data.put("success", "未知失败");
+            data.put("message", "请先调用init方法进行初始化操作");
             data.put("code", -1);
         }
         return data;
@@ -112,6 +111,19 @@ public class MusicNotificationModule extends UniModule {
         if (mServiceV2 != null) mServiceV2.favour(options.getBoolean("favour"));
     }
 
+    @SuppressLint("WrongConstant")
+    @UniJSMethod(uiThread = false)
+    public void setWidgetStyle(JSONObject options) {
+        Intent intent = new Intent("com.xzh.widget.MusicWidget");
+        intent.addFlags(0x01000000);
+        intent.putExtra("type", "bg");
+        intent.putExtra("packageName", mWXSDKInstance.getContext().getPackageName());
+        intent.putExtra("bg", options.getString("bg"));
+        intent.putExtra("title", options.getString("title"));
+        intent.putExtra("tip", options.getString("tip"));
+        mWXSDKInstance.getContext().sendBroadcast(intent);
+    }
+
     @UniJSMethod(uiThread = false)
     public void openLockActivity(JSONObject options) {
         if (mServiceV2 != null) mServiceV2.lock(options.getBoolean("lock"));
@@ -119,15 +131,20 @@ public class MusicNotificationModule extends UniModule {
 
     @UniJSMethod(uiThread = false)
     public void cancel() {
-        if (connection != null) mWXSDKInstance.getContext().getApplicationContext().unbindService(connection);
+        mWXSDKInstance.getContext().getApplicationContext().unbindService(this);
         PlayServiceV2.stopMusicService(mWXSDKInstance.getContext().getApplicationContext());
     }
 
     @UniJSMethod(uiThread = false)
     public JSONObject openPermissionSetting() {
         JSONObject data = new JSONObject();
-        data.put("success", openPermissionSetting(mWXSDKInstance.getContext().getApplicationContext()));
-        data.put("code", 0);
+        if(openPermissionSetting(mWXSDKInstance.getContext().getApplicationContext())) {
+            data.put("message", "打开应用通知设置页面成功");
+            data.put("code", 0);
+        } else {
+            data.put("message", "打开应用通知设置页面失败");
+            data.put("code", -5);
+        }
         return data;
     }
 

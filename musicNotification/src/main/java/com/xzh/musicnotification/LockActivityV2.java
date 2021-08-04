@@ -132,7 +132,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         String EXTRA_TYPE = "";
         String eventName = "musicNotificationError";
         Map<String, Object> data = new HashMap<>();
-        data.put("success", "操作成功");
+        data.put("message", "更新锁屏页成功");
         data.put("code", 0);
 
         final int viewId = view.getId();
@@ -150,10 +150,11 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         }
 
         switch (EXTRA_TYPE) {
-            case PlayServiceV2.NotificationReceiver.EXTRA_PLAY:
-                mServiceV2.Playing = !mServiceV2.Playing;
-                mServiceV2.playOrPause(mServiceV2.Playing);
-                eventName = "musicNotificationPause";
+            case PlayServiceV2.NotificationReceiver.EXTRA_PRE:
+                eventName = "musicNotificationPrevious";
+                break;
+            case PlayServiceV2.NotificationReceiver.EXTRA_NEXT:
+                eventName = "musicNotificationNext";
                 break;
             case PlayServiceV2.NotificationReceiver.EXTRA_FAV:
                 mServiceV2.Favour = !mServiceV2.Favour;
@@ -161,9 +162,14 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
                 data.put("favourite", mServiceV2.Favour);
                 eventName = "musicNotificationFavourite";
                 break;
+            case PlayServiceV2.NotificationReceiver.EXTRA_PLAY:
+                mServiceV2.Playing = !mServiceV2.Playing;
+                mServiceV2.playOrPause(mServiceV2.Playing);
+                eventName = "musicNotificationPause";
+                break;
             default:
-                data.put("success", "操作失败");
-                data.put("code", -1);
+                data.put("message", "更新锁屏页失败");
+                data.put("code", -6);
                 break;
         }
 
@@ -196,10 +202,10 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
             @Override
             public void run() {
                 if (options.getString("songName") != null) {
-                    tvAudio.setText(options.getString("songName"));
+                    tvAudioName.setText(options.getString("songName"));
                 }
                 if (options.getString("artistsName") != null) {
-                    tvAudioName.setText(options.getString("artistsName"));
+                    tvAudio.setText(options.getString("artistsName"));
                 }
                 favour(mServiceV2.Favour);
                 playOrPause(mServiceV2.Playing);
@@ -227,7 +233,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         }
     }
 
-    private class TimeChangeReceiver extends BroadcastReceiver {
+    private static class TimeChangeReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
