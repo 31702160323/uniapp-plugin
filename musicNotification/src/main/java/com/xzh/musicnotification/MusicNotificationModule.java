@@ -18,6 +18,7 @@ import android.support.v4.app.NotificationManagerCompat;
 import com.alibaba.fastjson.JSONObject;
 import com.xzh.musicnotification.service.PlayServiceV2;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ import io.dcloud.feature.uniapp.utils.UniLogUtils;
 import static android.content.Context.BIND_AUTO_CREATE;
 
 public class MusicNotificationModule extends UniModule implements ServiceConnection {
-    private PlayServiceV2 mServiceV2;
+    private WeakReference<PlayServiceV2> mServiceV2;
     private JSONObject mConfig;
     private UniJSCallback mCallback;
 
@@ -39,14 +40,14 @@ public class MusicNotificationModule extends UniModule implements ServiceConnect
         if (config.get("path") == null) {
             data.put("message", "path不能为空");
             data.put("code", -3);
-            callback.invoke(data);
+            callback.invokeAndKeepAlive(data);
             return;
         }
 
         if (config.get("icon") == null) {
             data.put("message", "icon不能为空");
             data.put("code", -4);
-            callback.invoke(data);
+            callback.invokeAndKeepAlive(data);
             return;
         }
 
@@ -54,19 +55,19 @@ public class MusicNotificationModule extends UniModule implements ServiceConnect
         this.mCallback = callback;
 
         Context context = mWXSDKInstance.getContext().getApplicationContext();
-        context.bindService(PlayServiceV2.startMusicService(context).get(), this, BIND_AUTO_CREATE);
+        context.bindService(PlayServiceV2.startMusicService(context), this, BIND_AUTO_CREATE);
     }
 
     @Override
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-        mServiceV2 = ((PlayServiceV2.ServiceBinder) iBinder).getInstance();
-        mServiceV2.initNotification(this.mConfig);
-        mServiceV2.addWXSDKInstance(mWXSDKInstance);
+        mServiceV2 = new WeakReference<>(((PlayServiceV2.ServiceBinder) iBinder).getInstance());
+        mServiceV2.get().initNotification(mConfig);
+        mServiceV2.get().setWXSDKInstance(mWXSDKInstance);
         JSONObject data = new JSONObject();
         data.put("message", "设置歌曲信息成功");
         data.put("code", 0);
-        UniLogUtils.i("XZH-musicNotification","初始化成功");
-        mCallback.invoke(data);
+        UniLogUtils.i("XZH-musicNotification", "初始化成功");
+        mCallback.invokeAndKeepAlive(data);
     }
 
     @Override
@@ -76,7 +77,7 @@ public class MusicNotificationModule extends UniModule implements ServiceConnect
 
     @UniJSMethod(uiThread = false)
     public JSONObject update(JSONObject options) {
-        UniLogUtils.i("XZH-musicNotification","更新UI");
+        UniLogUtils.i("XZH-musicNotification", "更新UI");
         JSONObject data = new JSONObject();
         boolean isNotification;
         Context context = mWXSDKInstance.getContext().getApplicationContext();
@@ -91,7 +92,7 @@ public class MusicNotificationModule extends UniModule implements ServiceConnect
             return data;
         }
         if (mServiceV2 != null) {
-            mServiceV2.update(options);
+            mServiceV2.get().update(options);
             data.put("message", "设置歌曲信息成功");
             data.put("code", 0);
         } else {
@@ -103,12 +104,13 @@ public class MusicNotificationModule extends UniModule implements ServiceConnect
 
     @UniJSMethod(uiThread = false)
     public void playOrPause(JSONObject options) {
-        if (mServiceV2 != null) mServiceV2.playOrPause(options.getBoolean("playing"));
+        if (mServiceV2 != null) mServiceV2.get().playOrPause(options.getBoolean("playing"));
     }
 
     @UniJSMethod(uiThread = false)
     public void favour(JSONObject options) {
-        if (mServiceV2 != null) mServiceV2.favour(options.getBoolean("favour"));
+        UniLogUtils.i("XZH-musicNotification", "favour");
+        if (mServiceV2 != null) mServiceV2.get().favour(options.getBoolean("favour"));
     }
 
     @SuppressLint("WrongConstant")
@@ -126,7 +128,7 @@ public class MusicNotificationModule extends UniModule implements ServiceConnect
 
     @UniJSMethod(uiThread = false)
     public void openLockActivity(JSONObject options) {
-        if (mServiceV2 != null) mServiceV2.lock(options.getBoolean("lock"));
+        if (mServiceV2 != null) mServiceV2.get().lock(options.getBoolean("lock"));
     }
 
     @UniJSMethod(uiThread = false)
@@ -138,7 +140,7 @@ public class MusicNotificationModule extends UniModule implements ServiceConnect
     @UniJSMethod(uiThread = false)
     public JSONObject openPermissionSetting() {
         JSONObject data = new JSONObject();
-        if(openPermissionSetting(mWXSDKInstance.getContext().getApplicationContext())) {
+        if (openPermissionSetting(mWXSDKInstance.getContext().getApplicationContext())) {
             data.put("message", "打开应用通知设置页面成功");
             data.put("code", 0);
         } else {
@@ -179,21 +181,22 @@ public class MusicNotificationModule extends UniModule implements ServiceConnect
             localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
             localIntent.setData(Uri.fromParts("package", context.getPackageName(), null));
             context.startActivity(localIntent);
-            UniLogUtils.i("XZH-musicNotification","打开通知权限页成功");
+            UniLogUtils.i("XZH-musicNotification", "打开通知权限页成功");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
-            UniLogUtils.e("XZH-musicNotification","打开通知权限页失败：" + e.getMessage());
+            UniLogUtils.e("XZH-musicNotification", "打开通知权限页失败：" + e.getMessage());
             return false;
         }
     }
 
     @UniJSMethod(uiThread = false)
-    public void initSongs(final UniJSCallback callback) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
+    public void initSongs(UniJSCallback callback) {
+        UniLogUtils.i("XZH-musicNotification", "获取歌曲");
+        try {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
                     List<SongBean> list = new ArrayList<>();
                     Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
                     ContentResolver resolver = mWXSDKInstance.getContext().getApplicationContext().getContentResolver();
@@ -210,7 +213,9 @@ public class MusicNotificationModule extends UniModule implements ServiceConnect
                                 songBean.musicAlbumURl = "";                                                                       //专辑图片路径
                                 songBean.musicPath = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));         //路径
                                 songBean.musicYear = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.YEAR));  //发布年份
-                                songBean.musicDuration = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION)); //时长
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                                    songBean.musicDuration = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION)); //时长
+                                }
                                 songBean.size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE));         //文件大小
 
                                 //获取本地音乐专辑图片
@@ -232,26 +237,26 @@ public class MusicNotificationModule extends UniModule implements ServiceConnect
                         // 释放资源
                         cursor.close();
                     }
-                    callback.invoke(list);
-                    UniLogUtils.i("XZH-musicNotification","获取歌曲信息成功");
-                } catch (Exception e) {
-                    callback.invoke((new JSONObject()).put("error", e.getMessage()));
-                    UniLogUtils.e("XZH-musicNotification","获取歌曲信息失败：" + e.getMessage());
+                    callback.invokeAndKeepAlive(list);
+                    UniLogUtils.i("XZH-musicNotification", "获取歌曲信息成功");
                 }
-            }
-        }).start();
+            }).start();
+        } catch (Exception e) {
+            callback.invokeAndKeepAlive((new JSONObject()).put("error", e.getMessage()));
+            UniLogUtils.e("XZH-musicNotification", "获取歌曲信息失败：" + e.getMessage());
+        }
     }
 
     public static class SongBean {
         public int id;                   //ID
-        public String musicName;		 //歌名
-        public String musicArtist;  	 //歌手
+        public String musicName;         //歌名
+        public String musicArtist;     //歌手
         public String musicAlbum;        //专辑
-        public int musicAlbumID; 	 //专辑ID
+        public int musicAlbumID;     //专辑ID
         public String musicAlbumURl = "";//专辑图片路径
-        public String musicPath;		 //路径
+        public String musicPath;         //路径
         public String musicYear;         //发布年份
         public String musicDuration;     //时长
-        public Long size;			     //文件大小
+        public Long size;                 //文件大小
     }
 }

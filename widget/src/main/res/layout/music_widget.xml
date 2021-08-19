@@ -7,7 +7,8 @@
     <TextView
         android:id="@+id/bg_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@android:color/white"/>
 
     <ImageView
         android:id="@+id/image_view"
@@ -16,7 +17,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_centerVertical="true"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:background="#BDE7FA"
         android:contentDescription="@string/bg" />
 
@@ -41,6 +42,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:gravity="center_vertical"
+            android:textColor="@android:color/black"
 
             android:text="@string/add_widget"/>
 
@@ -57,6 +59,7 @@
             android:singleLine="true"
             android:textSize="12sp"
             android:gravity="center_vertical"
+            android:textColor="@android:color/darker_gray"
 
             android:text="@string/add_widget"/>
 
