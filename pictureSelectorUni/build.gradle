@@ -3,15 +3,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 28
 
     defaultConfig {
-//        minSdkVersion 19
-//        targetSdkVersion 26
-
         minSdkVersion 21
-        compileSdkVersion 30
-        targetSdkVersion 30
+        targetSdkVersion 28
 
         versionCode 1
         versionName "1.0"
@@ -33,7 +29,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    compileOnly fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     compileOnly fileTree(include: ['uniapp-v8-release.aar'], dir: '../app/libs')
     compileOnly fileTree(include: ['lib.5plus.base-release.aar'], dir: '../app/libs')
 
@@ -41,6 +37,6 @@ dependencies {
     compileOnly 'com.alibaba:fastjson:1.1.46.android'
     compileOnly 'com.facebook.fresco:fresco:1.13.0'
 
-    implementation 'io.github.lucksiege:pictureselector:v2.7.3-rc06'
+//    implementation 'io.github.lucksiege:pictureselector:v2.7.3-rc06'
     compileOnly "com.github.bumptech.glide:glide:4.9.0"
 }

@@ -1,64 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2" xmlns:ns2="http://schemas.android.com/tools">
     <attr format="reference" name="coordinatorLayoutStyle"/>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
-    <attr format="enum" name="implementationMode">
-        <enum name="performance" value="0"/>
-        <enum name="compatible" value="1"/>
-    </attr>
+    <attr format="color" name="image_gallery_select_shade"/>
+    <attr format="integer" name="image_gallery_span_count"/>
     <attr format="boolean" name="isLightTheme"/>
-    <attr format="reference|color" name="picture.ac_preview.bottom.bg"/>
-    <attr format="reference|color" name="picture.ac_preview.complete.textColor"/>
-    <attr format="reference|color" name="picture.ac_preview.title.bg"/>
-    <attr format="reference|color" name="picture.ac_preview.title.textColor"/>
-    <attr format="reference" name="picture.arrow_down.icon"/>
-    <attr format="reference" name="picture.arrow_up.icon"/>
-    <attr format="reference|color" name="picture.bottom.bg"/>
-    <attr format="reference" name="picture.checked.style"/>
-    <attr format="reference|color" name="picture.complete.textColor"/>
-    <attr format="color" name="picture.container.backgroundColor"/>
-    <attr format="reference|color" name="picture.crop.status.color"/>
-    <attr format="reference|color" name="picture.crop.title.color"/>
-    <attr format="reference|color" name="picture.crop.toolbar.bg"/>
-    <attr format="color" name="picture.folder.textColor"/>
-    <attr format="dimension" name="picture.folder.textSize"/>
-    <attr format="reference" name="picture.folder_checked_dot"/>
-    <attr format="reference" name="picture.leftBack.icon"/>
-    <attr format="reference" name="picture.num.style"/>
-    <attr format="reference" name="picture.original.check.style"/>
-    <attr format="reference|color" name="picture.original.text.color"/>
-    <attr format="reference" name="picture.preview.leftBack.icon"/>
-    <attr format="reference|color" name="picture.preview.textColor"/>
-    <attr format="reference|color" name="picture.right.textColor"/>
-    <attr format="reference|color" name="picture.status.color"/>
-    <attr format="boolean" name="picture.statusFontColor"/>
-    <attr format="boolean" name="picture.style.checkNumMode"/>
-    <attr format="boolean" name="picture.style.numComplete"/>
-    <attr format="reference|color" name="picture.title.textColor"/>
-    <attr format="dimension" name="picture.titleBar.height"/>
-    <attr format="dimension" name="picture.titleRightArrow.LeftPadding"/>
-    <attr format="reference" name="recyclerViewStyle"/>
-    <attr format="enum" name="scaleType">
-        <enum name="fillStart" value="0"/>
-        <enum name="fillCenter" value="1"/>
-        <enum name="fillEnd" value="2"/>
-        <enum name="fitStart" value="3"/>
-        <enum name="fitCenter" value="4"/>
-        <enum name="fitEnd" value="5"/>
-    </attr>
     <attr format="string" name="title"/>
     <bool name="abc_action_bar_embed_tabs">true</bool>
+    <bool name="abc_allow_stacked_button_bar">false</bool>
     <bool name="abc_config_actionMenuItemAllCaps">true</bool>
-    <color name="abc_decor_view_status_guard">#ff000000</color>
-    <color name="abc_decor_view_status_guard_light">#ffffffff</color>
+    <color name="abc_input_method_navigation_guard">@android:color/black</color>
     <color name="abc_search_url_text_normal">#7fa87f</color>
     <color name="abc_search_url_text_pressed">@android:color/black</color>
     <color name="abc_search_url_text_selected">@android:color/black</color>
     <color name="accent_material_dark">@color/material_deep_teal_200</color>
     <color name="accent_material_light">@color/material_deep_teal_500</color>
-    <color name="androidx_core_ripple_material_light">#1f000000</color>
-    <color name="androidx_core_secondary_text_default_material_light">#8a000000</color>
     <color name="background_floating_material_dark">@color/material_grey_800</color>
     <color name="background_floating_material_light">@android:color/white</color>
     <color name="background_material_dark">@color/material_grey_850</color>
@@ -84,6 +41,16 @@
     <color name="foreground_material_light">@android:color/black</color>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
+    <color name="image_color_accent">#4CA1FB</color>
+    <color name="image_color_black">#000000</color>
+    <color name="image_color_blue">#0078FF</color>
+    <color name="image_color_cyan">#20FFCD</color>
+    <color name="image_color_green">#04B00C</color>
+    <color name="image_color_primary">#FFFFFF</color>
+    <color name="image_color_purple">#945AFC</color>
+    <color name="image_color_red">#FF5151</color>
+    <color name="image_color_white">#FFFFFF</color>
+    <color name="image_color_yellow">#FFCC00</color>
     <color name="image_pick_title_btn_normal">#00000000</color>
     <color name="image_pick_title_btn_pressed">#f4f4f4</color>
     <color name="ime_background">#cccccc</color>
@@ -91,7 +58,7 @@
     <color name="material_blue_grey_900">#ff263238</color>
     <color name="material_blue_grey_950">#ff21272b</color>
     <color name="material_deep_teal_200">#ff80cbc4</color>
-    <color name="material_deep_teal_500">#ff008577</color>
+    <color name="material_deep_teal_500">#ff009688</color>
     <color name="material_grey_100">#fff5f5f5</color>
     <color name="material_grey_300">#ffe0e0e0</color>
     <color name="material_grey_50">#fffafafa</color>
@@ -102,43 +69,6 @@
     <color name="notification_action_color_filter">#ffffffff</color>
     <color name="notification_icon_bg_color">#ff9e9e9e</color>
     <color name="notification_material_background_media_default_color">#ff424242</color>
-    <color name="picture_color_20">#20000000</color>
-    <color name="picture_color_20c064">#20c064</color>
-    <color name="picture_color_394a3e">#394a3e</color>
-    <color name="picture_color_4d">#4d4d4d</color>
-    <color name="picture_color_4e4d4e">#4e4d4e</color>
-    <color name="picture_color_529BeA">#529BeA</color>
-    <color name="picture_color_53575e">#53575e</color>
-    <color name="picture_color_66">#666666</color>
-    <color name="picture_color_70">#70000000</color>
-    <color name="picture_color_80">#80000000</color>
-    <color name="picture_color_9b">#9b9b9b</color>
-    <color name="picture_color_a83">#a8333333</color>
-    <color name="picture_color_aab2bd">#AAB2BD</color>
-    <color name="picture_color_ba3">#b0567ba3</color>
-    <color name="picture_color_bfe85d">#BF96E85D</color>
-    <color name="picture_color_black">#000000</color>
-    <color name="picture_color_blue">#7D7DFF</color>
-    <color name="picture_color_e">#EEEEEE</color>
-    <color name="picture_color_e0ff6100">#E0FF6100</color>
-    <color name="picture_color_eb">#ebebeb</color>
-    <color name="picture_color_ec">#ececec</color>
-    <color name="picture_color_f0">#F0F0F0</color>
-    <color name="picture_color_f2">#F2F2F2</color>
-    <color name="picture_color_fa">#FAFAFA</color>
-    <color name="picture_color_fa632d">#FA632D</color>
-    <color name="picture_color_ff572e">#ff572e</color>
-    <color name="picture_color_ffd042">#FFFFD042</color>
-    <color name="picture_color_ffe85d">#FF96E85D</color>
-    <color name="picture_color_grey">#393a3e</color>
-    <color name="picture_color_grey_3e">#dd393a3e</color>
-    <color name="picture_color_half_grey">#a0393a3e</color>
-    <color name="picture_color_half_white">#99FFFFFF</color>
-    <color name="picture_color_light_grey">#999999</color>
-    <color name="picture_color_transparent">#00000000</color>
-    <color name="picture_color_transparent_e0db">#E0DBDBDB</color>
-    <color name="picture_color_transparent_white">#F0FFFFFF</color>
-    <color name="picture_color_white">#FFFFFF</color>
     <color name="primary_dark_material_dark">@android:color/black</color>
     <color name="primary_dark_material_light">@color/material_grey_600</color>
     <color name="primary_material_dark">@color/material_grey_900</color>
@@ -159,32 +89,6 @@
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
     <color name="tooltip_background_dark">#e6616161</color>
     <color name="tooltip_background_light">#e6FFFFFF</color>
-    <color name="ucrop_color_active_aspect_ratio">@color/ucrop_color_blaze_orange</color>
-    <color name="ucrop_color_active_controls_color">@color/ucrop_color_blaze_orange</color>
-    <color name="ucrop_color_ba3">#b0567ba3</color>
-    <color name="ucrop_color_black">#000000</color>
-    <color name="ucrop_color_blaze_orange">#FF6300</color>
-    <color name="ucrop_color_crop_background">@color/ucrop_color_black</color>
-    <color name="ucrop_color_default_crop_frame">#ffffff</color>
-    <color name="ucrop_color_default_crop_grid">#80ffffff</color>
-    <color name="ucrop_color_default_dimmed">#8c000000</color>
-    <color name="ucrop_color_default_logo">#4f212121</color>
-    <color name="ucrop_color_ebony_clay">#20242F</color>
-    <color name="ucrop_color_ec">#ececec</color>
-    <color name="ucrop_color_heather">#B3BECE</color>
-    <color name="ucrop_color_inactive_aspect_ratio">@color/ucrop_color_ebony_clay</color>
-    <color name="ucrop_color_inactive_controls_color">@color/ucrop_color_heather</color>
-    <color name="ucrop_color_progress_wheel_line">@color/ucrop_color_ebony_clay</color>
-    <color name="ucrop_color_statusbar">#f5f5f5</color>
-    <color name="ucrop_color_toolbar">@color/ucrop_color_white</color>
-    <color name="ucrop_color_toolbar_widget">@color/ucrop_color_black</color>
-    <color name="ucrop_color_white">#FFFFFF</color>
-    <color name="ucrop_color_widget">@color/ucrop_color_black</color>
-    <color name="ucrop_color_widget_active">@color/ucrop_color_white</color>
-    <color name="ucrop_color_widget_background">@color/ucrop_color_ebony_clay</color>
-    <color name="ucrop_color_widget_rotate_angle">@color/ucrop_color_ebony_clay</color>
-    <color name="ucrop_color_widget_rotate_mid_line">@color/ucrop_color_blaze_orange</color>
-    <color name="ucrop_color_widget_text">@color/ucrop_color_blaze_orange</color>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
     <dimen name="abc_action_bar_content_inset_with_nav">72dp</dimen>
     <dimen name="abc_action_bar_default_height_material">56dp</dimen>
@@ -233,9 +137,6 @@
     <dimen name="abc_edit_text_inset_horizontal_material">4dp</dimen>
     <dimen name="abc_edit_text_inset_top_material">10dp</dimen>
     <dimen name="abc_floating_window_z">16dp</dimen>
-    <dimen name="abc_list_item_height_large_material">80dp</dimen>
-    <dimen name="abc_list_item_height_material">64dp</dimen>
-    <dimen name="abc_list_item_height_small_material">48dp</dimen>
     <dimen name="abc_list_item_padding_horizontal_material">@dimen/abc_action_bar_content_inset_material</dimen>
     <dimen name="abc_panel_menu_list_width">296dp</dimen>
     <dimen name="abc_progress_bar_height_material">4dp</dimen>
@@ -244,9 +145,6 @@
     <dimen name="abc_seekbar_track_background_height_material">2dp</dimen>
     <dimen name="abc_seekbar_track_progress_height_material">2dp</dimen>
     <dimen name="abc_select_dialog_padding_start_material">20dp</dimen>
-    <dimen name="abc_star_big">48dp</dimen>
-    <dimen name="abc_star_medium">36dp</dimen>
-    <dimen name="abc_star_small">16dp</dimen>
     <dimen name="abc_switch_padding">3dp</dimen>
     <dimen name="abc_text_size_body_1_material">14sp</dimen>
     <dimen name="abc_text_size_body_2_material">14sp</dimen>
@@ -288,6 +186,9 @@
     <item format="float" name="hint_alpha_material_light" type="dimen">0.38</item>
     <item format="float" name="hint_pressed_alpha_material_dark" type="dimen">0.70</item>
     <item format="float" name="hint_pressed_alpha_material_light" type="dimen">0.54</item>
+    <dimen name="image_color">28dp</dimen>
+    <dimen name="image_color_margin">6dp</dimen>
+    <dimen name="image_mode_space">32dp</dimen>
     <dimen name="item_touch_helper_max_drag_scroll_per_frame">20dp</dimen>
     <dimen name="item_touch_helper_swipe_escape_max_velocity">800dp</dimen>
     <dimen name="item_touch_helper_swipe_escape_velocity">120dp</dimen>
@@ -318,118 +219,33 @@
     <dimen name="tooltip_vertical_padding">6.5dp</dimen>
     <dimen name="tooltip_y_offset_non_touch">0dp</dimen>
     <dimen name="tooltip_y_offset_touch">16dp</dimen>
-    <dimen name="ucrop_default_crop_frame_stoke_width">1dp</dimen>
-    <dimen name="ucrop_default_crop_grid_stoke_width">1dp</dimen>
-    <dimen name="ucrop_default_crop_logo_size">200dp</dimen>
-    <dimen name="ucrop_default_crop_rect_corner_touch_area_line_length">10dp</dimen>
-    <dimen name="ucrop_default_crop_rect_corner_touch_threshold">30dp</dimen>
-    <dimen name="ucrop_default_crop_rect_min_size">100dp</dimen>
-    <dimen name="ucrop_height_crop_aspect_ratio_text">40dp</dimen>
-    <dimen name="ucrop_height_divider_shadow">3dp</dimen>
-    <dimen name="ucrop_height_horizontal_wheel_progress_line">20dp</dimen>
-    <dimen name="ucrop_height_wrapper_controls">64dp</dimen>
-    <dimen name="ucrop_height_wrapper_states">72dp</dimen>
-    <dimen name="ucrop_margin_horizontal_wheel_progress_line">10dp</dimen>
-    <dimen name="ucrop_margin_top_controls_text">4dp</dimen>
-    <dimen name="ucrop_margin_top_widget_text">10dp</dimen>
-    <dimen name="ucrop_padding_crop_frame">16dp</dimen>
-    <dimen name="ucrop_progress_size">30dp</dimen>
-    <dimen name="ucrop_size_dot_scale_text_view">8dp</dimen>
-    <dimen name="ucrop_size_wrapper_rotate_button">50dp</dimen>
-    <dimen name="ucrop_text_size_controls_text">11sp</dimen>
-    <dimen name="ucrop_text_size_widget_text">13sp</dimen>
-    <dimen name="ucrop_width_horizontal_wheel_progress_line">2dp</dimen>
-    <dimen name="ucrop_width_middle_wheel_progress_line">4dp</dimen>
+    <dimen name="widget_margin">8dp</dimen>
     <drawable name="notification_template_icon_bg">#3333B5E5</drawable>
     <drawable name="notification_template_icon_low_bg">#0cffffff</drawable>
-    <item name="accessibility_action_clickable_span" type="id"/>
-    <item name="accessibility_custom_action_0" type="id"/>
-    <item name="accessibility_custom_action_1" type="id"/>
-    <item name="accessibility_custom_action_10" type="id"/>
-    <item name="accessibility_custom_action_11" type="id"/>
-    <item name="accessibility_custom_action_12" type="id"/>
-    <item name="accessibility_custom_action_13" type="id"/>
-    <item name="accessibility_custom_action_14" type="id"/>
-    <item name="accessibility_custom_action_15" type="id"/>
-    <item name="accessibility_custom_action_16" type="id"/>
-    <item name="accessibility_custom_action_17" type="id"/>
-    <item name="accessibility_custom_action_18" type="id"/>
-    <item name="accessibility_custom_action_19" type="id"/>
-    <item name="accessibility_custom_action_2" type="id"/>
-    <item name="accessibility_custom_action_20" type="id"/>
-    <item name="accessibility_custom_action_21" type="id"/>
-    <item name="accessibility_custom_action_22" type="id"/>
-    <item name="accessibility_custom_action_23" type="id"/>
-    <item name="accessibility_custom_action_24" type="id"/>
-    <item name="accessibility_custom_action_25" type="id"/>
-    <item name="accessibility_custom_action_26" type="id"/>
-    <item name="accessibility_custom_action_27" type="id"/>
-    <item name="accessibility_custom_action_28" type="id"/>
-    <item name="accessibility_custom_action_29" type="id"/>
-    <item name="accessibility_custom_action_3" type="id"/>
-    <item name="accessibility_custom_action_30" type="id"/>
-    <item name="accessibility_custom_action_31" type="id"/>
-    <item name="accessibility_custom_action_4" type="id"/>
-    <item name="accessibility_custom_action_5" type="id"/>
-    <item name="accessibility_custom_action_6" type="id"/>
-    <item name="accessibility_custom_action_7" type="id"/>
-    <item name="accessibility_custom_action_8" type="id"/>
-    <item name="accessibility_custom_action_9" type="id"/>
     <item name="action_bar_activity_content" type="id"/>
     <item name="action_bar_spinner" type="id"/>
     <item name="action_menu_divider" type="id"/>
     <item name="action_menu_presenter" type="id"/>
-    <item name="fragment_container_view_tag" type="id"/>
-    <item name="ghost_view" type="id"/>
-    <item name="ghost_view_holder" type="id"/>
     <item name="glide_custom_view_target_tag" type="id"/>
     <item name="home" type="id"/>
-    <item name="id_recycler" type="id"/>
     <item name="item_touch_helper_previous_elevation" type="id"/>
     <item name="line1" type="id"/>
     <item name="line3" type="id"/>
-    <item name="parent_matrix" type="id"/>
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
-    <item name="save_non_transition_alpha" type="id"/>
-    <item name="save_overlay_view" type="id"/>
-    <item name="special_effects_controller_view_tag" type="id"/>
     <item name="split_action_bar" type="id"/>
-    <item name="tag_accessibility_actions" type="id"/>
-    <item name="tag_accessibility_clickable_spans" type="id"/>
-    <item name="tag_accessibility_heading" type="id"/>
-    <item name="tag_accessibility_pane_title" type="id"/>
-    <item name="tag_on_apply_window_listener" type="id"/>
-    <item name="tag_on_receive_content_listener" type="id"/>
-    <item name="tag_on_receive_content_mime_types" type="id"/>
-    <item name="tag_screen_reader_focusable" type="id"/>
-    <item name="tag_state_description" type="id"/>
     <item name="tag_transition_group" type="id"/>
     <item name="tag_unhandled_key_event_manager" type="id"/>
     <item name="tag_unhandled_key_listeners" type="id"/>
-    <item name="tag_window_insets_animation_callback" type="id"/>
     <item name="text" type="id"/>
     <item name="text2" type="id"/>
     <item name="title" type="id"/>
-    <item name="transition_current_scene" type="id"/>
-    <item name="transition_layout_save" type="id"/>
-    <item name="transition_position" type="id"/>
-    <item name="transition_scene_layoutid_cache" type="id"/>
-    <item name="transition_transform" type="id"/>
     <item name="up" type="id"/>
-    <item name="view_count_tag" type="id"/>
-    <item name="view_index_tag" type="id"/>
-    <item name="view_tag" type="id"/>
-    <id name="view_tree_lifecycle_owner"/>
-    <id name="view_tree_saved_state_registry_owner"/>
-    <id name="view_tree_view_model_store_owner"/>
-    <item name="visible_removing_fragment_view_tag" type="id"/>
     <integer name="abc_config_activityDefaultDur">220</integer>
     <integer name="abc_config_activityShortDur">150</integer>
     <integer name="cancel_button_image_alpha">127</integer>
     <integer name="config_tooltipAnimTime">150</integer>
     <integer name="status_bar_notification_info_maxnum">999</integer>
-    <integer name="ucrop_progress_loading_anim_time">1500</integer>
     <string name="abc_action_bar_home_description">Navigate home</string>
     <string name="abc_action_bar_up_description">Navigate up</string>
     <string name="abc_action_menu_overflow_description">More options</string>
@@ -438,6 +254,18 @@
     <string name="abc_activitychooserview_choose_application">Choose an app</string>
     <string name="abc_capital_off">OFF</string>
     <string name="abc_capital_on">ON</string>
+    <string name="abc_font_family_body_1_material">sans-serif</string>
+    <string name="abc_font_family_body_2_material">sans-serif-medium</string>
+    <string name="abc_font_family_button_material">sans-serif-medium</string>
+    <string name="abc_font_family_caption_material">sans-serif</string>
+    <string name="abc_font_family_display_1_material">sans-serif</string>
+    <string name="abc_font_family_display_2_material">sans-serif</string>
+    <string name="abc_font_family_display_3_material">sans-serif</string>
+    <string name="abc_font_family_display_4_material">sans-serif-light</string>
+    <string name="abc_font_family_headline_material">sans-serif</string>
+    <string name="abc_font_family_menu_material">sans-serif</string>
+    <string name="abc_font_family_subhead_material">sans-serif</string>
+    <string name="abc_font_family_title_material">sans-serif-medium</string>
     <string name="abc_menu_alt_shortcut_label">Alt+</string>
     <string name="abc_menu_ctrl_shortcut_label">Ctrl+</string>
     <string name="abc_menu_delete_shortcut_label">delete</string>
@@ -457,92 +285,272 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with <ns1:g example="Mail" id="application_name">%s</ns1:g></string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
+    <string name="add_widget">开启美好的一天</string>
     <string name="app_name">uni原生插件</string>
-    <string name="dcloud_choose_an_action">选择操作</string>
-    <string name="dcloud_gallery_app_name">@string/app_name</string>
+    <string name="bg">背景图</string>
+    <string name="dcloud_Init_fail_tips">Application configuration error detected, please modify according to the document configuration</string>
+    <string name="dcloud_audio_abnormal_rebuild">the playback is abnormal and needs to be recreated</string>
+    <string name="dcloud_audio_no_mp3_module_added">no recording support mp3 format file module is added when packaging, please refer to</string>
+    <string name="dcloud_audio_not_aac_recording">the current system does not support AAC recording!</string>
+    <string name="dcloud_audio_not_mp3_recording">the current application configuration does not support mp3</string>
+    <string name="dcloud_audio_play_error">file playback format error</string>
+    <string name="dcloud_audio_timeout">file request timed out</string>
+    <string name="dcloud_choose_an_action">Choose an action</string>
+    <string name="dcloud_common_allow">allow</string>
+    <string name="dcloud_common_app_check_failed">verification failed!</string>
+    <string name="dcloud_common_app_not_installed">the client is not installed</string>
+    <string name="dcloud_common_app_not_oaid">no OAID-related functionality is integrated</string>
+    <string name="dcloud_common_app_open_now">application, \n opens immediately?</string>
+    <string name="dcloud_common_app_res_download_failed">, application resource download failed!</string>
+    <string name="dcloud_common_app_target_tips">targetSdkVersion does not support the current path on Android10+ system devices after setting >=29. Please change to the application run path! Please see:https://ask.dcloud.net.cn/article/36199</string>
+    <string name="dcloud_common_app_test_tips">the current application is a developer test version, which has not been reviewed and may have security risks</string>
+    <string name="dcloud_common_app_tips1">this application is compiled using HBuilderX %s or the corresponding CLI version, while the mobile SDK version is %s. Mismatching versions can cause an application exception</string>
+    <string name="dcloud_common_app_tips2">the current environment cannot run uni-app applications with "Custom Component Mode" enabled!</string>
+    <string name="dcloud_common_app_trust_tips">trust the application without prompting</string>
+    <string name="dcloud_common_cancel">cancel</string>
+    <string name="dcloud_common_certificate_continue">there is a problem with this sites security certificate. Do you want to continue?</string>
+    <string name="dcloud_common_close">close</string>
+    <string name="dcloud_common_copy_clipboard">copy to clipboard</string>
+    <string name="dcloud_common_copy_link">copy the link</string>
+    <string name="dcloud_common_download">download</string>
+    <string name="dcloud_common_download_complete">download completes</string>
+    <string name="dcloud_common_download_do_file">download or not</string>
+    <string name="dcloud_common_download_failed">download failed</string>
+    <string name="dcloud_common_download_tips1">the download has started, and the installation interface will be opened automatically after completion</string>
+    <string name="dcloud_common_download_tips2">continuing with a previously unfinished download</string>
+    <string name="dcloud_common_download_tips3">installing the app you downloaded earlier</string>
+    <string name="dcloud_common_exit">exit</string>
+    <string name="dcloud_common_fail">fail</string>
+    <string name="dcloud_common_file_not_exist">file does not exist</string>
+    <string name="dcloud_common_ignore">ignore</string>
+    <string name="dcloud_common_in_the_buffer">loading</string>
+    <string name="dcloud_common_inside_error">business internal error</string>
+    <string name="dcloud_common_into">into</string>
+    <string name="dcloud_common_missing_parameter">missing business parameter configuration</string>
+    <string name="dcloud_common_msg_unread_prompt">you have %s unread messages</string>
+    <string name="dcloud_common_no_allow">dont allow</string>
+    <string name="dcloud_common_no_network_tips">device detected no network, please check the system network Settings!</string>
+    <string name="dcloud_common_not_sd_card">, no SD card!</string>
+    <string name="dcloud_common_not_supported">this feature is not supported</string>
+    <string name="dcloud_common_ok">ok</string>
+    <string name="dcloud_common_open">open</string>
+    <string name="dcloud_common_open_browser">open it in a browser</string>
+    <string name="dcloud_common_open_web">open the web page</string>
+    <string name="dcloud_common_parameter_error">parameter error</string>
+    <string name="dcloud_common_press_again_tips1">press the back key again to close the application</string>
+    <string name="dcloud_common_press_again_tips2">press the back key again to close</string>
+    <string name="dcloud_common_refresh">refresh</string>
+    <string name="dcloud_common_retry">retry</string>
+    <string name="dcloud_common_run_app_failed">failed to enter application</string>
+    <string name="dcloud_common_safety_warning">safety warning</string>
+    <string name="dcloud_common_screenshot_blank">the screenshot is white</string>
+    <string name="dcloud_common_screenshot_fail">screenshots failed</string>
+    <string name="dcloud_common_sd_not_space">, SD card space is insufficient!</string>
+    <string name="dcloud_common_search">search</string>
+    <string name="dcloud_common_set_network">configure network</string>
+    <string name="dcloud_common_set_up">set</string>
+    <string name="dcloud_common_setting_download_failed">, configuration file download failed!</string>
+    <string name="dcloud_common_share">share</string>
+    <string name="dcloud_common_share_page">share the page</string>
+    <string name="dcloud_common_soon_open">is about to open</string>
+    <string name="dcloud_common_tips">prompt</string>
+    <string name="dcloud_common_unknown_error">an unknown error</string>
+    <string name="dcloud_common_user_cancel">user cancelled</string>
+    <string name="dcloud_common_user_refuse_api">the user denies access to the API</string>
+    <string name="dcloud_common_view_details">view details</string>
+    <string name="dcloud_common_zip_image_output_failed">image output failed</string>
+    <string name="dcloud_current_address">current address</string>
+    <string name="dcloud_debug_break_off_reason">Disconnected from debugging service. Possible reason:</string>
+    <string name="dcloud_debug_cannot_connect">Unable to connect to debugging service, possible reason:</string>
+    <string name="dcloud_debug_connecting">connecting to debugging service...</string>
+    <string name="dcloud_debug_possible_causes">1. The mobile phone and PC are not in the same LAN\n 2. The mobile phone uses the mobile network\n 3. The mobile phone uses VPN and other proxy settings\n 4. The PC sets the firewall</string>
+    <string name="dcloud_debug_reconnection_service">retry</string>
+    <string name="dcloud_drop_down_refresh1">pull down to refresh</string>
+    <string name="dcloud_drop_down_refresh2">refresh after release</string>
+    <string name="dcloud_drop_down_refresh3">refreshing...</string>
+    <string name="dcloud_feature_barcode2_no_camera_permission">no camera permission</string>
+    <string name="dcloud_feature_error_tips">please check whether %s related nodes are added in assets/data/properties.xml file.</string>
+    <string name="dcloud_feature_error_tips2">%s module was not added when packaging, please refer to</string>
+    <string name="dcloud_feature_weex_amap_msg_bounds_cannot_null">id、src、bounds can not be null</string>
+    <string name="dcloud_feature_weex_amap_msg_bounds_create_fail">bounds create fail</string>
+    <string name="dcloud_feature_weex_amap_msg_key_invalid">key invalid</string>
+    <string name="dcloud_feature_weex_amap_msg_network_error">network error</string>
+    <string name="dcloud_feature_weex_amap_msg_param_error">parameters error</string>
+    <string name="dcloud_feature_weex_amap_msg_search_error">search fail</string>
+    <string name="dcloud_feature_weex_amap_msg_unknown_reason">unknown reson</string>
+    <string name="dcloud_feature_weex_amap_no_search_result">sorry. no result searched</string>
+    <string name="dcloud_feature_weex_msg_cannot_find_file_by_path">can not find file by path</string>
+    <string name="dcloud_feature_weex_msg_page_destroyed">page had destroyed</string>
+    <string name="dcloud_feature_weex_msg_param_empty">param is empty</string>
+    <string name="dcloud_feature_weex_msg_param_invalid">param invalid</string>
+    <string name="dcloud_gallery_Next">Next</string>
+    <string name="dcloud_gallery_all_dir_name">All Pictures &amp; Videos</string>
+    <string name="dcloud_gallery_all_image">All Photos</string>
+    <string name="dcloud_gallery_all_video">All Videos</string>
+    <string name="dcloud_gallery_cant_play_video">No programs to play</string>
+    <string name="dcloud_gallery_count_string"/>
+    <string name="dcloud_gallery_done">Done</string>
+    <string name="dcloud_gallery_edit">Edit</string>
+    <string name="dcloud_gallery_edit_image_all_photo">All Photos</string>
+    <string name="dcloud_gallery_edit_image_cancel">Cancel</string>
+    <string name="dcloud_gallery_edit_image_clip">Clip</string>
+    <string name="dcloud_gallery_edit_image_done">Done</string>
+    <string name="dcloud_gallery_edit_image_doodle">Doodle</string>
+    <string name="dcloud_gallery_edit_image_enable_storage_permission">Please enable storage permission</string>
+    <string name="dcloud_gallery_edit_image_enable_storage_tips">Need storage permission,please turn on in the Settings</string>
+    <string name="dcloud_gallery_edit_image_mosaic">Mosaic</string>
+    <string name="dcloud_gallery_edit_image_mosaic_tip">Please draw on the picture</string>
+    <string name="dcloud_gallery_edit_image_original">Full Image</string>
+    <string name="dcloud_gallery_edit_image_preview">Preview</string>
+    <string name="dcloud_gallery_edit_image_reset">Restore</string>
+    <string name="dcloud_gallery_edit_image_rotate">Rotate</string>
+    <string name="dcloud_gallery_edit_image_text">Text</string>
+    <string name="dcloud_gallery_edit_image_undo">Undo</string>
+    <string name="dcloud_gallery_library_name"/>
+    <string name="dcloud_gallery_msg_amount_limit">Maximum number of photos or videos</string>
+    <string name="dcloud_gallery_msg_size_limit">Please upload after compressing and cutting, the largest file only supports</string>
+    <string name="dcloud_gallery_preview">Preview</string>
+    <string name="dcloud_gallery_read_external_storage">Need to open storage permission</string>
+    <string name="dcloud_gallery_select">Select</string>
+    <string name="dcloud_gallery_select_image_title">Photos</string>
+    <string name="dcloud_gallery_select_null">You must select at least one file before previewing</string>
+    <string name="dcloud_gallery_select_title">Photos/Videos</string>
+    <string name="dcloud_gallery_select_video_title">Videos</string>
+    <string name="dcloud_gallery_video">Video</string>
+    <string name="dcloud_gallery_video_dir_name">All Videos</string>
+    <string name="dcloud_geo_current_address">the current address</string>
+    <string name="dcloud_geo_fail">to locate failure</string>
+    <string name="dcloud_geo_loading">is located</string>
+    <string name="dcloud_geo_open_permissions">unable to retrieve location information, please allow location permissions</string>
+    <string name="dcloud_geo_open_service">unable to obtain location information, please start service</string>
+    <string name="dcloud_geo_permission_failed">failed to obtain location permission</string>
+    <string name="dcloud_geo_provider_invalid">the specified provider does not exist or is invalid</string>
+    <string name="dcloud_io_coding_error">coding error</string>
+    <string name="dcloud_io_file_not_found">file not found</string>
+    <string name="dcloud_io_file_not_read">not allowed to read</string>
+    <string name="dcloud_io_grammar_mistakes">grammatical errors</string>
+    <string name="dcloud_io_invalid_modification">invalid edit</string>
+    <string name="dcloud_io_invalid_state">invalid state</string>
+    <string name="dcloud_io_no_modification_allowed">no modification allowed</string>
+    <string name="dcloud_io_path_exists">path already exists</string>
+    <string name="dcloud_io_path_not_exist">path does not exist</string>
+    <string name="dcloud_io_perform_error">execution error</string>
+    <string name="dcloud_io_type_mismatch">type does not match</string>
+    <string name="dcloud_io_unknown_error">unknown mistake</string>
+    <string name="dcloud_io_without_authorization">not authorized</string>
+    <string name="dcloud_io_write_non_base64">the write data is not a base64 string, please check</string>
+    <string name="dcloud_native_obj_load_failed">failed to load</string>
+    <string name="dcloud_native_obj_path_cannot_empty">path cannot be empty</string>
+    <string name="dcloud_native_obj_path_not_network">patch does not support network addresses, only supports local file systems</string>
+    <string name="dcloud_nf_afternoon">afternoon</string>
+    <string name="dcloud_nf_desktop_icon_corner">desktop icon corner mark</string>
+    <string name="dcloud_nf_evening">evening</string>
+    <string name="dcloud_nf_forenoon">forenoon</string>
+    <string name="dcloud_nf_midnight">midnight</string>
+    <string name="dcloud_nf_morning">morning</string>
+    <string name="dcloud_nf_night">night</string>
+    <string name="dcloud_nf_noon">noon</string>
+    <string name="dcloud_oauth_authentication_failed">failed to obtain authorization to log in to the authentication service</string>
+    <string name="dcloud_oauth_empower_failed">the Authentication Service operation to obtain authorized logon failed</string>
+    <string name="dcloud_oauth_logout_tips">not logged in or logged out</string>
+    <string name="dcloud_oauth_oauth_not_empower">oAuth authorization has not been obtained</string>
+    <string name="dcloud_oauth_token_failed">failed to get token</string>
+    <string name="dcloud_offline_fail_tips">Appkey is not configured or configured incorrectly</string>
     <string name="dcloud_package_name_base_application">io.dcloud.HBuilder</string>
-    <string name="dcloud_permission_read_phone_state_message">为保证您正常、安全地使用，需要获取设备识别码（部分手机提示为获取手机号码）使用权限，请允许。</string>
-    <string name="dcloud_permission_write_external_storage_message">应用保存运行状态等信息，需要获取读写手机存储（系统提示为访问设备上的照片、媒体内容和文件）权限，请允许。</string>
-    <string name="dcloud_privacy_prompt_accept_button_text">我知道了</string>
-    <string name="dcloud_privacy_prompt_message"><Data><![CDATA[请你务必审慎阅读、充分理解“服务协议”和“隐私政策”各条款，包括但不限于：为了更好的向你提供服务，我们需要收集你的设备标识、操作日志等信息用于分析、优化应用性能。<br />
-  你可阅读<a href="">《服务协议》</a>和<a href="">《隐私政策》</a>了解详细信息。如果你同意，请点击下面按钮开始接受我们的服务。]]></Data></string>
-    <string name="dcloud_privacy_prompt_title">服务协议和隐私政策</string>
-    <string name="dcloud_sync_debug_message">当前应用运行在自定义调试基座中，发布正式版请打包时不要勾选自定义调试基座。</string>
+    <string name="dcloud_permission_read_phone_state_message">In order to ensure your normal and safe use, you need to obtain the device identification code (some mobile phones prompt to obtain the mobile phone number) use permission, please allow.</string>
+    <string name="dcloud_permission_write_external_storage_message">The application saves running status and other information, and needs to obtain the permission to read and write mobile phone storage (the system prompts to access photos, media content and files on the device), please allow.</string>
+    <string name="dcloud_permissions_album_whether_allow">“%s” need to access the system album, is it allowed?</string>
+    <string name="dcloud_permissions_camera_whether_allow">“%s” need to call the camera to take photos or videos. Is it allowed?</string>
+    <string name="dcloud_permissions_checkbox_close_tips">dont prompt before exit</string>
+    <string name="dcloud_permissions_geo_retry_tips">the location service failed to turn on. Do you want to turn it on again?</string>
+    <string name="dcloud_permissions_informs_whether_allow">“%s” need to display a message in the system notification bar, is it allowed?</string>
+    <string name="dcloud_permissions_njs_tips1">the invocation module is not added to the application, and Native.js related APIs cannot be used. Please add the Invocation node under permissions in the manifest.json file.</string>
+    <string name="dcloud_permissions_njs_whether_allow">“%s” need to access the bottom level of the system, is it allowed?</string>
+    <string name="dcloud_permissions_phone_call_whether_allow">“%s” need to make a call, is it allowed?</string>
+    <string name="dcloud_permissions_reauthorization">reauthorize</string>
+    <string name="dcloud_permissions_record_whether_allow">“%s” need to use the recording function, is it allowed?</string>
+    <string name="dcloud_permissions_reopened">reopen</string>
+    <string name="dcloud_permissions_retry_tips">“%s” authorization failed. Do you want to re-authorize?</string>
+    <string name="dcloud_permissions_short_cut_close_tips">“%s” need to create a desktop icon, is it allowed?</string>
+    <string name="dcloud_permissions_short_cut_tips">please turn on the "shortcut activation" item?</string>
+    <string name="dcloud_permissions_short_cut_tips2">shortcut is enabled "Failed to open, do you want to restart?"</string>
+    <string name="dcloud_permissions_sms_whether_allow">“%s” need to send SMS, is it allowed?</string>
+    <string name="dcloud_permissions_whether_allow">“%s” need to obtain location information, is it allowed?</string>
+    <string name="dcloud_privacy_prompt_accept_button_text">Agree</string>
+    <string name="dcloud_privacy_prompt_message"><Data><![CDATA[Please read carefully and fully understand the terms of the "Service Agreement" and "Privacy Policy", including but not limited to: In order to provide you with better services, we need to collect your device identification, Information such as operation logs is used to analyze and optimize application performance. <br />
+   You can read the <a href="">"Service Agreement"</a> and <a href="">"Privacy Policy"</a> for details. If you agree, please click the button below to start accepting our service. ]]></Data></string>
+    <string name="dcloud_privacy_prompt_title">Service Agreement and Privacy Policy</string>
+    <string name="dcloud_record_address_current">current address</string>
+    <string name="dcloud_record_address_home">home address</string>
+    <string name="dcloud_record_address_unit">unit address</string>
+    <string name="dcloud_runtime_not_manifest">HTML5+ Runtime missing upgrade package modules configured in manifest.json</string>
+    <string name="dcloud_runtime_not_update_tips">uni-app compilation mode switching does not support upgrading application resources</string>
+    <string name="dcloud_share_content_not_empty">sharing text cannot be empty</string>
+    <string name="dcloud_share_local_path">share pictures only support local path</string>
+    <string name="dcloud_short_cut_abandon_install">abandon installation</string>
+    <string name="dcloud_short_cut_chuizi1">the hammer phone uses the 9/16 grid view, and the application cannot be installed on the desktop. Please click "Go to Settings View"-Desktop Settings-select "Android Native" in the single panel view-select "OK" in the pop-up prompt box.</string>
+    <string name="dcloud_short_cut_create_desktop_icon">create desktop icon</string>
+    <string name="dcloud_short_cut_create_error">the application cannot be installed on the desktop, you need to set the desktop shortcut permissions!</string>
+    <string name="dcloud_short_cut_create_error_tips">this application cannot be installed on the desktop and cannot be launched from the desktop in the future. It is strongly recommended to configure desktop shortcut permissions!</string>
+    <string name="dcloud_short_cut_create_error_tips2">the desktop shortcut permission is disabled, and the application cannot be installed on the desktop. Please click "Go to set permissions"-scroll to the bottom of the opened interface-click permission management-scroll to the bottom-click desktop shortcut-allow.</string>
+    <string name="dcloud_short_cut_create_error_tips3">the desktop shortcut permission is disabled, and the application cannot be installed on the desktop. Please click "Go to set permissions" to open the application information interface-permission management-desktop shortcut-allow.</string>
+    <string name="dcloud_short_cut_create_error_tips4">the desktop shortcut permission is disabled, and the application cannot be installed on the desktop. Please click "Go to set permissions" to open the application information interface-permissions-set individual permissions-create desktop shortcuts-allow.</string>
+    <string name="dcloud_short_cut_created">"%s" desktop icon created</string>
+    <string name="dcloud_short_cut_created_removed_manually">, please delete manually if there are duplicates</string>
+    <string name="dcloud_short_cut_created_tip">"the desktop icon has been created, please delete it manually if there are duplicates</string>
+    <string name="dcloud_short_cut_err1">the get address is empty, get a new URI through getShortCutUri?</string>
+    <string name="dcloud_short_cut_exists">shortcut already exists</string>
+    <string name="dcloud_short_cut_goto_pms">go to set permissions</string>
+    <string name="dcloud_short_cut_goto_run">go to settings to enable</string>
+    <string name="dcloud_short_cut_if_create_tips">whether to install the application "%s" on the phone desktop"</string>
+    <string name="dcloud_short_cut_it_set">i set it up</string>
+    <string name="dcloud_short_cut_not_install">not install on desktop</string>
+    <string name="dcloud_short_cut_open_pms_tips">the operation steps are as follows:\nPermission Management > desktop shortcut\nClick allow</string>
+    <string name="dcloud_short_cut_open_pms_title">open permissions: desktop shortcuts</string>
+    <string name="dcloud_short_cut_open_set_pms">please open [desktop shortcut] permissions</string>
+    <string name="dcloud_short_cut_pms_unauthorized_tips1">it is detected that the permission is turned off, please follow the steps below to open the permission: [Permission Management]-[Desktop Shortcut]-[Allow]</string>
+    <string name="dcloud_short_cut_pms_unauthorized_tips2">it is detected that the permission is turned off, please follow the steps below to open the permission: [Desktop shortcut]-[Allow]</string>
+    <string name="dcloud_short_cut_pms_unauthorized_tips3">it is detected that the permission is turned off, please follow the steps below to open the permission: [Permission]-[Set Single Permission]-[Desktop Shortcut]-[Allow]</string>
+    <string name="dcloud_short_cut_pms_unauthorized_tips4">the permission is detected to be closed, please follow the steps below to open the permission: [%s]-[Allow]</string>
+    <string name="dcloud_short_cut_qiku1">to use streaming apps on Qiku phones, you need to make sure that "Shortcuts" is enabled in the settings. Please click "Go to set permissions" to open the setting interface-desktop-shortcut enable-open. If there is no "Desktop" option in the setting interface, please upgrade to the latest version of Qiku ROM.</string>
+    <string name="dcloud_short_cut_set_pms">turn on "Desktop Shortcut" permission</string>
+    <string name="dcloud_short_cut_set_up">go to settings</string>
+    <string name="dcloud_short_cut_tips">create desktop icon reminder</string>
+    <string name="dcloud_short_cut_vivo1">to use streaming applications on VIVO mobile phones, you must first make sure to open the desktop shortcut. Please click "Go to set permissions"-Software Management-Desktop Shortcut Management-"</string>
+    <string name="dcloud_short_cut_vivo2">"-allow. If there is no "Desktop Shortcut Management" item in the software management interface, please upgrade to the latest version of ROM.</string>
+    <string name="dcloud_storage_ceiling_error">storage storage has exceeded the upper limit and cannot be stored normally</string>
+    <string name="dcloud_storage_key_error">the storage key is empty</string>
+    <string name="dcloud_storage_native_error">native error:</string>
+    <string name="dcloud_storage_no_db_error">native error: failed to find the storage library</string>
+    <string name="dcloud_storage_not_find_error">storage No storage record with the same key was found</string>
+    <string name="dcloud_storage_success">success</string>
+    <string name="dcloud_storage_write_big_error">failed to write large file</string>
+    <string name="dcloud_sync_debug_message">The current application is running in a custom debugging base. When releasing the official version, please do not tick the custom debugging base when packaging.</string>
+    <string name="dcloud_titlenview_back_button_description">Back</string>
+    <string name="dcloud_ui_webview_not_finished">The webview has not been created yet, please execute it later</string>
+    <string name="dcloud_wgt_appid_legal">WGT installation package manifest.json the appid of the file does not match</string>
+    <string name="dcloud_wgt_format_error">WGT/WGTU file format error</string>
+    <string name="dcloud_wgt_manifest_format_error">WGT installation package manifest.json file format error</string>
+    <string name="dcloud_wgt_not_manifest">WGT installation package manifest.json file does not exist</string>
+    <string name="dcloud_wgt_not_update_file">WGTU installation package update.xml file does not exist</string>
+    <string name="dcloud_wgt_update_appid_error">WGTU installation package update.xml the appid of the file does not match</string>
+    <string name="dcloud_wgt_update_format_error">WGTU installation package update.xml File format error</string>
+    <string name="dcloud_wgt_update_version_error">WGTU installation package update.xml the version version of the file does not match</string>
+    <string name="dcloud_wgt_version_error">WGT installation package manifest.json the version of the file does not match</string>
+    <string name="dcloud_wgtu_appid_legal">WGTU installation package www under contents manifest.json file appid mismatch</string>
+    <string name="dcloud_wgtu_manifest_format_error">WGTU installation package www under contents manifest.json file format error</string>
+    <string name="dcloud_wgtu_not_manifest">WGTU installation package www under contents manifest.json does not exist</string>
+    <string name="dcloud_wgtu_version_error">WGTU installation package www under contents manifest.json file version version mismatch</string>
+    <string name="favourite">收藏</string>
+    <string name="hint_text"><![CDATA[>>> 滑动解锁]]></string>
+    <string name="img">专辑图片</string>
     <string name="in_package">apk</string>
-    <string name="picture_all_audio">All audio</string>
-    <string name="picture_audio">Access to system recording permission denied</string>
-    <string name="picture_audio_empty">You can use system recordings to record audio</string>
-    <string name="picture_audio_error">The audio is corrupted</string>
-    <string name="picture_camera">Get system camera permission denied</string>
-    <string name="picture_camera_roll">CameraRoll</string>
-    <string name="picture_camera_roll_num">%1$s (%2$d)</string>
-    <string name="picture_cancel">Cancel</string>
-    <string name="picture_choose_limit_seconds">Only videos from %1$ds to %2$ds can be selected</string>
-    <string name="picture_choose_max_seconds">You can only select videos within %1$ds</string>
-    <string name="picture_choose_min_seconds">You cannot select a video less than %1$ds</string>
-    <string name="picture_completed">Completed</string>
-    <string name="picture_confirm">Confirm</string>
-    <string name="picture_data_exception">Get album data exception…</string>
-    <string name="picture_data_null">There no data here…</string>
-    <string name="picture_default_original_image">Original</string>
-    <string name="picture_done">Complete</string>
-    <string name="picture_done_front_num">%1$d/%2$d Ok</string>
-    <string name="picture_editor">Editor</string>
-    <string name="picture_empty">you can use your camera to take photos or videos</string>
-    <string name="picture_empty_audio_title">No audio file\n</string>
-    <string name="picture_empty_title">No video or photos\n</string>
-    <string name="picture_error">The picture is corrupted</string>
-    <string name="picture_gif_tag">gif</string>
-    <string name="picture_go_setting">Go Setting</string>
-    <string name="picture_jurisdiction">Read memory card access denied</string>
-    <string name="picture_know">I know the</string>
-    <string name="picture_long_chart">Long</string>
-    <string name="picture_message_audio_max_num">Select up to %1$s Audio</string>
-    <string name="picture_message_max_num">Select up to %1$s images</string>
-    <string name="picture_message_video_max_num">Select up to %1$s Video</string>
-    <string name="picture_min_img_num">Picture Selection Cannot%1$sNumber</string>
-    <string name="picture_min_video_num">Video Selection Cannot%1$sNumber</string>
-    <string name="picture_not_crop_data">No cropped data</string>
-    <string name="picture_original_image">Original (%1$s)</string>
-    <string name="picture_pause_audio">Pause</string>
-    <string name="picture_photo_camera">Photograph, photograph</string>
-    <string name="picture_photo_pictures">Take Picture</string>
-    <string name="picture_photo_recording">Long Press Camera</string>
-    <string name="picture_photograph">Photograph</string>
-    <string name="picture_play_audio">Play</string>
-    <string name="picture_please">Please later…</string>
-    <string name="picture_please_select">Please Select</string>
-    <string name="picture_preview">Preview</string>
-    <string name="picture_preview_image_num">%1$d/%2$d</string>
-    <string name="picture_preview_num">Preview(%1$d)</string>
-    <string name="picture_prompt">Prompt</string>
-    <string name="picture_prompt_content">Do you want to save pictures to your phone?</string>
-    <string name="picture_quit_audio">Quit</string>
-    <string name="picture_record_video">Record Video</string>
-    <string name="picture_recording_time_is_short">recording time is too short</string>
-    <string name="picture_rule">not pictures or video</string>
-    <string name="picture_save_error">Picture save failed</string>
-    <string name="picture_save_success">Save picture successfully until</string>
-    <string name="picture_select">Choose</string>
-    <string name="picture_send">Complete</string>
-    <string name="picture_send_num">Complete(%1$d/%2$d)</string>
-    <string name="picture_stop_audio">Stop</string>
-    <string name="picture_take_picture">Shot</string>
-    <string name="picture_tape">Tape</string>
-    <string name="picture_video_error">The video is corrupted</string>
-    <string name="picture_video_toast">Video not Preview</string>
-    <string name="picture_warning">No Media files!</string>
-    <string name="picture_webp_tag">webp</string>
+    <string name="next">下一首</string>
+    <string name="play">播放按钮</string>
+    <string name="previous">上一首</string>
     <string name="search_menu_title">Search</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="stream_my">最近流应用</string>
-    <string name="ucrop_crop">Crop</string>
-    <string name="ucrop_gif_tag">gif</string>
-    <string name="ucrop_label_edit_photo">Edit Photo</string>
-    <string name="ucrop_label_original">Original</string>
-    <string name="ucrop_menu_crop">Crop</string>
-    <string name="ucrop_rotate">Rotate</string>
-    <string name="ucrop_scale">Scale</string>
     <style name="ActionSheetStyleIOS6">
         <item name="actionSheetBackground">@drawable/dcloud_as_bg_ios6</item>
         <item name="cancelButtonBackground">@drawable/dcloud_as_cancel_bt_bg</item>
@@ -809,7 +817,6 @@
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="actionBarWidgetTheme">@null</item>
         <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
-        <item name="actionModeTheme">?attr/actionBarTheme</item>
 
         <!-- Panel attributes -->
         <item name="listChoiceBackgroundIndicator">@drawable/abc_list_selector_holo_dark</item>
@@ -833,7 +840,6 @@
         <item name="android:windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
     </style>
     <style name="Base.Theme.AppCompat.Light.DialogWhenLarge" parent="Theme.AppCompat.Light"/>
-    <style name="Base.Theme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar"/>
     <style name="Base.ThemeOverlay.AppCompat" parent="Platform.ThemeOverlay.AppCompat"/>
     <style name="Base.ThemeOverlay.AppCompat.ActionBar">
         <item name="colorControlNormal">?android:attr/textColorPrimary</item>
@@ -904,6 +910,7 @@
         <item name="isLightTheme">true</item>
     </style>
     <style name="Base.V7.Theme.AppCompat" parent="Platform.AppCompat">
+        <item name="viewInflaterClass">android.support.v7.app.AppCompatViewInflater</item>
         <item name="windowNoTitle">false</item>
         <item name="windowActionBar">true</item>
         <item name="windowActionBarOverlay">false</item>
@@ -944,11 +951,9 @@
         <item name="actionDropDownStyle">@style/Widget.AppCompat.Spinner.DropDown.ActionBar</item>
 
         <!-- Action Mode -->
-        <item name="actionModeTheme">?attr/actionBarTheme</item>
         <item name="actionModeStyle">@style/Widget.AppCompat.ActionMode</item>
         <item name="actionModeBackground">@drawable/abc_cab_background_top_material</item>
         <item name="actionModeSplitBackground">?attr/colorPrimaryDark</item>
-        <item name="actionModeCloseContentDescription">@string/abc_action_mode_done</item>
         <item name="actionModeCloseDrawable">@drawable/abc_ic_ab_back_material</item>
         <item name="actionModeCloseButtonStyle">@style/Widget.AppCompat.ActionButton.CloseMode</item>
 
@@ -969,13 +974,11 @@
         <item name="textAppearanceListItem">@style/TextAppearance.AppCompat.Subhead</item>
         <item name="textAppearanceListItemSmall">@style/TextAppearance.AppCompat.Subhead</item>
         <item name="textAppearanceListItemSecondary">@style/TextAppearance.AppCompat.Body1</item>
-        <item name="listPreferredItemHeight">@dimen/abc_list_item_height_material</item>
-        <item name="listPreferredItemHeightSmall">@dimen/abc_list_item_height_small_material</item>
-        <item name="listPreferredItemHeightLarge">@dimen/abc_list_item_height_large_material</item>
+        <item name="listPreferredItemHeight">64dp</item>
+        <item name="listPreferredItemHeightSmall">48dp</item>
+        <item name="listPreferredItemHeightLarge">80dp</item>
         <item name="listPreferredItemPaddingLeft">@dimen/abc_list_item_padding_horizontal_material</item>
         <item name="listPreferredItemPaddingRight">@dimen/abc_list_item_padding_horizontal_material</item>
-        <item name="listPreferredItemPaddingStart">@dimen/abc_list_item_padding_horizontal_material</item>
-        <item name="listPreferredItemPaddingEnd">@dimen/abc_list_item_padding_horizontal_material</item>
 
         <!-- Spinner styles -->
         <item name="spinnerStyle">@style/Widget.AppCompat.Spinner</item>
@@ -1013,7 +1016,6 @@
         <item name="editTextBackground">@drawable/abc_edit_text_material</item>
         <item name="editTextColor">?android:attr/textColorPrimary</item>
         <item name="autoCompleteTextViewStyle">@style/Widget.AppCompat.AutoCompleteTextView</item>
-        <item name="android:textViewStyle">@style/Widget.AppCompat.TextView</item>
 
         <!-- Color palette -->
         <item name="colorPrimaryDark">@color/primary_dark_material_dark</item>
@@ -1102,6 +1104,8 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
     <style name="Base.V7.Theme.AppCompat.Light" parent="Platform.AppCompat.Light">
+        <item name="viewInflaterClass">android.support.v7.app.AppCompatViewInflater</item>
+
         <item name="windowNoTitle">false</item>
         <item name="windowActionBar">true</item>
         <item name="windowActionBarOverlay">false</item>
@@ -1139,11 +1143,9 @@
         <item name="actionMenuTextColor">?android:attr/textColorPrimaryDisableOnly</item>
 
         <!-- Action Mode -->
-        <item name="actionModeTheme">?attr/actionBarTheme</item>
         <item name="actionModeStyle">@style/Widget.AppCompat.ActionMode</item>
         <item name="actionModeBackground">@drawable/abc_cab_background_top_material</item>
         <item name="actionModeSplitBackground">?attr/colorPrimaryDark</item>
-        <item name="actionModeCloseContentDescription">@string/abc_action_mode_done</item>
         <item name="actionModeCloseDrawable">@drawable/abc_ic_ab_back_material</item>
         <item name="actionModeCloseButtonStyle">@style/Widget.AppCompat.ActionButton.CloseMode</item>
 
@@ -1167,13 +1169,11 @@
         <item name="textAppearanceListItem">@style/TextAppearance.AppCompat.Subhead</item>
         <item name="textAppearanceListItemSmall">@style/TextAppearance.AppCompat.Subhead</item>
         <item name="textAppearanceListItemSecondary">@style/TextAppearance.AppCompat.Body1</item>
-        <item name="listPreferredItemHeight">@dimen/abc_list_item_height_material</item>
-        <item name="listPreferredItemHeightSmall">@dimen/abc_list_item_height_small_material</item>
-        <item name="listPreferredItemHeightLarge">@dimen/abc_list_item_height_large_material</item>
+        <item name="listPreferredItemHeight">64dp</item>
+        <item name="listPreferredItemHeightSmall">48dp</item>
+        <item name="listPreferredItemHeightLarge">80dp</item>
         <item name="listPreferredItemPaddingLeft">@dimen/abc_list_item_padding_horizontal_material</item>
         <item name="listPreferredItemPaddingRight">@dimen/abc_list_item_padding_horizontal_material</item>
-        <item name="listPreferredItemPaddingStart">@dimen/abc_list_item_padding_horizontal_material</item>
-        <item name="listPreferredItemPaddingEnd">@dimen/abc_list_item_padding_horizontal_material</item>
 
         <!-- Spinner styles -->
         <item name="spinnerStyle">@style/Widget.AppCompat.Spinner</item>
@@ -1211,7 +1211,6 @@
         <item name="editTextBackground">@drawable/abc_edit_text_material</item>
         <item name="editTextColor">?android:attr/textColorPrimary</item>
         <item name="autoCompleteTextViewStyle">@style/Widget.AppCompat.AutoCompleteTextView</item>
-        <item name="android:textViewStyle">@style/Widget.AppCompat.TextView</item>
 
         <!-- Color palette -->
         <item name="colorPrimaryDark">@color/primary_dark_material_light</item>
@@ -1356,9 +1355,7 @@
         <item name="contentInsetStart">16dp</item>
         <item name="contentInsetStartWithNavigation">@dimen/abc_action_bar_content_inset_with_nav</item>
         <item name="android:paddingLeft">@dimen/abc_action_bar_default_padding_start_material</item>
-        <item name="android:paddingStart">@dimen/abc_action_bar_default_padding_start_material</item>
         <item name="android:paddingRight">@dimen/abc_action_bar_default_padding_end_material</item>
-        <item name="android:paddingEnd">@dimen/abc_action_bar_default_padding_end_material</item>
     </style>
     <style name="Base.Widget.AppCompat.ActionBar" parent="">
         <item name="displayOptions">showTitle</item>
@@ -1438,17 +1435,6 @@
         <item name="titleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionMode.Title</item>
         <item name="subtitleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle</item>
         <item name="closeItemLayout">@layout/abc_action_mode_close_item_material</item>
-
-        <item name="android:minHeight">?attr/actionBarSize</item>
-        <item name="titleMargin">4dp</item>
-        <item name="maxButtonHeight">@dimen/abc_action_bar_default_height_material</item>
-        <item name="buttonGravity">top</item>
-        <item name="contentInsetStart">16dp</item>
-        <item name="contentInsetStartWithNavigation">@dimen/abc_action_bar_content_inset_with_nav</item>
-        <item name="android:paddingLeft">@dimen/abc_action_bar_default_padding_start_material</item>
-        <item name="android:paddingStart">@dimen/abc_action_bar_default_padding_start_material</item>
-        <item name="android:paddingRight">@dimen/abc_action_bar_default_padding_end_material</item>
-        <item name="android:paddingEnd">@dimen/abc_action_bar_default_padding_end_material</item>
     </style>
     <style name="Base.Widget.AppCompat.ActivityChooserView" parent="">
         <item name="android:gravity">center</item>
@@ -1491,12 +1477,10 @@
     <style name="Base.Widget.AppCompat.ButtonBar.AlertDialog"/>
     <style name="Base.Widget.AppCompat.CompoundButton.CheckBox" parent="android:Widget.CompoundButton.CheckBox">
         <item name="android:button">?android:attr/listChoiceIndicatorMultiple</item>
-        <item name="buttonCompat">?attr/listChoiceIndicatorMultipleAnimated</item>
         <item name="android:background">?attr/controlBackground</item>
     </style>
     <style name="Base.Widget.AppCompat.CompoundButton.RadioButton" parent="android:Widget.CompoundButton.RadioButton">
         <item name="android:button">?android:attr/listChoiceIndicatorSingle</item>
-        <item name="buttonCompat">?attr/listChoiceIndicatorSingleAnimated</item>
         <item name="android:background">?attr/controlBackground</item>
     </style>
     <style name="Base.Widget.AppCompat.CompoundButton.Switch" parent="android:Widget.CompoundButton">
@@ -1652,7 +1636,6 @@
     <style name="Base.Widget.AppCompat.Spinner.Underlined">
         <item name="android:background">@drawable/abc_spinner_textfield_background_material</item>
     </style>
-    <style name="Base.Widget.AppCompat.TextView" parent="android:Widget.TextView"/>
     <style name="Base.Widget.AppCompat.TextView.SpinnerItem" parent="android:Widget.TextView.SpinnerItem">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem</item>
         <item name="android:paddingLeft">8dp</item>
@@ -1664,10 +1647,11 @@
         <item name="android:minWidth">56dp</item>
         <item name="android:scaleType">center</item>
     </style>
-    <style name="DCloudTheme" parent="@style/DeviceDefault.Light">
-         <item name="android:windowNoTitle">true</item>
+    <style name="DCloudTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
         <item name="android:colorEdgeEffect">#333333</item>
-        <!--<item name="android:windowIsTranslucent">true</item>-->
+        <item name="android:windowBackground">@color/ime_background</item>
+        <item name="android:forceDarkAllowed">false</item>
     </style>
     <style name="DeviceDefault" parent="@android:style/Theme.DeviceDefault">
         <item name="android:windowNoTitle">true</item>
@@ -1680,6 +1664,54 @@
         <item name="android:colorEdgeEffect">#333333</item>
         <item name="android:windowBackground">@color/ime_background</item>
     </style>
+    <style name="ImageDialogAnimation" parent="android:Animation.Dialog">
+
+        <item name="android:windowEnterAnimation">@anim/image_dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/image_dialog_exit</item>
+
+    </style>
+    <style name="ImageEditTheme" parent="android:Theme.Holo">
+
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
+
+    </style>
+    <style name="ImageGalleryTheme" parent="@android:style/Theme.DeviceDefault.Light">
+        <item name="image_gallery_span_count">4</item>
+        <item name="image_gallery_select_shade">#90FFFFFF</item>
+    </style>
+    <style name="ImageTextDialog" parent="android:Theme.Holo.Dialog">
+
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:windowSoftInputMode">stateAlwaysVisible|adjustResize</item>
+
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.8</item>
+
+        <item name="android:windowAnimationStyle">@style/ImageDialogAnimation</item>
+
+    </style>
+    <style name="LockScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+    <style name="NotificationInfo" parent="android:TextAppearance.StatusBar.EventContent"/>
     <style name="NotificationText" parent="android:TextAppearance.StatusBar.EventContent">
         <item name="android:textColor">#bb000000</item>
         <item name="android:textSize">13dp</item>
@@ -1699,55 +1731,6 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@null</item>
         <item name="android:windowAnimationStyle">@null</item>
-    </style>
-    <style name="Picture.Theme.AlertDialog" parent="android:Theme.Dialog">
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowIsTranslucent">false</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFullscreen">false</item>
-        <item name="android:windowBackground">@color/picture_color_transparent</item>
-        <item name="android:windowAnimationStyle">@null</item>
-        <item name="android:backgroundDimEnabled">false</item>
-        <item name="android:backgroundDimAmount">0.4</item>
-    </style>
-    <style name="Picture.Theme.Dialog" parent="@android:style/Theme.Dialog">
-
-        
-        <item name="android:windowFrame">@android:color/transparent</item>
-        
-        <item name="android:windowIsFloating">true</item>
-        
-        <item name="android:windowIsTranslucent">false</item>
-        
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
-        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
-
-        
-        <item name="android:windowBackground">@android:color/transparent</item>
-    </style>
-    <style name="Picture.Theme.Dialog.AudioStyle">
-        <item name="android:windowEnterAnimation">@anim/picture_anim_enter</item>
-        <item name="android:windowExitAnimation">@anim/picture_anim_exit</item>
-    </style>
-    <style name="Picture.Theme.Translucent" parent="Base.Theme.NoActionBar">
-        <item name="android:windowBackground">@color/picture_color_transparent
-        </item> 
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-    </style>
-    <style mce_bogus="1" name="PictureThemeDialogFragmentAnim" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/picture_anim_up_in</item>
-        <item name="android:windowExitAnimation">@anim/picture_anim_down_out</item>
-    </style>
-    <style name="PictureThemeDialogWindowStyle">
-        <item name="android:windowEnterAnimation">@anim/picture_anim_modal_in</item>
-        <item name="android:windowExitAnimation">@anim/picture_anim_modal_out</item>
-    </style>
-    <style name="PictureThemeWindowStyle">
-        <item name="android:windowEnterAnimation">@anim/picture_anim_album_show</item>
-        <item name="android:windowExitAnimation">@anim/picture_anim_album_dismiss</item>
     </style>
     <style name="Platform.AppCompat" parent="android:Theme.Holo">
         <item name="android:windowNoTitle">true</item>
@@ -1793,30 +1776,19 @@
         <item name="android:textAppearanceSmallInverse">@style/TextAppearance.AppCompat.Small.Inverse</item>
 
         <item name="android:listChoiceIndicatorSingle">@drawable/abc_btn_radio_material</item>
-        <item name="listChoiceIndicatorSingleAnimated">@drawable/abc_btn_radio_material_anim</item>
         <item name="android:listChoiceIndicatorMultiple">@drawable/abc_btn_check_material</item>
-        <item name="listChoiceIndicatorMultipleAnimated">@drawable/abc_btn_check_material_anim</item>
 
-        <!-- List attributes -->
-        <item name="android:textAppearanceListItem">@style/TextAppearance.AppCompat.Subhead</item>
-        <item name="android:textAppearanceListItemSmall">@style/TextAppearance.AppCompat.Subhead</item>
-        <!-- textAppearanceListItemSecondary is 21+ only so not safe to apply here-->
-        <item name="android:listPreferredItemHeight">@dimen/abc_list_item_height_material</item>
-        <item name="android:listPreferredItemHeightSmall">@dimen/abc_list_item_height_small_material</item>
-        <item name="android:listPreferredItemHeightLarge">@dimen/abc_list_item_height_large_material</item>
         <item name="android:listPreferredItemPaddingLeft">@dimen/abc_list_item_padding_horizontal_material</item>
         <item name="android:listPreferredItemPaddingRight">@dimen/abc_list_item_padding_horizontal_material</item>
-        <item name="android:listPreferredItemPaddingStart">@dimen/abc_list_item_padding_horizontal_material</item>
-        <item name="android:listPreferredItemPaddingEnd">@dimen/abc_list_item_padding_horizontal_material</item>
 
         <item name="android:actionModeCutDrawable">?actionModeCutDrawable</item>
         <item name="android:actionModeCopyDrawable">?actionModeCopyDrawable</item>
         <item name="android:actionModePasteDrawable">?actionModePasteDrawable</item>
         <item name="android:actionModeSelectAllDrawable">?actionModeSelectAllDrawable</item>
 
-        <item name="android:textSelectHandle">@drawable/abc_text_select_handle_middle_mtrl</item>
-        <item name="android:textSelectHandleLeft">@drawable/abc_text_select_handle_left_mtrl</item>
-        <item name="android:textSelectHandleRight">@drawable/abc_text_select_handle_right_mtrl</item>
+        <item name="android:textSelectHandle">@drawable/abc_text_select_handle_middle_mtrl_dark</item>
+        <item name="android:textSelectHandleLeft">@drawable/abc_text_select_handle_left_mtrl_dark</item>
+        <item name="android:textSelectHandleRight">@drawable/abc_text_select_handle_right_mtrl_dark</item>
     </style>
     <style name="Platform.AppCompat.Light" parent="android:Theme.Holo.Light">
         <item name="android:windowNoTitle">true</item>
@@ -1863,30 +1835,19 @@
         <item name="android:textAppearanceSmallInverse">@style/TextAppearance.AppCompat.Small.Inverse</item>
 
         <item name="android:listChoiceIndicatorSingle">@drawable/abc_btn_radio_material</item>
-        <item name="listChoiceIndicatorSingleAnimated">@drawable/abc_btn_radio_material_anim</item>
         <item name="android:listChoiceIndicatorMultiple">@drawable/abc_btn_check_material</item>
-        <item name="listChoiceIndicatorMultipleAnimated">@drawable/abc_btn_check_material_anim</item>
 
-        <!-- List attributes -->
-        <item name="android:textAppearanceListItem">@style/TextAppearance.AppCompat.Subhead</item>
-        <item name="android:textAppearanceListItemSmall">@style/TextAppearance.AppCompat.Subhead</item>
-        <!-- textAppearanceListItemSecondary is 21+ only so not safe to apply here-->
-        <item name="android:listPreferredItemHeight">@dimen/abc_list_item_height_material</item>
-        <item name="android:listPreferredItemHeightSmall">@dimen/abc_list_item_height_small_material</item>
-        <item name="android:listPreferredItemHeightLarge">@dimen/abc_list_item_height_large_material</item>
         <item name="android:listPreferredItemPaddingLeft">@dimen/abc_list_item_padding_horizontal_material</item>
         <item name="android:listPreferredItemPaddingRight">@dimen/abc_list_item_padding_horizontal_material</item>
-        <item name="android:listPreferredItemPaddingStart">@dimen/abc_list_item_padding_horizontal_material</item>
-        <item name="android:listPreferredItemPaddingEnd">@dimen/abc_list_item_padding_horizontal_material</item>
 
         <item name="android:actionModeCutDrawable">?actionModeCutDrawable</item>
         <item name="android:actionModeCopyDrawable">?actionModeCopyDrawable</item>
         <item name="android:actionModePasteDrawable">?actionModePasteDrawable</item>
         <item name="android:actionModeSelectAllDrawable">?actionModeSelectAllDrawable</item>
 
-        <item name="android:textSelectHandle">@drawable/abc_text_select_handle_middle_mtrl</item>
-        <item name="android:textSelectHandleLeft">@drawable/abc_text_select_handle_left_mtrl</item>
-        <item name="android:textSelectHandleRight">@drawable/abc_text_select_handle_right_mtrl</item>
+        <item name="android:textSelectHandle">@drawable/abc_text_select_handle_middle_mtrl_light</item>
+        <item name="android:textSelectHandleLeft">@drawable/abc_text_select_handle_left_mtrl_light</item>
+        <item name="android:textSelectHandleRight">@drawable/abc_text_select_handle_right_mtrl_light</item>
     </style>
     <style name="Platform.ThemeOverlay.AppCompat" parent=""/>
     <style name="Platform.ThemeOverlay.AppCompat.Dark">
@@ -2056,7 +2017,6 @@
     <style name="Theme.AppCompat.Dialog.MinWidth" parent="Base.Theme.AppCompat.Dialog.MinWidth"/>
     <style name="Theme.AppCompat.DialogWhenLarge" parent="Base.Theme.AppCompat.DialogWhenLarge">
     </style>
-    <style name="Theme.AppCompat.Empty" parent=""/>
     <style name="Theme.AppCompat.Light" parent="Base.Theme.AppCompat.Light"/>
     <style name="Theme.AppCompat.Light.DarkActionBar" parent="Base.Theme.AppCompat.Light.DarkActionBar"/>
     <style name="Theme.AppCompat.Light.Dialog" parent="Base.Theme.AppCompat.Light.Dialog"/>
@@ -2082,11 +2042,6 @@
     <style name="ThemeOverlay.AppCompat.ActionBar" parent="Base.ThemeOverlay.AppCompat.ActionBar"/>
     <style name="ThemeOverlay.AppCompat.Dark" parent="Base.ThemeOverlay.AppCompat.Dark"/>
     <style name="ThemeOverlay.AppCompat.Dark.ActionBar" parent="Base.ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="ThemeOverlay.AppCompat.DayNight" parent="ThemeOverlay.AppCompat.Light"/>
-    <style name="ThemeOverlay.AppCompat.DayNight.ActionBar">
-        <item name="colorControlNormal">?android:attr/textColorPrimary</item>
-        <item name="searchViewStyle">@style/Widget.AppCompat.SearchView.ActionBar</item>
-    </style>
     <style name="ThemeOverlay.AppCompat.Dialog" parent="Base.ThemeOverlay.AppCompat.Dialog"/>
     <style name="ThemeOverlay.AppCompat.Dialog.Alert" parent="Base.ThemeOverlay.AppCompat.Dialog.Alert"/>
     <style name="ThemeOverlay.AppCompat.Light" parent="Base.ThemeOverlay.AppCompat.Light"/>
@@ -2095,6 +2050,7 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:colorEdgeEffect">#333333</item>
         <item name="android:windowBackground">@null</item>
+        <item name="android:forceDarkAllowed">false</item>
     </style>
     <style name="Widget.AppCompat.ActionBar" parent="Base.Widget.AppCompat.ActionBar">
     </style>
@@ -2187,7 +2143,6 @@
     <style name="Widget.AppCompat.Spinner.DropDown"/>
     <style name="Widget.AppCompat.Spinner.DropDown.ActionBar"/>
     <style name="Widget.AppCompat.Spinner.Underlined" parent="Base.Widget.AppCompat.Spinner.Underlined"/>
-    <style name="Widget.AppCompat.TextView" parent="Base.Widget.AppCompat.TextView"/>
     <style name="Widget.AppCompat.TextView.SpinnerItem" parent="Base.Widget.AppCompat.TextView.SpinnerItem"/>
     <style name="Widget.AppCompat.Toolbar" parent="Base.Widget.AppCompat.Toolbar"/>
     <style name="Widget.AppCompat.Toolbar.Button.Navigation" parent="Base.Widget.AppCompat.Toolbar.Button.Navigation"/>
@@ -2213,134 +2168,6 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:layout_width">match_parent</item>
     </style>
-    <style name="picture.WeChat.style" parent="Base.Theme.NoActionBar">
-        
-        
-        <item name="colorPrimary">@color/picture_color_grey</item>
-        
-        <item name="colorPrimaryDark">@color/picture_color_grey</item>
-        
-        <item name="picture.statusFontColor">false</item>
-        
-        <item name="picture.leftBack.icon">@drawable/picture_icon_close</item>
-        
-        <item name="picture.arrow_down.icon">@drawable/picture_icon_wechat_down</item>
-        
-        <item name="picture.arrow_up.icon">@drawable/picture_icon_wechat_up</item>
-        
-        <item name="picture.title.textColor">@color/picture_color_white</item>
-        
-        <item name="picture.right.textColor">@color/picture_color_white</item>
-        
-        <item name="picture.checked.style">@drawable/picture_wechat_num_selector</item>
-        
-        <item name="picture.style.checkNumMode">true</item>
-        
-        <item name="picture.style.numComplete">false</item>
-        
-        <item name="picture.bottom.bg">@color/picture_color_grey</item>
-        
-        <item name="picture.preview.textColor">@color/picture_color_white</item>
-        
-        <item name="picture.complete.textColor">@color/picture_color_white</item>
-        
-        <item name="picture.num.style">@drawable/picture_num_oval</item>
-        
-        <item name="picture.ac_preview.title.textColor">@color/picture_color_white</item>
-        
-        <item name="picture.ac_preview.complete.textColor">@color/picture_color_white</item>
-        
-        <item name="picture.ac_preview.title.bg">@color/picture_color_grey</item>
-        
-        <item name="picture.ac_preview.bottom.bg">@color/picture_color_grey</item>
-        
-        <item name="picture.preview.leftBack.icon">@drawable/picture_icon_back</item>
-        
-        <item name="picture.crop.toolbar.bg">@color/picture_color_grey</item>
-        
-        <item name="picture.crop.status.color">@color/picture_color_grey</item>
-        
-        <item name="picture.crop.title.color">@color/picture_color_white</item>
-        
-        <item name="picture.folder_checked_dot">@drawable/picture_orange_oval</item>
-        
-        <item name="picture.original.check.style">@drawable/picture_original_wechat_checkbox</item>
-        
-        <item name="picture.original.text.color">@color/picture_color_white</item>
-        
-        <item name="picture.folder.textColor">@color/picture_color_4d</item>
-        
-        <item name="picture.folder.textSize">16sp</item>
-        
-        <item name="picture.container.backgroundColor">@color/picture_color_black</item>
-        
-        <item name="picture.titleBar.height">48dp</item>
-        
-        <item name="picture.titleRightArrow.LeftPadding">3dp</item>
-    </style>
-    <style name="picture.default.style" parent="Base.Theme.NoActionBar">
-        
-        
-        <item name="colorPrimary">@color/picture_color_grey</item>
-        
-        <item name="colorPrimaryDark">@color/picture_color_grey</item>
-        
-        <item name="picture.statusFontColor">false</item>
-        
-        <item name="picture.leftBack.icon">@drawable/picture_icon_back</item>
-        
-        <item name="picture.arrow_down.icon">@drawable/picture_icon_arrow_down</item>
-        
-        <item name="picture.arrow_up.icon">@drawable/picture_icon_arrow_up</item>
-        
-        <item name="picture.title.textColor">@color/picture_color_white</item>
-        
-        <item name="picture.right.textColor">@color/picture_color_white</item>
-        
-        <item name="picture.checked.style">@drawable/picture_checkbox_selector</item>
-        
-        <item name="picture.style.checkNumMode">false</item>
-        
-        <item name="picture.style.numComplete">false</item>
-        
-        <item name="picture.bottom.bg">@color/picture_color_grey</item>
-        
-        <item name="picture.preview.textColor">@color/picture_list_text_color</item>
-        
-        <item name="picture.complete.textColor">@color/picture_list_text_color</item>
-        
-        <item name="picture.num.style">@drawable/picture_num_oval</item>
-        
-        <item name="picture.ac_preview.title.textColor">@color/picture_color_white</item>
-        
-        <item name="picture.ac_preview.complete.textColor">@color/picture_list_text_color</item>
-        
-        <item name="picture.ac_preview.title.bg">@color/picture_color_grey</item>
-        
-        <item name="picture.ac_preview.bottom.bg">@color/picture_color_grey</item>
-        
-        <item name="picture.preview.leftBack.icon">@drawable/picture_icon_back</item>
-        
-        <item name="picture.crop.toolbar.bg">@color/picture_color_grey</item>
-        
-        <item name="picture.crop.status.color">@color/picture_color_grey</item>
-        
-        <item name="picture.crop.title.color">@color/picture_color_white</item>
-        
-        <item name="picture.folder_checked_dot">@drawable/picture_orange_oval</item>
-        
-        <item name="picture.original.check.style">@drawable/picture_original_wechat_checkbox</item>
-        
-        <item name="picture.original.text.color">@color/picture_color_white</item>
-        
-        <item name="picture.folder.textColor">@color/picture_color_4d</item>
-        
-        <item name="picture.folder.textSize">16sp</item>
-        
-        <item name="picture.container.backgroundColor">@color/picture_color_white</item>
-        
-        <item name="picture.titleBar.height">48dp</item>
-    </style>
     <style name="streamDelete19Dialog" parent="@android:style/Theme.DeviceDefault.Light.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>
@@ -2351,53 +2178,6 @@
         <item name="android:textColor">#0000ff</item>
         <item name="android:textColorHint">#0000ff</item>
         <item name="android:textColorHighlight">#0000ff</item>
-    </style>
-    <style name="ucrop_ImageViewWidgetIcon">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:scaleType">fitCenter</item>
-        <item name="android:duplicateParentState">true</item>
-    </style>
-    <style name="ucrop_TextViewCropAspectRatio">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">@dimen/ucrop_height_crop_aspect_ratio_text</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:duplicateParentState">true</item>
-        <item name="android:textColor">@color/ucrop_scale_text_view_selector</item>
-    </style>
-    <style name="ucrop_TextViewWidget">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:layout_marginTop">@dimen/ucrop_margin_top_controls_text</item>
-        <item name="android:textColor">@color/ucrop_color_widget_active</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/ucrop_text_size_controls_text</item>
-    </style>
-    <style name="ucrop_TextViewWidgetText">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/ucrop_color_widget_text</item>
-        <item name="android:layout_marginTop">@dimen/ucrop_margin_top_widget_text</item>
-        <item name="android:textSize">@dimen/ucrop_text_size_widget_text</item>
-    </style>
-    <style name="ucrop_WrapperIconState">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_weight">1</item>
-        <item name="background">?attr/selectableItemBackground</item>
-        <item name="android:clickable">true</item>
-        <item name="android:gravity">center</item>
-        <item name="android:orientation">vertical</item>
-    </style>
-    <style name="ucrop_WrapperRotateButton">
-        <item name="android:layout_width">@dimen/ucrop_size_wrapper_rotate_button</item>
-        <item name="android:layout_height">@dimen/ucrop_size_wrapper_rotate_button</item>
-        <item name="background">?attr/selectableItemBackgroundBorderless</item>
-        <item name="android:clickable">true</item>
     </style>
     <declare-styleable name="ActionBar">
         <!-- The type of navigation to use. -->
@@ -2660,12 +2440,6 @@
     <declare-styleable name="AppCompatTextView">
         <!-- Present the text in ALL CAPS. This may use a small-caps form when available. -->
         <attr format="reference|boolean" name="textAllCaps"/>
-        <!-- Set the textLocale by a comma-separated language tag string,
-             for example "ja-JP,zh-CN". This attribute only takes effect on API 21 and above.
-             Before API 24, only the first language tag is used. Starting from API 24,
-             the string will be converted into a {@link android.os.LocaleList} and then used by
-             {@link android.widget.TextView} -->
-        <attr format="string" name="textLocale"/>
         <attr name="android:textAppearance"/>
         <!-- Specify the type of auto-size. Note that this feature is not supported by EditText,
         works only for TextView. -->
@@ -2699,38 +2473,6 @@
         <!-- Distance from the bottom of the TextView to the last text baseline. If set, this
              overrides the value set for paddingBottom. -->
         <attr format="dimension" name="lastBaselineToBottomHeight"/>
-        <!-- OpenType font variation settings, available after api 26. -->
-        <attr format="string" name="fontVariationSettings"/>
-        <!-- Compound drawables allowing the use of vector drawable when running on older versions
-             of the platform. -->
-        <attr format="reference" name="drawableLeftCompat"/>
-        <attr format="reference" name="drawableTopCompat"/>
-        <attr format="reference" name="drawableRightCompat"/>
-        <attr format="reference" name="drawableBottomCompat"/>
-        <attr format="reference" name="drawableStartCompat"/>
-        <attr format="reference" name="drawableEndCompat"/>
-        <!-- Tint to apply to the compound (left, top, etc.) drawables. -->
-        <attr format="color" name="drawableTint"/>
-        <!-- Blending mode used to apply the compound (left, top, etc.) drawables tint. -->
-        <attr name="drawableTintMode">
-            <!-- The tint is drawn on top of the drawable.
-                 [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc] -->
-            <enum name="src_over" value="3"/>
-            <!-- The tint is masked by the alpha channel of the drawable. The drawable’s
-                 color channels are thrown out. [Sa * Da, Sc * Da] -->
-            <enum name="src_in" value="5"/>
-            <!-- The tint is drawn above the drawable, but with the drawable’s alpha
-                 channel masking the result. [Da, Sc * Da + (1 - Sa) * Dc] -->
-            <enum name="src_atop" value="9"/>
-            <!-- Multiplies the color and alpha channels of the drawable with those of
-                 the tint. [Sa * Da, Sc * Dc] -->
-            <enum name="multiply" value="14"/>
-            <!-- [Sa + Da - Sa * Da, Sc + Dc - Sc * Dc] -->
-            <enum name="screen" value="15"/>
-            <!-- Combines the tint and drawable color and alpha channels, clamping the
-                 result to valid color values. Saturate(S + D) -->
-            <enum name="add" value="16"/>
-        </attr>
     </declare-styleable>
     <declare-styleable name="AppCompatTheme">
 
@@ -2811,10 +2553,6 @@
              action bar. This will be inherited by any widget inflated
              into the action bar. -->
         <attr format="reference" name="actionBarTheme"/>
-        <!-- Reference to a theme that should be used to inflate the
-             action bar in action mode. This will be inherited by any widget inflated
-             into the action bar. -->
-        <attr format="reference" name="actionModeTheme"/>
         <!-- Reference to a theme that should be used to inflate widgets
              and layouts destined for the action bar. Most of the time
              this will be a reference to the current theme, but when
@@ -2867,11 +2605,9 @@
         <!-- Drawable to use for the Web Search action button in WebView selection action modes -->
         <attr format="reference" name="actionModeWebSearchDrawable"/>
 
-        <!-- Content description to use for the close action mode button -->
-        <attr format="string" name="actionModeCloseContentDescription"/>
-
         <!-- PopupWindow style to use for action modes when showing as a window overlay. -->
         <attr format="reference" name="actionModePopupWindowStyle"/>
+
 
         <!-- =================== -->
         <!-- Text styles -->
@@ -2982,11 +2718,6 @@
         <attr format="dimension" name="listPreferredItemPaddingLeft"/>
         <!-- The preferred padding along the right edge of list items. -->
         <attr format="dimension" name="listPreferredItemPaddingRight"/>
-
-        <!-- The preferred padding along the start edge of list items. -->
-        <attr format="dimension" name="listPreferredItemPaddingStart"/>
-        <!-- The preferred padding along the end edge of list items. -->
-        <attr format="dimension" name="listPreferredItemPaddingEnd"/>
 
         <!-- ListPopupWindow compatibility -->
         <attr format="reference" name="dropDownListViewStyle"/>
@@ -3123,17 +2854,6 @@
         <attr format="reference|color" name="colorError"/>
 
         <attr format="string" name="viewInflaterClass"/>
-
-        <!-- ===================== -->
-        <!-- Animated list choice indicators -->
-        <!-- ===================== -->
-        <eat-comment/>
-
-        <!-- Animated Drawable to use for single choice indicators. -->
-        <attr format="reference" name="listChoiceIndicatorSingleAnimated"/>
-        <!-- Animated Drawable to use for multiple choice indicators. -->
-        <attr format="reference" name="listChoiceIndicatorMultipleAnimated"/>
-
     </declare-styleable>
     <declare-styleable name="ButtonBarLayout">
         <!-- Whether to automatically stack the buttons when there is not
@@ -3149,8 +2869,6 @@
     </declare-styleable>
     <declare-styleable name="CompoundButton">
         <attr name="android:button"/>
-        <!-- Compat attr to load backported drawable types -->
-        <attr format="reference" name="buttonCompat"/>
         <!-- Tint to apply to the button drawable. -->
         <attr format="color" name="buttonTint"/>
 
@@ -3334,11 +3052,6 @@
               timeout and wait until a reply is received from the font provider. -->
             <enum name="forever" value="-1"/>
         </attr>
-        <!-- Provides the system font family name to check before downloading the font. For
-        example if the fontProviderQuery asked for "Sans Serif", it is possible to define
-        fontProviderSystemFontFamily as "sans-serif" to tell the system to use "sans-serif" font
-        family if it exists on the system. -->
-        <attr format="string" name="fontProviderSystemFontFamily"/>
     </declare-styleable>
     <declare-styleable name="FontFamilyFont">
         <!-- The style of the given font file. This will be used when the font is being loaded into
@@ -3371,15 +3084,6 @@
         <attr name="android:fontWeight"/>
         <attr name="android:fontVariationSettings"/>
         <attr name="android:ttcIndex"/>
-    </declare-styleable>
-    <declare-styleable name="Fragment">
-        <attr name="android:name"/>
-        <attr name="android:id"/>
-        <attr name="android:tag"/>
-    </declare-styleable>
-    <declare-styleable name="FragmentContainerView">
-        <attr name="android:name"/>
-        <attr name="android:tag"/>
     </declare-styleable>
     <declare-styleable name="GIFVIEW">
         <!--gif文件引用-->
@@ -3579,6 +3283,12 @@
         <attr name="android:offset"/>
         <!-- The current color for the offset inside the gradient. -->
         <attr name="android:color"/>
+    </declare-styleable>
+    <declare-styleable name="IMGColorRadio" ns2:ignore="ResourceName">
+
+        <attr format="color" name="image_color"/>
+        <attr format="color" name="image_stroke_color"/>
+
     </declare-styleable>
     <declare-styleable name="LinearLayoutCompat">
         <!-- Should the layout be a column or a row?  Use "horizontal"
@@ -3812,14 +3522,6 @@
         <!-- Drawable for the arrow icon indicating a particular item is a submenu. -->
         <attr format="reference" name="subMenuArrow"/>
     </declare-styleable>
-    <declare-styleable name="PictureLongScaleImageView">
-        <attr format="reference" name="src"/>
-        <attr format="string" name="assetName"/>
-        <attr format="boolean" name="panEnabled"/>
-        <attr format="boolean" name="zoomEnabled"/>
-        <attr format="boolean" name="quickScaleEnabled"/>
-        <attr format="color" name="tileBackgroundColor"/>
-    </declare-styleable>
     <declare-styleable name="PopupWindow">
         <!-- Whether the popup window should overlap its anchor view. -->
         <attr format="boolean" name="overlapAnchor"/>
@@ -3830,10 +3532,6 @@
         <!-- State identifier indicating the popup will be above the anchor. -->
         <attr format="boolean" name="state_above_anchor"/>
     </declare-styleable>
-    <declare-styleable name="PreviewView">
-        <attr name="scaleType"/>
-        <attr name="implementationMode"/>
-    </declare-styleable>
     <declare-styleable name="RecycleListView">
         <!-- Bottom padding to use when no buttons are present. -->
         <attr format="dimension" name="paddingBottomNoButtons"/>
@@ -3843,7 +3541,7 @@
     <declare-styleable name="RecyclerView">
         <!-- Class name of the Layout Manager to be used.
         <p/>
-        The class must ext androidx.recyclerview.widget.RecyclerViewView$LayoutManager
+        The class must extandroidx.recyclerview.widget.RecyclerViewView$LayoutManager
         and have either a default constructor or constructor with the signature
         (android.content.Context, android.util.AttributeSet, int, int).
          <p/>
@@ -3859,7 +3557,6 @@
 
         <attr name="android:orientation"/>
         <attr name="android:descendantFocusability"/>
-        <attr name="android:clipToPadding"/>
         <attr format="integer" name="spanCount"/>
         <attr format="boolean" name="reverseLayout"/>
         <attr format="boolean" name="stackFromEnd"/>
@@ -4135,23 +3832,14 @@
         <attr name="android:textColorHint"/>
         <attr name="android:textColorLink"/>
         <attr name="android:textStyle"/>
-        <attr name="android:textFontWeight"/>
         <attr name="android:typeface"/>
         <attr name="android:fontFamily"/>
         <attr name="fontFamily"/>
         <attr name="textAllCaps"/>
-        <!-- Set the textLocale by a comma-separated language tag string,
-             for example "ja-JP,zh-CN". This attribute only takes effect on API 21 and above.
-             Before API 24, only the first language tag is used. Starting from API 24,
-             the string will be converted into a {@link android.os.LocaleList} and then used by
-             {@link android.widget.TextView} -->
-        <attr name="textLocale"/>
         <attr name="android:shadowColor"/>
         <attr name="android:shadowDy"/>
         <attr name="android:shadowDx"/>
         <attr name="android:shadowRadius"/>
-        <!-- OpenType font variation settings, available aftear api 26. -->
-        <attr name="fontVariationSettings"/>
     </declare-styleable>
     <declare-styleable name="Toolbar">
         <attr format="reference" name="titleTextAppearance"/>
@@ -4188,8 +3876,6 @@
         <attr name="contentInsetEndWithActions"/>
         <attr format="dimension" name="maxButtonHeight"/>
         <attr name="buttonGravity">
-            <!-- Place object in the vertical center of its container, not changing its size. -->
-            <flag name="center_vertical" value="0x10"/>
             <!-- Push object to the top of its container, not changing its size. -->
             <flag name="top" value="0x30"/>
             <!-- Push object to the bottom of its container, not changing its size. -->
@@ -4219,8 +3905,6 @@
         <!-- A color to apply to the subtitle string. -->
         <attr format="color" name="subtitleTextColor"/>
         <attr name="android:minHeight"/>
-        <!-- Menu resource to inflate to be shown in the toolbar -->
-        <attr format="reference" name="menu"/>
     </declare-styleable>
     <declare-styleable name="View">
         <!-- Sets the padding, in pixels, of the start edge; see {@link android.R.attr#padding}. -->
@@ -4275,35 +3959,5 @@
         <!-- Overrides the id of the inflated View with this value. -->
         <attr name="android:inflatedId"/>
         <attr name="android:id"/>
-    </declare-styleable>
-    <declare-styleable name="ucrop_AspectRatioTextView">
-
-        <attr format="string" name="ucrop_artv_ratio_title"/>
-
-        <attr format="float" name="ucrop_artv_ratio_x"/>
-        <attr format="float" name="ucrop_artv_ratio_y"/>
-
-    </declare-styleable>
-    <declare-styleable name="ucrop_UCropView">
-
-        
-        <attr format="float" name="ucrop_aspect_ratio_x"/>
-        <attr format="float" name="ucrop_aspect_ratio_y"/>
-
-        
-        <attr format="boolean" name="ucrop_show_oval_crop_frame"/>
-        <attr format="boolean" name="ucrop_circle_dimmed_layer"/>
-        <attr format="color" name="ucrop_dimmed_color"/>
-
-        <attr format="dimension" name="ucrop_grid_stroke_size"/>
-        <attr format="color" name="ucrop_grid_color"/>
-        <attr format="integer" name="ucrop_grid_row_count"/>
-        <attr format="integer" name="ucrop_grid_column_count"/>
-        <attr format="boolean" name="ucrop_show_grid"/>
-
-        <attr format="dimension" name="ucrop_frame_stroke_size"/>
-        <attr format="color" name="ucrop_frame_color"/>
-        <attr format="boolean" name="ucrop_show_frame"/>
-
     </declare-styleable>
 </resources>

@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
 import com.xzh.musicnotification.service.PlayServiceV2;
 import com.xzh.musicnotification.utils.ImageUtils;
 import com.xzh.musicnotification.view.SlidingFinishLayout;
@@ -31,6 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.dcloud.feature.uniapp.utils.UniLogUtils;
+import io.dcloud.feature.uniapp.utils.UniUtils;
 
 public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLayout.OnSlidingFinishListener, View.OnClickListener {
 
@@ -39,10 +43,12 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     private TextView tvAudio;
     private ImageView favouriteView;
     private ImageView playView;
-    private PlayServiceV2 mServiceV2;
+    private WeakReference<PlayServiceV2> mServiceV2;
     private ServiceConnection connection;
     private TimeChangeReceiver mReceiver;
-    private Bitmap bitmap;
+    private int mWidth;
+    private int mHeight;
+    private boolean xzhFavour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,15 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
         initView();
 
+        WindowManager windowManager = this.getWindowManager();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        mWidth = displayMetrics.widthPixels;
+        mHeight = displayMetrics.heightPixels;
+
+        UniLogUtils.i("XZH-musicNotification", "mWidth" + mWidth);
+        UniLogUtils.i("XZH-musicNotification", "mHeight" + mHeight);
+
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
         mReceiver = new TimeChangeReceiver();
@@ -61,10 +76,18 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         connection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                PlayServiceV2.ServiceBinder serviceBinder = (PlayServiceV2.ServiceBinder) iBinder;
-                mServiceV2 = serviceBinder.getInstance();
-                mServiceV2.setActivity(new WeakReference<>(LockActivityV2.this));
-                updateUI(mServiceV2.getSongData());
+                mServiceV2 = new WeakReference<>(((PlayServiceV2.ServiceBinder) iBinder).getInstance());
+                mServiceV2.get().setActivity(LockActivityV2.this);
+                if (UniUtils.isUiThread()) {
+                    updateUI(mServiceV2.get().getSongData());
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            updateUI(mServiceV2.get().getSongData());
+                        }
+                    });
+                }
             }
 
             @Override
@@ -114,8 +137,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         favouriteView = findViewById(R.id.favourite_view);
         try {
             ApplicationInfo info = this.getPackageManager().getApplicationInfo(this.getPackageName(), PackageManager.GET_META_DATA);
-            boolean xzhFavour = info.metaData.getBoolean("xzh_favour");
-            UniLogUtils.i("XZH-musicNotification","xzh_favour" + xzhFavour);
+            xzhFavour = info.metaData.getBoolean("xzh_favour");
             if (xzhFavour) favouriteView.setVisibility(View.VISIBLE);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -136,7 +158,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         data.put("code", 0);
 
         final int viewId = view.getId();
-        final int[] ids = new int[]{ R.id.previous_view, R.id.next_view, R.id.favourite_view, R.id.play_view };
+        final int[] ids = new int[]{R.id.previous_view, R.id.next_view, R.id.favourite_view, R.id.play_view};
         final String[] EXTRAS = new String[]{
                 PlayServiceV2.NotificationReceiver.EXTRA_PRE,
                 PlayServiceV2.NotificationReceiver.EXTRA_NEXT,
@@ -157,14 +179,14 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
                 eventName = "musicNotificationNext";
                 break;
             case PlayServiceV2.NotificationReceiver.EXTRA_FAV:
-                mServiceV2.Favour = !mServiceV2.Favour;
-                mServiceV2.favour(mServiceV2.Favour);
-                data.put("favourite", mServiceV2.Favour);
+                mServiceV2.get().Favour = !mServiceV2.get().Favour;
+                mServiceV2.get().favour(mServiceV2.get().Favour);
+                data.put("favourite", mServiceV2.get().Favour);
                 eventName = "musicNotificationFavourite";
                 break;
             case PlayServiceV2.NotificationReceiver.EXTRA_PLAY:
-                mServiceV2.Playing = !mServiceV2.Playing;
-                mServiceV2.playOrPause(mServiceV2.Playing);
+                mServiceV2.get().Playing = !mServiceV2.get().Playing;
+                mServiceV2.get().playOrPause(mServiceV2.get().Playing);
                 eventName = "musicNotificationPause";
                 break;
             default:
@@ -173,14 +195,15 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
                 break;
         }
 
-        mServiceV2.mWXSDKInstance.fireGlobalEventCallback(eventName, data);
+        mServiceV2.get().mWXSDKInstance.get().fireGlobalEventCallback(eventName, data);
     }
 
     /**
      * 重写物理返回键，使不能回退
      */
     @Override
-    public void onBackPressed() {}
+    public void onBackPressed() {
+    }
 
     @Override
     protected void onDestroy() {
@@ -197,27 +220,26 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         finish();
     }
 
-    public void updateUI(final JSONObject options){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (options.getString("songName") != null) {
-                    tvAudioName.setText(options.getString("songName"));
-                }
-                if (options.getString("artistsName") != null) {
-                    tvAudio.setText(options.getString("artistsName"));
-                }
-                favour(mServiceV2.Favour);
-                playOrPause(mServiceV2.Playing);
+    public void updateUI(final JSONObject options) {
+        if (options.getString("songName") != null) {
+            tvAudioName.setText(options.getString("songName"));
+        }
+        if (options.getString("artistsName") != null) {
+            tvAudio.setText(options.getString("artistsName"));
+        }
+        favour(mServiceV2.get().Favour);
+        playOrPause(mServiceV2.get().Playing);
 
-                if (bitmap != null) bitmap.recycle();
-                bitmap = ImageUtils.GetLocalOrNetBitmap(options.getString("picUrl"));
-                if (bitmap != null) lockDate.setImageBitmap(bitmap);
-            }
-        });
+        Glide.with(this.getApplicationContext())
+                .asBitmap()
+                .load(options.getString("picUrl"))
+                .sizeMultiplier(0.8f)
+                .override(mWidth, mHeight)
+                .format(DecodeFormat.PREFER_RGB_565)
+                .into(lockDate);
     }
 
-    public void playOrPause(boolean playing){
+    public void playOrPause(boolean playing) {
         if (playing) {
             playView.setImageResource(R.mipmap.note_btn_pause_white);
         } else {
@@ -225,11 +247,13 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         }
     }
 
-    public void favour(boolean isFavour){
-        if (isFavour) {
-            favouriteView.setImageResource(R.mipmap.note_btn_loved);
-        } else {
-            favouriteView.setImageResource(R.mipmap.note_btn_love_white);
+    public void favour(boolean isFavour) {
+        if (xzhFavour) {
+            if (isFavour) {
+                favouriteView.setImageResource(R.mipmap.note_btn_loved);
+            } else {
+                favouriteView.setImageResource(R.mipmap.note_btn_love_white);
+            }
         }
     }
 

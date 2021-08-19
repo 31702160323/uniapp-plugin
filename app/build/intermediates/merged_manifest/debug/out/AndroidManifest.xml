@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.HBuilder.UniPlugin"
+    package="com.xzh.UniPlugin"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="21"
-        android:targetSdkVersion="30" />
+        android:targetSdkVersion="29" />
 
     <supports-screens
         android:anyDensity="true"
@@ -14,8 +14,6 @@
         android:normalScreens="true"
         android:resizeable="true"
         android:smallScreens="true" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- Barcode(二维码)  begin -->
     <uses-permission android:name="android.permission.CAMERA" />
@@ -26,6 +24,7 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!--
     <uses-permission
@@ -34,14 +33,22 @@
     <!-- 华为修改角标需要设置权限 -->
     <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" /> <!-- vivo 修改角标需要设置权限 -->
     <uses-permission android:name="com.vivo.notification.permission.BADGE_ICON" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+        </intent>
+    </queries>
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="com.asus.msa.SupplementaryDID.ACCESS" /> <!-- Barcode(二维码)  end -->
+    <uses-permission android:name="com.asus.msa.SupplementaryDID.ACCESS" />
+    <uses-permission android:name="freemme.permission.msa" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- Barcode(二维码)  end -->
     <application
         android:name="io.dcloud.application.DCloudApplication"
         android:allowBackup="true"
         android:allowClearUserData="true"
-        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
@@ -98,21 +105,23 @@
 
                 <action android:name="android.intent.action.VIEW" />
 
-                <data android:scheme="h56131bcf" />
+                <data android:scheme=" " />
             </intent-filter>
         </activity>
 
-        <service
-            android:name="io.dcloud.common.adapter.io.MiniServerService"
-            android:exported="false" />
+        <provider
+            android:name="io.dcloud.common.util.DCloud_FileProvider"
+            android:authorities="com.android.UniPlugin.dc.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/dcloud_file_provider" />
+        </provider>
 
-        <receiver
-            android:name="io.dcloud.common.adapter.io.PushReceiver"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="dcloud.push.broswer" />
-            </intent-filter>
-        </receiver>
+        <meta-data
+            android:name="dcloud_appkey"
+            android:value="e9269f31a55e5d46e77a3e5e4ad97b88" />
 
         <activity
             android:name="io.dcloud.imagepick.CustomGalleryActivity"
@@ -138,8 +147,6 @@
             android:name="io.dcloud.ProcessMediator"
             android:excludeFromRecents="true"
             android:exported="false"
-            android:label="@string/app_name"
-            android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="io.dcloud.WebviewActivity"
@@ -153,16 +160,25 @@
             android:name="io.dcloud.common.adapter.io.DownloadReceiver"
             android:exported="false" >
             <intent-filter>
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
-            </intent-filter>
-            <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
 
                 <data android:scheme="package" /> <!-- HERE! -->
             </intent-filter>
-        </receiver>
+        </receiver> <!-- gallery******start -->
+        <activity
+            android:name="com.dmcbig.mediapicker.PickerActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:theme="@style/DeviceDefault.Light"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.dmcbig.mediapicker.PreviewActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:theme="@style/DeviceDefault.Light"
+            android:windowSoftInputMode="stateAlwaysHidden" /> <!-- gallery******end -->
         <!--
-        <provider
+            <provider
             android:name="io.dcloud.common.util.DCloud_FileProvider"
             android:authorities="${apk.applicationId}.dc.fileprovider"
             android:exported="false"
@@ -181,65 +197,41 @@
             android:name="android.max_aspect"
             android:value="2.4" />
 
+        <activity
+            android:name="io.dcloud.feature.gallery.imageedit.IMGEditActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:theme="@style/ImageEditTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
         <receiver
             android:name="com.taobao.weex.WXGlobalEventReceiver"
             android:enabled="true"
             android:exported="false" >
         </receiver>
 
-        <provider
-            android:name="com.luck.picture.lib.PictureFileProvider"
-            android:authorities="com.HBuilder.UniPlugin.luckProvider"
+        <activity
+            android:name="com.xzh.musicnotification.LockActivityV2"
+            android:excludeFromRecents="true"
             android:exported="false"
-            android:grantUriPermissions="true" >
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
+            android:launchMode="singleInstance"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:taskAffinity="com.ztk.lock"
+            android:theme="@style/LockScreenTheme" />
 
-        <activity
-            android:name="com.luck.picture.lib.PictureSelectorActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity
-            android:name="com.luck.picture.lib.PictureSelectorWeChatStyleActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity
-            android:name="com.luck.picture.lib.PictureSelectorCameraEmptyActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/Picture.Theme.Translucent" />
-        <activity
-            android:name="com.luck.picture.lib.PictureCustomCameraActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity
-            android:name="com.luck.picture.lib.PicturePreviewActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity
-            android:name="com.luck.picture.lib.PictureSelectorPreviewWeChatStyleActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity
-            android:name="com.luck.picture.lib.PictureVideoPlayActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="sensor" />
-        <activity
-            android:name="com.luck.picture.lib.PictureExternalPreviewActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity
-            android:name="com.luck.picture.lib.PicturePlayAudioActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity
-            android:name="com.yalantis.ucrop.UCropActivity"
-            android:theme="@style/Base.Theme.NoActionBar" />
-        <activity
-            android:name="com.yalantis.ucrop.PictureMultiCuttingActivity"
-            android:theme="@style/Base.Theme.NoActionBar" />
-        <!--
-        Service for holding metadata. Cannot be instantiated.
-        Metadata will be merged from other manifests.
-        -->
-        <service
-            android:name="androidx.camera.core.impl.MetadataHolderService"
-            android:enabled="false"
-            android:exported="false" />
+        <service android:name="com.xzh.musicnotification.service.PlayServiceV2" />
+
+        <receiver android:name="com.xzh.widget.MusicWidget" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.xzh.widget.MusicWidget" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/music_widget_info" />
+        </receiver>
     </application>
 
 </manifest>
