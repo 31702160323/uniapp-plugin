@@ -9,24 +9,24 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
 import com.xzh.musicnotification.service.PlayServiceV2;
-import com.xzh.musicnotification.utils.ImageUtils;
 import com.xzh.musicnotification.view.SlidingFinishLayout;
 
 import java.lang.ref.WeakReference;
@@ -53,11 +53,17 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD|
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|
+                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
         fullScreen(this);
         setContentView(R.layout.activity_lock);
 
         initView();
+
+        Log.d("XZH-musicNotification", "onCreate: 锁屏页");
 
         WindowManager windowManager = this.getWindowManager();
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -81,12 +87,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
                 if (UniUtils.isUiThread()) {
                     updateUI(mServiceV2.get().getSongData());
                 } else {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            updateUI(mServiceV2.get().getSongData());
-                        }
-                    });
+                    runOnUiThread(() -> updateUI(mServiceV2.get().getSongData()));
                 }
             }
 
