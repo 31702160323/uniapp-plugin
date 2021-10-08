@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -15,6 +16,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.request.target.AppWidgetTarget;
 import com.taobao.weex.utils.WXViewUtils;
+
+import java.util.Objects;
 
 import io.dcloud.feature.uniapp.utils.UniResourceUtils;
 
@@ -108,8 +111,7 @@ public class MusicWidget extends AppWidgetProvider {
         ) {
             return;
         }
-        final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.music_widget);
-        AppWidgetManager mAppWidgetManager = AppWidgetManager.getInstance(context);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.music_widget);
 
         //打开应用
         this.openAppIntent(views, context, new PendingIntentInfo(R.id.image_view, 0));
@@ -124,8 +126,9 @@ public class MusicWidget extends AppWidgetProvider {
                 new PendingIntentInfo(R.id.favourite_view, 4, "play_favourite")
         );
 
-        switch (intent.getStringExtra("type")) {
+        switch (Objects.requireNonNull(intent.getStringExtra("type"))) {
             case "update":
+                Log.d("XZH-musicNotification", "onReceive: " + intent.getStringExtra("songName"));
                 views.setTextViewText(R.id.title_view, intent.getStringExtra("songName"));
                 views.setTextViewText(R.id.tip_view, intent.getStringExtra("artistsName"));
 
@@ -164,8 +167,10 @@ public class MusicWidget extends AppWidgetProvider {
                     views.setInt(R.id.tip_view, "setTextColor", UniResourceUtils.getColor(intent.getStringExtra("tip")));
                 }
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + Objects.requireNonNull(intent.getStringExtra("type")));
         }
-        mAppWidgetManager.updateAppWidget(new ComponentName(context, MusicWidget.class), views);
+        AppWidgetManager.getInstance(context).updateAppWidget(new ComponentName(context, MusicWidget.class), views);
     }
 
     @Override

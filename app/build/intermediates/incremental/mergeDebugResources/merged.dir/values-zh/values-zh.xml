@@ -77,20 +77,14 @@
     <string name="dcloud_debug_connecting">正在连接调试服务...</string>
     <string name="dcloud_debug_possible_causes">1. 手机与PC不处于同一局域网\n 2. 手机使用移动网络\n 3. 手机使用VPN等代理设置\n 4. PC设置了防火墙</string>
     <string name="dcloud_debug_reconnection_service">重连调试服务</string>
+    <string name="dcloud_dialog_loading">正在加载...</string>
     <string name="dcloud_drop_down_refresh1">下拉可刷新</string>
     <string name="dcloud_drop_down_refresh2">松开后刷新</string>
     <string name="dcloud_drop_down_refresh3">正在刷新…</string>
     <string name="dcloud_feature_barcode2_no_camera_permission">未获取相机权限</string>
     <string name="dcloud_feature_error_tips">请检查assets/data/properties.xml文件是否添加 %s 相关节点。</string>
     <string name="dcloud_feature_error_tips2">打包时未添加%s模块, 请参考</string>
-    <string name="dcloud_feature_weex_amap_msg_bounds_cannot_null">id、src、bounds不能为空</string>
-    <string name="dcloud_feature_weex_amap_msg_bounds_create_fail">bounds生成失败</string>
-    <string name="dcloud_feature_weex_amap_msg_key_invalid">key验证无效！</string>
-    <string name="dcloud_feature_weex_amap_msg_network_error">网络错误</string>
-    <string name="dcloud_feature_weex_amap_msg_param_error">参数有误</string>
-    <string name="dcloud_feature_weex_amap_msg_search_error">搜索失败！</string>
-    <string name="dcloud_feature_weex_amap_msg_unknown_reason">未知错误</string>
-    <string name="dcloud_feature_weex_amap_no_search_result">对不起，没有搜索到相关数据！</string>
+    <string name="dcloud_feature_weex_jsfk_not_found_tips">当前环境无法运行“%s”版本的uni-app应用！</string>
     <string name="dcloud_feature_weex_msg_cannot_find_file_by_path">无法通过此路径找到相关文件</string>
     <string name="dcloud_feature_weex_msg_page_destroyed">当前页面已销毁</string>
     <string name="dcloud_feature_weex_msg_param_empty">参数为空</string>
@@ -188,10 +182,6 @@
     <string name="dcloud_permissions_short_cut_tips2">快捷快捷方式启用”开启失败，是否重新开启？"</string>
     <string name="dcloud_permissions_sms_whether_allow">“%s”需要发送短信，是否允许？</string>
     <string name="dcloud_permissions_whether_allow">“%s”需要获取位置信息，是否允许？</string>
-    <string name="dcloud_privacy_prompt_accept_button_text">同意</string>
-    <string name="dcloud_privacy_prompt_message"><Data><![CDATA[请你务必审慎阅读、充分理解“服务协议”和“隐私政策”各条款，包括但不限于：为了更好的向你提供服务，我们需要收集你的设备标识、操作日志等信息用于分析、优化应用性能。<br />
-  你可阅读<a href="">《服务协议》</a>和<a href="">《隐私政策》</a>了解详细信息。如果你同意，请点击下面按钮开始接受我们的服务。]]></Data></string>
-    <string name="dcloud_privacy_prompt_title">服务协议和隐私政策</string>
     <string name="dcloud_record_address_current">当前地址</string>
     <string name="dcloud_record_address_home">家庭地址</string>
     <string name="dcloud_record_address_unit">单位地址</string>

@@ -11,9 +11,9 @@ import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
-import android.text.TextUtils;
-import android.view.View;
+import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.alibaba.fastjson.JSONObject;
 import com.taobao.weex.WXSDKInstance;
@@ -119,9 +119,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
             if (UniUtils.isUiThread()) {
                 mActivityV2.get().updateUI(options);
             } else {
-                mActivityV2.get().runOnUiThread(() -> {
-                    mActivityV2.get().updateUI(options);
-                });
+                mActivityV2.get().runOnUiThread(() -> mActivityV2.get().updateUI(options));
             }
         }
 
@@ -201,10 +199,13 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent == null || TextUtils.isEmpty(intent.getAction())) {
-                return;
+            if (lockActivity && Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
+                Log.d("XZH-musicNotification", "开启锁屏页");
+                Intent lockScreen = new Intent(context, LockActivityV2.class);
+                lockScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                lockScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                context.startActivity(lockScreen);
             }
-            if (lockActivity) handleCommandIntent(intent);
             String extra = intent.getStringExtra(EXTRA);
             if (extra == null) return;
             String eventName = "musicNotificationError";
@@ -238,15 +239,6 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
                     break;
             }
             serviceV2.mWXSDKInstance.get().fireGlobalEventCallback(eventName, data);
-        }
-    }
-
-    private static void handleCommandIntent(Intent intent) {
-        final String action = intent.getAction();
-        if (Intent.ACTION_SCREEN_OFF.equals(action) ){
-            Intent lockScreen = new Intent(serviceV2, LockActivityV2.class);
-            lockScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            serviceV2.startActivity(lockScreen);
         }
     }
 
