@@ -20,6 +20,7 @@
     <color name="background_floating_material_light">@android:color/white</color>
     <color name="background_material_dark">@color/material_grey_850</color>
     <color name="background_material_light">@color/material_grey_50</color>
+    <color name="black">#FF000000</color>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
     <color name="bright_foreground_inverse_material_dark">@color/bright_foreground_material_light</color>
@@ -77,6 +78,9 @@
     <color name="primary_text_default_material_light">#de000000</color>
     <color name="primary_text_disabled_material_dark">#4Dffffff</color>
     <color name="primary_text_disabled_material_light">#39000000</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
     <color name="ripple_material_dark">#33ffffff</color>
     <color name="ripple_material_light">#1f000000</color>
     <color name="secondary_text_default_material_dark">#b3ffffff</color>
@@ -87,8 +91,11 @@
     <color name="switch_thumb_disabled_material_light">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
     <color name="tooltip_background_dark">#e6616161</color>
     <color name="tooltip_background_light">#e6FFFFFF</color>
+    <color name="white">#FFFFFFFF</color>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
     <dimen name="abc_action_bar_content_inset_with_nav">72dp</dimen>
     <dimen name="abc_action_bar_default_height_material">56dp</dimen>
@@ -365,20 +372,14 @@
     <string name="dcloud_debug_connecting">connecting to debugging service...</string>
     <string name="dcloud_debug_possible_causes">1. The mobile phone and PC are not in the same LAN\n 2. The mobile phone uses the mobile network\n 3. The mobile phone uses VPN and other proxy settings\n 4. The PC sets the firewall</string>
     <string name="dcloud_debug_reconnection_service">retry</string>
+    <string name="dcloud_dialog_loading">Loading...</string>
     <string name="dcloud_drop_down_refresh1">pull down to refresh</string>
     <string name="dcloud_drop_down_refresh2">refresh after release</string>
     <string name="dcloud_drop_down_refresh3">refreshing...</string>
     <string name="dcloud_feature_barcode2_no_camera_permission">no camera permission</string>
     <string name="dcloud_feature_error_tips">please check whether %s related nodes are added in assets/data/properties.xml file.</string>
     <string name="dcloud_feature_error_tips2">%s module was not added when packaging, please refer to</string>
-    <string name="dcloud_feature_weex_amap_msg_bounds_cannot_null">id、src、bounds can not be null</string>
-    <string name="dcloud_feature_weex_amap_msg_bounds_create_fail">bounds create fail</string>
-    <string name="dcloud_feature_weex_amap_msg_key_invalid">key invalid</string>
-    <string name="dcloud_feature_weex_amap_msg_network_error">network error</string>
-    <string name="dcloud_feature_weex_amap_msg_param_error">parameters error</string>
-    <string name="dcloud_feature_weex_amap_msg_search_error">search fail</string>
-    <string name="dcloud_feature_weex_amap_msg_unknown_reason">unknown reson</string>
-    <string name="dcloud_feature_weex_amap_no_search_result">sorry. no result searched</string>
+    <string name="dcloud_feature_weex_jsfk_not_found_tips">The current environment cannot run the uni app application of "%s" version!</string>
     <string name="dcloud_feature_weex_msg_cannot_find_file_by_path">can not find file by path</string>
     <string name="dcloud_feature_weex_msg_page_destroyed">page had destroyed</string>
     <string name="dcloud_feature_weex_msg_param_empty">param is empty</string>
@@ -476,10 +477,10 @@
     <string name="dcloud_permissions_short_cut_tips2">shortcut is enabled "Failed to open, do you want to restart?"</string>
     <string name="dcloud_permissions_sms_whether_allow">“%s” need to send SMS, is it allowed?</string>
     <string name="dcloud_permissions_whether_allow">“%s” need to obtain location information, is it allowed?</string>
-    <string name="dcloud_privacy_prompt_accept_button_text">Agree</string>
-    <string name="dcloud_privacy_prompt_message"><Data><![CDATA[Please read carefully and fully understand the terms of the "Service Agreement" and "Privacy Policy", including but not limited to: In order to provide you with better services, we need to collect your device identification, Information such as operation logs is used to analyze and optimize application performance. <br />
-   You can read the <a href="">"Service Agreement"</a> and <a href="">"Privacy Policy"</a> for details. If you agree, please click the button below to start accepting our service. ]]></Data></string>
-    <string name="dcloud_privacy_prompt_title">Service Agreement and Privacy Policy</string>
+    <string name="dcloud_privacy_prompt_accept_button_text">同意</string>
+    <string name="dcloud_privacy_prompt_message"><Data><![CDATA[请你务必审慎阅读、充分理解“服务协议”和“隐私政策”各条款，包括但不限于：为了更好的向你提供服务，我们需要收集你的设备标识、操作日志等信息用于分析、优化应用性能。<br />
+  你可阅读<a href="">《服务协议》</a>和<a href="">《隐私政策》</a>了解详细信息。如果你同意，请点击下面按钮开始接受我们的服务。]]></Data></string>
+    <string name="dcloud_privacy_prompt_title">服务协议和隐私政策</string>
     <string name="dcloud_record_address_current">current address</string>
     <string name="dcloud_record_address_home">home address</string>
     <string name="dcloud_record_address_unit">unit address</string>
@@ -546,6 +547,7 @@
     <string name="img">专辑图片</string>
     <string name="in_package">apk</string>
     <string name="next">下一首</string>
+    <string name="oaid_not_support">未集成oaid模块</string>
     <string name="play">播放按钮</string>
     <string name="previous">上一首</string>
     <string name="search_menu_title">Search</string>
@@ -910,7 +912,7 @@
         <item name="isLightTheme">true</item>
     </style>
     <style name="Base.V7.Theme.AppCompat" parent="Platform.AppCompat">
-        <item name="viewInflaterClass">android.support.v7.app.AppCompatViewInflater</item>
+        <item name="viewInflaterClass">androidx.appcompat.app.AppCompatViewInflater</item>
         <item name="windowNoTitle">false</item>
         <item name="windowActionBar">true</item>
         <item name="windowActionBarOverlay">false</item>
@@ -1104,7 +1106,7 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
     <style name="Base.V7.Theme.AppCompat.Light" parent="Platform.AppCompat.Light">
-        <item name="viewInflaterClass">android.support.v7.app.AppCompatViewInflater</item>
+        <item name="viewInflaterClass">androidx.appcompat.app.AppCompatViewInflater</item>
 
         <item name="windowNoTitle">false</item>
         <item name="windowActionBar">true</item>
@@ -2161,6 +2163,13 @@
         <item name="android:layout_gravity">top</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:layout_width">match_parent</item>
+    </style>
+    <style name="dialog_transparent" parent="@android:style/Theme.Material.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
     <style name="featureLossDialog" parent="@android:style/Theme.Holo.Dialog">
         <item name="android:windowBackground">@color/image_pick_title_btn_normal</item>

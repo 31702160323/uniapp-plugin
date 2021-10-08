@@ -13,7 +13,8 @@ import android.os.Build;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.support.v4.app.NotificationManagerCompat;
+
+import androidx.core.app.NotificationManagerCompat;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xzh.musicnotification.service.PlayServiceV2;

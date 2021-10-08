@@ -420,6 +420,7 @@ color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
 color background_material_light
+color black
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
 color bright_foreground_inverse_material_dark
@@ -481,6 +482,9 @@ color primary_text_default_material_dark
 color primary_text_default_material_light
 color primary_text_disabled_material_dark
 color primary_text_disabled_material_light
+color purple_200
+color purple_500
+color purple_700
 color ripple_material_dark
 color ripple_material_light
 color secondary_text_default_material_dark
@@ -493,8 +497,11 @@ color switch_thumb_material_dark
 color switch_thumb_material_light
 color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
+color teal_200
+color teal_700
 color tooltip_background_dark
 color tooltip_background_light
+color white
 dimen abc_action_bar_content_inset_material
 dimen abc_action_bar_content_inset_with_nav
 dimen abc_action_bar_default_height_material
@@ -724,18 +731,26 @@ drawable dcloud_actionsheet_single_normal
 drawable dcloud_actionsheet_single_pressed
 drawable dcloud_actionsheet_top_normal
 drawable dcloud_actionsheet_top_pressed
+drawable dcloud_ad_splash_ad_tag
+drawable dcloud_ad_splash_click_btn_bg
+drawable dcloud_ad_splash_skip_bg
+drawable dcloud_ad_splash_skip_shape
+drawable dcloud_ad_webview_activity_title_bg
 drawable dcloud_as_bg_ios6
 drawable dcloud_as_cancel_bt_bg
 drawable dcloud_as_other_bt_bg
 drawable dcloud_assistan_loc
 drawable dcloud_circle_black_progress
 drawable dcloud_circle_white_progress
+drawable dcloud_custom_rich_dialog_button_bg_selecter
 drawable dcloud_custom_rich_dialog_button_text_selecter
 drawable dcloud_debug_shape
+drawable dcloud_dialog_loading
 drawable dcloud_dialog_shape
 drawable dcloud_dialog_shape_bg
 drawable dcloud_gallery_action_btn
 drawable dcloud_gallery_btn_selected
+drawable dcloud_gallery_btn_selected_drawable
 drawable dcloud_gallery_btn_unselected
 drawable dcloud_gallery_default_check
 drawable dcloud_gallery_default_image
@@ -848,6 +863,7 @@ id activity_chooser_view_content
 id ad_dcloud_icon
 id ad_dcloud_icon_single
 id ad_dcloud_main_adtext
+id ad_dcloud_main_click
 id ad_dcloud_main_img
 id ad_dcloud_main_skip
 id ad_dcloud_name
@@ -889,6 +905,8 @@ id center_vertical
 id cg_colors
 id check_image
 id check_layout
+id check_origin_image
+id check_origin_image_layout
 id checkbox
 id chronometer
 id clip_horizontal
@@ -998,6 +1016,8 @@ id listMode
 id list_item
 id ll_content_layout
 id ll_title_bar
+id loading
+id loading_background
 id lock_date
 id lock_root
 id lock_time
@@ -1060,6 +1080,7 @@ id search_plate
 id search_src_text
 id search_voice_btn
 id select_dialog_listview
+id select_origin_image_text
 id select_text
 id set_priority
 id shortcut
@@ -1172,6 +1193,8 @@ layout activity_lock
 layout ad_dcloud_main
 layout ad_dcloud_splash
 layout dcloud_activity_main_market
+layout dcloud_ad_activity_webview
+layout dcloud_ad_splash_container
 layout dcloud_custom_alert_dialog_layout
 layout dcloud_custom_notification
 layout dcloud_custom_notification_dark
@@ -1181,6 +1204,7 @@ layout dcloud_custom_notification_white
 layout dcloud_custom_privacy_dialog_layout
 layout dcloud_custom_privacy_second_dialog_layout
 layout dcloud_dialog
+layout dcloud_dialog_loading
 layout dcloud_gallery_folders_view_item
 layout dcloud_gallery_media_view_item
 layout dcloud_gallery_picker_actionbar
@@ -1376,20 +1400,14 @@ string dcloud_debug_cannot_connect
 string dcloud_debug_connecting
 string dcloud_debug_possible_causes
 string dcloud_debug_reconnection_service
+string dcloud_dialog_loading
 string dcloud_drop_down_refresh1
 string dcloud_drop_down_refresh2
 string dcloud_drop_down_refresh3
 string dcloud_feature_barcode2_no_camera_permission
 string dcloud_feature_error_tips
 string dcloud_feature_error_tips2
-string dcloud_feature_weex_amap_msg_bounds_cannot_null
-string dcloud_feature_weex_amap_msg_bounds_create_fail
-string dcloud_feature_weex_amap_msg_key_invalid
-string dcloud_feature_weex_amap_msg_network_error
-string dcloud_feature_weex_amap_msg_param_error
-string dcloud_feature_weex_amap_msg_search_error
-string dcloud_feature_weex_amap_msg_unknown_reason
-string dcloud_feature_weex_amap_no_search_result
+string dcloud_feature_weex_jsfk_not_found_tips
 string dcloud_feature_weex_msg_cannot_find_file_by_path
 string dcloud_feature_weex_msg_page_destroyed
 string dcloud_feature_weex_msg_param_empty
@@ -1556,6 +1574,7 @@ string hint_text
 string img
 string in_package
 string next
+string oaid_not_support
 string play
 string previous
 string search_menu_title
@@ -1932,6 +1951,7 @@ style Widget_Compat_NotificationActionText
 style Widget_Support_CoordinatorLayout
 style dcloud_anim_dialog_window_in_out
 style dcloud_defalut_dialog
+style dialog_transparent
 style featureLossDialog
 style streamDelete19Dialog
 style textAppearance
@@ -1990,4 +2010,5 @@ styleable View android_theme android_focusable paddingEnd paddingStart theme
 styleable ViewBackgroundHelper android_background backgroundTint backgroundTintMode
 styleable ViewStubCompat android_id android_layout android_inflatedId
 xml dcloud_file_provider
+xml dcloud_gg_file_provider
 xml music_widget_info

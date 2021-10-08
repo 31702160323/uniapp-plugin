@@ -2,13 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xzh.musicnotification">
 
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
 
     <application>
         <activity
             android:name=".LockActivityV2"
-            android:excludeFromRecents="true"
             android:exported="false"
+            android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:noHistory="true"
             android:screenOrientation="portrait"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="dcloud_dialog_loading">Loading...</string>
     <string name="dcloud_gallery_Next">Next</string>
     <string name="dcloud_gallery_all_dir_name">All Pictures &amp; Videos</string>
     <string name="dcloud_gallery_all_image">All Photos</string>
@@ -35,4 +36,7 @@
     <string name="dcloud_gallery_select_video_title">Videos</string>
     <string name="dcloud_gallery_video">Video</string>
     <string name="dcloud_gallery_video_dir_name">All Videos</string>
+    <string name="dcloud_short_cut_created">"%s"Desktop icon created</string>
+    <string name="dcloud_short_cut_created_removed_manually">, Please delete the duplicate manually</string>
+    <string name="dcloud_short_cut_if_create_tips">Do you want to install the app “%s” on your mobile desk"</string>
 </resources>
