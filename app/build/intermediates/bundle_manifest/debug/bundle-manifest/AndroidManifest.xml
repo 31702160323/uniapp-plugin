@@ -197,16 +197,6 @@
             android:taskAffinity="com.ztk.lock"
             android:theme="@style/LockScreenTheme" />
 
-        <receiver android:name="com.xzh.musicnotification.view.MusicWidget" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/music_widget_info" />
-        </receiver>
-
         <service android:name="com.xzh.musicnotification.service.PlayServiceV2" />
 
         <activity
@@ -239,6 +229,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name="com.xzh.widget.MusicWidget" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.xzh.widget.MusicWidget" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/music_widget_info" />
+        </receiver>
     </application>
 
 </manifest>

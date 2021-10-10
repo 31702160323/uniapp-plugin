@@ -7,23 +7,34 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.graphics.Bitmap;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.alibaba.fastjson.JSONObject;
-import com.taobao.weex.bridge.JSCallback;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
 import com.xzh.musicnotification.service.PlayServiceV2;
-import com.xzh.musicnotification.utils.ImageUtils;
 import com.xzh.musicnotification.view.SlidingFinishLayout;
+
+import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.Map;
+
+import io.dcloud.feature.uniapp.utils.UniLogUtils;
+import io.dcloud.feature.uniapp.utils.UniUtils;
 
 public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLayout.OnSlidingFinishListener, View.OnClickListener {
 
@@ -32,10 +43,12 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     private TextView tvAudio;
     private ImageView favouriteView;
     private ImageView playView;
-    private PlayServiceV2 mServiceV2;
+    private WeakReference<PlayServiceV2> mServiceV2;
     private ServiceConnection connection;
     private TimeChangeReceiver mReceiver;
-    private ImageView mBgImg;
+    private int mWidth;
+    private int mHeight;
+    private boolean xzhFavour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +59,17 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
         initView();
 
+        Log.d("XZH-musicNotification", "onCreate: 锁屏页");
+
+        WindowManager windowManager = this.getWindowManager();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        mWidth = displayMetrics.widthPixels;
+        mHeight = displayMetrics.heightPixels;
+
+        UniLogUtils.i("XZH-musicNotification", "mWidth" + mWidth);
+        UniLogUtils.i("XZH-musicNotification", "mHeight" + mHeight);
+
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
         mReceiver = new TimeChangeReceiver();
@@ -54,10 +78,13 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         connection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                PlayServiceV2.ServiceBinder serviceBinder = (PlayServiceV2.ServiceBinder) iBinder;
-                mServiceV2 = serviceBinder.getInstance();
-                mServiceV2.setActivity(LockActivityV2.this);
-                updateUI(mServiceV2.getSongData());
+                mServiceV2 = new WeakReference<>(((PlayServiceV2.ServiceBinder) iBinder).getInstance());
+                mServiceV2.get().setActivity(LockActivityV2.this);
+                if (UniUtils.isUiThread()) {
+                    updateUI(mServiceV2.get().getSongData());
+                } else {
+                    runOnUiThread(() -> updateUI(mServiceV2.get().getSongData()));
+                }
             }
 
             @Override
@@ -99,13 +126,19 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     private void initView() {
         SlidingFinishLayout vLockRoot = findViewById(R.id.lock_root);
         vLockRoot.setOnSlidingFinishListener(this);
-        mBgImg = findViewById(R.id.img_bg);
 
         lockDate = findViewById(R.id.iv_audio);
         tvAudioName = findViewById(R.id.tv_audio_name);
         tvAudio = findViewById(R.id.tv_audio);
 
         favouriteView = findViewById(R.id.favourite_view);
+        try {
+            ApplicationInfo info = this.getPackageManager().getApplicationInfo(this.getPackageName(), PackageManager.GET_META_DATA);
+            xzhFavour = info.metaData.getBoolean("xzh_favour");
+            if (xzhFavour) favouriteView.setVisibility(View.VISIBLE);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
         playView = findViewById(R.id.play_view);
         favouriteView.setOnClickListener(this);
         playView.setOnClickListener(this);
@@ -115,48 +148,62 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
     @Override
     public void onClick(View view) {
-        JSONObject data = new JSONObject();
-        data.put("success", "操作成功");
+        String EXTRA_TYPE = "";
+        String eventName = "musicNotificationError";
+        Map<String, Object> data = new HashMap<>();
+        data.put("message", "更新锁屏页成功");
         data.put("code", 0);
-        JSCallback object = null;
 
-        if (view.getId() == R.id.previous_view) {
-            if (mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_PRE) != null) {
-                object = mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_PRE);
-            }
-        } else if (view.getId() == R.id.next_view) {
-            if (mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_NEXT) != null) {
-                object = mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_NEXT);
-            }
-        } else if (view.getId() == R.id.favourite_view) {
-            mServiceV2.Favour = !mServiceV2.Favour;
-            mServiceV2.favour(mServiceV2.Favour);
-            data.put("favourite", mServiceV2.Favour);
-            if (mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_FAV) != null) {
-                object = mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_FAV);
-            }
-        } else if (view.getId() == R.id.play_view) {
-            mServiceV2.Playing = !mServiceV2.Playing;
-            mServiceV2.playOrPause(mServiceV2.Playing);
-            if (mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_PLAY) != null) {
-                object = mServiceV2.mCallback.get(PlayServiceV2.NotificationReceiver.EXTRA_PLAY);
-            }
-        } else {
-            data.put("success", "操作失败");
-            data.put("code", -1);
+        final int viewId = view.getId();
+        final int[] ids = new int[]{R.id.previous_view, R.id.next_view, R.id.favourite_view, R.id.play_view};
+        final String[] EXTRAS = new String[]{
+                PlayServiceV2.NotificationReceiver.EXTRA_PRE,
+                PlayServiceV2.NotificationReceiver.EXTRA_NEXT,
+                PlayServiceV2.NotificationReceiver.EXTRA_FAV,
+                PlayServiceV2.NotificationReceiver.EXTRA_PLAY
+        };
+
+        for (int i = 0; i < ids.length; i++) {
+            if (viewId != ids[i]) continue;
+            EXTRA_TYPE = EXTRAS[i];
         }
-        if (object != null) object.invokeAndKeepAlive(data);
+
+        switch (EXTRA_TYPE) {
+            case PlayServiceV2.NotificationReceiver.EXTRA_PRE:
+                eventName = "musicNotificationPrevious";
+                break;
+            case PlayServiceV2.NotificationReceiver.EXTRA_NEXT:
+                eventName = "musicNotificationNext";
+                break;
+            case PlayServiceV2.NotificationReceiver.EXTRA_FAV:
+                mServiceV2.get().Favour = !mServiceV2.get().Favour;
+                mServiceV2.get().favour(mServiceV2.get().Favour);
+                data.put("favourite", mServiceV2.get().Favour);
+                eventName = "musicNotificationFavourite";
+                break;
+            case PlayServiceV2.NotificationReceiver.EXTRA_PLAY:
+                mServiceV2.get().Playing = !mServiceV2.get().Playing;
+                mServiceV2.get().playOrPause(mServiceV2.get().Playing);
+                eventName = "musicNotificationPause";
+                break;
+            default:
+                data.put("message", "更新锁屏页失败");
+                data.put("code", -6);
+                break;
+        }
+
+        mServiceV2.get().mWXSDKInstance.get().fireGlobalEventCallback(eventName, data);
     }
 
     /**
      * 重写物理返回键，使不能回退
      */
     @Override
-    public void onBackPressed() {}
+    public void onBackPressed() {
+    }
 
     @Override
     protected void onDestroy() {
-        mServiceV2.setActivity(null);
         unbindService(connection);
         unregisterReceiver(mReceiver);
         super.onDestroy();
@@ -170,38 +217,26 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         finish();
     }
 
-    public void updateUI(final JSONObject options){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (options.getString("songName") != null) {
-                    tvAudio.setText(options.getString("songName"));
-                }
-                if (options.getString("artistsName") != null) {
-                    tvAudioName.setText(options.getString("artistsName"));
-                }
-                favour(mServiceV2.Favour);
-                playOrPause(mServiceV2.Playing);
-            }
-        });
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final Bitmap bitmap = ImageUtils.GetLocalOrNetBitmap(options.getString("picUrl"));
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (bitmap != null) {
-                            lockDate.setImageBitmap(bitmap);
-                            mBgImg.setImageBitmap(ImageUtils.doBlur(bitmap,100,false));
-                        }
-                    }
-                });
-            }
-        }).start();
+    public void updateUI(final JSONObject options) {
+        if (options.getString("songName") != null) {
+            tvAudioName.setText(options.getString("songName"));
+        }
+        if (options.getString("artistsName") != null) {
+            tvAudio.setText(options.getString("artistsName"));
+        }
+        favour(mServiceV2.get().Favour);
+        playOrPause(mServiceV2.get().Playing);
+
+        Glide.with(this.getApplicationContext())
+                .asBitmap()
+                .load(options.getString("picUrl"))
+                .sizeMultiplier(0.8f)
+                .override(mWidth, mHeight)
+                .format(DecodeFormat.PREFER_RGB_565)
+                .into(lockDate);
     }
 
-    public void playOrPause(boolean playing){
+    public void playOrPause(boolean playing) {
         if (playing) {
             playView.setImageResource(R.mipmap.note_btn_pause_white);
         } else {
@@ -209,15 +244,17 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         }
     }
 
-    public void favour(boolean isFavour){
-        if (isFavour) {
-            favouriteView.setImageResource(R.mipmap.note_btn_loved);
-        } else {
-            favouriteView.setImageResource(R.mipmap.note_btn_love_white);
+    public void favour(boolean isFavour) {
+        if (xzhFavour) {
+            if (isFavour) {
+                favouriteView.setImageResource(R.mipmap.note_btn_loved);
+            } else {
+                favouriteView.setImageResource(R.mipmap.note_btn_love_white);
+            }
         }
     }
 
-    private class TimeChangeReceiver extends BroadcastReceiver {
+    private static class TimeChangeReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {

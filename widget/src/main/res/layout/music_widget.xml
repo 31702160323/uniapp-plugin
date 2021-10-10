@@ -1,0 +1,113 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rl"
+    android:padding="@dimen/widget_margin">
+
+    <TextView
+        android:id="@+id/bg_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"/>
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:background="#BDE7FA"
+        android:contentDescription="@string/bg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@id/image_view"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title_view"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:singleLine="true"
+
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+
+            android:text="@string/add_widget"/>
+
+        <TextView
+            android:id="@+id/tip_view"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/darker_gray"
+
+            android:text="@string/add_widget"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/favourite_view"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="15dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/favourite"
+                android:scaleType="fitXY"
+                android:src="@mipmap/note_btn_love_white"
+                android:visibility="gone" />
+
+            <ImageButton
+                android:id="@+id/previous_view"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="15dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/previous"
+                android:scaleType="fitXY"
+                android:src="@mipmap/note_btn_pre_white" />
+
+            <ImageButton
+                android:id="@+id/play_view"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginEnd="15dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/play"
+                android:scaleType="fitXY"
+                android:src="@mipmap/note_btn_play_white" />
+
+            <ImageButton
+                android:id="@+id/next_view"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/next"
+                android:scaleType="fitXY"
+                android:src="@mipmap/note_btn_next_white" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

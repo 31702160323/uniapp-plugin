@@ -1,0 +1,2 @@
+com/xzh/UniPlugin/BuildConfig.java
+ com.xzh.UniPlugin.BuildConfig

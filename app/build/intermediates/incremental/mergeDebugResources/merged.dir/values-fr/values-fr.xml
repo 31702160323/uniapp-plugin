@@ -27,6 +27,26 @@
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Partager avec"</string>
     <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"Partager avec <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
     <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Réduire"</string>
+    <string name="dcloud_common_allow">Allow</string>
+    <string name="dcloud_common_cancel">Annulation</string>
+    <string name="dcloud_common_close">Fermer</string>
+    <string name="dcloud_common_download">Télécharger</string>
+    <string name="dcloud_common_exit">Sortie</string>
+    <string name="dcloud_common_fail">Échec</string>
+    <string name="dcloud_common_ignore">Ignorer</string>
+    <string name="dcloud_common_into">Entrée</string>
+    <string name="dcloud_common_no_allow">Non autorisé</string>
+    <string name="dcloud_common_ok">Confirmation</string>
+    <string name="dcloud_common_open">Ouvre.</string>
+    <string name="dcloud_common_refresh">Rafraîchir</string>
+    <string name="dcloud_common_retry">Retry</string>
+    <string name="dcloud_common_search">Recherche</string>
+    <string name="dcloud_common_set_up">Paramètres</string>
+    <string name="dcloud_common_share">Partager</string>
+    <string name="dcloud_common_tips">Conseils</string>
+    <string name="dcloud_short_cut_created">"%s"Icône de bureau créée</string>
+    <string name="dcloud_short_cut_created_removed_manually">, Veuillez supprimer la copie manuellement</string>
+    <string name="dcloud_short_cut_if_create_tips">Voulez - vous installer l application “%s” sur votre Bureau mobile"</string>
     <string msgid="146198913615257606" name="search_menu_title">"Rechercher"</string>
     <string msgid="7988687684186075107" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>
