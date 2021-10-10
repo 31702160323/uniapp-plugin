@@ -1,6 +1,7 @@
 package com.xzh.musicnotification;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -13,6 +14,7 @@ import android.os.Build;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.util.Log;
 
 import androidx.core.app.NotificationManagerCompat;
 
@@ -21,7 +23,9 @@ import com.xzh.musicnotification.service.PlayServiceV2;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.dcloud.feature.uniapp.annotation.UniJSMethod;
 import io.dcloud.feature.uniapp.bridge.UniJSCallback;
@@ -34,6 +38,7 @@ public class MusicNotificationModule extends UniModule implements ServiceConnect
     private WeakReference<PlayServiceV2> mServiceV2;
     private JSONObject mConfig;
     private UniJSCallback mCallback;
+    private boolean mLock = false;
 
     @UniJSMethod(uiThread = false)
     public void init(JSONObject config, UniJSCallback callback) {
@@ -64,6 +69,7 @@ public class MusicNotificationModule extends UniModule implements ServiceConnect
         mServiceV2 = new WeakReference<>(((PlayServiceV2.ServiceBinder) iBinder).getInstance());
         mServiceV2.get().initNotification(mConfig);
         mServiceV2.get().setWXSDKInstance(mWXSDKInstance);
+        mServiceV2.get().lock(mLock);
         JSONObject data = new JSONObject();
         data.put("message", "设置歌曲信息成功");
         data.put("code", 0);
@@ -128,8 +134,24 @@ public class MusicNotificationModule extends UniModule implements ServiceConnect
     }
 
     @UniJSMethod(uiThread = false)
-    public void openLockActivity(JSONObject options) {
-        if (mServiceV2 != null) mServiceV2.get().lock(options.getBoolean("lock"));
+    public boolean openLockActivity(JSONObject options) {
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q || Settings.canDrawOverlays(mUniSDKInstance.getContext())) {
+            mLock = options.getBoolean("lock");
+            if (mServiceV2 != null) mServiceV2.get().lock(mLock);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("type", false);
+        if (requestCode == 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && Settings.canDrawOverlays(mUniSDKInstance.getContext())) {
+            map.put("type", true);
+        }
+        Log.d("XZH-musicNotification", "onActivityResult: " + map.get("type"));
+        mUniSDKInstance.fireGlobalEventCallback("openLockActivity", map);
     }
 
     @UniJSMethod(uiThread = false)
@@ -149,6 +171,13 @@ public class MusicNotificationModule extends UniModule implements ServiceConnect
             data.put("code", -5);
         }
         return data;
+    }
+
+    @UniJSMethod(uiThread = false)
+    public void openOverlaySetting() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            ((Activity) mUniSDKInstance.getContext()).startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + mUniSDKInstance.getContext().getPackageName())), 0);
+        }
     }
 
     public boolean openPermissionSetting(Context context) {
