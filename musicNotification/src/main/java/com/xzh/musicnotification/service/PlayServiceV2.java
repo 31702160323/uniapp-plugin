@@ -1,6 +1,7 @@
 package com.xzh.musicnotification.service;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -101,8 +102,9 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
     }
 
     @Override
-    public void onNotificationInit() {
-        startForeground(NOTIFICATION_ID, MusicNotificationV2.getInstance().getNotification());
+    public void onNotificationInit(Notification notification) {
+        // 设置为前台Service
+        startForeground(NOTIFICATION_ID, notification);
     }
 
     public void initNotification(JSONObject config) {
@@ -204,6 +206,9 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
                 Intent lockScreen = new Intent(context, LockActivityV2.class);
                 lockScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 lockScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                    lockScreen.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                }
                 context.startActivity(lockScreen);
             }
             String extra = intent.getStringExtra(EXTRA);

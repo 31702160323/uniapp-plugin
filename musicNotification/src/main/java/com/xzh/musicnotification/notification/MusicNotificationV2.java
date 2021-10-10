@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -123,7 +122,7 @@ public class MusicNotificationV2 {
             mNotification = builder.build();
         }
         //数据
-        ((NotificationHelperListener) service).onNotificationInit();
+        ((NotificationHelperListener) service).onNotificationInit(mNotification);
     }
 
     /**
@@ -251,14 +250,10 @@ public class MusicNotificationV2 {
         if (mNotificationManager != null) mNotificationManager.cancel(NOTIFICATION_ID);
     }
 
-    public Notification getNotification() {
-        return mNotification;
-    }
-
     /**
      * 与音乐service的回调通信
      */
     public interface NotificationHelperListener {
-        void onNotificationInit();
+        void onNotificationInit(Notification notification);
     }
 }
