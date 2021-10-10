@@ -14,7 +14,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -33,7 +32,6 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.dcloud.feature.uniapp.utils.UniLogUtils;
 import io.dcloud.feature.uniapp.utils.UniUtils;
 
 public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLayout.OnSlidingFinishListener, View.OnClickListener {
@@ -54,21 +52,19 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true);
+        }
         fullScreen(this);
         setContentView(R.layout.activity_lock);
 
         initView();
-
-        Log.d("XZH-musicNotification", "onCreate: 锁屏页");
 
         WindowManager windowManager = this.getWindowManager();
         DisplayMetrics displayMetrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         mWidth = displayMetrics.widthPixels;
         mHeight = displayMetrics.heightPixels;
-
-        UniLogUtils.i("XZH-musicNotification", "mWidth" + mWidth);
-        UniLogUtils.i("XZH-musicNotification", "mHeight" + mHeight);
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
