@@ -62,7 +62,7 @@ public class MusicWidget extends AppWidgetProvider {
             Intent intent = new Intent("io.dcloud.PandoraEntry");
             intent.setClassName(context, "io.dcloud.PandoraEntryActivity");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            views.setOnClickPendingIntent(item.getId(), PendingIntent.getActivity(context, item.getIndex(), intent, PendingIntent.FLAG_UPDATE_CURRENT));
+            views.setOnClickPendingIntent(item.getId(), PendingIntent.getActivity(context, item.getIndex() + 1, intent, PendingIntent.FLAG_UPDATE_CURRENT));
         }
     }
 
