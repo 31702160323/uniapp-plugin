@@ -1,7 +1,7 @@
 # compiler: R8
 # compiler_version: 2.1.86
 # min_api: 26
-# pg_map_id: d79c54c
+# pg_map_id: e8de6ac
 # common_typos_disable
 XI.K0.XI.XI$K0 -> XI.K0.XI.a:
     XI.K0.XI.XI XI -> a
@@ -35323,26 +35323,26 @@ com.xzh.musicnotification.LockActivityV2 -> com.xzh.musicnotification.LockActivi
     39:39:void <init>() -> <init>
     39:39:java.lang.ref.WeakReference access$100(com.xzh.musicnotification.LockActivityV2) -> access$100
     39:39:java.lang.ref.WeakReference access$102(com.xzh.musicnotification.LockActivityV2,java.lang.ref.WeakReference) -> access$102
-    252:259:void favour(boolean) -> favour
-    109:128:void fullScreen(android.app.Activity) -> fullScreen
-    131:151:void initView() -> initView
-    207:207:void onBackPressed() -> onBackPressed
-    155:200:void onClick(android.view.View) -> onClick
-    55:101:void onCreate(android.os.Bundle) -> onCreate
-    211:214:void onDestroy() -> onDestroy
-    221:222:void onSlidingFinish() -> onSlidingFinish
-    244:249:void playOrPause(boolean) -> playOrPause
-    225:241:void updateUI(com.alibaba.fastjson.JSONObject) -> updateUI
+    248:255:void favour(boolean) -> favour
+    105:124:void fullScreen(android.app.Activity) -> fullScreen
+    127:147:void initView() -> initView
+    203:203:void onBackPressed() -> onBackPressed
+    151:196:void onClick(android.view.View) -> onClick
+    55:97:void onCreate(android.os.Bundle) -> onCreate
+    207:210:void onDestroy() -> onDestroy
+    217:218:void onSlidingFinish() -> onSlidingFinish
+    240:245:void playOrPause(boolean) -> playOrPause
+    221:237:void updateUI(com.alibaba.fastjson.JSONObject) -> updateUI
 com.xzh.musicnotification.LockActivityV2$1 -> com.xzh.musicnotification.LockActivityV2$1:
-    82:82:void <init>(com.xzh.musicnotification.LockActivityV2) -> <init>
-    90:90:void lambda$onServiceConnected$0() -> a
+    78:78:void <init>(com.xzh.musicnotification.LockActivityV2) -> <init>
+    86:86:void lambda$onServiceConnected$0() -> a
     void lambda$onServiceConnected$0$LockActivityV2$1() -> b
-    85:92:void onServiceConnected(android.content.ComponentName,android.os.IBinder) -> onServiceConnected
-    97:97:void onServiceDisconnected(android.content.ComponentName) -> onServiceDisconnected
+    81:88:void onServiceConnected(android.content.ComponentName,android.os.IBinder) -> onServiceConnected
+    93:93:void onServiceDisconnected(android.content.ComponentName) -> onServiceDisconnected
 com.xzh.musicnotification.LockActivityV2$TimeChangeReceiver -> com.xzh.musicnotification.LockActivityV2$TimeChangeReceiver:
-    261:261:void <init>() -> <init>
-    261:261:void <init>(com.xzh.musicnotification.LockActivityV2$1) -> <init>
-    265:265:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    257:257:void <init>() -> <init>
+    257:257:void <init>(com.xzh.musicnotification.LockActivityV2$1) -> <init>
+    261:261:void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.xzh.musicnotification.MusicNotificationModule -> com.xzh.musicnotification.MusicNotificationModule:
     33:33:void <init>() -> <init>
     137:139:void cancel() -> cancel
@@ -35429,24 +35429,6 @@ com.xzh.musicnotification.view.SlidingFinishLayout -> com.xzh.musicnotification.
     130:135:void scrollOrigin() -> scrollOrigin
     122:127:void scrollRight() -> scrollRight
     69:70:void setOnSlidingFinishListener(com.xzh.musicnotification.view.SlidingFinishLayout$OnSlidingFinishListener) -> setOnSlidingFinishListener
-com.xzh.widget.BuildConfig -> com.xzh.widget.BuildConfig:
-    7:7:void <clinit>() -> <clinit>
-    6:6:void <init>() -> <init>
-com.xzh.widget.MusicWidget -> com.xzh.widget.MusicWidget:
-    27:27:void <init>() -> <init>
-    70:77:void addOnClickPendingIntents(android.widget.RemoteViews,android.content.Context,com.xzh.widget.MusicWidget$PendingIntentInfo[]) -> addOnClickPendingIntents
-    200:200:void onDisabled(android.content.Context) -> onDisabled
-    193:194:void onEnabled(android.content.Context) -> onEnabled
-    107:174:void onReceive(android.content.Context,android.content.Intent) -> onReceive
-    179:187:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]) -> onUpdate
-    61:67:void openAppIntent(android.widget.RemoteViews,android.content.Context,com.xzh.widget.MusicWidget$PendingIntentInfo[]) -> openAppIntent
-    82:103:void updateAppWidget(android.content.Context,android.appwidget.AppWidgetManager,int) -> updateAppWidget
-com.xzh.widget.MusicWidget$PendingIntentInfo -> com.xzh.widget.MusicWidget$PendingIntentInfo:
-    36:39:void <init>(int,int) -> <init>
-    41:45:void <init>(int,int,java.lang.String) -> <init>
-    56:56:java.lang.String getEXTRA() -> getEXTRA
-    48:48:int getId() -> getId
-    52:52:int getIndex() -> getIndex
 dc.squareup.HttpConstants -> e.a.a:
     java.lang.String defaultUAConstants -> a
     1:1:java.lang.String getDefaultUA() -> a
