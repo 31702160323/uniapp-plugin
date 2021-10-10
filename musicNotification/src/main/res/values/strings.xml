@@ -1,6 +1,4 @@
 <resources>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
     <string name="hint_text"><![CDATA[>>> 滑动解锁]]></string>
     <string name="bg">背景图</string>
     <string name="img">专辑图片</string>
