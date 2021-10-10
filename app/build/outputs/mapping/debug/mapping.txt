@@ -1,7 +1,7 @@
 # compiler: R8
 # compiler_version: 2.1.86
 # min_api: 26
-# pg_map_id: 625e047
+# pg_map_id: d79c54c
 # common_typos_disable
 XI.K0.XI.XI$K0 -> XI.K0.XI.a:
     XI.K0.XI.XI XI -> a
@@ -35363,19 +35363,19 @@ com.xzh.musicnotification.MusicNotificationModule$1 -> com.xzh.musicnotification
 com.xzh.musicnotification.MusicNotificationModule$SongBean -> com.xzh.musicnotification.MusicNotificationModule$SongBean:
     251:257:void <init>() -> <init>
 com.xzh.musicnotification.notification.MusicNotificationV2 -> com.xzh.musicnotification.notification.MusicNotificationV2:
-    29:29:void <init>() -> <init>
-    250:251:void cancel() -> cancel
-    240:247:void favour(boolean) -> favour
-    41:41:com.xzh.musicnotification.notification.MusicNotificationV2 getInstance() -> getInstance
-    254:254:android.app.Notification getNotification() -> getNotification
-    52:126:void initNotification(com.xzh.musicnotification.service.PlayServiceV2,com.alibaba.fastjson.JSONObject) -> initNotification
-    132:164:void initRemoteViews() -> initRemoteViews
-    224:232:void playOrPause(boolean) -> playOrPause
-    172:216:void updateSong(com.alibaba.fastjson.JSONObject) -> updateSong
+    30:30:void <init>() -> <init>
+    251:252:void cancel() -> cancel
+    241:248:void favour(boolean) -> favour
+    42:42:com.xzh.musicnotification.notification.MusicNotificationV2 getInstance() -> getInstance
+    255:255:android.app.Notification getNotification() -> getNotification
+    53:127:void initNotification(com.xzh.musicnotification.service.PlayServiceV2,com.alibaba.fastjson.JSONObject) -> initNotification
+    133:165:void initRemoteViews() -> initRemoteViews
+    225:233:void playOrPause(boolean) -> playOrPause
+    173:217:void updateSong(com.alibaba.fastjson.JSONObject) -> updateSong
 com.xzh.musicnotification.notification.MusicNotificationV2$SingletonHolder -> com.xzh.musicnotification.notification.MusicNotificationV2$SingletonHolder:
-    45:45:void <clinit>() -> <clinit>
-    44:44:void <init>() -> <init>
-    44:44:com.xzh.musicnotification.notification.MusicNotificationV2 access$000() -> access$000
+    46:46:void <clinit>() -> <clinit>
+    45:45:void <init>() -> <init>
+    45:45:com.xzh.musicnotification.notification.MusicNotificationV2 access$000() -> access$000
 com.xzh.musicnotification.service.-$$Lambda$PlayServiceV2$rLhtRT8HsCqPsGAPO7oS91Qteyw -> com.xzh.musicnotification.service.a:
     com.alibaba.fastjson.JSONObject f$1 -> b
     com.xzh.musicnotification.service.PlayServiceV2 f$0 -> a
