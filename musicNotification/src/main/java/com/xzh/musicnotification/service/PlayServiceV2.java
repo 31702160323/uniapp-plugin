@@ -2,6 +2,7 @@ package com.xzh.musicnotification.service;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,7 +13,6 @@ import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -129,12 +129,12 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
 
         Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
         intent.addFlags(FLAGS);
+        intent.setPackage(getPackageName());
         intent.putExtra("type", "update");
-        intent.putExtra("packageName", getPackageName());
         intent.putExtra("songName", options.getString("songName"));
         intent.putExtra("artistsName", options.getString("artistsName"));
         intent.putExtra("picUrl", options.getString("picUrl"));
-        sendBroadcast(intent);
+        sendOrderedBroadcast(intent, null);
 
         MusicNotificationV2.getInstance().updateSong(options);
     }
@@ -146,10 +146,10 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
 
         Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
         intent.addFlags(FLAGS);
+        intent.setPackage(getPackageName());
         intent.putExtra("type", "playOrPause");
-        intent.putExtra("packageName", getPackageName());
         intent.putExtra("playing", playing);
-        sendBroadcast(intent);
+        sendOrderedBroadcast(intent, null);
 
         MusicNotificationV2.getInstance().playOrPause(playing);
     }
@@ -162,10 +162,10 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
 
             Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
             intent.addFlags(FLAGS);
+            intent.setPackage(getPackageName());
             intent.putExtra("type", "favour");
-            intent.putExtra("packageName", getPackageName());
             intent.putExtra("favour", isFavour);
-            sendBroadcast(intent);
+            sendOrderedBroadcast(intent, null);
 
             MusicNotificationV2.getInstance().favour(isFavour);
         }
@@ -202,14 +202,28 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         @Override
         public void onReceive(Context context, Intent intent) {
             if (lockActivity && Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
-                Log.d("XZH-musicNotification", "开启锁屏页");
-                Intent lockScreen = new Intent(context, LockActivityV2.class);
-                lockScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                lockScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-                    lockScreen.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                try {
+                    Intent lockScreen = new Intent(context, LockActivityV2.class);
+                    lockScreen.setPackage(serviceV2.getPackageName());
+                    lockScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                            | Intent.FLAG_ACTIVITY_SINGLE_TOP
+                            | Intent.FLAG_FROM_BACKGROUND
+                            | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+                            | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                            | Intent.FLAG_ACTIVITY_NO_ANIMATION
+                            | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, lockScreen, 0);
+                    pendingIntent.send();
+                } catch (PendingIntent.CanceledException e) {
+                    e.printStackTrace();
+                    Intent lockScreen = new Intent(context, LockActivityV2.class);
+                    lockScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    lockScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                        lockScreen.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                    }
+                    context.startActivity(lockScreen);
                 }
-                context.startActivity(lockScreen);
             }
             String extra = intent.getStringExtra(EXTRA);
             if (extra == null) return;
