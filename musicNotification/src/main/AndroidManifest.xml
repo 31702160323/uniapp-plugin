@@ -11,12 +11,13 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application>
+<!--        android:noHistory="true"-->
         <activity
             android:name=".LockActivityV2"
             android:exported="false"
+            android:showWhenLocked="true"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
-            android:noHistory="true"
             android:screenOrientation="portrait"
             android:taskAffinity="com.ztk.lock"
             android:theme="@style/LockScreenTheme" />

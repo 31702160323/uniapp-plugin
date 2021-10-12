@@ -224,15 +224,14 @@
             android:name="com.taobao.weex.WXGlobalEventReceiver"
             android:enabled="true"
             android:exported="false" >
-        </receiver>
-
+        </receiver> <!-- android:noHistory="true" -->
         <activity
             android:name="com.xzh.musicnotification.LockActivityV2"
             android:excludeFromRecents="true"
             android:exported="false"
             android:launchMode="singleInstance"
-            android:noHistory="true"
             android:screenOrientation="portrait"
+            android:showWhenLocked="true"
             android:taskAffinity="com.ztk.lock"
             android:theme="@style/LockScreenTheme" />
 
