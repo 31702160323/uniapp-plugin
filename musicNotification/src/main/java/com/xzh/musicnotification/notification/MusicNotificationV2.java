@@ -100,23 +100,6 @@ public class MusicNotificationV2 {
                 if (bitmap != null) {
                     builder.setSmallIcon(Icon.createWithBitmap(bitmap));
                 }
-
-//                Glide.with(service)
-//                        .asBitmap()
-//                        .sizeMultiplier(0.8f)
-//                        .override(40, 40)
-//                        .load(config.getString("icon"))
-//                        .into(new CustomTarget<Bitmap>() {
-//                            @Override
-//                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-//                                builder.setSmallIcon(Icon.createWithBitmap(resource));
-//                            }
-//
-//                            @Override
-//                            public void onLoadCleared(@Nullable Drawable placeholder) {
-//
-//                            }
-//                        });
             }
 
             mNotification = builder.build();

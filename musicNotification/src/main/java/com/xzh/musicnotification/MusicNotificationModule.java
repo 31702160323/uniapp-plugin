@@ -34,11 +34,10 @@ import io.dcloud.feature.uniapp.utils.UniLogUtils;
 
 import static android.content.Context.BIND_AUTO_CREATE;
 
-public class MusicNotificationModule extends UniModule implements ServiceConnection {
-    private WeakReference<PlayServiceV2> mServiceV2;
-    private JSONObject mConfig;
-    private UniJSCallback mCallback;
+public class MusicNotificationModule extends UniModule {
     private boolean mLock = false;
+    private WeakReference<PlayServiceV2> mServiceV2;
+    private WeakReference<ServiceConnection> connection;
 
     @UniJSMethod(uiThread = false)
     public void init(JSONObject config, UniJSCallback callback) {
@@ -57,29 +56,28 @@ public class MusicNotificationModule extends UniModule implements ServiceConnect
             return;
         }
 
-        this.mConfig = config;
-        this.mCallback = callback;
+        connection = new WeakReference<>(new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                mServiceV2 = new WeakReference<>(((PlayServiceV2.ServiceBinder) iBinder).getInstance());
+                mServiceV2.get().initNotification(config);
+                mServiceV2.get().setWXSDKInstance(mWXSDKInstance);
+                mServiceV2.get().lock(mLock);
+                JSONObject data = new JSONObject();
+                data.put("message", "设置歌曲信息成功");
+                data.put("code", 0);
+                UniLogUtils.i("XZH-musicNotification", "初始化成功");
+                callback.invokeAndKeepAlive(data);
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName componentName) {
+
+            }
+        });
 
         Context context = mWXSDKInstance.getContext().getApplicationContext();
-        context.bindService(PlayServiceV2.startMusicService(context), this, BIND_AUTO_CREATE);
-    }
-
-    @Override
-    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-        mServiceV2 = new WeakReference<>(((PlayServiceV2.ServiceBinder) iBinder).getInstance());
-        mServiceV2.get().initNotification(mConfig);
-        mServiceV2.get().setWXSDKInstance(mWXSDKInstance);
-        mServiceV2.get().lock(mLock);
-        JSONObject data = new JSONObject();
-        data.put("message", "设置歌曲信息成功");
-        data.put("code", 0);
-        UniLogUtils.i("XZH-musicNotification", "初始化成功");
-        mCallback.invokeAndKeepAlive(data);
-    }
-
-    @Override
-    public void onServiceDisconnected(ComponentName componentName) {
-
+        context.bindService(PlayServiceV2.startMusicService(context), connection.get(), BIND_AUTO_CREATE);
     }
 
     @UniJSMethod(uiThread = false)
@@ -156,7 +154,7 @@ public class MusicNotificationModule extends UniModule implements ServiceConnect
 
     @UniJSMethod(uiThread = false)
     public void cancel() {
-        mWXSDKInstance.getContext().getApplicationContext().unbindService(this);
+        mWXSDKInstance.getContext().getApplicationContext().unbindService(connection.get());
         PlayServiceV2.stopMusicService(mWXSDKInstance.getContext().getApplicationContext());
     }
 

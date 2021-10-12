@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -104,33 +103,13 @@ public class MusicWidget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, final Intent intent) {
-        super.onReceive(context, intent);
-        if (intent == null ||
-                !"com.xzh.widget.MusicWidget".equals(intent.getAction()) ||
-                !context.getPackageName().equals(intent.getStringExtra("packageName"))
-        ) {
-            return;
-        }
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.music_widget);
+        if ("com.xzh.widget.MusicWidget".equals(intent.getAction()) && context.getPackageName().equals(intent.getPackage())) {
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.music_widget);
 
-        //打开应用
-        this.openAppIntent(views, context, new PendingIntentInfo(R.id.image_view, 0));
-        this.addOnClickPendingIntents(views, context,
-                //点击播放按钮要发送的广播
-                new PendingIntentInfo(R.id.play_view, 1, "play_pause"),
-                //点击上一首按钮要发送的广播
-                new PendingIntentInfo(R.id.previous_view, 2, "play_previous"),
-                //点击下一首按钮要发送的广播
-                new PendingIntentInfo(R.id.next_view, 3, "play_next"),
-                //点击收藏按钮要发送的广播
-                new PendingIntentInfo(R.id.favourite_view, 4, "play_favourite")
-        );
-
-        switch (Objects.requireNonNull(intent.getStringExtra("type"))) {
-            case "update":
-                Log.d("XZH-musicNotification", "onReceive: " + intent.getStringExtra("songName"));
-                views.setTextViewText(R.id.title_view, intent.getStringExtra("songName"));
-                views.setTextViewText(R.id.tip_view, intent.getStringExtra("artistsName"));
+            switch (Objects.requireNonNull(intent.getStringExtra("type"))) {
+                case "update":
+                    views.setTextViewText(R.id.title_view, intent.getStringExtra("songName"));
+                    views.setTextViewText(R.id.tip_view, intent.getStringExtra("artistsName"));
 
                 AppWidgetTarget appWidgetTarget = new AppWidgetTarget(context, R.id.image_view, views, new ComponentName(context, MusicWidget.class));
 
@@ -141,36 +120,38 @@ public class MusicWidget extends AppWidgetProvider {
                         .override(WXViewUtils.dip2px(70), WXViewUtils.dip2px(70))
                         .format(DecodeFormat.PREFER_RGB_565)
                         .into(appWidgetTarget);
-                break;
-            case "playOrPause":
-                if (intent.getBooleanExtra("playing", false)) {
-                    views.setImageViewResource(R.id.play_view, R.mipmap.note_btn_pause_white);
-                } else {
-                    views.setImageViewResource(R.id.play_view, R.mipmap.note_btn_play_white);
-                }
-                break;
-            case "favour":
-                if (intent.getBooleanExtra("favour", false)) {
-                    views.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_loved);
-                } else {
-                    views.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_love_white);
-                }
-                break;
-            case "bg":
-                if (intent.getStringExtra("bg") != null) {
-                    views.setInt(R.id.bg_view, "setBackgroundColor", UniResourceUtils.getColor(intent.getStringExtra("bg")));
-                }
-                if (intent.getStringExtra("title") != null) {
-                    views.setInt(R.id.title_view, "setTextColor", UniResourceUtils.getColor(intent.getStringExtra("title")));
-                }
-                if (intent.getStringExtra("tip") != null) {
-                    views.setInt(R.id.tip_view, "setTextColor", UniResourceUtils.getColor(intent.getStringExtra("tip")));
-                }
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + Objects.requireNonNull(intent.getStringExtra("type")));
+                    break;
+                case "playOrPause":
+                    if (intent.getBooleanExtra("playing", false)) {
+                        views.setImageViewResource(R.id.play_view, R.mipmap.note_btn_pause_white);
+                    } else {
+                        views.setImageViewResource(R.id.play_view, R.mipmap.note_btn_play_white);
+                    }
+                    break;
+                case "favour":
+                    if (intent.getBooleanExtra("favour", false)) {
+                        views.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_loved);
+                    } else {
+                        views.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_love_white);
+                    }
+                    break;
+                case "bg":
+                    if (intent.getStringExtra("bg") != null) {
+                        views.setInt(R.id.bg_view, "setBackgroundColor", UniResourceUtils.getColor(intent.getStringExtra("bg")));
+                    }
+                    if (intent.getStringExtra("title") != null) {
+                        views.setInt(R.id.title_view, "setTextColor", UniResourceUtils.getColor(intent.getStringExtra("title")));
+                    }
+                    if (intent.getStringExtra("tip") != null) {
+                        views.setInt(R.id.tip_view, "setTextColor", UniResourceUtils.getColor(intent.getStringExtra("tip")));
+                    }
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + Objects.requireNonNull(intent.getStringExtra("type")));
+            }
+            AppWidgetManager.getInstance(context).updateAppWidget(new ComponentName(context, MusicWidget.class), views);
         }
-        AppWidgetManager.getInstance(context).updateAppWidget(new ComponentName(context, MusicWidget.class), views);
+        super.onReceive(context, intent);
     }
 
     @Override
