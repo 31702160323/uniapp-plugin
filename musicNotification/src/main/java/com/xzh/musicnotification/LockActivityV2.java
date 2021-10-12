@@ -199,10 +199,10 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onRestart() {
         unbindService(connection);
         unregisterReceiver(mReceiver);
-        super.onDestroy();
+        super.onRestart();
     }
 
     /**
