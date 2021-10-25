@@ -27,15 +27,15 @@ import com.xzh.musicnotification.utils.PendingIntentInfo;
 import java.lang.ref.WeakReference;
 
 public class MusicNotificationV2 {
+    public static final int NOTIFICATION_ID = 0x111;
     public static final String CHANNEL_ID = "music_id_audio";
     public static final String CHANNEL_NAME = "music_name_audio";
-    public static final int NOTIFICATION_ID = 0x111;
 
-    private NotificationManager mNotificationManager;
-    private Notification mNotification;
     private RemoteViews mRemoteViews; // 大布局
+    private Notification mNotification;
     private RemoteViews mSmallRemoteViews; //小布局
     private WeakReference<Context> mContext;
+    private NotificationManager mNotificationManager;
 
     public static MusicNotificationV2 getInstance() {
         return SingletonHolder.instance;

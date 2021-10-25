@@ -36,8 +36,8 @@ import static android.content.Context.BIND_AUTO_CREATE;
 
 public class MusicNotificationModule extends UniModule {
     private boolean mLock = false;
-    private WeakReference<PlayServiceV2> mServiceV2;
     private WeakReference<ServiceConnection> connection;
+    private WeakReference<PlayServiceV2.ServiceBinder> mBinder;
 
     @UniJSMethod(uiThread = false)
     public void init(JSONObject config, UniJSCallback callback) {
@@ -59,10 +59,10 @@ public class MusicNotificationModule extends UniModule {
         connection = new WeakReference<>(new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                mServiceV2 = new WeakReference<>(((PlayServiceV2.ServiceBinder) iBinder).getInstance());
-                mServiceV2.get().initNotification(config);
-                mServiceV2.get().setWXSDKInstance(mWXSDKInstance);
-                mServiceV2.get().lock(mLock);
+                mBinder = new WeakReference<>((PlayServiceV2.ServiceBinder) iBinder);
+                mBinder.get().initNotification(config);
+                mBinder.get().setWXSDKInstance(mWXSDKInstance);
+                mBinder.get().lock(mLock);
                 JSONObject data = new JSONObject();
                 data.put("message", "设置歌曲信息成功");
                 data.put("code", 0);
@@ -96,8 +96,8 @@ public class MusicNotificationModule extends UniModule {
             data.put("code", -2);
             return data;
         }
-        if (mServiceV2 != null) {
-            mServiceV2.get().update(options);
+        if (mBinder != null) {
+            mBinder.get().update(options);
             data.put("message", "设置歌曲信息成功");
             data.put("code", 0);
         } else {
@@ -109,13 +109,13 @@ public class MusicNotificationModule extends UniModule {
 
     @UniJSMethod(uiThread = false)
     public void playOrPause(JSONObject options) {
-        if (mServiceV2 != null) mServiceV2.get().playOrPause(options.getBoolean("playing"));
+        if (mBinder != null) mBinder.get().playOrPause(options.getBoolean("playing"));
     }
 
     @UniJSMethod(uiThread = false)
     public void favour(JSONObject options) {
         UniLogUtils.i("XZH-musicNotification", "favour");
-        if (mServiceV2 != null) mServiceV2.get().favour(options.getBoolean("favour"));
+        if (mBinder != null) mBinder.get().favour(options.getBoolean("favour"));
     }
 
     @SuppressLint("WrongConstant")
@@ -135,7 +135,7 @@ public class MusicNotificationModule extends UniModule {
     public boolean openLockActivity(JSONObject options) {
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q || Settings.canDrawOverlays(mUniSDKInstance.getContext())) {
             mLock = options.getBoolean("lock");
-            if (mServiceV2 != null) mServiceV2.get().lock(mLock);
+            if (mBinder != null) mBinder.get().lock(mLock);
             return true;
         }
         return false;
@@ -222,52 +222,49 @@ public class MusicNotificationModule extends UniModule {
     public void initSongs(UniJSCallback callback) {
         UniLogUtils.i("XZH-musicNotification", "获取歌曲");
         try {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    List<SongBean> list = new ArrayList<>();
-                    Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-                    ContentResolver resolver = mWXSDKInstance.getContext().getApplicationContext().getContentResolver();
-                    Cursor cursor = resolver.query(uri, null, null, null, MediaStore.Audio.AudioColumns.IS_MUSIC);
-                    if (cursor != null) {
-                        while (cursor.moveToNext()) {
-                            if (cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE)) > 1000 * 800) {
-                                SongBean songBean = new SongBean();
-                                songBean.id = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));             //ID
-                                songBean.musicName = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));        //歌名
-                                songBean.musicArtist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));     //歌手
-                                songBean.musicAlbum = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));//专辑
-                                songBean.musicAlbumID = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));     //专辑ID
-                                songBean.musicAlbumURl = "";                                                                       //专辑图片路径
-                                songBean.musicPath = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));         //路径
-                                songBean.musicYear = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.YEAR));  //发布年份
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                                    songBean.musicDuration = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION)); //时长
-                                }
-                                songBean.size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE));         //文件大小
-
-                                //获取本地音乐专辑图片
-                                Cursor cursorTwo = resolver.query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, new String[]{MediaStore.Audio.Albums._ID, MediaStore.Audio.Albums.ALBUM_ART},
-                                        MediaStore.Audio.Albums._ID + "=?", new String[]{String.valueOf(cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)))},
-                                        null);
-
-                                if (cursorTwo == null) throw new AssertionError();
-                                if (cursorTwo.moveToFirst()) {
-                                    String path = cursorTwo.getString(cursorTwo.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART));
-                                    if (path != null) songBean.musicAlbumURl = path;
-                                }
-
-                                list.add(songBean);
-
-                                cursorTwo.close();
+            new Thread(() -> {
+                List<SongBean> list = new ArrayList<>();
+                Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                ContentResolver resolver = mWXSDKInstance.getContext().getApplicationContext().getContentResolver();
+                Cursor cursor = resolver.query(uri, null, null, null, MediaStore.Audio.AudioColumns.IS_MUSIC);
+                if (cursor != null) {
+                    while (cursor.moveToNext()) {
+                        if (cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE)) > 1000 * 800) {
+                            SongBean songBean = new SongBean();
+                            songBean.id = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));             //ID
+                            songBean.musicName = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));        //歌名
+                            songBean.musicArtist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));     //歌手
+                            songBean.musicAlbum = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));//专辑
+                            songBean.musicAlbumID = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));     //专辑ID
+                            songBean.musicAlbumURl = "";                                                                       //专辑图片路径
+                            songBean.musicPath = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));         //路径
+                            songBean.musicYear = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.YEAR));  //发布年份
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                                songBean.musicDuration = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION)); //时长
                             }
+                            songBean.size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE));         //文件大小
+
+                            //获取本地音乐专辑图片
+                            Cursor cursorTwo = resolver.query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, new String[]{MediaStore.Audio.Albums._ID, MediaStore.Audio.Albums.ALBUM_ART},
+                                    MediaStore.Audio.Albums._ID + "=?", new String[]{String.valueOf(cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)))},
+                                    null);
+
+                            if (cursorTwo == null) throw new AssertionError();
+                            if (cursorTwo.moveToFirst()) {
+                                String path = cursorTwo.getString(cursorTwo.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART));
+                                if (path != null) songBean.musicAlbumURl = path;
+                            }
+
+                            list.add(songBean);
+
+                            cursorTwo.close();
                         }
-                        // 释放资源
-                        cursor.close();
                     }
-                    callback.invokeAndKeepAlive(list);
-                    UniLogUtils.i("XZH-musicNotification", "获取歌曲信息成功");
+                    // 释放资源
+                    cursor.close();
                 }
+                callback.invokeAndKeepAlive(list);
+                UniLogUtils.i("XZH-musicNotification", "获取歌曲信息成功");
             }).start();
         } catch (Exception e) {
             callback.invokeAndKeepAlive((new JSONObject()).put("error", e.getMessage()));
