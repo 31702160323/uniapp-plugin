@@ -1,11 +1,8 @@
 package com.xzh.musicnotification;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -36,17 +33,16 @@ import io.dcloud.feature.uniapp.utils.UniUtils;
 
 public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLayout.OnSlidingFinishListener, View.OnClickListener {
 
-    private ImageView lockDate;
-    private TextView tvAudioName;
-    private TextView tvAudio;
-    private ImageView favouriteView;
-    private ImageView playView;
-    private WeakReference<PlayServiceV2> mServiceV2;
-    private ServiceConnection connection;
-    private TimeChangeReceiver mReceiver;
     private int mWidth;
     private int mHeight;
     private boolean xzhFavour;
+    private TextView tvAudio;
+    private TextView tvAudioName;
+    private ImageView lockDate;
+    private ImageView playView;
+    private ImageView favouriteView;
+    private ServiceConnection connection;
+    private WeakReference<PlayServiceV2.ServiceBinder> mBinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,20 +62,15 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         mWidth = displayMetrics.widthPixels;
         mHeight = displayMetrics.heightPixels;
 
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(Intent.ACTION_TIME_TICK);
-        mReceiver = new TimeChangeReceiver();
-        registerReceiver(mReceiver, intentFilter);
-
         connection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                mServiceV2 = new WeakReference<>(((PlayServiceV2.ServiceBinder) iBinder).getInstance());
-                mServiceV2.get().setActivity(LockActivityV2.this);
+                mBinder = new WeakReference<>((PlayServiceV2.ServiceBinder) iBinder);
+                mBinder.get().setActivity(LockActivityV2.this);
                 if (UniUtils.isUiThread()) {
-                    updateUI(mServiceV2.get().getSongData());
+                    updateUI(mBinder.get().getSongData());
                 } else {
-                    runOnUiThread(() -> updateUI(mServiceV2.get().getSongData()));
+                    runOnUiThread(() -> updateUI(mBinder.get().getSongData()));
                 }
             }
 
@@ -172,14 +163,12 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
                 eventName = "musicNotificationNext";
                 break;
             case PlayServiceV2.NotificationReceiver.EXTRA_FAV:
-                mServiceV2.get().Favour = !mServiceV2.get().Favour;
-                mServiceV2.get().favour(mServiceV2.get().Favour);
-                data.put("favourite", mServiceV2.get().Favour);
+                mBinder.get().favour();
+                data.put("favourite", mBinder.get().getFavour());
                 eventName = "musicNotificationFavourite";
                 break;
             case PlayServiceV2.NotificationReceiver.EXTRA_PLAY:
-                mServiceV2.get().Playing = !mServiceV2.get().Playing;
-                mServiceV2.get().playOrPause(mServiceV2.get().Playing);
+                mBinder.get().playOrPause();
                 eventName = "musicNotificationPause";
                 break;
             default:
@@ -188,7 +177,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
                 break;
         }
 
-        mServiceV2.get().mWXSDKInstance.get().fireGlobalEventCallback(eventName, data);
+        mBinder.get().fireGlobalEventCallback(eventName, data);
     }
 
     /**
@@ -201,7 +190,6 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     @Override
     protected void onDestroy() {
         unbindService(connection);
-        unregisterReceiver(mReceiver);
         super.onDestroy();
     }
 
@@ -220,8 +208,8 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         if (options.getString("artistsName") != null) {
             tvAudio.setText(options.getString("artistsName"));
         }
-        favour(mServiceV2.get().Favour);
-        playOrPause(mServiceV2.get().Playing);
+        favour(mBinder.get().getFavour());
+        playOrPause(mBinder.get().getPlaying());
 
         Glide.with(this.getApplicationContext())
                 .asBitmap()
@@ -247,13 +235,6 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
             } else {
                 favouriteView.setImageResource(R.mipmap.note_btn_love_white);
             }
-        }
-    }
-
-    private static class TimeChangeReceiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
         }
     }
 }
