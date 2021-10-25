@@ -31,17 +31,19 @@ import io.dcloud.feature.uniapp.utils.UniUtils;
 import static com.xzh.musicnotification.notification.MusicNotificationV2.NOTIFICATION_ID;
 
 public class PlayServiceV2 extends Service implements MusicNotificationV2.NotificationHelperListener {
-    public static final int FLAGS = 0x01000000;
-    public final String COM_XZH_WIDGET_MUSIC_WIDGET = "com.xzh.widget.MusicWidget";
     private static PlayServiceV2 serviceV2;
-    private JSONObject songData;
-    private WeakReference<LockActivityV2> mActivityV2;
-    private NotificationReceiver mReceiver;
+    private static final int FLAGS = 0x01000000;
+    private static final String COM_XZH_WIDGET_MUSIC_WIDGET = "com.xzh.widget.MusicWidget";
 
-    public boolean Favour = false;
-    public boolean Playing = false;
-    public WeakReference<WXSDKInstance> mWXSDKInstance;
     private boolean xzhFavour;
+    private boolean Favour = false;
+    private boolean Playing = false;
+
+    private JSONObject songData;
+    private ServiceBinder mBinder;
+    private NotificationReceiver mReceiver;
+    private WeakReference<LockActivityV2> mActivityV2;
+    private WeakReference<WXSDKInstance> mWXSDKInstance;
 
     public static Intent startMusicService(Context context) {
         Intent intent = new Intent(context, PlayServiceV2.class);
@@ -58,8 +60,8 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         context.stopService(intent);
     }
 
-    @SuppressLint("WrongConstant")
     @Override
+    @SuppressLint("WrongConstant")
     public void onCreate() {
         super.onCreate();
         UniLogUtils.i("XZH-musicNotification","serviceV2 创建成功");
@@ -87,15 +89,14 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return new ServiceBinder();
+        mBinder = new ServiceBinder();
+        return mBinder;
     }
 
     @SuppressLint("WrongConstant")
     @Override
     public void onDestroy() {
         super.onDestroy();
-        serviceV2 = null;
-
         unregisterReceiver(mReceiver);
         MusicNotificationV2.getInstance().cancel();
         UniLogUtils.i("XZH-musicNotification","serviceV2 消毁成功");
@@ -105,86 +106,6 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
     public void onNotificationInit(Notification notification) {
         // 设置为前台Service
         startForeground(NOTIFICATION_ID, notification);
-    }
-
-    public void initNotification(JSONObject config) {
-        MusicNotificationV2.getInstance().initNotification(this, config);
-        UniLogUtils.i("XZH-musicNotification","创建通知栏成功");
-        favour(Favour);
-    }
-
-    @SuppressLint("WrongConstant")
-    public void update(JSONObject options){
-        songData = options;
-        Favour = options.getBoolean("favour");
-        if (mActivityV2 != null && mActivityV2.get() != null) {
-            if (UniUtils.isUiThread()) {
-                mActivityV2.get().updateUI(options);
-            } else {
-                mActivityV2.get().runOnUiThread(() -> mActivityV2.get().updateUI(options));
-            }
-        }
-
-        this.favour(Favour);
-
-        Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
-        intent.addFlags(FLAGS);
-        intent.setPackage(getPackageName());
-        intent.putExtra("type", "update");
-        intent.putExtra("songName", options.getString("songName"));
-        intent.putExtra("artistsName", options.getString("artistsName"));
-        intent.putExtra("picUrl", options.getString("picUrl"));
-        sendOrderedBroadcast(intent, null);
-
-        MusicNotificationV2.getInstance().updateSong(options);
-    }
-
-    @SuppressLint("WrongConstant")
-    public void playOrPause(boolean playing){
-        Playing = playing;
-        if (mActivityV2 != null && mActivityV2.get() != null) mActivityV2.get().playOrPause(playing);
-
-        Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
-        intent.addFlags(FLAGS);
-        intent.setPackage(getPackageName());
-        intent.putExtra("type", "playOrPause");
-        intent.putExtra("playing", playing);
-        sendOrderedBroadcast(intent, null);
-
-        MusicNotificationV2.getInstance().playOrPause(playing);
-    }
-
-    @SuppressLint("WrongConstant")
-    public void favour(boolean isFavour){
-        if (xzhFavour) {
-            Favour = isFavour;
-            if (mActivityV2 != null && mActivityV2.get() != null) mActivityV2.get().favour(isFavour);
-
-            Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
-            intent.addFlags(FLAGS);
-            intent.setPackage(getPackageName());
-            intent.putExtra("type", "favour");
-            intent.putExtra("favour", isFavour);
-            sendOrderedBroadcast(intent, null);
-
-            MusicNotificationV2.getInstance().favour(isFavour);
-        }
-    }
-
-    public void lock(boolean locking) {
-        mReceiver.lockActivity = locking;
-    }
-
-    public void setWXSDKInstance(WXSDKInstance WXSDKInstance){
-        this.mWXSDKInstance = new WeakReference<>(WXSDKInstance);
-    }
-
-    public JSONObject getSongData() {
-        return songData;
-    }
-
-    public void setActivity(LockActivityV2 activityV2){
-        mActivityV2 = new WeakReference<>(activityV2);
     }
 
     /**
@@ -233,8 +154,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
             data.put("code", 0);
             switch (extra) {
                 case EXTRA_PLAY:
-                    serviceV2.Playing = !serviceV2.Playing;
-                    serviceV2.playOrPause(serviceV2.Playing);
+                    serviceV2.mBinder.playOrPause();
                     UniLogUtils.i("XZH-musicNotification","点击播放按钮");
                     eventName = "musicNotificationPause";
                     break;
@@ -247,8 +167,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
                     eventName = "musicNotificationNext";
                     break;
                 case EXTRA_FAV:
-                    serviceV2.Favour = !serviceV2.Favour;
-                    serviceV2.favour(serviceV2.Favour);
+                    serviceV2.mBinder.favour();
                     UniLogUtils.i("XZH-musicNotification","点击搜藏按钮");
                     eventName = "musicNotificationFavourite";
                     break;
@@ -257,13 +176,111 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
                     data.put("code", -7);
                     break;
             }
-            serviceV2.mWXSDKInstance.get().fireGlobalEventCallback(eventName, data);
+            serviceV2.mBinder.fireGlobalEventCallback(eventName, data);
         }
     }
 
     public class ServiceBinder extends Binder {
-        public PlayServiceV2 getInstance(){
-            return PlayServiceV2.this;
+        public void setActivity(LockActivityV2 activityV2){
+            mActivityV2 = new WeakReference<>(activityV2);
+        }
+
+        public void setWXSDKInstance(WXSDKInstance WXSDKInstance){
+            mWXSDKInstance = new WeakReference<>(WXSDKInstance);
+        }
+
+        public void initNotification(JSONObject config) {
+            MusicNotificationV2.getInstance().initNotification(serviceV2, config);
+            UniLogUtils.i("XZH-musicNotification","创建通知栏成功");
+            favour(Favour);
+        }
+
+        public void lock(boolean locking) {
+            mReceiver.lockActivity = locking;
+        }
+
+        public JSONObject getSongData() {
+            return songData;
+        }
+
+        public void playOrPause(){
+            serviceV2.Playing = !serviceV2.Playing;
+            playOrPause(serviceV2.Playing);
+        }
+
+        @SuppressLint("WrongConstant")
+        public void playOrPause(boolean playing){
+            Playing = playing;
+            if (mActivityV2 != null && mActivityV2.get() != null) mActivityV2.get().playOrPause(playing);
+
+            Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
+            intent.addFlags(FLAGS);
+            intent.setPackage(getPackageName());
+            intent.putExtra("type", "playOrPause");
+            intent.putExtra("playing", playing);
+            sendOrderedBroadcast(intent, null);
+
+            MusicNotificationV2.getInstance().playOrPause(playing);
+        }
+
+        public void favour(){
+            serviceV2.Favour = !serviceV2.Favour;
+            favour(serviceV2.Favour);
+        }
+
+        @SuppressLint("WrongConstant")
+        public void favour(boolean isFavour){
+            if (xzhFavour) {
+                Favour = isFavour;
+                if (mActivityV2 != null && mActivityV2.get() != null) mActivityV2.get().favour(isFavour);
+
+                Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
+                intent.addFlags(FLAGS);
+                intent.setPackage(getPackageName());
+                intent.putExtra("type", "favour");
+                intent.putExtra("favour", isFavour);
+                sendOrderedBroadcast(intent, null);
+
+                MusicNotificationV2.getInstance().favour(isFavour);
+            }
+        }
+
+        public boolean getFavour(){
+            return serviceV2.Favour;
+        }
+
+        public boolean getPlaying(){
+            return serviceV2.Playing;
+        }
+
+        @SuppressLint("WrongConstant")
+        public void update(JSONObject options){
+            songData = options;
+            Favour = options.getBoolean("favour");
+            if (mActivityV2 != null && mActivityV2.get() != null) {
+                if (UniUtils.isUiThread()) {
+                    mActivityV2.get().updateUI(options);
+                } else {
+                    mActivityV2.get().runOnUiThread(() -> mActivityV2.get().updateUI(options));
+                }
+            }
+
+            this.favour(Favour);
+
+            Intent intent = new Intent(COM_XZH_WIDGET_MUSIC_WIDGET);
+            intent.addFlags(FLAGS);
+            intent.setPackage(getPackageName());
+            intent.putExtra("type", "update");
+            intent.putExtra("songName", options.getString("songName"));
+            intent.putExtra("artistsName", options.getString("artistsName"));
+            intent.putExtra("picUrl", options.getString("picUrl"));
+            sendOrderedBroadcast(intent, null);
+
+            MusicNotificationV2.getInstance().updateSong(options);
+        }
+
+        public void fireGlobalEventCallback(String eventName, Map<String, Object> params){
+            mWXSDKInstance.get().fireGlobalEventCallback(eventName, params);
         }
     }
 }
