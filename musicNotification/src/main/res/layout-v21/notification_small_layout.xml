@@ -58,6 +58,9 @@
         android:adjustViewBounds="true"
         android:paddingVertical="22dp"
         android:paddingHorizontal="10dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/play" />
 
     <ImageView
@@ -68,5 +71,8 @@
         android:adjustViewBounds="true"
         android:paddingVertical="22dp"
         android:paddingHorizontal="10dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/next" />
 </LinearLayout>
