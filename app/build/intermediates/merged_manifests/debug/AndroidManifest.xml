@@ -65,7 +65,6 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:usesCleartextTraffic="true" >
 
         <!-- 应用入口 -->
@@ -236,17 +235,6 @@
             android:theme="@style/LockScreenTheme" />
 
         <service android:name="com.xzh.musicnotification.service.PlayServiceV2" />
-
-        <receiver android:name="com.xzh.widget.MusicWidget" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="com.xzh.widget.MusicWidget" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/music_widget_info" />
-        </receiver>
     </application>
 
 </manifest>
