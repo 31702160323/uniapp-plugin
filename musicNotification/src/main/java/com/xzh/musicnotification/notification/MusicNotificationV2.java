@@ -45,12 +45,13 @@ public class MusicNotificationV2 {
         private static final MusicNotificationV2 instance = new MusicNotificationV2();
     }
 
-    /*
+    /**
      * 创建Notification,
+     * @param service
+     * @param config
      */
     public void initNotification(PlayServiceV2 service, JSONObject config) {
         mContext = new WeakReference<>(service);
-        if (mNotification != null) return;
 
         mNotificationManager = (NotificationManager) mContext.get().getSystemService(Context.NOTIFICATION_SERVICE);
         initRemoteViews();
@@ -105,7 +106,7 @@ public class MusicNotificationV2 {
             mNotification = builder.build();
         }
         //数据
-        ((NotificationHelperListener) service).onNotificationInit(mNotification);
+        service.onNotificationInit(mNotification);
     }
 
     /**

@@ -5,7 +5,6 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +22,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
 import com.xzh.musicnotification.service.PlayServiceV2;
+import com.xzh.musicnotification.utils.Utils;
 import com.xzh.musicnotification.view.SlidingFinishLayout;
 
 import java.lang.ref.WeakReference;
@@ -119,13 +119,13 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         tvAudio = findViewById(R.id.tv_audio);
 
         favouriteView = findViewById(R.id.favourite_view);
-        try {
-            ApplicationInfo info = this.getPackageManager().getApplicationInfo(this.getPackageName(), PackageManager.GET_META_DATA);
+
+        ApplicationInfo info = Utils.getApplicationInfo(this);
+        if (info != null) {
             xzhFavour = info.metaData.getBoolean("xzh_favour");
             if (xzhFavour) favouriteView.setVisibility(View.VISIBLE);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
         }
+
         playView = findViewById(R.id.play_view);
         favouriteView.setOnClickListener(this);
         playView.setOnClickListener(this);
