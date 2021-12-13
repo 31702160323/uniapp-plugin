@@ -268,7 +268,6 @@
 -keep class com.taobao.weex.WXGlobalEventReceiver { <init>(); }
 -keep class com.xzh.musicnotification.LockActivityV2 { <init>(); }
 -keep class com.xzh.musicnotification.service.PlayServiceV2 { <init>(); }
--keep class com.xzh.widget.MusicWidget { <init>(); }
 -keep class io.dcloud.PandoraEntry { <init>(); }
 -keep class io.dcloud.PandoraEntryActivity { <init>(); }
 -keep class io.dcloud.ProcessMediator { <init>(); }
@@ -579,9 +578,6 @@
 -dontwarn com.facebook.infer.**
 
 # End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\a9d23402cd9b0ed30540f4ba31c570e0\jetified-fbcore-1.13.0\proguard.txt
-# The proguard configuration file for the following section is D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
-
-# End of content from D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
 # The proguard configuration file for the following section is <unknown>
 -ignorewarnings
 # End of content from <unknown>

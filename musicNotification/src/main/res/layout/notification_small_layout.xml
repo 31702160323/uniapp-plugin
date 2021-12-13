@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/image_view"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:minWidth="64dp"
+        android:minHeight="64dp"
         android:scaleType="fitXY"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/bg" />
 
     <LinearLayout
+        android:layout_weight="1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_height="match_parent"
         android:layout_marginStart="10dp"
-        android:layout_toEndOf="@id/image_view"
-        android:layout_toStartOf="@id/btn"
+        android:gravity="center_vertical"
         android:orientation="vertical">
 
         <TextView
@@ -46,29 +50,23 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/btn"
+    <ImageView
+        android:id="@+id/play_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:paddingVertical="22dp"
+        android:paddingHorizontal="10dp"
+        android:contentDescription="@string/play" />
 
-        <ImageView
-            android:id="@+id/play_view"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:contentDescription="@string/play" />
-
-
-        <ImageView
-            android:id="@+id/next_view"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:contentDescription="@string/next" />
-
-    </LinearLayout>
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/next_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:paddingVertical="22dp"
+        android:paddingHorizontal="10dp"
+        android:contentDescription="@string/next" />
+</LinearLayout>

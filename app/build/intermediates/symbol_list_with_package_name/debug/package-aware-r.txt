@@ -632,7 +632,6 @@ dimen tooltip_precise_anchor_threshold
 dimen tooltip_vertical_padding
 dimen tooltip_y_offset_non_touch
 dimen tooltip_y_offset_touch
-dimen widget_margin
 drawable abc_ab_share_pack_mtrl_alpha
 drawable abc_action_bar_item_background_material
 drawable abc_btn_borderless_material
@@ -720,7 +719,6 @@ drawable abc_vector_test
 drawable ad_dcloud_main_ad_tag
 drawable ad_dcloud_main_skip_bg
 drawable ad_dcloud_main_skip_shape
-drawable bg_radius
 drawable dcloud_about_buttons_bg
 drawable dcloud_about_buttons_button_bg
 drawable dcloud_actionsheet_bottom_normal
@@ -883,7 +881,6 @@ id bg_view
 id blocking
 id bottom
 id bottom_content_layout
-id btn
 id btn_back
 id btn_clip
 id btn_custom_privacy_cancel
@@ -1061,7 +1058,6 @@ id right
 id rightLayout
 id right_icon
 id right_side
-id rl
 id rl_notification
 id root
 id rv_images
@@ -1235,7 +1231,6 @@ layout image_layout_gallery_menu_item
 layout image_layout_gallery_pop
 layout image_layout_image
 layout image_text_dialog
-layout music_widget
 layout notification_action
 layout notification_action_tombstone
 layout notification_big_layout
@@ -1320,7 +1315,6 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
-string add_widget
 string app_name
 string bg
 string dcloud_Init_fail_tips
@@ -2011,4 +2005,3 @@ styleable ViewBackgroundHelper android_background backgroundTint backgroundTintM
 styleable ViewStubCompat android_id android_layout android_inflatedId
 xml dcloud_file_provider
 xml dcloud_gg_file_provider
-xml music_widget_info

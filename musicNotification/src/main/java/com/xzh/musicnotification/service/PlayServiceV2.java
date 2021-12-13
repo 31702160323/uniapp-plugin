@@ -9,10 +9,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -20,11 +20,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.taobao.weex.WXSDKInstance;
 import com.xzh.musicnotification.LockActivityV2;
 import com.xzh.musicnotification.notification.MusicNotificationV2;
+import com.xzh.musicnotification.utils.Utils;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.dcloud.feature.uniapp.AbsSDKInstance;
 import io.dcloud.feature.uniapp.utils.UniLogUtils;
 import io.dcloud.feature.uniapp.utils.UniUtils;
 
@@ -43,7 +45,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
     private ServiceBinder mBinder;
     private NotificationReceiver mReceiver;
     private WeakReference<LockActivityV2> mActivityV2;
-    private WeakReference<WXSDKInstance> mWXSDKInstance;
+    private WeakReference<AbsSDKInstance> mUniSDKInstance;
 
     public static Intent startMusicService(Context context) {
         Intent intent = new Intent(context, PlayServiceV2.class);
@@ -67,15 +69,13 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         UniLogUtils.i("XZH-musicNotification","serviceV2 创建成功");
         serviceV2 = this;
 
-        try {
-            ApplicationInfo info = this.getPackageManager().getApplicationInfo(this.getPackageName(), PackageManager.GET_META_DATA);
+        ApplicationInfo info = Utils.getApplicationInfo(this);
+        if (info != null) {
             xzhFavour = info.metaData.getBoolean("xzh_favour");
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
         }
 
         mReceiver = new NotificationReceiver();
-        final IntentFilter filter = new IntentFilter();
+        IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         filter.addAction(NotificationReceiver.ACTION_STATUS_BAR);
         registerReceiver(mReceiver, filter);
@@ -97,14 +97,16 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
     @Override
     public void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(mReceiver);
+        stopForeground(true);
         MusicNotificationV2.getInstance().cancel();
+        unregisterReceiver(mReceiver);
         UniLogUtils.i("XZH-musicNotification","serviceV2 消毁成功");
     }
 
     @Override
     public void onNotificationInit(Notification notification) {
         // 设置为前台Service
+        Log.d("设置为前台Service", "onNotificationInit: " + notification);
         startForeground(NOTIFICATION_ID, notification);
     }
 
@@ -185,8 +187,8 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
             mActivityV2 = new WeakReference<>(activityV2);
         }
 
-        public void setWXSDKInstance(WXSDKInstance WXSDKInstance){
-            mWXSDKInstance = new WeakReference<>(WXSDKInstance);
+        public void setUniSDKInstance(AbsSDKInstance instance){
+            mUniSDKInstance = new WeakReference<>(instance);
         }
 
         public void initNotification(JSONObject config) {
@@ -280,7 +282,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         }
 
         public void fireGlobalEventCallback(String eventName, Map<String, Object> params){
-            mWXSDKInstance.get().fireGlobalEventCallback(eventName, params);
+            mUniSDKInstance.get().fireGlobalEventCallback(eventName, params);
         }
     }
 }
