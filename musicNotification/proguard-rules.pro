@@ -20,3 +20,4 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 -keep public class * extends io.dcloud.feature.uniapp.common.UniModule{*;}
+#-keep public class com.xzh.musicnotification.utils.MusicAsyncQueryHandler$SongBean

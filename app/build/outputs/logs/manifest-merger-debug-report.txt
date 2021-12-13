@@ -51,7 +51,6 @@ MERGED from [com.facebook.fresco:nativeimagetranscoder:1.13.0] D:\xu\.gradle\cac
 MERGED from [com.facebook.fresco:imagepipeline-base:1.13.0] D:\xu\.gradle\caches\transforms-2\files-2.1\c4c7f0795e8c657a466603c49d513070\jetified-imagepipeline-base-1.13.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.fresco:fbcore:1.13.0] D:\xu\.gradle\caches\transforms-2\files-2.1\a9d23402cd9b0ed30540f4ba31c570e0\jetified-fbcore-1.13.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.soloader:soloader:0.6.0] D:\xu\.gradle\caches\transforms-2\files-2.1\6c626cc19970b8b44cee0d91bdaf0132\soloader-0.6.0\AndroidManifest.xml:2:1-13:12
-MERGED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-24:12
 INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-99:12
 INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-99:12
 INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-99:12
@@ -127,8 +126,6 @@ MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] D:\xu\.gradle\caches\tr
 MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] D:\xu\.gradle\caches\transforms-2\files-2.1\30e2b970262300f8ced5dda99fb889ac\jetified-gifdecoder-4.9.0\AndroidManifest.xml:9:5-20
 MERGED from [com.facebook.soloader:soloader:0.6.0] D:\xu\.gradle\caches\transforms-2\files-2.1\6c626cc19970b8b44cee0d91bdaf0132\soloader-0.6.0\AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.soloader:soloader:0.6.0] D:\xu\.gradle\caches\transforms-2\files-2.1\6c626cc19970b8b44cee0d91bdaf0132\soloader-0.6.0\AndroidManifest.xml:11:5-20
-MERGED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-22:19
-MERGED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-22:19
 	android:extractNativeLibs
 		ADDED from [uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\017f3f251b2817869b7edfcbdec11097\jetified-uniapp-v8-release\AndroidManifest.xml:29:18-50
 	android:appComponentFactory
@@ -345,8 +342,6 @@ MERGED from [com.facebook.fresco:fbcore:1.13.0] D:\xu\.gradle\caches\transforms-
 MERGED from [com.facebook.fresco:fbcore:1.13.0] D:\xu\.gradle\caches\transforms-2\files-2.1\a9d23402cd9b0ed30540f4ba31c570e0\jetified-fbcore-1.13.0\AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.soloader:soloader:0.6.0] D:\xu\.gradle\caches\transforms-2\files-2.1\6c626cc19970b8b44cee0d91bdaf0132\soloader-0.6.0\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.soloader:soloader:0.6.0] D:\xu\.gradle\caches\transforms-2\files-2.1\6c626cc19970b8b44cee0d91bdaf0132\soloader-0.6.0\AndroidManifest.xml:7:5-9:41
-MERGED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
 INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
 	tools:overrideLibrary
@@ -571,23 +566,3 @@ service#com.xzh.musicnotification.service.PlayServiceV2
 ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:32:9-83
 	android:name
 		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:32:18-80
-receiver#com.xzh.widget.MusicWidget
-ADDED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-21:20
-	android:name
-		ADDED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:19-60
-intent-filter#action:name:android.appwidget.action.APPWIDGET_UPDATE+action:name:com.xzh.widget.MusicWidget
-ADDED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-16:29
-action#android.appwidget.action.APPWIDGET_UPDATE
-ADDED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:17-84
-	android:name
-		ADDED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:25-81
-action#com.xzh.widget.MusicWidget
-ADDED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:17-69
-	android:name
-		ADDED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:25-66
-meta-data#android.appwidget.provider
-ADDED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-20:61
-	android:resource
-		ADDED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:17-58
-	android:name
-		ADDED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:17-58
