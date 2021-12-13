@@ -1,14 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/rl"
     android:padding="@dimen/widget_margin">
 
-    <TextView
+    <ImageView
         android:id="@+id/bg_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"/>
+        android:scaleType="fitXY"/>
 
     <ImageView
         android:id="@+id/image_view"
@@ -18,7 +19,6 @@
         android:layout_marginRight="10dp"
         android:layout_centerVertical="true"
         android:scaleType="centerCrop"
-        android:background="#BDE7FA"
         android:contentDescription="@string/bg" />
 
     <LinearLayout
@@ -64,6 +64,7 @@
             android:text="@string/add_widget"/>
 
         <LinearLayout
+            android:id="@+id/test"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center">

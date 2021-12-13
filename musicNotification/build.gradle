@@ -40,5 +40,5 @@ dependencies {
     compileOnly 'com.facebook.fresco:fresco:1.13.0'
     compileOnly "com.github.bumptech.glide:glide:4.9.0"
 
-    implementation project(path: ':widget')
+//    implementation project(path: ':widget')
 }

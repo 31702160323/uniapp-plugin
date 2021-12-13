@@ -8,7 +8,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.RemoteViews;
 
 import com.bumptech.glide.Glide;
@@ -97,6 +102,24 @@ public class MusicWidget extends AppWidgetProvider {
             views.setViewVisibility(R.id.favourite_view, View.VISIBLE);
         }
 
+        // 背景颜色
+        int color = Color.BLUE;
+        // 透明度
+        int alpha = 50;
+        // 背景宽度
+        int width = context.getResources().getDimensionPixelSize(R.dimen.dp_250);
+        // 背景高度
+        int height = context.getResources().getDimensionPixelSize(R.dimen.dp_70);
+        // 圆角角度
+//        int radius = context.getResources().getDimensionPixelSize(R.dimen.dp_5);
+        int radius = 30;
+        // 绘制背景
+        Drawable drawable = DrawableUtils.roundShapeDrawable(color, alpha, width, height, radius);
+        // 将绘制好的背景转换为Bitmap
+        Bitmap bitmap = DrawableUtils.drawableToBitmap(drawable);
+        // 将转换好的Bitmap设置到ImageView上
+        views.setImageViewBitmap(R.id.bg_view, bitmap);
+
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
@@ -136,6 +159,7 @@ public class MusicWidget extends AppWidgetProvider {
                     }
                     break;
                 case "bg":
+                    Log.d("XZH-musicNotification", "bg: " + intent.getStringExtra("bg"));
                     if (intent.getStringExtra("bg") != null) {
                         views.setInt(R.id.bg_view, "setBackgroundColor", UniResourceUtils.getColor(intent.getStringExtra("bg")));
                     }
