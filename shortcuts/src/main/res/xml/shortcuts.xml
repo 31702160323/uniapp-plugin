@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:enabled="true"
+        android:shortcutDisabledMessage="@string/shortcut_long_label1"
+        android:shortcutId="static1"
+        android:shortcutLongLabel="@string/shortcut_long_label1"
+        android:shortcutShortLabel="@string/shortcut_short_label1">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.xzh.shortcuts.TrampolineActivity"
+            android:targetPackage="com.xzh.UniPlugin">
+
+            <extra
+                android:name="source"
+                android:value="SHORTCUT" />
+        </intent>
+    </shortcut>
+
+</shortcuts>

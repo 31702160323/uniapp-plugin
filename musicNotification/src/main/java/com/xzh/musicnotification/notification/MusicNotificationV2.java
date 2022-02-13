@@ -26,6 +26,8 @@ import com.xzh.musicnotification.utils.PendingIntentInfo;
 
 import java.lang.ref.WeakReference;
 
+import io.dcloud.PandoraEntryActivity;
+
 public class MusicNotificationV2 {
     public static final int NOTIFICATION_ID = 0x111;
     public static final String CHANNEL_ID = "music_id_audio";
@@ -56,8 +58,7 @@ public class MusicNotificationV2 {
         mNotificationManager = (NotificationManager) mContext.get().getSystemService(Context.NOTIFICATION_SERVICE);
         initRemoteViews();
 
-        Intent intent = new Intent("io.dcloud.PandoraEntry");
-        intent.setClassName(mContext.get(), "io.dcloud.PandoraEntryActivity");
+        Intent intent = new Intent(mContext.get(), PandoraEntryActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (config != null && config.get("path") != null) {
             intent.putExtra("path", config.getString("path"));
