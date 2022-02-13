@@ -19,7 +19,7 @@
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
-            android:taskAffinity="com.ztk.lock"
+            android:taskAffinity="com.xzh.musicnotificationV2"
             android:theme="@style/LockScreenTheme" />
 
         <service android:name=".service.PlayServiceV2" />

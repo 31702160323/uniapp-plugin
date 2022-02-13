@@ -4,6 +4,7 @@
 -keep class com.taobao.weex.WXGlobalEventReceiver { <init>(); }
 -keep class com.xzh.musicnotification.LockActivityV2 { <init>(); }
 -keep class com.xzh.musicnotification.service.PlayServiceV2 { <init>(); }
+-keep class com.xzh.shortcuts.TrampolineActivity { <init>(); }
 -keep class io.dcloud.PandoraEntry { <init>(); }
 -keep class io.dcloud.PandoraEntryActivity { <init>(); }
 -keep class io.dcloud.ProcessMediator { <init>(); }
@@ -15,7 +16,6 @@
 -keep class io.dcloud.common.util.DCloud_FileProvider { <init>(); }
 -keep class io.dcloud.feature.gallery.imageedit.IMGEditActivity { <init>(); }
 -keep class io.dcloud.feature.nativeObj.photoview.PhotoActivity { <init>(); }
--keep class io.dcloud.imagepick.CustomGalleryActivity { <init>(); }
 -keep class android.widget.Space { <init>(android.content.Context, android.util.AttributeSet); }
 
 -keep class androidx.appcompat.app.AlertController$RecycleListView { <init>(android.content.Context, android.util.AttributeSet); }
