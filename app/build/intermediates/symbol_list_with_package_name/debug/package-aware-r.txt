@@ -1540,6 +1540,7 @@ string dcloud_short_cut_set_up
 string dcloud_short_cut_tips
 string dcloud_short_cut_vivo1
 string dcloud_short_cut_vivo2
+string dcloud_statistics_service_invalid
 string dcloud_storage_ceiling_error
 string dcloud_storage_key_error
 string dcloud_storage_native_error
@@ -1572,6 +1573,8 @@ string oaid_not_support
 string play
 string previous
 string search_menu_title
+string shortcut_long_label1
+string shortcut_short_label1
 string status_bar_notification_info_overflow
 string stream_my
 style ActionSheetStyleIOS6
@@ -1867,6 +1870,7 @@ style ThemeOverlay_AppCompat_Dark_ActionBar
 style ThemeOverlay_AppCompat_Dialog
 style ThemeOverlay_AppCompat_Dialog_Alert
 style ThemeOverlay_AppCompat_Light
+style TranslucentNoTitleDialogTheme
 style TranslucentTheme
 style Widget_AppCompat_ActionBar
 style Widget_AppCompat_ActionBar_Solid
@@ -2005,3 +2009,4 @@ styleable ViewBackgroundHelper android_background backgroundTint backgroundTintM
 styleable ViewStubCompat android_id android_layout android_inflatedId
 xml dcloud_file_provider
 xml dcloud_gg_file_provider
+xml shortcuts

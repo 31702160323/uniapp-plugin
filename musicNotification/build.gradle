@@ -33,7 +33,7 @@ repositories {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    compileOnly fileTree(include: ['uniapp-v8-release.aar'], dir: '../app/libs')
+    compileOnly fileTree(dir: '../app/libs')
 
     implementation 'androidx.appcompat:appcompat:1.0.0'
     compileOnly 'com.alibaba:fastjson:1.1.46.android'
