@@ -1,5 +1,9 @@
 [
     {
+        "merged": "D:\\htmlFile\\UniPlugin-Hello-AS\\app\\build\\intermediates\\res\\merged\\debug\\xml_network_security_config.xml.flat",
+        "source": "D:\\htmlFile\\UniPlugin-Hello-AS\\app\\src\\main\\res\\xml\\network_security_config.xml"
+    },
+    {
         "merged": "D:\\htmlFile\\UniPlugin-Hello-AS\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_icon.png.flat",
         "source": "D:\\htmlFile\\UniPlugin-Hello-AS\\app\\src\\main\\res\\drawable-xxhdpi\\icon.png"
     },
