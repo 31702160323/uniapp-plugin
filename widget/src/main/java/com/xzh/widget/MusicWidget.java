@@ -1,5 +1,6 @@
 package com.xzh.widget;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -21,8 +22,10 @@ import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.request.target.AppWidgetTarget;
 import com.taobao.weex.utils.WXViewUtils;
 
+import java.util.Map;
 import java.util.Objects;
 
+import io.dcloud.PandoraEntryActivity;
 import io.dcloud.feature.uniapp.utils.UniResourceUtils;
 
 /**
@@ -31,6 +34,32 @@ import io.dcloud.feature.uniapp.utils.UniResourceUtils;
 public class MusicWidget extends AppWidgetProvider {
 
     private boolean xzhFavour;
+
+    @SuppressLint("WrongConstant")
+    public static void update(Context context, String type, Map<String, Object> options) {
+        Log.d("TAG", "MusicWidget: " + type);
+        Intent intent = new Intent("com.xzh.widget.MusicWidget");
+        intent.addFlags(0x01000000);
+        intent.setPackage(context.getPackageName());
+        intent.putExtra("type", type);
+
+        for (String key : options.keySet()) {
+            Object value = options.get(key);
+            if (value instanceof Boolean) {
+                intent.putExtra(key, (Boolean) value);
+            } else if (value instanceof String) {
+                intent.putExtra(key, (String) value);
+            } else if (value instanceof Integer) {
+                intent.putExtra(key, (Integer) value);
+            } else if (value instanceof Float) {
+                intent.putExtra(key, (float) value);
+            } else if (value instanceof Double) {
+                intent.putExtra(key, (double) value);
+            }
+        }
+
+        context.sendOrderedBroadcast(intent, null);
+    }
 
     public static final class PendingIntentInfo {
         private final int Id;
@@ -63,8 +92,7 @@ public class MusicWidget extends AppWidgetProvider {
 
     public void openAppIntent(RemoteViews views, Context context, PendingIntentInfo... pendingIntentInfoList) {
         for (PendingIntentInfo item : pendingIntentInfoList) {
-            Intent intent = new Intent("io.dcloud.PandoraEntry");
-            intent.setClassName(context, "io.dcloud.PandoraEntryActivity");
+            Intent intent = new Intent(context, PandoraEntryActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             views.setOnClickPendingIntent(item.getId(), PendingIntent.getActivity(context, item.getIndex() + 1, intent, PendingIntent.FLAG_UPDATE_CURRENT));
         }
