@@ -1,6 +1,5 @@
 package com.xzh.musicnotification;
 
-import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -11,7 +10,6 @@ import android.os.Build;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.util.ArrayMap;
 import android.util.Log;
 
 import androidx.core.app.NotificationManagerCompat;
@@ -123,7 +121,7 @@ public class MusicNotificationModule extends UniModule {
     public void favour(JSONObject options) {
         UniLogUtils.i("XZH-musicNotification", "favour");
         if (mBinder != null) mBinder.get().favour(options.getBoolean("favour"));
-        Intent intent = new Intent(mUniSDKInstance.getContext(), WeexActivity.class);
+        Intent intent = new Intent(mUniSDKInstance.getContext(), LockActivityV3.class);
         mUniSDKInstance.getContext().startActivity(intent);
     }
 

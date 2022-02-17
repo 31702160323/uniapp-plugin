@@ -25,7 +25,7 @@
             android:theme="@style/LockScreenTheme" />
 
         <activity
-            android:name=".WeexActivity"
+            android:name=".LockActivityV3"
             android:exported="false"
             android:noHistory="true"
             android:showWhenLocked="true"
