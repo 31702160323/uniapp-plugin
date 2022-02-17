@@ -121,8 +121,6 @@ public class MusicNotificationModule extends UniModule {
     public void favour(JSONObject options) {
         UniLogUtils.i("XZH-musicNotification", "favour");
         if (mBinder != null) mBinder.get().favour(options.getBoolean("favour"));
-        Intent intent = new Intent(mUniSDKInstance.getContext(), LockActivityV3.class);
-        mUniSDKInstance.getContext().startActivity(intent);
     }
 
     @UniJSMethod(uiThread = false)
