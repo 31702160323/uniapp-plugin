@@ -589,6 +589,10 @@ dimen dcloud_wel_base_content_space_2
 dimen dcloud_wel_base_content_text_min_size
 dimen disabled_alpha_material_dark
 dimen disabled_alpha_material_light
+dimen dp_250
+dimen dp_320
+dimen dp_40
+dimen dp_70
 dimen fastscroll_default_thickness
 dimen fastscroll_margin
 dimen fastscroll_minimum_range
@@ -632,6 +636,7 @@ dimen tooltip_precise_anchor_threshold
 dimen tooltip_vertical_padding
 dimen tooltip_y_offset_non_touch
 dimen tooltip_y_offset_touch
+dimen widget_margin
 drawable abc_ab_share_pack_mtrl_alpha
 drawable abc_action_bar_item_background_material
 drawable abc_btn_borderless_material
@@ -719,6 +724,7 @@ drawable abc_vector_test
 drawable ad_dcloud_main_ad_tag
 drawable ad_dcloud_main_skip_bg
 drawable ad_dcloud_main_skip_shape
+drawable bg_radius
 drawable dcloud_about_buttons_bg
 drawable dcloud_about_buttons_button_bg
 drawable dcloud_actionsheet_bottom_normal
@@ -790,6 +796,10 @@ drawable dcloud_tabbar_badge
 drawable dcloud_tabbar_dot
 drawable dcloud_webview_activity_title_bg
 drawable icon
+drawable icon_1
+drawable icon_2
+drawable icon_3
+drawable icon_4
 drawable image_bg_bottom
 drawable image_bg_edit_check
 drawable image_bg_top
@@ -1058,6 +1068,7 @@ id right
 id rightLayout
 id right_icon
 id right_side
+id rl
 id rl_notification
 id root
 id rv_images
@@ -1115,6 +1126,7 @@ id tabTV
 id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
+id test
 id text
 id text2
 id textSpacerNoButtons
@@ -1231,6 +1243,7 @@ layout image_layout_gallery_menu_item
 layout image_layout_gallery_pop
 layout image_layout_image
 layout image_text_dialog
+layout music_widget
 layout notification_action
 layout notification_action_tombstone
 layout notification_big_layout
@@ -1315,6 +1328,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string add_widget
 string app_name
 string bg
 string dcloud_Init_fail_tips
@@ -1568,13 +1582,19 @@ string favourite
 string hint_text
 string img
 string in_package
+string long_label_1
+string long_label_2
+string long_label_3
+string long_label_4
 string next
 string oaid_not_support
 string play
 string previous
 string search_menu_title
-string shortcut_long_label1
-string shortcut_short_label1
+string short_label_1
+string short_label_2
+string short_label_3
+string short_label_4
 string status_bar_notification_info_overflow
 string stream_my
 style ActionSheetStyleIOS6
@@ -2009,4 +2029,6 @@ styleable ViewBackgroundHelper android_background backgroundTint backgroundTintM
 styleable ViewStubCompat android_id android_layout android_inflatedId
 xml dcloud_file_provider
 xml dcloud_gg_file_provider
+xml music_widget_info
+xml network_security_config
 xml shortcuts
