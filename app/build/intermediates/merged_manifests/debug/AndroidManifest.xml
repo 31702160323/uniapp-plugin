@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="21"
+        android:minSdkVersion="25"
         android:targetSdkVersion="26" />
 
     <supports-screens
@@ -61,9 +61,10 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:extractNativeLibs="true"
-        android:icon="@drawable/icon"
+        android:icon="@drawable/icon_1"
         android:label="@string/app_name"
         android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:testOnly="true"
         android:usesCleartextTraffic="true" >
@@ -224,6 +225,17 @@
             android:excludeFromRecents="true"
             android:exported="false"
             android:launchMode="singleInstance"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:showWhenLocked="true"
+            android:taskAffinity="com.xzh.musicnotificationV2"
+            android:theme="@style/LockScreenTheme" />
+        <activity
+            android:name="com.xzh.musicnotification.WeexActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleInstance"
+            android:noHistory="true"
             android:screenOrientation="portrait"
             android:showWhenLocked="true"
             android:taskAffinity="com.xzh.musicnotificationV2"
@@ -237,6 +249,17 @@
             android:noHistory="true"
             android:taskAffinity="com.xzh.shortcutsV2"
             android:theme="@style/TranslucentNoTitleDialogTheme" />
+
+        <receiver android:name="com.xzh.widget.MusicWidget" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.xzh.widget.MusicWidget" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/music_widget_info" />
+        </receiver>
     </application>
 
 </manifest>

@@ -3,18 +3,73 @@
 
     <shortcut
         android:enabled="true"
-        android:shortcutDisabledMessage="@string/shortcut_long_label1"
-        android:shortcutId="static1"
-        android:shortcutLongLabel="@string/shortcut_long_label1"
-        android:shortcutShortLabel="@string/shortcut_short_label1">
+        android:shortcutId="static_1"
+        android:icon="@drawable/icon_1"
+        android:shortcutDisabledMessage="@string/long_label_1"
+        android:shortcutLongLabel="@string/long_label_1"
+        android:shortcutShortLabel="@string/short_label_1">
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="com.xzh.shortcuts.TrampolineActivity"
             android:targetPackage="com.xzh.UniPlugin">
 
             <extra
-                android:name="source"
-                android:value="SHORTCUT" />
+                android:name="path"
+                android:value="/pages/test/test" />
+        </intent>
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:shortcutId="static_2"
+        android:icon="@drawable/icon_2"
+        android:shortcutDisabledMessage="@string/long_label_2"
+        android:shortcutLongLabel="@string/long_label_2"
+        android:shortcutShortLabel="@string/short_label_2">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.xzh.shortcuts.TrampolineActivity"
+            android:targetPackage="com.xzh.UniPlugin">
+
+            <extra
+                android:name="path"
+                android:value="/pages/test/test" />
+        </intent>
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:shortcutId="static_3"
+        android:icon="@drawable/icon_3"
+        android:shortcutDisabledMessage="@string/long_label_3"
+        android:shortcutLongLabel="@string/long_label_3"
+        android:shortcutShortLabel="@string/short_label_3">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.xzh.shortcuts.TrampolineActivity"
+            android:targetPackage="com.xzh.UniPlugin">
+
+            <extra
+                android:name="path"
+                android:value="/pages/test/test" />
+        </intent>
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:shortcutId="static_4"
+        android:icon="@drawable/icon_4"
+        android:shortcutDisabledMessage="@string/long_label_4"
+        android:shortcutLongLabel="@string/long_label_4"
+        android:shortcutShortLabel="@string/short_label_4">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.xzh.shortcuts.TrampolineActivity"
+            android:targetPackage="com.xzh.UniPlugin">s
+
+            <extra
+                android:name="path"
+                android:value="/pages/test/test" />
         </intent>
     </shortcut>
 

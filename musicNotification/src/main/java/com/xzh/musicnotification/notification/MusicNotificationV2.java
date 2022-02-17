@@ -52,8 +52,8 @@ public class MusicNotificationV2 {
      * @param service
      * @param config
      */
-    public void initNotification(PlayServiceV2 service, JSONObject config) {
-        mContext = new WeakReference<>(service);
+    public void initNotification( MusicNotificationV2.NotificationHelperListener service, JSONObject config) {
+        mContext = new WeakReference<>((Context) service);
 
         mNotificationManager = (NotificationManager) mContext.get().getSystemService(Context.NOTIFICATION_SERVICE);
         initRemoteViews();
