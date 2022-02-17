@@ -9,9 +9,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.taobao.weex.IWXRenderListener;
-import com.taobao.weex.WXSDKEngine;
 import com.taobao.weex.WXSDKInstance;
-import com.taobao.weex.common.WXException;
 import com.taobao.weex.common.WXRenderStrategy;
 import com.taobao.weex.utils.WXFileUtils;
 import com.xzh.musicnotification.utils.Utils;
@@ -19,7 +17,7 @@ import com.xzh.musicnotification.utils.Utils;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WeexActivity extends AppCompatActivity implements IWXRenderListener {
+public class LockActivityV3 extends AppCompatActivity implements IWXRenderListener {
     WXSDKInstance mWXSDKInstance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +40,7 @@ public class WeexActivity extends AppCompatActivity implements IWXRenderListener
         Log.d("TAG", "onViewCreated: " + view);
         setContentView(view);
     }
+
     @Override
     public void onRenderSuccess(WXSDKInstance instance, int width, int height) {
     }

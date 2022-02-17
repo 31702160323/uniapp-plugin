@@ -14,7 +14,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.RemoteViews;
 
 import com.bumptech.glide.Glide;
@@ -28,15 +27,12 @@ import java.util.Objects;
 import io.dcloud.PandoraEntryActivity;
 import io.dcloud.feature.uniapp.utils.UniResourceUtils;
 
-/**
- * Implementation of App Widget functionality.
- */
 public class MusicWidget extends AppWidgetProvider {
 
     private boolean xzhFavour;
 
     @SuppressLint("WrongConstant")
-    public static void update(Context context, String type, Map<String, Object> options) {
+    public static void invoke(Context context, String type, Map<String, Object> options) {
         Log.d("TAG", "MusicWidget: " + type);
         Intent intent = new Intent("com.xzh.widget.MusicWidget");
         intent.addFlags(0x01000000);
