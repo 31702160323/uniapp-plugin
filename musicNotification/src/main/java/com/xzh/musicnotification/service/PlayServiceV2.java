@@ -262,7 +262,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
     public static void invoke(Context context, String type, Map<String, Object> options) {
         try {
             Class<?> clazz = Class.forName("com.xzh.widget.MusicWidget");
-            Method method = clazz.getMethod("update", Context.class, String.class, Map.class);
+            Method method = clazz.getMethod("invoke", Context.class, String.class, Map.class);
             method.invoke(null, context, type, options);
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
