@@ -1,17 +1,14 @@
 package com.xzh.musicnotification;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.ApplicationInfo;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,7 +28,7 @@ import java.util.Map;
 
 import io.dcloud.feature.uniapp.utils.UniUtils;
 
-public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLayout.OnSlidingFinishListener, View.OnClickListener {
+public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLayout.OnSlidingFinishListener, View.OnClickListener, PlayServiceV2.OnClickListener {
 
     private int mWidth;
     private int mHeight;
@@ -51,7 +48,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             setShowWhenLocked(true);
         }
-        fullScreen(this);
+        Utils.fullScreen(this);
         setContentView(R.layout.activity_lock);
 
         initView();
@@ -68,9 +65,9 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
                 mBinder = new WeakReference<>((PlayServiceV2.ServiceBinder) iBinder);
                 mBinder.get().setActivity(LockActivityV2.this);
                 if (UniUtils.isUiThread()) {
-                    updateUI(mBinder.get().getSongData());
+                    update(mBinder.get().getSongData());
                 } else {
-                    runOnUiThread(() -> updateUI(mBinder.get().getSongData()));
+                    runOnUiThread(() -> update(mBinder.get().getSongData()));
                 }
             }
 
@@ -81,33 +78,6 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         };
 
         bindService(new Intent(this, PlayServiceV2.class), connection, BIND_AUTO_CREATE);
-    }
-
-    /**
-     * 通过设置全屏，设置状态栏透明
-     *
-     * @param activity Activity
-     */
-    public static void fullScreen(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window window = activity.getWindow();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                //5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色
-                View decorView = window.getDecorView();
-                //两个 flag 要结合使用，表示让应用的主体内容占用系统状态栏的空间
-                int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-                decorView.setSystemUiVisibility(option);
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(Color.TRANSPARENT);
-
-            } else {
-                WindowManager.LayoutParams attributes = window.getAttributes();
-                int flagTranslucentStatus = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-                attributes.flags |= flagTranslucentStatus;
-                window.setAttributes(attributes);
-            }
-        }
     }
 
     private void initView() {
@@ -163,12 +133,12 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
                 eventName = "musicNotificationNext";
                 break;
             case PlayServiceV2.NotificationReceiver.EXTRA_FAV:
-                mBinder.get().favour();
+                mBinder.get().favour(!mBinder.get().getFavour());
                 data.put("favourite", mBinder.get().getFavour());
                 eventName = "musicNotificationFavourite";
                 break;
             case PlayServiceV2.NotificationReceiver.EXTRA_PLAY:
-                mBinder.get().playOrPause();
+                mBinder.get().playOrPause(!mBinder.get().getPlaying());
                 eventName = "musicNotificationPause";
                 break;
             default:
@@ -201,7 +171,35 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         finish();
     }
 
-    public void updateUI(final JSONObject options) {
+    @Override
+    public void playOrPause(boolean playing) {
+        if (playing) {
+            playView.setImageResource(R.mipmap.note_btn_pause_white);
+        } else {
+            playView.setImageResource(R.mipmap.note_btn_play_white);
+        }
+    }
+
+    @Override
+    public void favour(boolean isFavour) {
+        if (!xzhFavour) return;
+        if (isFavour) {
+            favouriteView.setImageResource(R.mipmap.note_btn_loved);
+        } else {
+            favouriteView.setImageResource(R.mipmap.note_btn_love_white);
+        }
+    }
+
+    @Override
+    public void update(JSONObject options) {
+        if (UniUtils.isUiThread()) {
+            updateUI(options);
+        } else {
+            runOnUiThread(() -> updateUI(options));
+        }
+    }
+
+    private void updateUI(JSONObject options) {
         if (options.getString("songName") != null) {
             tvAudioName.setText(options.getString("songName"));
         }
@@ -218,23 +216,5 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
                 .override(mWidth, mHeight)
                 .format(DecodeFormat.PREFER_RGB_565)
                 .into(lockDate);
-    }
-
-    public void playOrPause(boolean playing) {
-        if (playing) {
-            playView.setImageResource(R.mipmap.note_btn_pause_white);
-        } else {
-            playView.setImageResource(R.mipmap.note_btn_play_white);
-        }
-    }
-
-    public void favour(boolean isFavour) {
-        if (xzhFavour) {
-            if (isFavour) {
-                favouriteView.setImageResource(R.mipmap.note_btn_loved);
-            } else {
-                favouriteView.setImageResource(R.mipmap.note_btn_love_white);
-            }
-        }
     }
 }

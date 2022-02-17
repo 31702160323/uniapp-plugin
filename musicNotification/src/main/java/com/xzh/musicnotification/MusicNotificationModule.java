@@ -1,6 +1,5 @@
 package com.xzh.musicnotification;
 
-import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -122,6 +121,8 @@ public class MusicNotificationModule extends UniModule {
     public void favour(JSONObject options) {
         UniLogUtils.i("XZH-musicNotification", "favour");
         if (mBinder != null) mBinder.get().favour(options.getBoolean("favour"));
+        Intent intent = new Intent(mUniSDKInstance.getContext(), LockActivityV3.class);
+        mUniSDKInstance.getContext().startActivity(intent);
     }
 
     @UniJSMethod(uiThread = false)
@@ -134,17 +135,9 @@ public class MusicNotificationModule extends UniModule {
         }
     }
 
-    @SuppressLint("WrongConstant")
     @UniJSMethod(uiThread = false)
     public void setWidgetStyle(JSONObject options) {
-        Intent intent = new Intent("com.xzh.widget.MusicWidget");
-        intent.addFlags(0x01000000);
-        intent.setPackage(mUniSDKInstance.getContext().getPackageName());
-        intent.putExtra("type", "bg");
-        intent.putExtra("bg", options.getString("bg"));
-        intent.putExtra("title", options.getString("title"));
-        intent.putExtra("tip", options.getString("tip"));
-        mUniSDKInstance.getContext().sendOrderedBroadcast(intent, null);
+        PlayServiceV2.invoke(mUniSDKInstance.getContext(), "bg", options);
     }
 
     @UniJSMethod(uiThread = false)

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xzh.musicnotification">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -15,12 +16,24 @@
         <activity
             android:name=".LockActivityV2"
             android:exported="false"
+            android:noHistory="true"
             android:showWhenLocked="true"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:taskAffinity="com.xzh.musicnotificationV2"
             android:theme="@style/LockScreenTheme" />
+
+        <activity
+            android:name=".LockActivityV3"
+            android:exported="false"
+            android:noHistory="true"
+            android:showWhenLocked="true"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:taskAffinity="com.xzh.musicnotificationV2"
+            android:theme="@style/LockScreenTheme"/>
 
         <service android:name=".service.PlayServiceV2" />
     </application>
