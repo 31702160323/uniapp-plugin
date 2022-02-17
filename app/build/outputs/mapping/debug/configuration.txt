@@ -267,7 +267,7 @@
 -keep class com.dmcbig.mediapicker.PreviewActivity { <init>(); }
 -keep class com.taobao.weex.WXGlobalEventReceiver { <init>(); }
 -keep class com.xzh.musicnotification.LockActivityV2 { <init>(); }
--keep class com.xzh.musicnotification.WeexActivity { <init>(); }
+-keep class com.xzh.musicnotification.LockActivityV3 { <init>(); }
 -keep class com.xzh.musicnotification.service.PlayServiceV2 { <init>(); }
 -keep class com.xzh.shortcuts.TrampolineActivity { <init>(); }
 -keep class com.xzh.widget.MusicWidget { <init>(); }

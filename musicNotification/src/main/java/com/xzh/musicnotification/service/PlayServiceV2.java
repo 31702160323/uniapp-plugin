@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xzh.musicnotification.LockActivityV2;
+import com.xzh.musicnotification.LockActivityV3;
 import com.xzh.musicnotification.notification.MusicNotificationV2;
 import com.xzh.musicnotification.utils.Utils;
 
@@ -124,7 +125,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         public void onReceive(Context context, Intent intent) {
             if (lockActivity && Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
                 try {
-                    Intent lockScreen = new Intent(context, LockActivityV2.class);
+                    Intent lockScreen = new Intent(context, LockActivityV3.class);
                     lockScreen.setPackage(serviceV2.getPackageName());
                     lockScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                             | Intent.FLAG_ACTIVITY_SINGLE_TOP
@@ -137,7 +138,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
                     pendingIntent.send();
                 } catch (PendingIntent.CanceledException e) {
                     e.printStackTrace();
-                    Intent lockScreen = new Intent(context, LockActivityV2.class);
+                    Intent lockScreen = new Intent(context, LockActivityV3.class);
                     lockScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     lockScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
