@@ -128,6 +128,12 @@
         <meta-data
             android:name="dcloud_appkey"
             android:value="e9269f31a55e5d46e77a3e5e4ad97b88" />
+        <meta-data
+            android:name="xzh_appId"
+            android:value="__UNI__35223F8" />
+        <meta-data
+            android:name="xzh_page"
+            android:value="pages/lock/lock" />
         <!--
         <activity
             android:name="io.dcloud.imagepick.CustomGalleryActivity"
@@ -225,17 +231,15 @@
             android:excludeFromRecents="true"
             android:exported="false"
             android:launchMode="singleInstance"
-            android:noHistory="true"
             android:screenOrientation="portrait"
             android:showWhenLocked="true"
             android:taskAffinity="com.xzh.musicnotificationV2"
             android:theme="@style/LockScreenTheme" />
         <activity
-            android:name="com.xzh.musicnotification.WeexActivity"
+            android:name="com.xzh.musicnotification.LockActivityV3"
             android:excludeFromRecents="true"
             android:exported="false"
             android:launchMode="singleInstance"
-            android:noHistory="true"
             android:screenOrientation="portrait"
             android:showWhenLocked="true"
             android:taskAffinity="com.xzh.musicnotificationV2"

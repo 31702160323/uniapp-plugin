@@ -1,5 +1,6 @@
 package com.xzh.musicnotification;
 
+import android.content.pm.ApplicationInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,9 @@ import java.util.Map;
 
 public class LockActivityV3 extends AppCompatActivity implements IWXRenderListener {
     WXSDKInstance mWXSDKInstance;
+    private String appId;
+    private String page;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,15 +33,20 @@ public class LockActivityV3 extends AppCompatActivity implements IWXRenderListen
         }
         Utils.fullScreen(this);
 
-        mWXSDKInstance = new WXSDKInstance(this);
-        mWXSDKInstance.registerRenderListener(this);
-        Map<String, Object> options = new HashMap<>();
-        options.put(WXSDKInstance.BUNDLE_URL, "source");
-        mWXSDKInstance.render(getPackageName(), WXFileUtils.loadAsset("build/index.js", this), options, null, WXRenderStrategy.APPEND_ASYNC);
+        ApplicationInfo info = Utils.getApplicationInfo(this);
+        if (info != null) {
+            appId = info.metaData.getString("xzh_appId");
+            page = info.metaData.getString("xzh_page");
+
+            mWXSDKInstance = new WXSDKInstance(this);
+            mWXSDKInstance.registerRenderListener(this);
+            Map<String, Object> options = new HashMap<>();
+            options.put(WXSDKInstance.BUNDLE_URL, "source");
+            mWXSDKInstance.render(getPackageName(), WXFileUtils.loadAsset("apps/" + appId + "/www/" + page + ".js", this), options, null, WXRenderStrategy.APPEND_ASYNC);
+        }
     }
     @Override
     public void onViewCreated(WXSDKInstance instance, View view) {
-        Log.d("TAG", "onViewCreated: " + view);
         setContentView(view);
     }
 
