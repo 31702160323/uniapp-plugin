@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
+import com.xzh.musicnotification.service.NotificationReceiver;
 import com.xzh.musicnotification.service.PlayServiceV2;
 import com.xzh.musicnotification.utils.Utils;
 import com.xzh.musicnotification.view.SlidingFinishLayout;
@@ -29,7 +30,6 @@ import java.util.Map;
 import io.dcloud.feature.uniapp.utils.UniUtils;
 
 public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLayout.OnSlidingFinishListener, View.OnClickListener, PlayServiceV2.OnClickListener {
-
     private int mWidth;
     private int mHeight;
     private boolean xzhFavour;
@@ -114,10 +114,10 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         final int viewId = view.getId();
         final int[] ids = new int[]{R.id.previous_view, R.id.next_view, R.id.favourite_view, R.id.play_view};
         final String[] EXTRAS = new String[]{
-                PlayServiceV2.NotificationReceiver.EXTRA_PRE,
-                PlayServiceV2.NotificationReceiver.EXTRA_NEXT,
-                PlayServiceV2.NotificationReceiver.EXTRA_FAV,
-                PlayServiceV2.NotificationReceiver.EXTRA_PLAY
+                NotificationReceiver.EXTRA_PRE,
+                NotificationReceiver.EXTRA_NEXT,
+                NotificationReceiver.EXTRA_FAV,
+                NotificationReceiver.EXTRA_PLAY
         };
 
         for (int i = 0; i < ids.length; i++) {
@@ -126,18 +126,18 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         }
 
         switch (EXTRA_TYPE) {
-            case PlayServiceV2.NotificationReceiver.EXTRA_PRE:
+            case NotificationReceiver.EXTRA_PRE:
                 eventName = "musicNotificationPrevious";
                 break;
-            case PlayServiceV2.NotificationReceiver.EXTRA_NEXT:
+            case NotificationReceiver.EXTRA_NEXT:
                 eventName = "musicNotificationNext";
                 break;
-            case PlayServiceV2.NotificationReceiver.EXTRA_FAV:
+            case NotificationReceiver.EXTRA_FAV:
                 mBinder.get().favour(!mBinder.get().getFavour());
                 data.put("favourite", mBinder.get().getFavour());
                 eventName = "musicNotificationFavourite";
                 break;
-            case PlayServiceV2.NotificationReceiver.EXTRA_PLAY:
+            case NotificationReceiver.EXTRA_PLAY:
                 mBinder.get().playOrPause(!mBinder.get().getPlaying());
                 eventName = "musicNotificationPause";
                 break;

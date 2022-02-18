@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
+import com.xzh.musicnotification.service.NotificationReceiver;
 import com.xzh.musicnotification.service.PlayServiceV2;
 
 public class PendingIntentInfo {
@@ -32,8 +33,8 @@ public class PendingIntentInfo {
 
     public static void addOnClickPendingIntents(RemoteViews views, Context context, PendingIntentInfo... pendingIntentInfoList){
         for (PendingIntentInfo item : pendingIntentInfoList) {
-            Intent playIntent = new Intent(PlayServiceV2.NotificationReceiver.ACTION_STATUS_BAR);
-            playIntent.putExtra(PlayServiceV2.NotificationReceiver.EXTRA,
+            Intent playIntent = new Intent(NotificationReceiver.ACTION_STATUS_BAR);
+            playIntent.putExtra(NotificationReceiver.EXTRA,
                     item.getEXTRA());
             views.setOnClickPendingIntent( item.getId(),
                     PendingIntent.getBroadcast(context, item.getIndex(), playIntent, PendingIntent.FLAG_UPDATE_CURRENT));
