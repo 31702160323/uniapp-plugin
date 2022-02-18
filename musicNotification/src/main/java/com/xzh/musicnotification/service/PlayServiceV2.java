@@ -2,9 +2,7 @@ package com.xzh.musicnotification.service;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
-import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -18,7 +16,6 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.alibaba.fastjson.JSONObject;
-import com.xzh.musicnotification.LockActivityV2;
 import com.xzh.musicnotification.LockActivityV3;
 import com.xzh.musicnotification.notification.MusicNotificationV2;
 import com.xzh.musicnotification.utils.Utils;
@@ -40,6 +37,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
     private boolean xzhFavour;
     private boolean Favour = false;
     private boolean Playing = false;
+    private boolean lockActivity = false;
 
     private JSONObject songData;
     private ServiceBinder mBinder;
@@ -73,7 +71,41 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
             xzhFavour = info.metaData.getBoolean("xzh_favour");
         }
 
-        mReceiver = new NotificationReceiver();
+        mReceiver = new NotificationReceiver((action, extra) -> {
+            if (lockActivity && Intent.ACTION_SCREEN_OFF.equals(action)) {
+                Utils.openLock(this, LockActivityV3.class);
+            }
+            if (extra == null) return;
+            String eventName = "musicNotificationError";
+            Map<String, Object> data = new HashMap<>();
+            data.put("message", "触发回调事件成功");
+            data.put("code", 0);
+            switch (extra) {
+                case NotificationReceiver.EXTRA_PLAY:
+                    mBinder.playOrPause(serviceV2.Playing);
+                    UniLogUtils.i("XZH-musicNotification","点击播放按钮");
+                    eventName = "musicNotificationPause";
+                    break;
+                case NotificationReceiver.EXTRA_PRE:
+                    UniLogUtils.i("XZH-musicNotification","点击上一首按钮");
+                    eventName = "musicNotificationPrevious";
+                    break;
+                case NotificationReceiver.EXTRA_NEXT:
+                    UniLogUtils.i("XZH-musicNotification","点击下一首按钮");
+                    eventName = "musicNotificationNext";
+                    break;
+                case NotificationReceiver.EXTRA_FAV:
+                    mBinder.favour(!Favour);
+                    UniLogUtils.i("XZH-musicNotification","点击搜藏按钮");
+                    eventName = "musicNotificationFavourite";
+                    break;
+                default:
+                    data.put("message", "触发回调事件失败");
+                    data.put("code", -7);
+                    break;
+            }
+            mBinder.fireGlobalEventCallback(eventName, data);
+        });
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         filter.addAction(NotificationReceiver.ACTION_STATUS_BAR);
@@ -109,78 +141,6 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         startForeground(NOTIFICATION_ID, notification);
     }
 
-    /**
-     * 接收Notification发送的广播
-     */
-    public static class NotificationReceiver extends BroadcastReceiver {
-        public static final String ACTION_STATUS_BAR = serviceV2.getPackageName() + ".NOTIFICATION_ACTIONS";
-        public static final String EXTRA = "extra";
-        public static final String EXTRA_PLAY = "play_pause";
-        public static final String EXTRA_NEXT = "play_next";
-        public static final String EXTRA_PRE = "play_previous";
-        public static final String EXTRA_FAV = "play_favourite";
-        public boolean lockActivity = false;
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (lockActivity && Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
-                try {
-                    Intent lockScreen = new Intent(context, LockActivityV3.class);
-                    lockScreen.setPackage(serviceV2.getPackageName());
-                    lockScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                            | Intent.FLAG_ACTIVITY_SINGLE_TOP
-                            | Intent.FLAG_FROM_BACKGROUND
-                            | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-                            | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-                            | Intent.FLAG_ACTIVITY_NO_ANIMATION
-                            | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-                    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, lockScreen, 0);
-                    pendingIntent.send();
-                } catch (PendingIntent.CanceledException e) {
-                    e.printStackTrace();
-                    Intent lockScreen = new Intent(context, LockActivityV3.class);
-                    lockScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    lockScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-                        lockScreen.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-                    }
-                    context.startActivity(lockScreen);
-                }
-            }
-            String extra = intent.getStringExtra(EXTRA);
-            if (extra == null) return;
-            String eventName = "musicNotificationError";
-            Map<String, Object> data = new HashMap<>();
-            data.put("message", "触发回调事件成功");
-            data.put("code", 0);
-            switch (extra) {
-                case EXTRA_PLAY:
-                    serviceV2.mBinder.playOrPause(serviceV2.Playing);
-                    UniLogUtils.i("XZH-musicNotification","点击播放按钮");
-                    eventName = "musicNotificationPause";
-                    break;
-                case EXTRA_PRE:
-                    UniLogUtils.i("XZH-musicNotification","点击上一首按钮");
-                    eventName = "musicNotificationPrevious";
-                    break;
-                case EXTRA_NEXT:
-                    UniLogUtils.i("XZH-musicNotification","点击下一首按钮");
-                    eventName = "musicNotificationNext";
-                    break;
-                case EXTRA_FAV:
-                    serviceV2.mBinder.favour(!serviceV2.Favour);
-                    UniLogUtils.i("XZH-musicNotification","点击搜藏按钮");
-                    eventName = "musicNotificationFavourite";
-                    break;
-                default:
-                    data.put("message", "触发回调事件失败");
-                    data.put("code", -7);
-                    break;
-            }
-            serviceV2.mBinder.fireGlobalEventCallback(eventName, data);
-        }
-    }
-
     public class ServiceBinder extends Binder {
         private WeakReference<OnClickListener> mClickListener;
 
@@ -206,12 +166,12 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
             return serviceV2.Playing;
         }
 
-        public void lock(boolean locking) {
-            mReceiver.lockActivity = locking;
-        }
-
         public JSONObject getSongData() {
             return songData;
+        }
+
+        public void lock(boolean locking) {
+            lockActivity = locking;
         }
 
         @SuppressLint("WrongConstant")
@@ -220,7 +180,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
 
             if (mClickListener != null && mClickListener.get() != null) mClickListener.get().playOrPause(playing);
 
-            Map<String, Object> options = new ArrayMap();
+            Map<String, Object> options = new ArrayMap<>();
             options.put("playing", playing);
             PlayServiceV2.invoke(serviceV2,"playOrPause", options);
 
@@ -233,7 +193,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
             Favour = isFavour;
             if (mClickListener != null && mClickListener.get() != null) mClickListener.get().favour(isFavour);
 
-            Map<String, Object> options = new ArrayMap();
+            Map<String, Object> options = new ArrayMap<>();
             options.put("favour", isFavour);
             PlayServiceV2.invoke(serviceV2,"favour", options);
 

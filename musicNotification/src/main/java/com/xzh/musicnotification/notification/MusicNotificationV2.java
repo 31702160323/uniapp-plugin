@@ -20,7 +20,7 @@ import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.request.target.NotificationTarget;
 import com.taobao.weex.utils.WXViewUtils;
 import com.xzh.musicnotification.R;
-import com.xzh.musicnotification.service.PlayServiceV2;
+import com.xzh.musicnotification.service.NotificationReceiver;
 import com.xzh.musicnotification.utils.ImageUtils;
 import com.xzh.musicnotification.utils.PendingIntentInfo;
 
@@ -49,10 +49,10 @@ public class MusicNotificationV2 {
 
     /**
      * 创建Notification,
-     * @param service
-     * @param config
+     * @param service MusicNotificationV2.NotificationHelperListener
+     * @param config JSONObject
      */
-    public void initNotification( MusicNotificationV2.NotificationHelperListener service, JSONObject config) {
+    public void initNotification(MusicNotificationV2.NotificationHelperListener service, JSONObject config) {
         mContext = new WeakReference<>((Context) service);
 
         mNotificationManager = (NotificationManager) mContext.get().getSystemService(Context.NOTIFICATION_SERVICE);
@@ -131,20 +131,20 @@ public class MusicNotificationV2 {
 
         PendingIntentInfo.addOnClickPendingIntents(mRemoteViews, mContext.get(),
                 //点击播放按钮要发送的广播
-                new PendingIntentInfo(R.id.play_view, 1, PlayServiceV2.NotificationReceiver.EXTRA_PLAY),
+                new PendingIntentInfo(R.id.play_view, 1, NotificationReceiver.EXTRA_PLAY),
                 //点击上一首按钮要发送的广播
-                new PendingIntentInfo(R.id.previous_view, 2, PlayServiceV2.NotificationReceiver.EXTRA_PRE),
+                new PendingIntentInfo(R.id.previous_view, 2, NotificationReceiver.EXTRA_PRE),
                 //点击下一首按钮要发送的广播
-                new PendingIntentInfo(R.id.next_view, 3, PlayServiceV2.NotificationReceiver.EXTRA_NEXT),
+                new PendingIntentInfo(R.id.next_view, 3, NotificationReceiver.EXTRA_NEXT),
                 //点击收藏按钮要发送的广播
-                new PendingIntentInfo(R.id.favourite_view, 4, PlayServiceV2.NotificationReceiver.EXTRA_FAV)
+                new PendingIntentInfo(R.id.favourite_view, 4, NotificationReceiver.EXTRA_FAV)
         );
 
         PendingIntentInfo.addOnClickPendingIntents(mSmallRemoteViews, mContext.get(),
                 //点击播放按钮要发送的广播
-                new PendingIntentInfo(R.id.play_view, 1, PlayServiceV2.NotificationReceiver.EXTRA_PLAY),
+                new PendingIntentInfo(R.id.play_view, 1, NotificationReceiver.EXTRA_PLAY),
                 //点击下一首按钮要发送的广播
-                new PendingIntentInfo(R.id.next_view, 3, PlayServiceV2.NotificationReceiver.EXTRA_NEXT)
+                new PendingIntentInfo(R.id.next_view, 3, NotificationReceiver.EXTRA_NEXT)
         );
     }
 
