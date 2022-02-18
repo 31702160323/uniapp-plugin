@@ -14,14 +14,15 @@ import com.taobao.weex.WXSDKInstance;
 import com.taobao.weex.common.WXRenderStrategy;
 import com.taobao.weex.utils.WXFileUtils;
 import com.xzh.musicnotification.utils.Utils;
+import com.xzh.musicnotification.utils.XmlUtils;
+
+import org.xmlpull.v1.XmlPullParser;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class LockActivityV3 extends AppCompatActivity implements IWXRenderListener {
     WXSDKInstance mWXSDKInstance;
-    private String appId;
-    private String page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +35,20 @@ public class LockActivityV3 extends AppCompatActivity implements IWXRenderListen
         Utils.fullScreen(this);
 
         ApplicationInfo info = Utils.getApplicationInfo(this);
-        if (info != null) {
-            appId = info.metaData.getString("xzh_appId");
-            page = info.metaData.getString("xzh_page");
+        XmlUtils.readXml(this, "data/dcloud_control.xml", (event, parser) -> {
+            if (event == XmlPullParser.START_TAG && parser.getName().equalsIgnoreCase("app")) {
+                String appId = parser.getAttributeValue(null, "appid");
+                String page = info.metaData.getString("xzh_page");
+                Map<String, Object> options = new HashMap<>();
+                options.put(WXSDKInstance.BUNDLE_URL, "source");
 
-            mWXSDKInstance = new WXSDKInstance(this);
-            mWXSDKInstance.registerRenderListener(this);
-            Map<String, Object> options = new HashMap<>();
-            options.put(WXSDKInstance.BUNDLE_URL, "source");
-            mWXSDKInstance.render(getPackageName(), WXFileUtils.loadAsset("apps/" + appId + "/www/" + page + ".js", this), options, null, WXRenderStrategy.APPEND_ASYNC);
-        }
+                mWXSDKInstance = new WXSDKInstance(this);
+                mWXSDKInstance.registerRenderListener(this);
+                mWXSDKInstance.render(getPackageName(), WXFileUtils.loadAsset("apps/" + appId + "/www/" + page + ".js", this), options, null, WXRenderStrategy.APPEND_ASYNC);
+                return true;
+            }
+            return false;
+        });
     }
     @Override
     public void onViewCreated(WXSDKInstance instance, View view) {
