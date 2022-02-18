@@ -1,15 +1,15 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-100:12
-INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-100:12
-INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-100:12
-INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-100:12
+ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
+INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
+INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
+INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
 MERGED from [android-gif-drawable-release@1.2.23.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4e5ddf07fcf40de5b289452d40b4ea65\jetified-android-gif-drawable-release@1.2.23\AndroidManifest.xml:2:1-9:12
 MERGED from [lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\55011eea89fbd79436cf9be4053b9559\jetified-lib.5plus.base-release\AndroidManifest.xml:2:1-268:12
 MERGED from [oaid_sdk_1.0.25.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\0a89d77de82c19940f307bb28a4c6765\jetified-oaid_sdk_1.0.25\AndroidManifest.xml:2:1-17:12
 MERGED from [uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\277e0d23e1ec2e0b3b106b89a98179dc\jetified-uniapp-v8-release\AndroidManifest.xml:20:1-37:12
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\d9c8547f43bfc98a7c33c7a922993a2d\legacy-support-v4-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-45:12
+MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-46:12
 MERGED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-25:12
 MERGED from [androidx.appcompat:appcompat:1.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\deb6da7db3da191b108446f27e37e742\appcompat-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.recyclerview:recyclerview:1.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\24e82aba340b759240f09c8ab46deb1a\recyclerview-1.0.0\AndroidManifest.xml:17:1-22:12
@@ -53,20 +53,20 @@ MERGED from [com.facebook.fresco:imagepipeline-base:1.13.0] D:\xu\.gradle\caches
 MERGED from [com.facebook.fresco:fbcore:1.13.0] D:\xu\.gradle\caches\transforms-2\files-2.1\7a4c57e77bfb1762efe4b7fb40eca4b2\jetified-fbcore-1.13.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.soloader:soloader:0.6.0] D:\xu\.gradle\caches\transforms-2\files-2.1\6c626cc19970b8b44cee0d91bdaf0132\jetified-soloader-0.6.0\AndroidManifest.xml:2:1-13:12
 MERGED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-24:12
-INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-100:12
-INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-100:12
-INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-100:12
+INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
+INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
+INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
 	package
 		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:3:5-32
 		INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
 		INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
-		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-100:12
+		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
 		INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
-		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-100:12
+		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
 		INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:11-69
@@ -111,13 +111,13 @@ ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:20:5-
 	android:name
 		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:20:22-66
 application
-ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:23:5-98:19
+ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:23:5-94:19
 MERGED from [lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\55011eea89fbd79436cf9be4053b9559\jetified-lib.5plus.base-release\AndroidManifest.xml:169:5-266:19
 MERGED from [lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\55011eea89fbd79436cf9be4053b9559\jetified-lib.5plus.base-release\AndroidManifest.xml:169:5-266:19
 MERGED from [uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\277e0d23e1ec2e0b3b106b89a98179dc\jetified-uniapp-v8-release\AndroidManifest.xml:29:5-35:19
 MERGED from [uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\277e0d23e1ec2e0b3b106b89a98179dc\jetified-uniapp-v8-release\AndroidManifest.xml:29:5-35:19
-MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:5-43:19
-MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:5-43:19
+MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:5-44:19
+MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:5-44:19
 MERGED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-23:19
 MERGED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-23:19
 MERGED from [com.github.bumptech.glide:glide:4.9.0] D:\xu\.gradle\caches\transforms-2\files-2.1\063f161a826f627d1e41043ce9696a71\jetified-glide-4.9.0\AndroidManifest.xml:10:5-20
@@ -238,18 +238,12 @@ ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:87:9-
 		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:89:13-61
 	android:name
 		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:88:13-41
-meta-data#xzh_appId
-ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:91:9-93:45
-	android:value
-		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:93:13-43
-	android:name
-		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:92:13-37
 meta-data#xzh_page
-ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:95:9-97:46
+ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:91:9-93:46
 	android:value
-		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:97:13-44
+		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:93:13-44
 	android:name
-		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:96:13-36
+		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:92:13-36
 uses-sdk
 INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
@@ -523,7 +517,7 @@ ADDED from [lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-
 	android:name
 		ADDED from [lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\55011eea89fbd79436cf9be4053b9559\jetified-lib.5plus.base-release\AndroidManifest.xml:263:13-70
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-100:12 reason: io.dcloud.base requested WRITE_EXTERNAL_STORAGE
+IMPLIED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12 reason: io.dcloud.base requested WRITE_EXTERNAL_STORAGE
 MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-80
 MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-80
 uses-permission#com.asus.msa.SupplementaryDID.ACCESS
@@ -566,46 +560,28 @@ uses-permission#android.permission.SYSTEM_ALERT_WINDOW
 ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:5-78
 	android:name
 		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:22-75
-activity#com.xzh.musicnotification.LockActivityV2
-ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:23:9-31:54
-	android:screenOrientation
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:28:13-49
-	android:excludeFromRecents
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:13-46
-	android:showWhenLocked
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:29:13-42
-	android:launchMode
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:27:13-48
-	android:exported
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:26:13-37
-	android:theme
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:31:13-51
-	android:taskAffinity
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:30:13-63
-	android:name
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:13-68
 activity#com.xzh.musicnotification.LockActivityV3
-ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:32:9-40:54
+ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:33:9-41:54
 	android:screenOrientation
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:37:13-49
+		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:38:13-49
 	android:excludeFromRecents
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:34:13-46
+		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:35:13-46
 	android:showWhenLocked
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:38:13-42
+		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:39:13-42
 	android:launchMode
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:36:13-48
+		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:37:13-48
 	android:exported
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:35:13-37
+		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:36:13-37
 	android:theme
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:40:13-51
+		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:41:13-51
 	android:taskAffinity
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:39:13-63
+		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:40:13-63
 	android:name
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:33:13-68
+		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:34:13-68
 service#com.xzh.musicnotification.service.PlayServiceV2
-ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:42:9-83
+ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:43:9-83
 	android:name
-		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:42:18-80
+		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:43:18-80
 meta-data#android.app.shortcuts
 ADDED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-15:53
 	android:resource

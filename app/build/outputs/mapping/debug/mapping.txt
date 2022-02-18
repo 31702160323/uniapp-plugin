@@ -1,7 +1,7 @@
 # compiler: R8
 # compiler_version: 2.1.86
 # min_api: 26
-# pg_map_id: 9b1aecc
+# pg_map_id: a0149da
 # common_typos_disable
 XI.K0.XI.XI$K0 -> XI.K0.XI.a:
     XI.K0.XI.XI XI -> a
@@ -35338,7 +35338,10 @@ com.xzh.musicnotification.-$$Lambda$LockActivityV2$1$JgP8J3GJhPTM5LKklWXoVz3NnLs
 com.xzh.musicnotification.-$$Lambda$LockActivityV2$CEKySSFjR7Z2B76GHk1s0Mfr99g -> com.xzh.musicnotification.b:
     com.xzh.musicnotification.LockActivityV2 f$0 -> a
     com.alibaba.fastjson.JSONObject f$1 -> b
-com.xzh.musicnotification.-$$Lambda$MusicNotificationModule$eCM5JjqtqlrhXszDmMH4fansdE0 -> com.xzh.musicnotification.c:
+com.xzh.musicnotification.-$$Lambda$LockActivityV3$Nk2fI9YyGhNZnEzk75mM52Rrw78 -> com.xzh.musicnotification.c:
+    android.content.pm.ApplicationInfo f$1 -> b
+    com.xzh.musicnotification.LockActivityV3 f$0 -> a
+com.xzh.musicnotification.-$$Lambda$MusicNotificationModule$eCM5JjqtqlrhXszDmMH4fansdE0 -> com.xzh.musicnotification.d:
     io.dcloud.feature.uniapp.bridge.UniJSCallback f$0 -> a
 com.xzh.musicnotification.BuildConfig -> com.xzh.musicnotification.BuildConfig:
     7:7:void <clinit>() -> <clinit>
@@ -35366,16 +35369,18 @@ com.xzh.musicnotification.LockActivityV2$1 -> com.xzh.musicnotification.LockActi
     65:72:void onServiceConnected(android.content.ComponentName,android.os.IBinder) -> onServiceConnected
     77:77:void onServiceDisconnected(android.content.ComponentName) -> onServiceDisconnected
 com.xzh.musicnotification.LockActivityV3 -> com.xzh.musicnotification.LockActivityV3:
-    21:21:void <init>() -> <init>
-    28:47:void onCreate(android.os.Bundle) -> onCreate
-    88:92:void onDestroy() -> onDestroy
-    62:64:void onException(com.taobao.weex.WXSDKInstance,java.lang.String,java.lang.String) -> onException
-    74:78:void onPause() -> onPause
-    58:58:void onRefreshSuccess(com.taobao.weex.WXSDKInstance,int,int) -> onRefreshSuccess
-    55:55:void onRenderSuccess(com.taobao.weex.WXSDKInstance,int,int) -> onRenderSuccess
-    67:71:void onResume() -> onResume
-    81:85:void onStop() -> onStop
-    50:51:void onViewCreated(com.taobao.weex.WXSDKInstance,android.view.View) -> onViewCreated
+    24:24:void <init>() -> <init>
+    39:50:boolean lambda$onCreate$0(android.content.pm.ApplicationInfo,int,org.xmlpull.v1.XmlPullParser) -> a
+    boolean lambda$onCreate$0$LockActivityV3(android.content.pm.ApplicationInfo,int,org.xmlpull.v1.XmlPullParser) -> b
+    29:52:void onCreate(android.os.Bundle) -> onCreate
+    93:97:void onDestroy() -> onDestroy
+    67:69:void onException(com.taobao.weex.WXSDKInstance,java.lang.String,java.lang.String) -> onException
+    79:83:void onPause() -> onPause
+    63:63:void onRefreshSuccess(com.taobao.weex.WXSDKInstance,int,int) -> onRefreshSuccess
+    60:60:void onRenderSuccess(com.taobao.weex.WXSDKInstance,int,int) -> onRenderSuccess
+    72:76:void onResume() -> onResume
+    86:90:void onStop() -> onStop
+    55:56:void onViewCreated(com.taobao.weex.WXSDKInstance,android.view.View) -> onViewCreated
 com.xzh.musicnotification.MusicNotificationModule -> com.xzh.musicnotification.MusicNotificationModule:
     34:36:void <init>() -> <init>
     185:187:void lambda$initSongs$0(io.dcloud.feature.uniapp.bridge.UniJSCallback,java.util.List) -> a
@@ -35471,6 +35476,9 @@ com.xzh.musicnotification.utils.Utils -> com.xzh.musicnotification.utils.Utils:
     20:26:android.content.pm.ApplicationInfo getApplicationInfo(android.content.Context) -> getApplicationInfo
     70:74:void openOverlaySetting(android.content.Context) -> openOverlaySetting
     31:65:boolean openPermissionSetting(android.content.Context) -> openPermissionSetting
+com.xzh.musicnotification.utils.XmlUtils -> com.xzh.musicnotification.utils.XmlUtils:
+    12:12:void <init>() -> <init>
+    14:24:void readXml(android.content.Context,java.lang.String,com.xzh.musicnotification.utils.XmlUtils$IReadXmlListener) -> readXml
 com.xzh.musicnotification.view.HintTextView -> com.xzh.musicnotification.view.HintTextView:
     30:38:void <init>(android.content.Context) -> <init>
     34:38:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
