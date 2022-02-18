@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/lock_root"
-    android:background="#9F9F9F"
-    tools:context=".LockActivityV2">
+    android:background="#9F9F9F">
 
     <ImageView
         android:id="@+id/iv_audio"

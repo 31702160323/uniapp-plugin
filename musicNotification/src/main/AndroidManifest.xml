@@ -13,15 +13,15 @@
 
     <application>
 <!--        android:noHistory="true"-->
-        <activity
-            android:name=".LockActivityV2"
-            android:exported="false"
-            android:showWhenLocked="true"
-            android:excludeFromRecents="true"
-            android:launchMode="singleInstance"
-            android:screenOrientation="portrait"
-            android:taskAffinity="com.xzh.musicnotificationV2"
-            android:theme="@style/LockScreenTheme" />
+<!--        <activity-->
+<!--            android:name=".LockActivityV2"-->
+<!--            android:exported="false"-->
+<!--            android:showWhenLocked="true"-->
+<!--            android:excludeFromRecents="true"-->
+<!--            android:launchMode="singleInstance"-->
+<!--            android:screenOrientation="portrait"-->
+<!--            android:taskAffinity="com.xzh.musicnotificationV2"-->
+<!--            android:theme="@style/LockScreenTheme" />-->
 
         <activity
             android:name=".LockActivityV3"
