@@ -1,6 +1,7 @@
 package com.xzh.musicnotification.utils;
 
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -12,6 +13,8 @@ import android.provider.Settings;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.xzh.musicnotification.LockActivityV3;
 
 import io.dcloud.feature.uniapp.utils.UniLogUtils;
 
@@ -73,6 +76,29 @@ public class Utils {
         }
     }
 
+    public static void openLock(Context context, Class<?> clazz) {
+        try {
+            Intent lockScreen = new Intent(context, clazz);
+            lockScreen.setPackage(context.getPackageName());
+            lockScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    | Intent.FLAG_FROM_BACKGROUND
+                    | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+                    | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                    | Intent.FLAG_ACTIVITY_NO_ANIMATION
+                    | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, lockScreen, 0);
+            pendingIntent.send();
+        } catch (PendingIntent.CanceledException e) {
+            Intent lockScreen = new Intent(context, clazz);
+            lockScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            lockScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                lockScreen.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+            }
+            context.startActivity(lockScreen);
+        }
+    }
     /**
      * 通过设置全屏，设置状态栏透明
      *
