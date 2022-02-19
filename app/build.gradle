@@ -78,6 +78,4 @@ dependencies {
 
     // 添加uni-app插件
     implementation project(':musicNotification')
-    implementation project(':shortcuts')
-//    implementation project(':pictureSelectorUni')
 }

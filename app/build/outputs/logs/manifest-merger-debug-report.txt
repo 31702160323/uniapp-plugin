@@ -10,7 +10,6 @@ MERGED from [oaid_sdk_1.0.25.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\0a
 MERGED from [uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\277e0d23e1ec2e0b3b106b89a98179dc\jetified-uniapp-v8-release\AndroidManifest.xml:20:1-37:12
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\d9c8547f43bfc98a7c33c7a922993a2d\legacy-support-v4-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-46:12
-MERGED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-25:12
 MERGED from [androidx.appcompat:appcompat:1.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\deb6da7db3da191b108446f27e37e742\appcompat-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.recyclerview:recyclerview:1.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\24e82aba340b759240f09c8ab46deb1a\recyclerview-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.facebook.fresco:fresco:1.13.0] D:\xu\.gradle\caches\transforms-2\files-2.1\173b3d647206f427c654de2b284c44ca\jetified-fresco-1.13.0\AndroidManifest.xml:2:1-9:12
@@ -118,8 +117,6 @@ MERGED from [uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\
 MERGED from [uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\277e0d23e1ec2e0b3b106b89a98179dc\jetified-uniapp-v8-release\AndroidManifest.xml:29:5-35:19
 MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:5-44:19
 MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:5-44:19
-MERGED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-23:19
-MERGED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-23:19
 MERGED from [com.github.bumptech.glide:glide:4.9.0] D:\xu\.gradle\caches\transforms-2\files-2.1\063f161a826f627d1e41043ce9696a71\jetified-glide-4.9.0\AndroidManifest.xml:10:5-20
 MERGED from [com.github.bumptech.glide:glide:4.9.0] D:\xu\.gradle\caches\transforms-2\files-2.1\063f161a826f627d1e41043ce9696a71\jetified-glide-4.9.0\AndroidManifest.xml:10:5-20
 MERGED from [androidx.core:core:1.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\4bc29e434132fc7b689c2d24b374ddd7\core-1.0.0\AndroidManifest.xml:22:5-89
@@ -147,7 +144,7 @@ MERGED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\
 	android:largeHeap
 		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:30:9-33
 	android:icon
-		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:28:9-40
+		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:28:9-38
 	android:allowBackup
 		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:26:9-35
 	android:networkSecurityConfig
@@ -158,8 +155,6 @@ MERGED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\
 		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:25:9-63
 activity#io.dcloud.PandoraEntry
 ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:35:9-57:20
-MERGED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-16:20
-MERGED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-16:20
 	android:hardwareAccelerated
 		ADDED from D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:39:13-47
 	android:windowSoftInputMode
@@ -260,8 +255,6 @@ MERGED from [androidx.legacy:legacy-support-v4:1.0.0] D:\xu\.gradle\caches\trans
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\d9c8547f43bfc98a7c33c7a922993a2d\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.appcompat:appcompat:1.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\deb6da7db3da191b108446f27e37e742\appcompat-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.appcompat:appcompat:1.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\deb6da7db3da191b108446f27e37e742\appcompat-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.recyclerview:recyclerview:1.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\24e82aba340b759240f09c8ab46deb1a\recyclerview-1.0.0\AndroidManifest.xml:20:5-44
@@ -582,24 +575,6 @@ service#com.xzh.musicnotification.service.PlayServiceV2
 ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:43:9-83
 	android:name
 		ADDED from [:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:43:18-80
-meta-data#android.app.shortcuts
-ADDED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-15:53
-	android:resource
-		ADDED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:17-50
-	android:name
-		ADDED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:17-53
-activity#com.xzh.shortcuts.TrampolineActivity
-ADDED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:9-22:68
-	android:excludeFromRecents
-		ADDED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-46
-	android:noHistory
-		ADDED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:13-37
-	android:theme
-		ADDED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:13-65
-	android:taskAffinity
-		ADDED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:21:13-55
-	android:name
-		ADDED from [:shortcuts] D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-64
 receiver#com.xzh.widget.MusicWidget
 ADDED from [:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-21:20
 	android:name

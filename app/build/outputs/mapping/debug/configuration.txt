@@ -268,7 +268,6 @@
 -keep class com.taobao.weex.WXGlobalEventReceiver { <init>(); }
 -keep class com.xzh.musicnotification.LockActivityV3 { <init>(); }
 -keep class com.xzh.musicnotification.service.PlayServiceV2 { <init>(); }
--keep class com.xzh.shortcuts.TrampolineActivity { <init>(); }
 -keep class com.xzh.widget.MusicWidget { <init>(); }
 -keep class io.dcloud.PandoraEntry { <init>(); }
 -keep class io.dcloud.PandoraEntryActivity { <init>(); }
@@ -363,9 +362,6 @@
 # The proguard configuration file for the following section is D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
 
 # End of content from D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
-# The proguard configuration file for the following section is D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
-
-# End of content from D:\htmlFile\UniPlugin-Hello-AS\shortcuts\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
 # The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\deb6da7db3da191b108446f27e37e742\appcompat-1.0.0\proguard.txt
 # Copyright (C) 2018 The Android Open Source Project
 #

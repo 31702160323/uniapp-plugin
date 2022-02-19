@@ -1,7 +1,7 @@
 # compiler: R8
 # compiler_version: 2.1.86
 # min_api: 26
-# pg_map_id: 792b02a
+# pg_map_id: 910a7c7
 # common_typos_disable
 XI.K0.XI.XI$K0 -> XI.K0.XI.a:
     XI.K0.XI.XI XI -> a
@@ -35497,12 +35497,6 @@ com.xzh.musicnotification.view.SlidingFinishLayout -> com.xzh.musicnotification.
     130:135:void scrollOrigin() -> scrollOrigin
     122:127:void scrollRight() -> scrollRight
     69:70:void setOnSlidingFinishListener(com.xzh.musicnotification.view.SlidingFinishLayout$OnSlidingFinishListener) -> setOnSlidingFinishListener
-com.xzh.shortcuts.BuildConfig -> com.xzh.shortcuts.BuildConfig:
-    7:7:void <clinit>() -> <clinit>
-    6:6:void <init>() -> <init>
-com.xzh.shortcuts.TrampolineActivity -> com.xzh.shortcuts.TrampolineActivity:
-    13:13:void <init>() -> <init>
-    18:27:void onCreate(android.os.Bundle) -> onCreate
 com.xzh.widget.BuildConfig -> com.xzh.widget.BuildConfig:
     7:7:void <clinit>() -> <clinit>
     6:6:void <init>() -> <init>

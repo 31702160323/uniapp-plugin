@@ -551,19 +551,11 @@
     <string name="hint_text"><![CDATA[>>> 滑动解锁]]></string>
     <string name="img">专辑图片</string>
     <string name="in_package">apk</string>
-    <string name="long_label_1">long_label_1</string>
-    <string name="long_label_2">long_label_2</string>
-    <string name="long_label_3">long_label_3</string>
-    <string name="long_label_4">long_label_4</string>
     <string name="next">下一首</string>
     <string name="oaid_not_support">未集成oaid模块</string>
     <string name="play">播放按钮</string>
     <string name="previous">上一首</string>
     <string name="search_menu_title">Search</string>
-    <string name="short_label_1">short_label_1</string>
-    <string name="short_label_2">short_label_2</string>
-    <string name="short_label_3">short_label_3</string>
-    <string name="short_label_4">short_label_4</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="stream_my">最近流应用</string>
     <style name="ActionSheetStyleIOS6">
@@ -2060,23 +2052,6 @@
     <style name="ThemeOverlay.AppCompat.Dialog" parent="Base.ThemeOverlay.AppCompat.Dialog"/>
     <style name="ThemeOverlay.AppCompat.Dialog.Alert" parent="Base.ThemeOverlay.AppCompat.Dialog.Alert"/>
     <style name="ThemeOverlay.AppCompat.Light" parent="Base.ThemeOverlay.AppCompat.Light"/>
-    <style name="TranslucentNoTitleDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-            <item name="android:windowNoTitle">true</item>
-            <item name="android:windowBackground">@android:color/transparent</item>
-            <item name="android:windowIsTranslucent">true</item>
-            <item name="background">@android:color/transparent</item>
-            <item name="android:windowFrame">@null</item>
-            <item name="title">null</item>
-            <item name="windowNoTitle">true</item>
-            <item name="android:windowIsFloating">true</item>
-            <item name="android:windowContentOverlay">@null</item>
-            <item name="android:fullBright">@android:color/transparent</item>
-            <item name="android:fullDark">@android:color/transparent</item>
-            <item name="android:topBright">@android:color/transparent</item>
-            <item name="android:topDark">@android:color/transparent</item>
-            <item name="android:borderlessButtonStyle">@android:color/transparent</item>
-            <item name="android:backgroundDimEnabled">false</item>
-    </style>
     <style name="TranslucentTheme" parent="@android:style/Theme.DeviceDefault.Light">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
