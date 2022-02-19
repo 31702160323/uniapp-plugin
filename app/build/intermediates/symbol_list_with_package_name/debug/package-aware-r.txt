@@ -796,10 +796,6 @@ drawable dcloud_tabbar_badge
 drawable dcloud_tabbar_dot
 drawable dcloud_webview_activity_title_bg
 drawable icon
-drawable icon_1
-drawable icon_2
-drawable icon_3
-drawable icon_4
 drawable image_bg_bottom
 drawable image_bg_edit_check
 drawable image_bg_top
@@ -1582,19 +1578,11 @@ string favourite
 string hint_text
 string img
 string in_package
-string long_label_1
-string long_label_2
-string long_label_3
-string long_label_4
 string next
 string oaid_not_support
 string play
 string previous
 string search_menu_title
-string short_label_1
-string short_label_2
-string short_label_3
-string short_label_4
 string status_bar_notification_info_overflow
 string stream_my
 style ActionSheetStyleIOS6
@@ -1890,7 +1878,6 @@ style ThemeOverlay_AppCompat_Dark_ActionBar
 style ThemeOverlay_AppCompat_Dialog
 style ThemeOverlay_AppCompat_Dialog_Alert
 style ThemeOverlay_AppCompat_Light
-style TranslucentNoTitleDialogTheme
 style TranslucentTheme
 style Widget_AppCompat_ActionBar
 style Widget_AppCompat_ActionBar_Solid
@@ -2031,4 +2018,3 @@ xml dcloud_file_provider
 xml dcloud_gg_file_provider
 xml music_widget_info
 xml network_security_config
-xml shortcuts
