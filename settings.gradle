@@ -1,6 +1,2 @@
-include ':pictureSelectorUni'
 include ':app'
-include ':widget'
-include ':musicNotification'
-include ':varyDesktopIcons'
-include ':shortcuts'
+include ':pictureSelectorUni'

@@ -25,7 +25,7 @@
         android:name="io.dcloud.application.DCloudApplication"
         android:allowBackup="true"
         android:allowClearUserData="true"
-        android:icon="@drawable/icon_1"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:debuggable="true"
