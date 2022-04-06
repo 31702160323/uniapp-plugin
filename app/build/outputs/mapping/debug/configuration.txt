@@ -1,4 +1,4 @@
-# The proguard configuration file for the following section is D:\htmlFile\UniPlugin-Hello-AS\app\build\intermediates\proguard-files\proguard-android.txt-4.1.2
+# The proguard configuration file for the following section is D:\htmlFile\project\UniPlugin-Hello-AS\app\build\intermediates\proguard-files\proguard-android.txt-4.1.2
 # This is a configuration file for ProGuard.
 # http://proguard.sourceforge.net/index.html#manual/usage.html
 #
@@ -110,8 +110,8 @@
 # These classes are duplicated between android.jar and core-lambda-stubs.jar.
 -dontnote java.lang.invoke.**
 
-# End of content from D:\htmlFile\UniPlugin-Hello-AS\app\build\intermediates\proguard-files\proguard-android.txt-4.1.2
-# The proguard configuration file for the following section is D:\htmlFile\UniPlugin-Hello-AS\app\proguard-rules.pro
+# End of content from D:\htmlFile\project\UniPlugin-Hello-AS\app\build\intermediates\proguard-files\proguard-android.txt-4.1.2
+# The proguard configuration file for the following section is D:\htmlFile\project\UniPlugin-Hello-AS\app\proguard-rules.pro
 -optimizationpasses 5
 -dontusemixedcaseclassnames
 -dontskipnonpubliclibraryclasses
@@ -260,13 +260,13 @@
 -keep class org.mozilla.**{*;}
 
 -keep public class * extends io.dcloud.feature.uniapp.common.UniModule{*;}
-# End of content from D:\htmlFile\UniPlugin-Hello-AS\app\proguard-rules.pro
-# The proguard configuration file for the following section is D:\htmlFile\UniPlugin-Hello-AS\app\build\intermediates\aapt_proguard_file\debug\aapt_rules.txt
+# End of content from D:\htmlFile\project\UniPlugin-Hello-AS\app\proguard-rules.pro
+# The proguard configuration file for the following section is D:\htmlFile\project\UniPlugin-Hello-AS\app\build\intermediates\aapt_proguard_file\debug\aapt_rules.txt
 -keep class androidx.core.app.CoreComponentFactory { <init>(); }
 -keep class com.dmcbig.mediapicker.PickerActivity { <init>(); }
 -keep class com.dmcbig.mediapicker.PreviewActivity { <init>(); }
 -keep class com.taobao.weex.WXGlobalEventReceiver { <init>(); }
--keep class com.xzh.musicnotification.LockActivityV3 { <init>(); }
+-keep class com.xzh.musicnotification.LockActivityV2 { <init>(); }
 -keep class com.xzh.musicnotification.service.PlayServiceV2 { <init>(); }
 -keep class com.xzh.widget.MusicWidget { <init>(); }
 -keep class io.dcloud.PandoraEntry { <init>(); }
@@ -349,7 +349,7 @@
 -keepclassmembers class * { *** onClick(android.view.View); }
 
 
-# End of content from D:\htmlFile\UniPlugin-Hello-AS\app\build\intermediates\aapt_proguard_file\debug\aapt_rules.txt
+# End of content from D:\htmlFile\project\UniPlugin-Hello-AS\app\build\intermediates\aapt_proguard_file\debug\aapt_rules.txt
 # The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\4e5ddf07fcf40de5b289452d40b4ea65\jetified-android-gif-drawable-release@1.2.23\proguard.txt
 -keep public class pl.droidsonroids.gif.GifIOException{<init>(int, java.lang.String);}
 #Prevents warnings for consumers not using AndroidX
@@ -359,9 +359,9 @@
 # The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\0a89d77de82c19940f307bb28a4c6765\jetified-oaid_sdk_1.0.25\proguard.txt
 
 # End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\0a89d77de82c19940f307bb28a4c6765\jetified-oaid_sdk_1.0.25\proguard.txt
-# The proguard configuration file for the following section is D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
+# The proguard configuration file for the following section is D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
 
-# End of content from D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
+# End of content from D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
 # The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\deb6da7db3da191b108446f27e37e742\appcompat-1.0.0\proguard.txt
 # Copyright (C) 2018 The Android Open Source Project
 #
@@ -419,6 +419,9 @@
 # Uncomment for DexGuard only
 #-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 # End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\063f161a826f627d1e41043ce9696a71\jetified-glide-4.9.0\proguard.txt
+# The proguard configuration file for the following section is D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
+
+# End of content from D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
 # The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\7f64c1045ae362310688a10253c2a109\media-1.0.0\proguard.txt
 # Copyright (C) 2017 The Android Open Source Project
 #
@@ -578,9 +581,6 @@
 -dontwarn com.facebook.infer.**
 
 # End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\7a4c57e77bfb1762efe4b7fb40eca4b2\jetified-fbcore-1.13.0\proguard.txt
-# The proguard configuration file for the following section is D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
-
-# End of content from D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
 # The proguard configuration file for the following section is <unknown>
 -ignorewarnings
 # End of content from <unknown>

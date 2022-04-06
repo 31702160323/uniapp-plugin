@@ -20,15 +20,18 @@ import com.xzh.musicnotification.service.PlayServiceV2;
 import com.xzh.musicnotification.utils.MusicAsyncQueryHandler;
 import com.xzh.musicnotification.utils.Utils;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.dcloud.common.util.BaseInfo;
 import io.dcloud.feature.uniapp.annotation.UniJSMethod;
 import io.dcloud.feature.uniapp.bridge.UniJSCallback;
 import io.dcloud.feature.uniapp.common.UniModule;
 import io.dcloud.feature.uniapp.utils.UniLogUtils;
 
+import static android.content.ContentValues.TAG;
 import static android.content.Context.BIND_AUTO_CREATE;
 
 public class MusicNotificationModule extends UniModule {

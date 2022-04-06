@@ -95,6 +95,7 @@ public class MusicWidget extends AppWidgetProvider {
     }
 
     public void addOnClickPendingIntents(RemoteViews views, Context context, PendingIntentInfo... pendingIntentInfoList) {
+        Log.d("TAG", "addOnClickPendingIntents: " + context.getPackageName() + ".NOTIFICATION_ACTIONS");
         for (PendingIntentInfo item : pendingIntentInfoList) {
             Intent playIntent = new Intent(context.getPackageName() + ".NOTIFICATION_ACTIONS");
             playIntent.putExtra("extra",

@@ -20,3 +20,4 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 -keep public class * extends io.dcloud.feature.uniapp.common.UniModule{*;}
+-keep class com.xzh.widget.MusicWidget { public static void invoke(android.content.Context, java.lang.String, java.util.Map); }

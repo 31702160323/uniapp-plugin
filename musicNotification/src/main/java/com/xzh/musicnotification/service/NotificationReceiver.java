@@ -4,12 +4,13 @@ package com.xzh.musicnotification.service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 /**
  * 接收Notification发送的广播
  */
 public class NotificationReceiver extends BroadcastReceiver {
-    public static final String ACTION_STATUS_BAR = NotificationReceiver.class.getPackage().getName() + ".NOTIFICATION_ACTIONS";
+    public static final String ACTION_STATUS_BAR = ".NOTIFICATION_ACTIONS";
     public static final String EXTRA = "extra";
     public static final String EXTRA_PLAY = "play_pause";
     public static final String EXTRA_NEXT = "play_next";

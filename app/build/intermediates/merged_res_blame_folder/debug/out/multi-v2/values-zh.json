@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\htmlFile\\UniPlugin-Hello-AS\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh\\values-zh.xml",
+            "outputFile": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh\\values-zh.xml",
             "map": [
                 {
                     "source": "D:\\xu\\.gradle\\caches\\transforms-2\\files-2.1\\55011eea89fbd79436cf9be4053b9559\\jetified-lib.5plus.base-release\\res\\values-zh\\values-zh.xml",
