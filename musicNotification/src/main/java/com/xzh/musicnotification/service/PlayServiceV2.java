@@ -16,6 +16,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xzh.musicnotification.LockActivityV2;
 import com.xzh.musicnotification.LockActivityV3;
 import com.xzh.musicnotification.notification.MusicNotificationV2;
 import com.xzh.musicnotification.utils.Utils;
@@ -31,7 +32,7 @@ import io.dcloud.feature.uniapp.utils.UniLogUtils;
 
 import static com.xzh.musicnotification.notification.MusicNotificationV2.NOTIFICATION_ID;
 
-public class PlayServiceV2 extends Service implements MusicNotificationV2.NotificationHelperListener {
+public class PlayServiceV2 extends Service implements MusicNotificationV2.NotificationHelperListener, NotificationReceiver.IReceiverListener {
     private static PlayServiceV2 serviceV2;
 
     private boolean xzhFavour;
@@ -71,44 +72,10 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
             xzhFavour = info.metaData.getBoolean("xzh_favour");
         }
 
-        mReceiver = new NotificationReceiver((action, extra) -> {
-            if (lockActivity && Intent.ACTION_SCREEN_OFF.equals(action)) {
-                Utils.openLock(this, LockActivityV3.class);
-            }
-            if (extra == null) return;
-            String eventName = "musicNotificationError";
-            Map<String, Object> data = new HashMap<>();
-            data.put("message", "触发回调事件成功");
-            data.put("code", 0);
-            switch (extra) {
-                case NotificationReceiver.EXTRA_PLAY:
-                    mBinder.playOrPause(serviceV2.Playing);
-                    UniLogUtils.i("XZH-musicNotification","点击播放按钮");
-                    eventName = "musicNotificationPause";
-                    break;
-                case NotificationReceiver.EXTRA_PRE:
-                    UniLogUtils.i("XZH-musicNotification","点击上一首按钮");
-                    eventName = "musicNotificationPrevious";
-                    break;
-                case NotificationReceiver.EXTRA_NEXT:
-                    UniLogUtils.i("XZH-musicNotification","点击下一首按钮");
-                    eventName = "musicNotificationNext";
-                    break;
-                case NotificationReceiver.EXTRA_FAV:
-                    mBinder.favour(!Favour);
-                    UniLogUtils.i("XZH-musicNotification","点击搜藏按钮");
-                    eventName = "musicNotificationFavourite";
-                    break;
-                default:
-                    data.put("message", "触发回调事件失败");
-                    data.put("code", -7);
-                    break;
-            }
-            mBinder.fireGlobalEventCallback(eventName, data);
-        });
+        mReceiver = new NotificationReceiver(this);
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_OFF);
-        filter.addAction(NotificationReceiver.ACTION_STATUS_BAR);
+        filter.addAction(getPackageName() + NotificationReceiver.ACTION_STATUS_BAR);
         registerReceiver(mReceiver, filter);
     }
 
@@ -139,6 +106,44 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         // 设置为前台Service
         Log.d("设置为前台Service", "onNotificationInit: " + notification);
         startForeground(NOTIFICATION_ID, notification);
+    }
+
+    @Override
+    public void onReceive(String action, String extra) {
+        Log.d("NotificationReceiver", "onCreate: " + extra);
+        if (lockActivity && Intent.ACTION_SCREEN_OFF.equals(action)) {
+            Utils.openLock(this, LockActivityV2.class);
+        }
+        if (extra == null) return;
+        String eventName = "musicNotificationError";
+        Map<String, Object> data = new HashMap<>();
+        data.put("message", "触发回调事件成功");
+        data.put("code", 0);
+        switch (extra) {
+            case NotificationReceiver.EXTRA_PLAY:
+                mBinder.playOrPause(serviceV2.Playing);
+                UniLogUtils.i("XZH-musicNotification","点击播放按钮");
+                eventName = "musicNotificationPause";
+                break;
+            case NotificationReceiver.EXTRA_PRE:
+                UniLogUtils.i("XZH-musicNotification","点击上一首按钮");
+                eventName = "musicNotificationPrevious";
+                break;
+            case NotificationReceiver.EXTRA_NEXT:
+                UniLogUtils.i("XZH-musicNotification","点击下一首按钮");
+                eventName = "musicNotificationNext";
+                break;
+            case NotificationReceiver.EXTRA_FAV:
+                mBinder.favour(!Favour);
+                UniLogUtils.i("XZH-musicNotification","点击搜藏按钮");
+                eventName = "musicNotificationFavourite";
+                break;
+            default:
+                data.put("message", "触发回调事件失败");
+                data.put("code", -7);
+                break;
+        }
+        mBinder.fireGlobalEventCallback(eventName, data);
     }
 
     public class ServiceBinder extends Binder {
@@ -223,8 +228,8 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
     public static void invoke(Context context, String type, Map<String, Object> options) {
         try {
             Class<?> clazz = Class.forName("com.xzh.widget.MusicWidget");
-            Method method = clazz.getMethod("invoke", Context.class, String.class, Map.class);
-            method.invoke(null, context, type, options);
+            Method method = clazz.getDeclaredMethod("invoke", Context.class, String.class, Map.class);
+            method.invoke(clazz, context, type, options);
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }

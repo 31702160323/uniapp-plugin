@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/lock_root"
-    android:background="#9F9F9F">
+    android:background="@color/image_color_accent">
 
     <ImageView
         android:id="@+id/iv_audio"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:scaleType="centerCrop"
+        android:scaleType="fitStart"
         android:contentDescription="@string/img" />
 
     <TextClock
