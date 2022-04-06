@@ -219,25 +219,23 @@
             android:enabled="true"
             android:exported="false" >
         </receiver> <!-- android:noHistory="true" -->
-        <!-- <activity -->
-        <!-- android:name=".LockActivityV2" -->
-        <!-- android:exported="false" -->
-        <!-- android:showWhenLocked="true" -->
-        <!-- android:excludeFromRecents="true" -->
-        <!-- android:launchMode="singleInstance" -->
-        <!-- android:screenOrientation="portrait" -->
-        <!-- android:taskAffinity="com.xzh.musicnotificationV2" -->
-        <!-- android:theme="@style/LockScreenTheme" /> -->
         <activity
-            android:name="com.xzh.musicnotification.LockActivityV3"
+            android:name="com.xzh.musicnotification.LockActivityV2"
             android:excludeFromRecents="true"
             android:exported="false"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:showWhenLocked="true"
             android:taskAffinity="com.xzh.musicnotificationV2"
-            android:theme="@style/LockScreenTheme" />
-
+            android:theme="@style/LockScreenTheme" /> <!-- <activity -->
+        <!-- android:name=".LockActivityV3" -->
+        <!-- android:exported="false" -->
+        <!-- android:showWhenLocked="true" -->
+        <!-- android:excludeFromRecents="true" -->
+        <!-- android:launchMode="singleInstance" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:taskAffinity="com.xzh.musicnotificationV2" -->
+        <!-- android:theme="@style/LockScreenTheme"/> -->
         <service android:name="com.xzh.musicnotification.service.PlayServiceV2" />
 
         <receiver android:name="com.xzh.widget.MusicWidget" >

@@ -6,44 +6,44 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="25"
-8-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
+8-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="26" />
-9-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
+9-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
 10
 11    <supports-screens
-11-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:5:5-10:39
+11-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:5:5-10:39
 12        android:anyDensity="true"
-12-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:6:9-34
+12-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:6:9-34
 13        android:largeScreens="true"
-13-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:7:9-36
+13-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:7:9-36
 14        android:normalScreens="true"
-14-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:8:9-37
+14-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:8:9-37
 15        android:resizeable="true"
-15-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:9:9-34
+15-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:9:9-34
 16        android:smallScreens="true" />
-16-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:10:9-36
+16-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:10:9-36
 17
 18    <!-- Barcode(二维码)  begin -->
 19    <uses-permission android:name="android.permission.CAMERA" />
-19-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:13:5-65
-19-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:13:22-62
+19-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:13:5-65
+19-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:13:22-62
 20    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-20-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:14:5-81
-20-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:14:22-78
+20-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:14:5-81
+20-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:14:22-78
 21
 22    <uses-feature android:name="android.hardware.camera" />
-22-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:16:5-60
-22-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:16:19-57
+22-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:16:5-60
+22-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:16:19-57
 23    <uses-feature android:name="android.hardware.camera.autofocus" />
-23-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:17:5-70
-23-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:17:19-67
+23-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:17:5-70
+23-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:17:19-67
 24
 25    <uses-permission android:name="android.permission.VIBRATE" />
-25-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:19:5-66
-25-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:19:22-63
+25-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:19:5-66
+25-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:19:22-63
 26    <uses-permission android:name="android.permission.FLASHLIGHT" />
-26-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:20:5-69
-26-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:20:22-66
+26-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:20:5-69
+26-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:20:22-66
 27    <uses-permission android:name="android.permission.INTERNET" />
 27-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\55011eea89fbd79436cf9be4053b9559\jetified-lib.5plus.base-release\AndroidManifest.xml:17:5-67
 27-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\55011eea89fbd79436cf9be4053b9559\jetified-lib.5plus.base-release\AndroidManifest.xml:17:22-64
@@ -67,18 +67,18 @@
 38        <intent>
 38-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\55011eea89fbd79436cf9be4053b9559\jetified-lib.5plus.base-release\AndroidManifest.xml:29:9-31:18
 39            <action android:name="android.intent.action.MAIN" />
-39-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:54:17-68
-39-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:54:25-66
+39-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:54:17-68
+39-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:54:25-66
 40        </intent>
 41        <intent>
 41-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\55011eea89fbd79436cf9be4053b9559\jetified-lib.5plus.base-release\AndroidManifest.xml:32:9-36:18
 42            <action android:name="android.intent.action.VIEW" />
-42-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:43:17-68
-42-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:43:25-66
+42-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:43:17-68
+42-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:43:25-66
 43
 44            <category android:name="android.intent.category.DEFAULT" />
-44-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:45:17-75
-44-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:45:27-73
+44-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:45:17-75
+44-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:45:27-73
 45        </intent>
 46    </queries>
 47
@@ -90,163 +90,163 @@
 50-->[oaid_sdk_1.0.25.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\0a89d77de82c19940f307bb28a4c6765\jetified-oaid_sdk_1.0.25\AndroidManifest.xml:15:5-62
 50-->[oaid_sdk_1.0.25.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\0a89d77de82c19940f307bb28a4c6765\jetified-oaid_sdk_1.0.25\AndroidManifest.xml:15:22-59
 51    <uses-permission android:name="android.permission.WAKE_LOCK" />
-51-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-68
-51-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:22-65
+51-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-68
+51-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:22-65
 52    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-52-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:5-75
-52-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:22-72
+52-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:5-75
+52-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:22-72
 53    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-53-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:5-77
-53-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:22-74
+53-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:5-77
+53-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:22-74
 54    <uses-permission android:name="android.permission.START_ACTIVITIES_FROM_BACKGROUND" />
-54-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:5-91
-54-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:22-88
+54-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:5-91
+54-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:22-88
 55    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-55-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:5-80
-55-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:22-77
+55-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:5-80
+55-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:22-77
 56    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- Barcode(二维码)  end -->
-56-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:5-78
-56-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:22-75
+56-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:5-78
+56-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:22-75
 57    <application
-57-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:23:5-94:19
+57-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:23:5-94:19
 58        android:name="io.dcloud.application.DCloudApplication"
-58-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:25:9-63
+58-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:25:9-63
 59        android:allowBackup="true"
-59-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:26:9-35
+59-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:26:9-35
 60        android:allowClearUserData="true"
-60-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:27:9-42
+60-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:27:9-42
 61        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 61-->[androidx.core:core:1.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\4bc29e434132fc7b689c2d24b374ddd7\core-1.0.0\AndroidManifest.xml:22:18-86
 62        android:debuggable="true"
-62-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:31:9-34
+62-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:31:9-34
 63        android:extractNativeLibs="true"
 63-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\277e0d23e1ec2e0b3b106b89a98179dc\jetified-uniapp-v8-release\AndroidManifest.xml:29:18-50
 64        android:icon="@drawable/icon"
-64-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:28:9-38
+64-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:28:9-38
 65        android:label="@string/app_name"
-65-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:29:9-41
+65-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:29:9-41
 66        android:largeHeap="true"
-66-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:30:9-33
+66-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:30:9-33
 67        android:networkSecurityConfig="@xml/network_security_config"
-67-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:24:9-69
+67-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:24:9-69
 68        android:supportsRtl="true"
-68-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:32:9-35
+68-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:32:9-35
 69        android:testOnly="true"
 70        android:usesCleartextTraffic="true" >
 70-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\55011eea89fbd79436cf9be4053b9559\jetified-lib.5plus.base-release\AndroidManifest.xml:172:9-44
 71
 72        <!-- 应用入口 -->
 73        <activity
-73-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:35:9-57:20
+73-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:35:9-57:20
 74            android:name="io.dcloud.PandoraEntry"
-74-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:36:13-50
+74-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:36:13-50
 75            android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale"
-75-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:38:13-92
+75-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:38:13-92
 76            android:hardwareAccelerated="true"
-76-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:39:13-47
+76-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:39:13-47
 77            android:theme="@style/TranslucentTheme"
-77-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:37:13-52
+77-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:37:13-52
 78            android:windowSoftInputMode="adjustResize" >
-78-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:40:13-55
+78-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:40:13-55
 79            <intent-filter>
-79-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:41:13-47:29
+79-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:41:13-47:29
 80                <data android:scheme="hbuilder" />
-80-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:42:17-50
-80-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:42:23-48
+80-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:42:17-50
+80-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:42:23-48
 81
 82                <action android:name="android.intent.action.VIEW" />
-82-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:43:17-68
-82-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:43:25-66
+82-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:43:17-68
+82-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:43:25-66
 83
 84                <category android:name="android.intent.category.DEFAULT" />
-84-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:45:17-75
-84-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:45:27-73
+84-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:45:17-75
+84-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:45:27-73
 85                <category android:name="android.intent.category.BROWSABLE" />
-85-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:46:17-77
-85-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:46:27-75
+85-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:46:17-77
+85-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:46:27-75
 86            </intent-filter>
 87            <intent-filter>
-87-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:48:13-52:29
+87-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:48:13-52:29
 88                <data android:mimeType="image/*" />
-88-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:42:17-50
-88-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:49:23-49
+88-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:42:17-50
+88-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:49:23-49
 89
 90                <action android:name="android.intent.action.SEND" />
-90-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:50:17-68
-90-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:50:25-66
+90-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:50:17-68
+90-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:50:25-66
 91
 92                <category android:name="android.intent.category.DEFAULT" />
-92-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:45:17-75
-92-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:45:27-73
+92-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:45:17-75
+92-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:45:27-73
 93            </intent-filter>
 94            <intent-filter>
-94-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:53:13-56:29
+94-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:53:13-56:29
 95                <action android:name="android.intent.action.MAIN" />
-95-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:54:17-68
-95-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:54:25-66
+95-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:54:17-68
+95-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:54:25-66
 96
 97                <category android:name="android.intent.category.LAUNCHER" />
-97-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:55:17-76
-97-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:55:27-74
+97-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:55:17-76
+97-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:55:27-74
 98            </intent-filter>
 99        </activity>
 100
 101        <meta-data
-101-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:58:9-59:35
+101-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:58:9-59:35
 102            android:name="dcloud_uninview_background"
-102-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:58:20-61
+102-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:58:20-61
 103            android:value="true" />
-103-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:59:13-33
+103-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:59:13-33
 104
 105        <activity
-105-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:61:9-85:20
+105-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:61:9-85:20
 106            android:name="io.dcloud.PandoraEntryActivity"
-106-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:62:13-58
+106-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:62:13-58
 107            android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale|keyboard"
-107-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:64:13-101
+107-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:64:13-101
 108            android:hardwareAccelerated="true"
-108-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:65:13-47
+108-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:65:13-47
 109            android:launchMode="singleTask"
-109-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:63:13-44
+109-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:63:13-44
 110            android:permission="com.miui.securitycenter.permission.AppPermissionsEditor"
-110-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:66:13-89
+110-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:66:13-89
 111            android:screenOrientation="user"
-111-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:67:13-45
+111-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:67:13-45
 112            android:theme="@style/DCloudTheme"
-112-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:68:13-47
+112-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:68:13-47
 113            android:windowSoftInputMode="adjustResize" >
-113-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:69:13-55
+113-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:69:13-55
 114            <intent-filter>
-114-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:71:13-84:29
+114-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:71:13-84:29
 115                <category android:name="android.intent.category.DEFAULT" />
-115-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:45:17-75
-115-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:45:27-73
+115-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:45:17-75
+115-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:45:27-73
 116                <category android:name="android.intent.category.BROWSABLE" />
-116-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:46:17-77
-116-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:46:27-75
+116-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:46:17-77
+116-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:46:27-75
 117
 118                <action android:name="android.intent.action.VIEW" />
-118-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:43:17-68
-118-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:43:25-66
+118-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:43:17-68
+118-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:43:25-66
 119
 120                <data android:scheme=" " />
-120-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:42:17-50
-120-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:42:23-48
+120-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:42:17-50
+120-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:42:23-48
 121            </intent-filter>
 122        </activity>
 123
 124        <meta-data
-124-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:87:9-89:64
+124-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:87:9-89:64
 125            android:name="dcloud_appkey"
-125-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:88:13-41
+125-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:88:13-41
 126            android:value="e9269f31a55e5d46e77a3e5e4ad97b88" />
-126-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:89:13-61
+126-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:89:13-61
 127        <meta-data
-127-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:91:9-93:46
+127-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:91:9-93:46
 128            android:name="xzh_page"
-128-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:92:13-36
+128-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:92:13-36
 129            android:value="pages/lock/lock" />
-129-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:93:13-44
+129-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:93:13-44
 130        <!--
 131        <activity
 132            android:name="io.dcloud.imagepick.CustomGalleryActivity"
@@ -324,8 +324,8 @@
 170-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\55011eea89fbd79436cf9be4053b9559\jetified-lib.5plus.base-release\AndroidManifest.xml:215:25-75
 171
 172                <data android:scheme="package" /> <!-- HERE! -->
-172-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:42:17-50
-172-->D:\htmlFile\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:42:23-48
+172-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:42:17-50
+172-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:42:23-48
 173            </intent-filter>
 174        </receiver> <!-- gallery******start -->
 175        <activity
@@ -412,58 +412,56 @@
 220            android:exported="false" >
 220-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\277e0d23e1ec2e0b3b106b89a98179dc\jetified-uniapp-v8-release\AndroidManifest.xml:33:13-37
 221        </receiver> <!-- android:noHistory="true" -->
-222        <!-- <activity -->
-223        <!-- android:name=".LockActivityV2" -->
-224        <!-- android:exported="false" -->
-225        <!-- android:showWhenLocked="true" -->
-226        <!-- android:excludeFromRecents="true" -->
-227        <!-- android:launchMode="singleInstance" -->
-228        <!-- android:screenOrientation="portrait" -->
-229        <!-- android:taskAffinity="com.xzh.musicnotificationV2" -->
-230        <!-- android:theme="@style/LockScreenTheme" /> -->
-231        <activity
-231-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:33:9-41:54
-232            android:name="com.xzh.musicnotification.LockActivityV3"
-232-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:34:13-68
-233            android:excludeFromRecents="true"
-233-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:35:13-46
-234            android:exported="false"
-234-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:36:13-37
-235            android:launchMode="singleInstance"
-235-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:37:13-48
-236            android:screenOrientation="portrait"
-236-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:38:13-49
-237            android:showWhenLocked="true"
-237-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:39:13-42
-238            android:taskAffinity="com.xzh.musicnotificationV2"
-238-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:40:13-63
-239            android:theme="@style/LockScreenTheme" />
-239-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:41:13-51
+222        <activity
+222-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:23:9-31:54
+223            android:name="com.xzh.musicnotification.LockActivityV2"
+223-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:13-68
+224            android:excludeFromRecents="true"
+224-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:13-46
+225            android:exported="false"
+225-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:26:13-37
+226            android:launchMode="singleInstance"
+226-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:27:13-48
+227            android:screenOrientation="portrait"
+227-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:28:13-49
+228            android:showWhenLocked="true"
+228-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:29:13-42
+229            android:taskAffinity="com.xzh.musicnotificationV2"
+229-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:30:13-63
+230            android:theme="@style/LockScreenTheme" /> <!-- <activity -->
+230-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:31:13-51
+231        <!-- android:name=".LockActivityV3" -->
+232        <!-- android:exported="false" -->
+233        <!-- android:showWhenLocked="true" -->
+234        <!-- android:excludeFromRecents="true" -->
+235        <!-- android:launchMode="singleInstance" -->
+236        <!-- android:screenOrientation="portrait" -->
+237        <!-- android:taskAffinity="com.xzh.musicnotificationV2" -->
+238        <!-- android:theme="@style/LockScreenTheme"/> -->
+239        <service android:name="com.xzh.musicnotification.service.PlayServiceV2" />
+239-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:43:9-83
+239-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:43:18-80
 240
-241        <service android:name="com.xzh.musicnotification.service.PlayServiceV2" />
-241-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:43:9-83
-241-->[:musicNotification] D:\htmlFile\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:43:18-80
-242
-243        <receiver android:name="com.xzh.widget.MusicWidget" >
-243-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-21:20
-243-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:19-60
-244            <intent-filter>
-244-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-16:29
-245                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-245-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:17-84
-245-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:25-81
-246                <action android:name="com.xzh.widget.MusicWidget" />
-246-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:17-69
-246-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:25-66
-247            </intent-filter>
-248
-249            <meta-data
-249-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-20:61
-250                android:name="android.appwidget.provider"
-250-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:17-58
-251                android:resource="@xml/music_widget_info" />
-251-->[:widget] D:\htmlFile\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:17-58
-252        </receiver>
-253    </application>
-254
-255</manifest>
+241        <receiver android:name="com.xzh.widget.MusicWidget" >
+241-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-21:20
+241-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:19-60
+242            <intent-filter>
+242-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-16:29
+243                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+243-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:17-84
+243-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:25-81
+244                <action android:name="com.xzh.widget.MusicWidget" />
+244-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:17-69
+244-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:25-66
+245            </intent-filter>
+246
+247            <meta-data
+247-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-20:61
+248                android:name="android.appwidget.provider"
+248-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:17-58
+249                android:resource="@xml/music_widget_info" />
+249-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:17-58
+250        </receiver>
+251    </application>
+252
+253</manifest>

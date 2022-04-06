@@ -33,7 +33,7 @@ public class PendingIntentInfo {
 
     public static void addOnClickPendingIntents(RemoteViews views, Context context, PendingIntentInfo... pendingIntentInfoList){
         for (PendingIntentInfo item : pendingIntentInfoList) {
-            Intent playIntent = new Intent(NotificationReceiver.ACTION_STATUS_BAR);
+            Intent playIntent = new Intent(context.getPackageName() + NotificationReceiver.ACTION_STATUS_BAR);
             playIntent.putExtra(NotificationReceiver.EXTRA,
                     item.getEXTRA());
             views.setOnClickPendingIntent( item.getId(),

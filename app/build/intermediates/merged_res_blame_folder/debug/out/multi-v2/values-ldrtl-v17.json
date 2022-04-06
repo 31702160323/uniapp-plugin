@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\htmlFile\\UniPlugin-Hello-AS\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ldrtl-v17\\values-ldrtl-v17.xml",
+            "outputFile": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ldrtl-v17\\values-ldrtl-v17.xml",
             "map": [
                 {
                     "source": "D:\\xu\\.gradle\\caches\\transforms-2\\files-2.1\\277e0d23e1ec2e0b3b106b89a98179dc\\jetified-uniapp-v8-release\\res\\values-ldrtl-v17\\values-ldrtl-v17.xml",
