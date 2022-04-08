@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/lock_root"
-    android:background="@color/image_color_accent">
+    android:background="#4CA1FB">
 
     <ImageView
         android:id="@+id/iv_audio"

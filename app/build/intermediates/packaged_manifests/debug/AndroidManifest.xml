@@ -127,6 +127,18 @@
         <meta-data
             android:name="xzh_page"
             android:value="pages/lock/lock" />
+        <meta-data
+            android:name="xzh_favour"
+            android:value="false" />
+        <meta-data
+            android:name="xzh_theme_color"
+            android:value="#5500ff00" />
+        <meta-data
+            android:name="xzh_title_color"
+            android:value="#ffffff" />
+        <meta-data
+            android:name="xzh_artist_color"
+            android:value="#ffffff" />
         <!--
         <activity
             android:name="io.dcloud.imagepick.CustomGalleryActivity"
