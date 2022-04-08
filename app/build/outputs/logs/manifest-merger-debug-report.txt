@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
-INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
-INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
-INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
+ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-112:12
+INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-112:12
+INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-112:12
+INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-112:12
 MERGED from [android-gif-drawable-release@1.2.23.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4e5ddf07fcf40de5b289452d40b4ea65\jetified-android-gif-drawable-release@1.2.23\AndroidManifest.xml:2:1-9:12
 MERGED from [lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\55011eea89fbd79436cf9be4053b9559\jetified-lib.5plus.base-release\AndroidManifest.xml:2:1-268:12
 MERGED from [oaid_sdk_1.0.25.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\0a89d77de82c19940f307bb28a4c6765\jetified-oaid_sdk_1.0.25\AndroidManifest.xml:2:1-17:12
@@ -52,20 +52,20 @@ MERGED from [com.facebook.fresco:nativeimagetranscoder:1.13.0] D:\xu\.gradle\cac
 MERGED from [com.facebook.fresco:imagepipeline-base:1.13.0] D:\xu\.gradle\caches\transforms-2\files-2.1\b8f05a44a2f5f663a09ace20816b5c21\jetified-imagepipeline-base-1.13.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.fresco:fbcore:1.13.0] D:\xu\.gradle\caches\transforms-2\files-2.1\7a4c57e77bfb1762efe4b7fb40eca4b2\jetified-fbcore-1.13.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.soloader:soloader:0.6.0] D:\xu\.gradle\caches\transforms-2\files-2.1\6c626cc19970b8b44cee0d91bdaf0132\jetified-soloader-0.6.0\AndroidManifest.xml:2:1-13:12
-INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
-INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
-INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
+INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-112:12
+INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-112:12
+INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-112:12
 	package
 		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:3:5-32
 		INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
 		INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
-		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
+		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-112:12
 		INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
-		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12
+		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-112:12
 		INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:11-69
@@ -110,7 +110,7 @@ ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.x
 	android:name
 		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:20:22-66
 application
-ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:23:5-94:19
+ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:23:5-110:19
 MERGED from [lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\55011eea89fbd79436cf9be4053b9559\jetified-lib.5plus.base-release\AndroidManifest.xml:169:5-266:19
 MERGED from [lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\55011eea89fbd79436cf9be4053b9559\jetified-lib.5plus.base-release\AndroidManifest.xml:169:5-266:19
 MERGED from [uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\277e0d23e1ec2e0b3b106b89a98179dc\jetified-uniapp-v8-release\AndroidManifest.xml:29:5-35:19
@@ -239,6 +239,30 @@ ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.x
 		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:93:13-44
 	android:name
 		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:92:13-36
+meta-data#xzh_favour
+ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:95:9-97:36
+	android:value
+		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:97:13-34
+	android:name
+		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:96:13-38
+meta-data#xzh_theme_color
+ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:99:9-101:40
+	android:value
+		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:101:13-38
+	android:name
+		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:100:13-43
+meta-data#xzh_title_color
+ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:103:9-105:38
+	android:value
+		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:105:13-36
+	android:name
+		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:104:13-43
+meta-data#xzh_artist_color
+ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:107:9-109:38
+	android:value
+		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:109:13-36
+	android:name
+		ADDED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:108:13-44
 uses-sdk
 INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
@@ -510,7 +534,7 @@ ADDED from [lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-
 	android:name
 		ADDED from [lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\55011eea89fbd79436cf9be4053b9559\jetified-lib.5plus.base-release\AndroidManifest.xml:263:13-70
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-96:12 reason: io.dcloud.base requested WRITE_EXTERNAL_STORAGE
+IMPLIED from D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:2:1-112:12 reason: io.dcloud.base requested WRITE_EXTERNAL_STORAGE
 MERGED from [:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-80
 MERGED from [:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-80
 uses-permission#com.asus.msa.SupplementaryDID.ACCESS

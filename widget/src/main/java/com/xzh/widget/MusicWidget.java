@@ -10,9 +10,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -30,10 +28,12 @@ import io.dcloud.feature.uniapp.utils.UniResourceUtils;
 public class MusicWidget extends AppWidgetProvider {
 
     private boolean xzhFavour;
+    private int themeColor;
+    private int titleColor;
+    private int artistColor;
 
     @SuppressLint("WrongConstant")
     public static void invoke(Context context, String type, Map<String, Object> options) {
-        Log.d("TAG", "MusicWidget: " + type);
         Intent intent = new Intent("com.xzh.widget.MusicWidget");
         intent.addFlags(0x01000000);
         intent.setPackage(context.getPackageName());
@@ -95,7 +95,6 @@ public class MusicWidget extends AppWidgetProvider {
     }
 
     public void addOnClickPendingIntents(RemoteViews views, Context context, PendingIntentInfo... pendingIntentInfoList) {
-        Log.d("TAG", "addOnClickPendingIntents: " + context.getPackageName() + ".NOTIFICATION_ACTIONS");
         for (PendingIntentInfo item : pendingIntentInfoList) {
             Intent playIntent = new Intent(context.getPackageName() + ".NOTIFICATION_ACTIONS");
             playIntent.putExtra("extra",
@@ -126,24 +125,16 @@ public class MusicWidget extends AppWidgetProvider {
         if (xzhFavour) {
             views.setViewVisibility(R.id.favourite_view, View.VISIBLE);
         }
-
-        // 背景颜色
-        int color = Color.BLUE;
-        // 透明度
-        int alpha = 50;
-        // 背景宽度
-        int width = context.getResources().getDimensionPixelSize(R.dimen.dp_250);
-        // 背景高度
-        int height = context.getResources().getDimensionPixelSize(R.dimen.dp_70);
-        // 圆角角度
-//        int radius = context.getResources().getDimensionPixelSize(R.dimen.dp_5);
-        int radius = 30;
-        // 绘制背景
-        Drawable drawable = DrawableUtils.roundShapeDrawable(color, alpha, width, height, radius);
-        // 将绘制好的背景转换为Bitmap
-        Bitmap bitmap = DrawableUtils.drawableToBitmap(drawable);
-        // 将转换好的Bitmap设置到ImageView上
-        views.setImageViewBitmap(R.id.bg_view, bitmap);
+        if (themeColor != 0) {
+            // 将转换好的Bitmap设置到ImageView上
+            views.setImageViewBitmap(R.id.bg_view, getBgBitmap(context, themeColor));
+        }
+        if (titleColor != 0) {
+            views.setInt(R.id.title_view, "setTextColor", titleColor);
+        }
+        if (artistColor != 0) {
+            views.setInt(R.id.tip_view, "setTextColor", artistColor);
+        }
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -159,15 +150,15 @@ public class MusicWidget extends AppWidgetProvider {
                     views.setTextViewText(R.id.title_view, intent.getStringExtra("songName"));
                     views.setTextViewText(R.id.tip_view, intent.getStringExtra("artistsName"));
 
-                AppWidgetTarget appWidgetTarget = new AppWidgetTarget(context, R.id.image_view, views, new ComponentName(context, MusicWidget.class));
+                    AppWidgetTarget appWidgetTarget = new AppWidgetTarget(context, R.id.image_view, views, new ComponentName(context, MusicWidget.class));
 
-                Glide.with(context.getApplicationContext())
-                        .asBitmap()
-                        .load(intent.getStringExtra("picUrl"))
-                        .sizeMultiplier(0.8f)
-                        .override(WXViewUtils.dip2px(70), WXViewUtils.dip2px(70))
-                        .format(DecodeFormat.PREFER_RGB_565)
-                        .into(appWidgetTarget);
+                    Glide.with(context.getApplicationContext())
+                            .asBitmap()
+                            .load(intent.getStringExtra("picUrl"))
+                            .sizeMultiplier(0.8f)
+                            .override(WXViewUtils.dip2px(70), WXViewUtils.dip2px(70))
+                            .format(DecodeFormat.PREFER_RGB_565)
+                            .into(appWidgetTarget);
                     break;
                 case "playOrPause":
                     if (intent.getBooleanExtra("playing", false)) {
@@ -184,15 +175,14 @@ public class MusicWidget extends AppWidgetProvider {
                     }
                     break;
                 case "bg":
-                    Log.d("XZH-musicNotification", "bg: " + intent.getStringExtra("bg"));
-                    if (intent.getStringExtra("bg") != null) {
-                        views.setInt(R.id.bg_view, "setBackgroundColor", UniResourceUtils.getColor(intent.getStringExtra("bg")));
+                    if (intent.getStringExtra("themeColor") != null) {
+                        views.setImageViewBitmap(R.id.bg_view, getBgBitmap(context, UniResourceUtils.getColor(intent.getStringExtra("themeColor"))));
                     }
-                    if (intent.getStringExtra("title") != null) {
-                        views.setInt(R.id.title_view, "setTextColor", UniResourceUtils.getColor(intent.getStringExtra("title")));
+                    if (intent.getStringExtra("titleColor") != null) {
+                        views.setInt(R.id.title_view, "setTextColor", UniResourceUtils.getColor(intent.getStringExtra("titleColor")));
                     }
-                    if (intent.getStringExtra("tip") != null) {
-                        views.setInt(R.id.tip_view, "setTextColor", UniResourceUtils.getColor(intent.getStringExtra("tip")));
+                    if (intent.getStringExtra("artistColor") != null) {
+                        views.setInt(R.id.tip_view, "setTextColor", UniResourceUtils.getColor(intent.getStringExtra("artistColor")));
                     }
                     break;
                 default:
@@ -208,6 +198,9 @@ public class MusicWidget extends AppWidgetProvider {
         try {
             ApplicationInfo info = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
             xzhFavour = info.metaData.getBoolean("xzh_favour");
+            themeColor = info.metaData.getInt("xzh_theme_color");
+            titleColor = info.metaData.getInt("xzh_title_color");
+            artistColor = info.metaData.getInt("xzh_artist_color");
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -227,6 +220,22 @@ public class MusicWidget extends AppWidgetProvider {
     @Override
     public void onDisabled(Context context) {
         // 在最后一个 widget 被删除时，终止服务
+    }
+
+    private Bitmap getBgBitmap(Context context, int color) {
+        // 透明度
+        int alpha = 100;
+        // 背景宽度
+        int width = context.getResources().getDimensionPixelSize(R.dimen.dp_250);
+        // 背景高度
+        int height = context.getResources().getDimensionPixelSize(R.dimen.dp_70);
+        // 圆角角度
+//        int radius = context.getResources().getDimensionPixelSize(R.dimen.dp_5);
+        int radius = 25;
+        // 绘制背景
+        Drawable drawable = DrawableUtils.roundShapeDrawable(color, alpha, width, height, radius);
+        // 将绘制好的背景转换为Bitmap
+        return DrawableUtils.drawableToBitmap(drawable);
     }
 }
 
