@@ -226,8 +226,6 @@ androidx.core.app.RemoteInput:
     public static final java.lang.String RESULTS_CLIP_LABEL
     public static final java.lang.String EXTRA_RESULTS_DATA
     private static final java.lang.String EXTRA_DATA_TYPE_RESULTS_DATA
-androidx.core.app.NotificationCompatBuilder:
-    public android.app.Notification$Builder getBuilder()
 androidx.annotation.RestrictTo
 XI.CA.XI.kM
 androidx.appcompat.view.SupportMenuInflater:
@@ -2128,14 +2126,9 @@ androidx.recyclerview.widget.DiffUtil$Snake
 dc.squareup.okhttp3.Challenge
 androidx.core.app.NotificationCompat$Builder:
     public void <init>(android.content.Context)
-    private android.graphics.Bitmap reduceLargeIconSize(android.graphics.Bitmap)
-    protected static java.lang.CharSequence limitCharSequenceLength(java.lang.CharSequence)
     public androidx.core.app.NotificationCompat$Builder setWhen(long)
-    public androidx.core.app.NotificationCompat$Builder setShowWhen(boolean)
     public androidx.core.app.NotificationCompat$Builder setUsesChronometer(boolean)
     public androidx.core.app.NotificationCompat$Builder setSmallIcon(int,int)
-    public androidx.core.app.NotificationCompat$Builder setContentTitle(java.lang.CharSequence)
-    public androidx.core.app.NotificationCompat$Builder setContentText(java.lang.CharSequence)
     public androidx.core.app.NotificationCompat$Builder setSubText(java.lang.CharSequence)
     public androidx.core.app.NotificationCompat$Builder setRemoteInputHistory(java.lang.CharSequence[])
     public androidx.core.app.NotificationCompat$Builder setNumber(int)
@@ -2145,13 +2138,10 @@ androidx.core.app.NotificationCompat$Builder:
     public androidx.core.app.NotificationCompat$Builder setFullScreenIntent(android.app.PendingIntent,boolean)
     public androidx.core.app.NotificationCompat$Builder setTicker(java.lang.CharSequence)
     public androidx.core.app.NotificationCompat$Builder setTicker(java.lang.CharSequence,android.widget.RemoteViews)
-    public androidx.core.app.NotificationCompat$Builder setLargeIcon(android.graphics.Bitmap)
     public androidx.core.app.NotificationCompat$Builder setSound(android.net.Uri)
     public androidx.core.app.NotificationCompat$Builder setSound(android.net.Uri,int)
     public androidx.core.app.NotificationCompat$Builder setVibrate(long[])
     public androidx.core.app.NotificationCompat$Builder setLights(int,int,int)
-    public androidx.core.app.NotificationCompat$Builder setColorized(boolean)
-    public androidx.core.app.NotificationCompat$Builder setOnlyAlertOnce(boolean)
     public androidx.core.app.NotificationCompat$Builder setAutoCancel(boolean)
     public androidx.core.app.NotificationCompat$Builder setLocalOnly(boolean)
     public androidx.core.app.NotificationCompat$Builder setCategory(java.lang.String)
@@ -2163,27 +2153,20 @@ androidx.core.app.NotificationCompat$Builder:
     public androidx.core.app.NotificationCompat$Builder addExtras(android.os.Bundle)
     public androidx.core.app.NotificationCompat$Builder setExtras(android.os.Bundle)
     public androidx.core.app.NotificationCompat$Builder addAction(int,java.lang.CharSequence,android.app.PendingIntent)
-    public androidx.core.app.NotificationCompat$Builder addAction(androidx.core.app.NotificationCompat$Action)
     public androidx.core.app.NotificationCompat$Builder addInvisibleAction(int,java.lang.CharSequence,android.app.PendingIntent)
     public androidx.core.app.NotificationCompat$Builder addInvisibleAction(androidx.core.app.NotificationCompat$Action)
-    public androidx.core.app.NotificationCompat$Builder setStyle(androidx.core.app.NotificationCompat$Style)
     public androidx.core.app.NotificationCompat$Builder setColor(int)
-    public androidx.core.app.NotificationCompat$Builder setVisibility(int)
     public androidx.core.app.NotificationCompat$Builder setPublicVersion(android.app.Notification)
     public androidx.core.app.NotificationCompat$Builder setCustomHeadsUpContentView(android.widget.RemoteViews)
     public androidx.core.app.NotificationCompat$Builder setChannelId(java.lang.String)
     public androidx.core.app.NotificationCompat$Builder setTimeoutAfter(long)
     public androidx.core.app.NotificationCompat$Builder setShortcutId(java.lang.String)
-    public androidx.core.app.NotificationCompat$Builder setBadgeIconType(int)
     public androidx.core.app.NotificationCompat$Builder setGroupAlertBehavior(int)
     public androidx.core.app.NotificationCompat$Builder extend(androidx.core.app.NotificationCompat$Extender)
     public android.app.Notification getNotification()
     public android.widget.RemoteViews getContentView()
     public android.widget.RemoteViews getBigContentView()
     public android.widget.RemoteViews getHeadsUpContentView()
-    public long getWhenIfShowing()
-    public int getPriority()
-    public int getColor()
     private static final int MAX_CHARSEQUENCE_LENGTH
 dc.squareup.okhttp3.Cache$1
 androidx.appcompat.widget.AppCompatDrawableManager:
@@ -2359,22 +2342,14 @@ androidx.core.app.RemoteInput$Builder
 androidx.core.net.DatagramSocketWrapper
 androidx.core.view.inputmethod.InputConnectionCompat
 androidx.core.app.NotificationCompat$Style:
-    public void <init>()
-    private android.graphics.Bitmap createColoredBitmap(int,int,int)
-    private android.graphics.Bitmap createIconWithBackground(int,int,int,int)
     private void hideNormalContent(android.widget.RemoteViews)
     private int calculateTopPadding()
     private static float constrain(float,float,float)
-    public void setBuilder(androidx.core.app.NotificationCompat$Builder)
     public android.app.Notification build()
     protected void restoreFromCompatExtras(android.os.Bundle)
-    public android.widget.RemoteViews applyStandardTemplate(boolean,int,boolean)
-    public android.graphics.Bitmap createColoredBitmap(int,int)
     public void buildIntoRemoteViews(android.widget.RemoteViews,android.widget.RemoteViews)
-    protected androidx.core.app.NotificationCompat$Builder mBuilder
     java.lang.CharSequence mBigContentTitle
     java.lang.CharSequence mSummaryText
-    boolean mSummaryTextSet
 androidx.vectordrawable.graphics.drawable.AndroidResources:
     private void <init>()
     static final int STYLEABLE_VECTOR_DRAWABLE_ALPHA
@@ -2592,8 +2567,6 @@ androidx.recyclerview.widget.RecyclerView$Recycler:
     public void bindViewToPosition(android.view.View,int)
     void recycleViewInternal(android.view.View)
     static final int DEFAULT_CACHE_SIZE
-androidx.core.app.NotificationBuilderWithBuilderAccessor:
-    public abstract android.app.Notification$Builder getBuilder()
 androidx.recyclerview.widget.ViewBoundsCheck$Callback:
     public abstract int getChildCount()
     public abstract android.view.View getParent()
@@ -3094,8 +3067,6 @@ androidx.customview.widget.ExploreByTouchHelper
 androidx.core.graphics.drawable.WrappedDrawableApi21:
     private static final java.lang.String TAG
 androidx.core.app.NotificationCompat$Action:
-    public void <init>(int,java.lang.CharSequence,android.app.PendingIntent)
-    void <init>(int,java.lang.CharSequence,android.app.PendingIntent,android.os.Bundle,androidx.core.app.RemoteInput[],androidx.core.app.RemoteInput[],boolean,int,boolean)
     public static final int SEMANTIC_ACTION_NONE
     public static final int SEMANTIC_ACTION_REPLY
     public static final int SEMANTIC_ACTION_MARK_AS_READ
@@ -3904,7 +3875,12 @@ androidx.appcompat.widget.AppCompatSpinner:
     private static final int MODE_THEME
 XI.XI.XI.XI$XI:
     public static final synthetic int XI
-androidx.media.app.NotificationCompat$MediaStyle
+androidx.media.app.NotificationCompat$MediaStyle:
+    public static android.support.v4.media.session.MediaSessionCompat$Token getMediaSession(android.app.Notification)
+    public void <init>(androidx.core.app.NotificationCompat$Builder)
+    public androidx.media.app.NotificationCompat$MediaStyle setCancelButtonIntent(android.app.PendingIntent)
+    private static final int MAX_MEDIA_BUTTONS_IN_COMPACT
+    private static final int MAX_MEDIA_BUTTONS
 androidx.core.text.TextDirectionHeuristicsCompat$AnyStrong
 androidx.appcompat.widget.ScrollingTabContainerView:
     public void <init>(android.content.Context)
@@ -4874,6 +4850,8 @@ androidx.appcompat.widget.ActivityChooserView$ActivityChooserViewAdapter:
     public void setShowFooterView(boolean)
     public int getHistorySize()
     public void setShowDefaultActivity(boolean,boolean)
+a.a.a.c.a$a:
+    public static final enum a.a.a.c.a$a e
 androidx.core.view.ViewPropertyAnimatorCompat$2:
     final synthetic androidx.core.view.ViewPropertyAnimatorCompat this$0
 androidx.fragment.app.FragmentTransitionCompat21$4:
@@ -4939,6 +4917,13 @@ androidx.core.view.accessibility.AccessibilityNodeInfoCompat$AccessibilityAction
     public static final androidx.core.view.accessibility.AccessibilityNodeInfoCompat$AccessibilityActionCompat ACTION_MOVE_WINDOW
     public static final androidx.core.view.accessibility.AccessibilityNodeInfoCompat$AccessibilityActionCompat ACTION_SHOW_TOOLTIP
     public static final androidx.core.view.accessibility.AccessibilityNodeInfoCompat$AccessibilityActionCompat ACTION_HIDE_TOOLTIP
+a.a.a.g.a$c:
+    public static final enum a.a.a.g.a$c b
+    public static final enum a.a.a.g.a$c c
+    public static final enum a.a.a.g.a$c d
+    public static final enum a.a.a.g.a$c f
+    public static final enum a.a.a.g.a$c g
+    public static final enum a.a.a.g.a$c h
 androidx.fragment.app.FragmentTransitionImpl$1:
     final synthetic androidx.fragment.app.FragmentTransitionImpl this$0
 androidx.core.view.NestedScrollingParentHelper:
@@ -5018,6 +5003,8 @@ dc.squareup.okhttp3.ConnectionSpec:
     public static final dc.squareup.okhttp3.ConnectionSpec RESTRICTED_TLS
 androidtranscoder.engine.MediaTranscoderEngine:
     private volatile double mProgress
+androidx.core.app.NotificationCompat$Style:
+    boolean mSummaryTextSet
 androidtranscoder.engine.TextureRender:
     private final float[] mTriangleVerticesData
 androidtranscoder.utils.MediaExtractorUtils$TrackResult:
@@ -5025,6 +5012,8 @@ androidtranscoder.utils.MediaExtractorUtils$TrackResult:
     public java.lang.String mAudioTrackMime
 androidx.appcompat.graphics.drawable.DrawableContainer:
     private int mLastIndex
+a.a.a.f.q.b:
+    public static final enum a.a.a.f.q.b b
 XI.K0.XI.XI$K0:
     public java.lang.String K0
     public java.lang.String kM
@@ -5037,6 +5026,9 @@ androidx.media.MediaBrowserServiceCompat$ServiceCallbacksCompat:
     public void onConnect(java.lang.String,android.support.v4.media.session.MediaSessionCompat$Token,android.os.Bundle)
 androidx.drawerlayout.widget.DrawerLayout:
     private boolean mDisallowInterceptRequested
+a.a.a.f.q.a:
+    public static final enum a.a.a.f.q.a e
+    public static final enum a.a.a.f.q.a f
 androidx.appcompat.app.AlertController$AlertParams:
     public boolean mRecycleOnMeasure
 androidx.appcompat.widget.ActivityChooserModel:
@@ -5044,6 +5036,8 @@ androidx.appcompat.widget.ActivityChooserModel:
     public int getHistorySize()
 androidx.fragment.app.BackStackRecord:
     boolean mAllowAddToBackStack
+a.a.a.g.a$a:
+    public static final enum a.a.a.g.a$a b
 dc.squareup.okhttp3.MediaType:
     private final java.lang.String type
     private final java.lang.String subtype
@@ -5052,6 +5046,8 @@ dc.squareup.okhttp3.internal.http2.Http2Connection:
     static final synthetic boolean $assertionsDisabled
 dc.squareup.okhttp3.internal.connection.StreamAllocation:
     static final synthetic boolean $assertionsDisabled
+a.a.a.e.a.a:
+    private int n
 androidx.core.provider.SelfDestructiveThread$3:
     final synthetic androidx.core.provider.SelfDestructiveThread this$0
 androidx.fragment.app.FragmentTransitionImpl$3:
@@ -5184,6 +5180,8 @@ androidtranscoder.MediaTranscoder$4:
     final synthetic androidtranscoder.MediaTranscoder this$0
 androidx.lifecycle.MethodCallsLogger:
     private java.util.Map mCalledMethods
+a.a.a.g.a:
+    private int d
 XI.XI.K0.XI:
     public static boolean K0
 androidx.media.MediaBrowserServiceCompat$ConnectionRecord:
@@ -5214,6 +5212,9 @@ androidx.lifecycle.LiveData:
     public java.lang.Object getValue()
     public boolean hasActiveObservers()
     private final java.lang.Runnable mPostValueRunnable
+a.a.a.d.b:
+    public static final enum a.a.a.d.b h
+    public static final enum a.a.a.d.b i
 dc.squareup.okhttp3.internal.http1.Http1Codec$FixedLengthSource:
     final synthetic dc.squareup.okhttp3.internal.http1.Http1Codec this$0
 dc.squareup.okhttp3.Dispatcher:

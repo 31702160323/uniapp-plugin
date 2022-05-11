@@ -8,10 +8,8 @@
 
     <ImageView
         android:id="@+id/image_view"
-        android:layout_width="wrap_content"
+        android:layout_width="64dp"
         android:layout_height="match_parent"
-        android:minWidth="64dp"
-        android:minHeight="64dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
         android:contentDescription="@string/bg" />
@@ -41,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:textSize="12sp"
+            android:textSize="10sp"
             style="@style/NotificationInfo"
             android:ellipsize="marquee"
             android:focusable="true"
@@ -49,6 +47,16 @@
             android:singleLine="true"/>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/previous_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:paddingVertical="22dp"
+        android:paddingHorizontal="10dp"
+        android:contentDescription="@string/previous" />
 
     <ImageView
         android:id="@+id/play_view"

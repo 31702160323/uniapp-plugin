@@ -16,7 +16,6 @@
         <activity
             android:name=".LockActivityV2"
             android:exported="false"
-            android:noHistory="true"
             android:showWhenLocked="true"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
@@ -27,7 +26,6 @@
         <activity
             android:name=".LockActivityV3"
             android:exported="false"
-            android:noHistory="true"
             android:showWhenLocked="true"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
