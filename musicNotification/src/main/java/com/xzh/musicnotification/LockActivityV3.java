@@ -1,8 +1,11 @@
 package com.xzh.musicnotification;
 
+import android.content.pm.ApplicationInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.ArrayMap;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -14,30 +17,47 @@ import com.taobao.weex.common.WXRenderStrategy;
 import com.taobao.weex.utils.WXFileUtils;
 import com.xzh.musicnotification.utils.Utils;
 
-import java.util.HashMap;
 import java.util.Map;
 
+import io.dcloud.common.util.BaseInfo;
+import io.dcloud.feature.uniapp.UniSDKInstance;
+
 public class LockActivityV3 extends AppCompatActivity implements IWXRenderListener {
-    WXSDKInstance mWXSDKInstance;
+    UniSDKInstance mUniSDKInstance;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             setShowWhenLocked(true);
         }
-        Utils.fullScreen(this);
 
-        mWXSDKInstance = new WXSDKInstance(this);
-        mWXSDKInstance.registerRenderListener(this);
-        Map<String, Object> options = new HashMap<>();
+        Utils.fullScreen(this);
+        ApplicationInfo info = Utils.getApplicationInfo(this);
+        String page = info.metaData.getString("xzh_page");
+        Map<String, Object> options = new ArrayMap<>();
         options.put(WXSDKInstance.BUNDLE_URL, "source");
-        mWXSDKInstance.render(getPackageName(), WXFileUtils.loadAsset("build/index.js", this), options, null, WXRenderStrategy.APPEND_ASYNC);
+
+        String template = WXFileUtils.loadFileOrAsset(BaseInfo.sCacheFsAppsPath + BaseInfo.sDefaultBootApp + "/www/"+ page +".js", this);
+
+        mUniSDKInstance = new UniSDKInstance(this);
+        mUniSDKInstance.registerRenderListener(this);
+        mUniSDKInstance.render(getPackageName(), template, options, null, WXRenderStrategy.APPEND_ASYNC);
+
     }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_UP) {
+            Log.d("TAG", "dispatchTouchEvent: ACTION_UP");
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
     @Override
     public void onViewCreated(WXSDKInstance instance, View view) {
-        Log.d("TAG", "onViewCreated: " + view);
         setContentView(view);
     }
 
@@ -54,31 +74,31 @@ public class LockActivityV3 extends AppCompatActivity implements IWXRenderListen
         Log.d("TAG", "onException: " + msg);
     }
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
-        if(mWXSDKInstance!=null){
-            mWXSDKInstance.onActivityResume();
+        if(mUniSDKInstance !=null){
+            mUniSDKInstance.onActivityResume();
         }
     }
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
-        if(mWXSDKInstance!=null){
-            mWXSDKInstance.onActivityPause();
+        if(mUniSDKInstance !=null){
+            mUniSDKInstance.onActivityPause();
         }
     }
     @Override
     protected void onStop() {
         super.onStop();
-        if(mWXSDKInstance!=null){
-            mWXSDKInstance.onActivityStop();
+        if(mUniSDKInstance !=null){
+            mUniSDKInstance.onActivityStop();
         }
     }
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
-        if(mWXSDKInstance!=null){
-            mWXSDKInstance.onActivityDestroy();
+        if(mUniSDKInstance !=null){
+            mUniSDKInstance.onActivityDestroy();
         }
     }
 }

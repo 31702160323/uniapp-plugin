@@ -1,7 +1,10 @@
 package com.xzh.musicnotification.utils;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
+import com.xzh.musicnotification.R;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -41,9 +44,9 @@ public class ImageUtils {
             options.inPreferredConfig = Bitmap.Config.RGB_565;
             //加载图片并返回
             return BitmapFactory.decodeByteArray(data, 0, data.length, options);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.music_icon);
         }
     }
 }
