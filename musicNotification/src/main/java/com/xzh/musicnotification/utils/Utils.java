@@ -60,7 +60,7 @@ public class Utils {
             localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
             localIntent.setData(Uri.fromParts("package", context.getPackageName(), null));
             context.startActivity(localIntent);
-            UniLogUtils.i("XZH-musicNotification", "打开通知权限页成功");
+            UniLogUtils.d("XZH-musicNotification", "打开通知权限页成功");
             return true;
         } catch (Exception e) {
             e.printStackTrace();

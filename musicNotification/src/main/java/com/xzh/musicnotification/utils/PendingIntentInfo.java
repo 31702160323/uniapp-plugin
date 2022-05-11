@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.xzh.musicnotification.service.NotificationReceiver;
-import com.xzh.musicnotification.service.PlayServiceV2;
 
 public class PendingIntentInfo {
     private final int Id;

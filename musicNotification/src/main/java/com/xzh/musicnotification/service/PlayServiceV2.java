@@ -11,13 +11,11 @@ import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.ArrayMap;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xzh.musicnotification.LockActivityV2;
-import com.xzh.musicnotification.LockActivityV3;
 import com.xzh.musicnotification.notification.MusicNotificationV2;
 import com.xzh.musicnotification.utils.Utils;
 
@@ -35,10 +33,10 @@ import static com.xzh.musicnotification.notification.MusicNotificationV2.NOTIFIC
 public class PlayServiceV2 extends Service implements NotificationReceiver.IReceiverListener {
     private static PlayServiceV2 serviceV2;
 
-    private boolean xzhFavour;
-    private boolean Favour = false;
-    private boolean Playing = false;
-    private boolean lockActivity = false;
+    private boolean showFavour;
+    private boolean favour;
+    private boolean playing;
+    private boolean lockActivity;
 
     private JSONObject songData;
     private ServiceBinder mBinder;
@@ -64,12 +62,12 @@ public class PlayServiceV2 extends Service implements NotificationReceiver.IRece
     @SuppressLint("WrongConstant")
     public void onCreate() {
         super.onCreate();
-        UniLogUtils.i("XZH-musicNotification","serviceV2 创建成功");
+        UniLogUtils.d("XZH-musicNotification","serviceV2 创建成功");
         serviceV2 = this;
 
         ApplicationInfo info = Utils.getApplicationInfo(this);
         if (info != null) {
-            xzhFavour = info.metaData.getBoolean("xzh_favour");
+            showFavour = info.metaData.getBoolean("xzh_favour");
         }
 
         mReceiver = new NotificationReceiver(this);
@@ -98,18 +96,18 @@ public class PlayServiceV2 extends Service implements NotificationReceiver.IRece
         stopForeground(true);
         MusicNotificationV2.getInstance().cancel();
         unregisterReceiver(mReceiver);
-        UniLogUtils.i("XZH-musicNotification","serviceV2 消毁成功");
+        UniLogUtils.d("XZH-musicNotification","serviceV2 消毁成功");
     }
 
     public final void startForeground(Notification notification) {
         // 设置为前台Service
-        Log.d("设置为前台Service", "onNotificationInit: " + notification);
+        UniLogUtils.d("设置为前台Service", "onNotificationInit: " + notification);
         startForeground(NOTIFICATION_ID, notification);
     }
 
     @Override
     public void onReceive(String action, String extra) {
-        Log.d("NotificationReceiver", "onCreate: " + extra);
+        UniLogUtils.d("NotificationReceiver", "onCreate: " + extra);
         if (lockActivity && Intent.ACTION_SCREEN_OFF.equals(action)) {
             Utils.openLock(this, LockActivityV2.class);
         }
@@ -120,21 +118,21 @@ public class PlayServiceV2 extends Service implements NotificationReceiver.IRece
         data.put("code", 0);
         switch (extra) {
             case NotificationReceiver.EXTRA_PLAY:
-                mBinder.playOrPause(serviceV2.Playing);
-                UniLogUtils.i("XZH-musicNotification","点击播放按钮");
+                mBinder.playOrPause(serviceV2.playing);
+                UniLogUtils.d("XZH-musicNotification","点击播放按钮");
                 eventName = "musicNotificationPause";
                 break;
             case NotificationReceiver.EXTRA_PRE:
-                UniLogUtils.i("XZH-musicNotification","点击上一首按钮");
+                UniLogUtils.d("XZH-musicNotification","点击上一首按钮");
                 eventName = "musicNotificationPrevious";
                 break;
             case NotificationReceiver.EXTRA_NEXT:
-                UniLogUtils.i("XZH-musicNotification","点击下一首按钮");
+                UniLogUtils.d("XZH-musicNotification","点击下一首按钮");
                 eventName = "musicNotificationNext";
                 break;
             case NotificationReceiver.EXTRA_FAV:
-                mBinder.favour(!Favour);
-                UniLogUtils.i("XZH-musicNotification","点击搜藏按钮");
+                mBinder.favour(!favour);
+                UniLogUtils.d("XZH-musicNotification","点击搜藏按钮");
                 eventName = "musicNotificationFavourite";
                 break;
             default:
@@ -158,8 +156,8 @@ public class PlayServiceV2 extends Service implements NotificationReceiver.IRece
 
         public void initNotification(JSONObject config) {
             MusicNotificationV2.getInstance().initNotification(serviceV2, config);
-            UniLogUtils.i("XZH-musicNotification","创建通知栏成功");
-            favour(Favour);
+            UniLogUtils.d("XZH-musicNotification","创建通知栏成功");
+            favour(favour);
         }
 
         public void switchNotification(boolean is) {
@@ -167,11 +165,11 @@ public class PlayServiceV2 extends Service implements NotificationReceiver.IRece
         }
 
         public boolean getFavour(){
-            return serviceV2.Favour;
+            return serviceV2.favour;
         }
 
         public boolean getPlaying(){
-            return serviceV2.Playing;
+            return serviceV2.playing;
         }
 
         public JSONObject getSongData() {
@@ -184,7 +182,7 @@ public class PlayServiceV2 extends Service implements NotificationReceiver.IRece
 
         @SuppressLint("WrongConstant")
         public void playOrPause(boolean playing){
-            Playing = playing;
+            PlayServiceV2.this.playing = playing;
 
             if (mClickListener != null && mClickListener.get() != null) mClickListener.get().playOrPause(playing);
 
@@ -197,8 +195,8 @@ public class PlayServiceV2 extends Service implements NotificationReceiver.IRece
 
         @SuppressLint("WrongConstant")
         public void favour(boolean isFavour){
-            if (!xzhFavour) return;
-            Favour = isFavour;
+            if (!showFavour) return;
+            favour = isFavour;
             if (mClickListener != null && mClickListener.get() != null) mClickListener.get().favour(isFavour);
 
             Map<String, Object> options = new ArrayMap<>();
@@ -211,8 +209,8 @@ public class PlayServiceV2 extends Service implements NotificationReceiver.IRece
         @SuppressLint("WrongConstant")
         public void update(JSONObject options){
             songData = options;
-            Favour = options.getBoolean("favour");
-            favour(Favour);
+            favour = options.getBoolean("favour");
+            favour(favour);
 
             if (mClickListener != null && mClickListener.get() != null) {
                 mClickListener.get().update(options);
