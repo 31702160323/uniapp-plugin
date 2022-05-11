@@ -4,7 +4,6 @@ import android.content.pm.ApplicationInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.ArrayMap;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -21,6 +20,7 @@ import java.util.Map;
 
 import io.dcloud.common.util.BaseInfo;
 import io.dcloud.feature.uniapp.UniSDKInstance;
+import io.dcloud.feature.uniapp.utils.UniLogUtils;
 
 public class LockActivityV3 extends AppCompatActivity implements IWXRenderListener {
     UniSDKInstance mUniSDKInstance;
@@ -51,7 +51,7 @@ public class LockActivityV3 extends AppCompatActivity implements IWXRenderListen
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_UP) {
-            Log.d("TAG", "dispatchTouchEvent: ACTION_UP");
+            UniLogUtils.d("TAG", "dispatchTouchEvent: ACTION_UP");
         }
         return super.dispatchTouchEvent(ev);
     }
@@ -70,8 +70,8 @@ public class LockActivityV3 extends AppCompatActivity implements IWXRenderListen
 
     @Override
     public void onException(WXSDKInstance instance, String errCode, String msg) {
-        Log.d("TAG", "onException: " + errCode);
-        Log.d("TAG", "onException: " + msg);
+        UniLogUtils.d("TAG", "onException: " + errCode);
+        UniLogUtils.d("TAG", "onException: " + msg);
     }
     @Override
     public void onResume() {

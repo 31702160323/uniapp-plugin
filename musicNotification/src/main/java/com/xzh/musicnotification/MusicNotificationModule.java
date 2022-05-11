@@ -10,7 +10,6 @@ import android.os.Build;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.util.Log;
 
 import androidx.core.app.NotificationManagerCompat;
 
@@ -20,12 +19,10 @@ import com.xzh.musicnotification.service.PlayServiceV2;
 import com.xzh.musicnotification.utils.MusicAsyncQueryHandler;
 import com.xzh.musicnotification.utils.Utils;
 
-import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.dcloud.common.util.BaseInfo;
 import io.dcloud.feature.uniapp.annotation.UniJSMethod;
 import io.dcloud.feature.uniapp.bridge.UniJSCallback;
 import io.dcloud.feature.uniapp.common.UniModule;
@@ -36,7 +33,8 @@ import static android.content.Context.BIND_AUTO_CREATE;
 
 public class MusicNotificationModule extends UniModule {
     private JSONObject mConfig;
-    private boolean mLock = false;
+    private boolean mLock;
+    private boolean mSystemStyle;
     private WeakReference<ServiceConnection> connection;
     private WeakReference<PlayServiceV2.ServiceBinder> mBinder;
 
@@ -72,7 +70,8 @@ public class MusicNotificationModule extends UniModule {
                 mBinder.get().initNotification(mConfig);
                 mBinder.get().setUniSDKInstance(mUniSDKInstance);
                 mBinder.get().lock(mLock);
-                UniLogUtils.i("XZH-musicNotification", "初始化成功");
+                mBinder.get().switchNotification(mSystemStyle);
+                UniLogUtils.d("XZH-musicNotification", "初始化成功");
                 callback.invoke(data);
             }
 
@@ -82,7 +81,7 @@ public class MusicNotificationModule extends UniModule {
             }
         });
 
-        Log.d("XZH-musicNotification", "createNotification: " + connection + connection.get());
+        UniLogUtils.d("XZH-musicNotification", "createNotification: " + connection + connection.get());
 
         Context context = mUniSDKInstance.getContext();
         context.bindService(PlayServiceV2.startMusicService(context), connection.get(), BIND_AUTO_CREATE);
@@ -90,7 +89,7 @@ public class MusicNotificationModule extends UniModule {
 
     @UniJSMethod(uiThread = false)
     public JSONObject update(JSONObject options) {
-        UniLogUtils.i("XZH-musicNotification", "更新UI");
+        UniLogUtils.d("XZH-musicNotification", "更新UI");
         JSONObject data = new JSONObject();
         boolean isNotification;
         Context context = mUniSDKInstance.getContext();
@@ -122,14 +121,15 @@ public class MusicNotificationModule extends UniModule {
 
     @UniJSMethod(uiThread = false)
     public void favour(JSONObject options) {
-        UniLogUtils.i("XZH-musicNotification", "favour");
+        UniLogUtils.d("XZH-musicNotification", "favour");
         if (mBinder != null) mBinder.get().favour(options.getBoolean("favour"));
     }
 
     @UniJSMethod(uiThread = false)
     public void switchNotification(boolean is) {
-        Log.d(TAG, "switchNotification: " + is);
-        if (mBinder != null) mBinder.get().switchNotification(is);
+        UniLogUtils.d(TAG, "switchNotification: " + is);
+        mSystemStyle = is;
+        if (mBinder != null) mBinder.get().switchNotification(mSystemStyle);
     }
 
     @UniJSMethod(uiThread = false)
@@ -157,17 +157,6 @@ public class MusicNotificationModule extends UniModule {
         return false;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("type", false);
-        if (requestCode == 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && Settings.canDrawOverlays(mUniSDKInstance.getContext())) {
-            map.put("type", true);
-        }
-        Log.d("XZH-musicNotification", "onActivityResult: " + map.get("type"));
-        mUniSDKInstance.fireGlobalEventCallback("openLockActivity", map);
-    }
-
     @UniJSMethod(uiThread = false)
     public JSONObject openPermissionSetting() {
         JSONObject data = new JSONObject();
@@ -188,12 +177,23 @@ public class MusicNotificationModule extends UniModule {
 
     @UniJSMethod(uiThread = false)
     public void initSongs(UniJSCallback callback) {
-        UniLogUtils.i("XZH-musicNotification", "获取歌曲" + System.currentTimeMillis());
+        UniLogUtils.d("XZH-musicNotification", "获取歌曲" + System.currentTimeMillis());
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         MusicAsyncQueryHandler asyncQueryHandler = new MusicAsyncQueryHandler(mUniSDKInstance.getContext().getContentResolver(), list -> {
                 callback.invoke(list);
-                UniLogUtils.i("XZH-musicNotification", "获取歌曲信息成功" + System.currentTimeMillis());
+                UniLogUtils.d("XZH-musicNotification", "获取歌曲信息成功" + System.currentTimeMillis());
         });
         asyncQueryHandler.startQuery(0, null, uri, null, null, null, MediaStore.Audio.AudioColumns.IS_MUSIC);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("type", false);
+        if (requestCode == 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && Settings.canDrawOverlays(mUniSDKInstance.getContext())) {
+            map.put("type", true);
+        }
+        UniLogUtils.d("XZH-musicNotification", "onActivityResult: " + map.get("type"));
+        mUniSDKInstance.fireGlobalEventCallback("openLockActivity", map);
     }
 }

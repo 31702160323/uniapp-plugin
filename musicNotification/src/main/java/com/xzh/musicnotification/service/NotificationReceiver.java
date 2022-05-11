@@ -4,7 +4,6 @@ package com.xzh.musicnotification.service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 /**
  * 接收Notification发送的广播

@@ -7,26 +7,30 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.Icon;
-import android.media.MediaMetadata;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.target.NotificationTarget;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.taobao.weex.utils.WXViewUtils;
 import com.xzh.musicnotification.R;
 import com.xzh.musicnotification.service.NotificationReceiver;
 import com.xzh.musicnotification.service.PlayServiceV2;
-import com.xzh.musicnotification.utils.ImageUtils;
 import com.xzh.musicnotification.utils.PendingIntentInfo;
 
 import java.lang.ref.WeakReference;
@@ -38,16 +42,17 @@ public class MusicNotificationV2 {
     public static final String CHANNEL_ID = "music_id_audio";
     public static final String CHANNEL_NAME = "music_name_audio";
 
+    private JSONObject songInfo;
     private boolean isPlay;
+    private boolean systemStyle;
     private JSONObject mConfig;
     private RemoteViews mRemoteViews; // 大布局
     private Notification mNotification;
     private RemoteViews mSmallRemoteViews; //小布局
     private WeakReference<Context> mContext;
     private NotificationManager mNotificationManager;
-    private JSONObject songInfo;
-    private boolean isDefault;
     private MediaSessionCompat mediaSession;
+    private CustomTarget<Bitmap> mTarget;
     private Bitmap mIcon;
 
     public static MusicNotificationV2 getInstance() {
@@ -81,7 +86,7 @@ public class MusicNotificationV2 {
         mediaSession.setMetadata(new MediaMetadataCompat.Builder().build());
     }
 
-    public void createNotification(boolean is) {
+    public void createNotification() {
         mNotificationManager = (NotificationManager) mContext.get().getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1) { //Android 5.1 以下
@@ -109,9 +114,9 @@ public class MusicNotificationV2 {
             notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
             mNotificationManager.createNotificationChannel(notificationChannel);
 
-            if (is) {
-                mIcon = ImageUtils.GetLocalOrNetBitmap(String.valueOf(songInfo.getString("picUrl")));
-                mNotification = buildNotification(mIcon);
+            if (systemStyle) {
+                mIcon = BitmapFactory.decodeResource(mContext.get().getResources(), R.drawable.music_icon);
+                buildNotification();
             } else {
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext.get(), CHANNEL_ID)
                         .setOngoing(true)
@@ -136,10 +141,29 @@ public class MusicNotificationV2 {
         ((PlayServiceV2) mContext.get()).startForeground(mNotification);
     }
 
-    private Notification buildNotification() {
-        return buildNotification(mIcon);
+    private void buildNotification() {
+        buildNotification(mIcon);
+        mNotificationManager.notify(NOTIFICATION_ID, mNotification);
+        mTarget = new CustomTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                mIcon = resource;
+                buildNotification(resource);
+                mNotificationManager.notify(NOTIFICATION_ID, mNotification);
+            }
+
+            @Override
+            public void onLoadCleared(@Nullable Drawable placeholder) {
+            }
+
+            @Override
+            public void onLoadFailed(@Nullable Drawable errorDrawable) {
+            }
+        };
+        generateGlide(mContext.get(), mTarget, String.valueOf(songInfo.getString("picUrl")), WXViewUtils.dip2px(WXViewUtils.dip2px(64)), WXViewUtils.dip2px(WXViewUtils.dip2px(64)));
     }
-    private Notification buildNotification(Bitmap icon) {
+
+    private void buildNotification(Bitmap icon) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext.get(), CHANNEL_ID)
                 .setOngoing(true)
                 .setColorized(true)
@@ -151,7 +175,7 @@ public class MusicNotificationV2 {
                 .setContentIntent(getContentIntent(mConfig.getString("path")))
                 .setContentTitle(String.valueOf(songInfo.getString("songName")))
                 .setContentText(String.valueOf(songInfo.getString("artistsName")))
-                .setBadgeIconType(androidx.core.app.NotificationCompat.BADGE_ICON_NONE)
+                .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)
                 .setLargeIcon(icon)
                 .setStyle(new androidx.media.app.NotificationCompat.MediaStyle().setShowActionsInCompactView(1, 2).setShowCancelButton(true).setMediaSession(mediaSession.getSessionToken()));
 
@@ -165,8 +189,9 @@ public class MusicNotificationV2 {
 
         builder.addAction(generateAction(R.drawable.note_btn_next_white, "Next", 3, NotificationReceiver.EXTRA_NEXT));
 
-        return builder.build();
+        mNotification = builder.build();
     }
+
 
     private NotificationCompat.Action generateAction(int icon, CharSequence title, int requestCode, String EXTRA) {
         return new NotificationCompat.Action(icon, title, PendingIntent.getBroadcast(mContext.get(), requestCode,
@@ -227,16 +252,18 @@ public class MusicNotificationV2 {
     public void updateSong(JSONObject options) {
         songInfo = options;
         if (mNotificationManager == null) {
-            createNotification(isDefault);
+            createNotification();
         }
         if (mRemoteViews != null) {
             if (options.getString("songName") != null) {
                 mRemoteViews.setTextViewText(R.id.title_view, String.valueOf(options.getString("songName")));
-                if (mSmallRemoteViews != null) mSmallRemoteViews.setTextViewText(R.id.title_view, String.valueOf(options.getString("songName")));
+                if (mSmallRemoteViews != null)
+                    mSmallRemoteViews.setTextViewText(R.id.title_view, String.valueOf(options.getString("songName")));
             }
             if (options.getString("artistsName") != null) {
                 mRemoteViews.setTextViewText(R.id.tip_view, String.valueOf(options.getString("artistsName")));
-                if (mSmallRemoteViews != null) mSmallRemoteViews.setTextViewText(R.id.tip_view, String.valueOf(options.getString("artistsName")));
+                if (mSmallRemoteViews != null)
+                    mSmallRemoteViews.setTextViewText(R.id.tip_view, String.valueOf(options.getString("artistsName")));
             }
             if (options.getBoolean("favour") != null && options.getBoolean("favour")) {
                 mRemoteViews.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_loved);
@@ -245,12 +272,15 @@ public class MusicNotificationV2 {
             }
 
             setPicUrlBitmap(mContext.get(), mRemoteViews, String.valueOf(options.getString("picUrl")), WXViewUtils.dip2px(112), WXViewUtils.dip2px(112));
-            if (mSmallRemoteViews != null) setPicUrlBitmap(mContext.get(), mSmallRemoteViews, String.valueOf(options.getString("picUrl")), WXViewUtils.dip2px(64), WXViewUtils.dip2px(64));
+            if (mSmallRemoteViews != null) {
+                setPicUrlBitmap(mContext.get(), mSmallRemoteViews, String.valueOf(options.getString("picUrl")), WXViewUtils.dip2px(64), WXViewUtils.dip2px(64));
+            }
+
+            mNotificationManager.notify(NOTIFICATION_ID, mNotification);
         } else {
-            mIcon = ImageUtils.GetLocalOrNetBitmap(String.valueOf(songInfo.getString("picUrl")));
-            mNotification = buildNotification(mIcon);
+            Log.d("TAG", "updateSong: ");
+            buildNotification();
         }
-        mNotificationManager.notify(NOTIFICATION_ID, mNotification);
     }
 
     private void setPicUrlBitmap(Context context, RemoteViews remoteViews, String picUrl, float width, float height) {
@@ -261,6 +291,10 @@ public class MusicNotificationV2 {
                 mNotification,
                 NOTIFICATION_ID);
 
+        generateGlide(context, target, picUrl, width, height);
+    }
+
+    private void generateGlide(Context context, Target<Bitmap> target, String picUrl, float width, float height) {
         Glide.with(context)
                 .asBitmap()
                 .load(picUrl)
@@ -280,15 +314,17 @@ public class MusicNotificationV2 {
         if (mRemoteViews != null) {
             if (isPlay) {
                 mRemoteViews.setImageViewResource(R.id.play_view, R.drawable.note_btn_pause_white);
-                if (mSmallRemoteViews != null) mSmallRemoteViews.setImageViewResource(R.id.play_view, R.drawable.note_btn_pause_white);
+                if (mSmallRemoteViews != null)
+                    mSmallRemoteViews.setImageViewResource(R.id.play_view, R.drawable.note_btn_pause_white);
             } else {
                 mRemoteViews.setImageViewResource(R.id.play_view, R.drawable.note_btn_play_white);
-                if (mSmallRemoteViews != null) mSmallRemoteViews.setImageViewResource(R.id.play_view, R.drawable.note_btn_play_white);
+                if (mSmallRemoteViews != null)
+                    mSmallRemoteViews.setImageViewResource(R.id.play_view, R.drawable.note_btn_play_white);
             }
+            mNotificationManager.notify(NOTIFICATION_ID, mNotification);
         } else {
-            mNotification = buildNotification();
+            buildNotification();
         }
-        mNotificationManager.notify(NOTIFICATION_ID, mNotification);
     }
 
     /**
@@ -309,9 +345,11 @@ public class MusicNotificationV2 {
     }
 
     public void switchNotification(boolean is) {
-        isDefault = is;
-        cancel();
-        createNotification(isDefault);
+        systemStyle = is;
+        if (mNotificationManager != null) {
+            cancel();
+            createNotification();
+        }
     }
 
     public void cancel() {
