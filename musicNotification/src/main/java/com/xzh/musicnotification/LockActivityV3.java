@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -18,9 +19,6 @@ import com.xzh.musicnotification.utils.Utils;
 
 import java.util.Map;
 
-import io.dcloud.EntryProxy;
-import io.dcloud.common.DHInterface.ICore;
-import io.dcloud.common.DHInterface.IMgr;
 import io.dcloud.common.util.BaseInfo;
 import io.dcloud.feature.uniapp.UniSDKInstance;
 
@@ -35,6 +33,7 @@ public class LockActivityV3 extends AppCompatActivity implements IWXRenderListen
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             setShowWhenLocked(true);
         }
+
         Utils.fullScreen(this);
         ApplicationInfo info = Utils.getApplicationInfo(this);
         String page = info.metaData.getString("xzh_page");
@@ -48,6 +47,15 @@ public class LockActivityV3 extends AppCompatActivity implements IWXRenderListen
         mUniSDKInstance.render(getPackageName(), template, options, null, WXRenderStrategy.APPEND_ASYNC);
 
     }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_UP) {
+            Log.d("TAG", "dispatchTouchEvent: ACTION_UP");
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
     @Override
     public void onViewCreated(WXSDKInstance instance, View view) {
         setContentView(view);

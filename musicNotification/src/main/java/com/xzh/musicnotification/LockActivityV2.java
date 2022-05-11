@@ -183,9 +183,9 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     @Override
     public void playOrPause(boolean playing) {
         if (playing) {
-            playView.setImageResource(R.mipmap.note_btn_pause_white);
+            playView.setImageResource(R.drawable.note_btn_pause_white);
         } else {
-            playView.setImageResource(R.mipmap.note_btn_play_white);
+            playView.setImageResource(R.drawable.note_btn_play_white);
         }
     }
 
@@ -193,9 +193,9 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     public void favour(boolean isFavour) {
         if (!xzhFavour) return;
         if (isFavour) {
-            favouriteView.setImageResource(R.mipmap.note_btn_loved);
+            favouriteView.setImageResource(R.drawable.note_btn_loved);
         } else {
-            favouriteView.setImageResource(R.mipmap.note_btn_love_white);
+            favouriteView.setImageResource(R.drawable.note_btn_love_white);
         }
     }
 

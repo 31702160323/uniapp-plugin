@@ -3,6 +3,7 @@
 -keep class com.dmcbig.mediapicker.PreviewActivity { <init>(); }
 -keep class com.taobao.weex.WXGlobalEventReceiver { <init>(); }
 -keep class com.xzh.musicnotification.LockActivityV2 { <init>(); }
+-keep class com.xzh.musicnotification.LockActivityV3 { <init>(); }
 -keep class com.xzh.musicnotification.service.PlayServiceV2 { <init>(); }
 -keep class com.xzh.widget.MusicWidget { <init>(); }
 -keep class io.dcloud.PandoraEntry { <init>(); }
@@ -14,6 +15,8 @@
 -keep class io.dcloud.application.DCloudApplication { <init>(); }
 -keep class io.dcloud.common.adapter.io.DownloadReceiver { <init>(); }
 -keep class io.dcloud.common.util.DCloud_FileProvider { <init>(); }
+-keep class io.dcloud.debug.PullDebugActivity { <init>(); }
+-keep class io.dcloud.debug.PullService { <init>(); }
 -keep class io.dcloud.feature.gallery.imageedit.IMGEditActivity { <init>(); }
 -keep class io.dcloud.feature.nativeObj.photoview.PhotoActivity { <init>(); }
 -keep class android.widget.Space { <init>(android.content.Context, android.util.AttributeSet); }

@@ -127,6 +127,12 @@ public class MusicNotificationModule extends UniModule {
     }
 
     @UniJSMethod(uiThread = false)
+    public void switchNotification(boolean is) {
+        Log.d(TAG, "switchNotification: " + is);
+        if (mBinder != null) mBinder.get().switchNotification(is);
+    }
+
+    @UniJSMethod(uiThread = false)
     public void cancel() {
         if (connection != null) {
             mUniSDKInstance.getContext().unbindService(connection.get());
