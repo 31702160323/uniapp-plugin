@@ -32,7 +32,7 @@ import io.dcloud.feature.uniapp.utils.UniLogUtils;
 
 import static com.xzh.musicnotification.notification.MusicNotificationV2.NOTIFICATION_ID;
 
-public class PlayServiceV2 extends Service implements MusicNotificationV2.NotificationHelperListener, NotificationReceiver.IReceiverListener {
+public class PlayServiceV2 extends Service implements NotificationReceiver.IReceiverListener {
     private static PlayServiceV2 serviceV2;
 
     private boolean xzhFavour;
@@ -101,8 +101,7 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
         UniLogUtils.i("XZH-musicNotification","serviceV2 消毁成功");
     }
 
-    @Override
-    public void onNotificationInit(Notification notification) {
+    public final void startForeground(Notification notification) {
         // 设置为前台Service
         Log.d("设置为前台Service", "onNotificationInit: " + notification);
         startForeground(NOTIFICATION_ID, notification);
@@ -161,6 +160,10 @@ public class PlayServiceV2 extends Service implements MusicNotificationV2.Notifi
             MusicNotificationV2.getInstance().initNotification(serviceV2, config);
             UniLogUtils.i("XZH-musicNotification","创建通知栏成功");
             favour(Favour);
+        }
+
+        public void switchNotification(boolean is) {
+            MusicNotificationV2.getInstance().switchNotification(is);
         }
 
         public boolean getFavour(){

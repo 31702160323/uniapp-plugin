@@ -267,6 +267,7 @@
 -keep class com.dmcbig.mediapicker.PreviewActivity { <init>(); }
 -keep class com.taobao.weex.WXGlobalEventReceiver { <init>(); }
 -keep class com.xzh.musicnotification.LockActivityV2 { <init>(); }
+-keep class com.xzh.musicnotification.LockActivityV3 { <init>(); }
 -keep class com.xzh.musicnotification.service.PlayServiceV2 { <init>(); }
 -keep class com.xzh.widget.MusicWidget { <init>(); }
 -keep class io.dcloud.PandoraEntry { <init>(); }
@@ -278,6 +279,8 @@
 -keep class io.dcloud.application.DCloudApplication { <init>(); }
 -keep class io.dcloud.common.adapter.io.DownloadReceiver { <init>(); }
 -keep class io.dcloud.common.util.DCloud_FileProvider { <init>(); }
+-keep class io.dcloud.debug.PullDebugActivity { <init>(); }
+-keep class io.dcloud.debug.PullService { <init>(); }
 -keep class io.dcloud.feature.gallery.imageedit.IMGEditActivity { <init>(); }
 -keep class io.dcloud.feature.nativeObj.photoview.PhotoActivity { <init>(); }
 -keep class android.widget.Space { <init>(android.content.Context, android.util.AttributeSet); }
@@ -350,15 +353,15 @@
 
 
 # End of content from D:\htmlFile\project\UniPlugin-Hello-AS\app\build\intermediates\aapt_proguard_file\debug\aapt_rules.txt
+# The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\0a89d77de82c19940f307bb28a4c6765\jetified-oaid_sdk_1.0.25\proguard.txt
+
+# End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\0a89d77de82c19940f307bb28a4c6765\jetified-oaid_sdk_1.0.25\proguard.txt
 # The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\4e5ddf07fcf40de5b289452d40b4ea65\jetified-android-gif-drawable-release@1.2.23\proguard.txt
 -keep public class pl.droidsonroids.gif.GifIOException{<init>(int, java.lang.String);}
 #Prevents warnings for consumers not using AndroidX
 -dontwarn androidx.annotation.**
 
 # End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\4e5ddf07fcf40de5b289452d40b4ea65\jetified-android-gif-drawable-release@1.2.23\proguard.txt
-# The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\0a89d77de82c19940f307bb28a4c6765\jetified-oaid_sdk_1.0.25\proguard.txt
-
-# End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\0a89d77de82c19940f307bb28a4c6765\jetified-oaid_sdk_1.0.25\proguard.txt
 # The proguard configuration file for the following section is D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
 
 # End of content from D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt

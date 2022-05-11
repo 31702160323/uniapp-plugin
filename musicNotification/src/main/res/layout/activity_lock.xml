@@ -84,7 +84,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:src="@mipmap/note_btn_pre_white"
+            android:src="@drawable/note_btn_pre_white"
             android:contentDescription="@string/previous" />
 
         <ImageView
@@ -93,7 +93,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:src="@mipmap/note_btn_play_white"
+            android:src="@drawable/note_btn_play_white"
             android:contentDescription="@string/play" />
 
         <ImageView
@@ -102,7 +102,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:src="@mipmap/note_btn_next_white"
+            android:src="@drawable/note_btn_next_white"
             android:contentDescription="@string/next" />
 
         <ImageView
@@ -112,7 +112,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:src="@mipmap/note_btn_love_white"
+            android:src="@drawable/note_btn_love_white"
             android:contentDescription="@string/favourite" />
     </LinearLayout>
 

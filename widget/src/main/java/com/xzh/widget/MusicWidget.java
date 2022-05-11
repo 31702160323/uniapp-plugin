@@ -162,16 +162,16 @@ public class MusicWidget extends AppWidgetProvider {
                     break;
                 case "playOrPause":
                     if (intent.getBooleanExtra("playing", false)) {
-                        views.setImageViewResource(R.id.play_view, R.mipmap.note_btn_pause_white);
+                        views.setImageViewResource(R.id.play_view, R.drawable.note_btn_pause_white);
                     } else {
-                        views.setImageViewResource(R.id.play_view, R.mipmap.note_btn_play_white);
+                        views.setImageViewResource(R.id.play_view, R.drawable.note_btn_play_white);
                     }
                     break;
                 case "favour":
                     if (intent.getBooleanExtra("favour", false)) {
-                        views.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_loved);
+                        views.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_loved);
                     } else {
-                        views.setImageViewResource(R.id.favourite_view, R.mipmap.note_btn_love_white);
+                        views.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_love_white);
                     }
                     break;
                 case "bg":
