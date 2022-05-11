@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion '28.0.3'
 //    buildToolsVersion '29.0.2'
     defaultConfig {
@@ -62,7 +62,12 @@ repositories {
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation fileTree(dir: 'libs', include: ['*.aar'])
+    implementation fileTree(dir: 'libs', include: ['oaid_sdk_1.0.25.aar'])
+    implementation fileTree(dir: 'libs', include: ['uniapp-v8-release.aar'])
+    implementation fileTree(dir: 'libs', include: ['lib.5plus.base-release.aar'])
+    implementation fileTree(dir: 'libs', include: ['android-gif-drawable-release@1.2.23.aar'])
+
+    debugImplementation fileTree(dir: 'libs', include: ['debug-server-release.aar'])
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'

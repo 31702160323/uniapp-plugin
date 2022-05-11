@@ -12,10 +12,8 @@
 
     <ImageView
         android:id="@+id/image_view"
-        android:layout_width="wrap_content"
+        android:layout_width="114dp"
         android:layout_height="match_parent"
-        android:minWidth="112dp"
-        android:minHeight="112dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
         android:contentDescription="@string/bg" />
@@ -48,7 +46,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:singleLine="true"
-        android:textSize="12sp"
+        android:textSize="10sp"
         style="@style/NotificationInfo"
         android:layout_alignStart="@id/title_view"
         android:layout_alignParentEnd="true" />
@@ -62,7 +60,7 @@
 
         <ImageView
             android:visibility="gone"
-            android:src="@mipmap/note_btn_loved"
+            android:src="@drawable/note_btn_loved"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
@@ -73,7 +71,7 @@
 
         <ImageView
             android:id="@+id/previous_view"
-            android:src="@mipmap/note_btn_pre_white"
+            android:src="@drawable/note_btn_pre_white"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
@@ -84,7 +82,7 @@
 
         <ImageView
             android:id="@+id/play_view"
-            android:src="@mipmap/note_btn_pause_white"
+            android:src="@drawable/note_btn_pause_white"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
@@ -95,7 +93,7 @@
 
         <ImageView
             android:id="@+id/next_view"
-            android:src="@mipmap/note_btn_next_white"
+            android:src="@drawable/note_btn_next_white"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:scaleType="fitXY"

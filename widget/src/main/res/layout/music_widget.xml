@@ -77,7 +77,7 @@
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/favourite"
                 android:scaleType="fitXY"
-                android:src="@mipmap/note_btn_love_white"
+                android:src="@drawable/note_btn_love_white"
                 android:visibility="gone" />
 
             <ImageButton
@@ -88,7 +88,7 @@
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/previous"
                 android:scaleType="fitXY"
-                android:src="@mipmap/note_btn_pre_white" />
+                android:src="@drawable/note_btn_pre_white" />
 
             <ImageButton
                 android:id="@+id/play_view"
@@ -98,7 +98,7 @@
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/play"
                 android:scaleType="fitXY"
-                android:src="@mipmap/note_btn_play_white" />
+                android:src="@drawable/note_btn_play_white" />
 
             <ImageButton
                 android:id="@+id/next_view"
@@ -107,7 +107,7 @@
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/next"
                 android:scaleType="fitXY"
-                android:src="@mipmap/note_btn_next_white" />
+                android:src="@drawable/note_btn_next_white" />
         </LinearLayout>
     </LinearLayout>
 
