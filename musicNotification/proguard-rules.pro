@@ -21,3 +21,10 @@
 #-renamesourcefileattribute SourceFile
 -keep public class * extends io.dcloud.feature.uniapp.common.UniModule{*;}
 #-keep public class com.xzh.musicnotification.utils.MusicAsyncQueryHandler$SongBean
+
+#####方法名等混淆指定配置
+-obfuscationdictionary ./proguard_keywords.txt
+#####类名混淆指定配置
+-classobfuscationdictionary ./proguard_keywords.txt
+#####包名混淆指定配置
+-packageobfuscationdictionary ./proguard_keywords.txt

@@ -24,8 +24,20 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\xu\AppData\Local\Temp\ic_android_black_24dp.xml" />
+                                                <entry key="imagePath" value="C:\Users\xu\AppData\Local\Temp\baseline_play_circle_outline_24.xml" />
                                                 <entry key="opacityPercent" value="80" />
+                                                <entry key="trimmed" value="true" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                      <entry key="clipartAsset">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="url" value="file:/$PROJECT_DIR$/../../../xu/AppData/Local/Android/Sdk/icons/material/materialicons/play_circle_outline/baseline_play_circle_outline_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -72,11 +84,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="imageAsset" value="D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\src\main\res\drawable\icon.png" />
-                                      <entry key="outputName" value="icon" />
+                                      <entry key="outputName" value="note_btn_play_white" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="8a8a8a" />
+                                      <entry key="themeColor" value="8f8f8f" />
                                     </map>
                                   </option>
                                 </PersistentState>

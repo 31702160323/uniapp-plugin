@@ -724,7 +724,6 @@ drawable abc_vector_test
 drawable ad_dcloud_main_ad_tag
 drawable ad_dcloud_main_skip_bg
 drawable ad_dcloud_main_skip_shape
-drawable bg_radius
 drawable dcloud_about_buttons_bg
 drawable dcloud_about_buttons_button_bg
 drawable dcloud_actionsheet_bottom_normal

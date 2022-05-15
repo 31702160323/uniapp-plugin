@@ -1,7 +1,7 @@
 # compiler: R8
 # compiler_version: 2.1.86
 # min_api: 26
-# pg_map_id: 3a78c56
+# pg_map_id: 9e62289
 # common_typos_disable
 XI.K0.XI.XI$K0 -> XI.K0.XI.a:
     XI.K0.XI.XI XI -> a
@@ -35981,156 +35981,145 @@ com.xzh.musicnotification.-$$Lambda$LockActivityV2$1$JgP8J3GJhPTM5LKklWXoVz3NnLs
 com.xzh.musicnotification.-$$Lambda$LockActivityV2$CEKySSFjR7Z2B76GHk1s0Mfr99g -> com.xzh.musicnotification.b:
     com.xzh.musicnotification.LockActivityV2 f$0 -> a
     com.alibaba.fastjson.JSONObject f$1 -> b
-com.xzh.musicnotification.-$$Lambda$MusicNotificationModule$eCM5JjqtqlrhXszDmMH4fansdE0 -> com.xzh.musicnotification.c:
+com.xzh.musicnotification.-$$Lambda$PCimFzXQD18xADwFd-yL8kC_pcs -> com.xzh.musicnotification.c:
     io.dcloud.feature.uniapp.bridge.UniJSCallback f$0 -> a
 com.xzh.musicnotification.BuildConfig -> com.xzh.musicnotification.BuildConfig:
     7:7:void <clinit>() -> <clinit>
     6:6:void <init>() -> <init>
+com.xzh.musicnotification.Global -> com.xzh.musicnotification.Global:
+    3:3:void <init>() -> <init>
 com.xzh.musicnotification.LockActivityV2 -> com.xzh.musicnotification.LockActivityV2:
-    39:39:void <init>() -> <init>
-    205:205:void lambda$update$0(com.alibaba.fastjson.JSONObject) -> a
-    39:39:java.lang.ref.WeakReference access$000(com.xzh.musicnotification.LockActivityV2) -> access$000
-    39:39:java.lang.ref.WeakReference access$002(com.xzh.musicnotification.LockActivityV2,java.lang.ref.WeakReference) -> access$002
-    39:39:android.widget.ImageView access$100(com.xzh.musicnotification.LockActivityV2) -> access$100
+    37:37:void <init>() -> <init>
+    202:202:void lambda$update$0(com.alibaba.fastjson.JSONObject) -> a
+    37:37:java.lang.ref.WeakReference access$000(com.xzh.musicnotification.LockActivityV2) -> access$000
+    37:37:java.lang.ref.WeakReference access$002(com.xzh.musicnotification.LockActivityV2,java.lang.ref.WeakReference) -> access$002
+    37:37:android.widget.ImageView access$100(com.xzh.musicnotification.LockActivityV2) -> access$100
     void lambda$update$0$LockActivityV2(com.alibaba.fastjson.JSONObject) -> b
-    241:280:android.graphics.Bitmap changeAlpha(android.graphics.Bitmap) -> changeAlpha
-    192:198:void favour(boolean) -> favour
-    91:111:void initView() -> initView
-    165:165:void onBackPressed() -> onBackPressed
-    115:158:void onClick(android.view.View) -> onClick
-    53:88:void onCreate(android.os.Bundle) -> onCreate
-    169:171:void onDestroy() -> onDestroy
-    178:179:void onSlidingFinish() -> onSlidingFinish
-    183:188:void playOrPause(boolean) -> playOrPause
-    202:207:void update(com.alibaba.fastjson.JSONObject) -> update
-    210:237:void updateUI(com.alibaba.fastjson.JSONObject) -> updateUI
+    238:277:android.graphics.Bitmap changeAlpha(android.graphics.Bitmap) -> changeAlpha
+    189:195:void favour(boolean) -> favour
+    89:109:void initView() -> initView
+    162:162:void onBackPressed() -> onBackPressed
+    113:155:void onClick(android.view.View) -> onClick
+    51:86:void onCreate(android.os.Bundle) -> onCreate
+    166:168:void onDestroy() -> onDestroy
+    175:176:void onSlidingFinish() -> onSlidingFinish
+    180:185:void playOrPause(boolean) -> playOrPause
+    199:204:void update(com.alibaba.fastjson.JSONObject) -> update
+    207:234:void updateUI(com.alibaba.fastjson.JSONObject) -> updateUI
 com.xzh.musicnotification.LockActivityV2$1 -> com.xzh.musicnotification.LockActivityV2$1:
-    69:69:void <init>(com.xzh.musicnotification.LockActivityV2) -> <init>
-    77:77:void lambda$onServiceConnected$0() -> a
+    67:67:void <init>(com.xzh.musicnotification.LockActivityV2) -> <init>
+    75:75:void lambda$onServiceConnected$0() -> a
     void lambda$onServiceConnected$0$LockActivityV2$1() -> b
-    72:79:void onServiceConnected(android.content.ComponentName,android.os.IBinder) -> onServiceConnected
-    84:84:void onServiceDisconnected(android.content.ComponentName) -> onServiceDisconnected
+    70:77:void onServiceConnected(android.content.ComponentName,android.os.IBinder) -> onServiceConnected
+    82:82:void onServiceDisconnected(android.content.ComponentName) -> onServiceDisconnected
 com.xzh.musicnotification.LockActivityV2$2 -> com.xzh.musicnotification.LockActivityV2$2:
-    225:225:void <init>(com.xzh.musicnotification.LockActivityV2) -> <init>
-    234:234:void onLoadCleared(android.graphics.drawable.Drawable) -> onLoadCleared
-    225:225:void onResourceReady(java.lang.Object,com.bumptech.glide.request.transition.Transition) -> onResourceReady
-    228:229:void onResourceReady(android.graphics.Bitmap,com.bumptech.glide.request.transition.Transition) -> onResourceReady
-com.xzh.musicnotification.LockActivityV3 -> com.xzh.musicnotification.LockActivityV3:
-    25:25:void <init>() -> <init>
-    53:56:boolean dispatchTouchEvent(android.view.MotionEvent) -> dispatchTouchEvent
-    30:49:void onCreate(android.os.Bundle) -> onCreate
-    99:103:void onDestroy() -> onDestroy
-    73:75:void onException(com.taobao.weex.WXSDKInstance,java.lang.String,java.lang.String) -> onException
-    85:89:void onPause() -> onPause
-    69:69:void onRefreshSuccess(com.taobao.weex.WXSDKInstance,int,int) -> onRefreshSuccess
-    66:66:void onRenderSuccess(com.taobao.weex.WXSDKInstance,int,int) -> onRenderSuccess
-    78:82:void onResume() -> onResume
-    92:96:void onStop() -> onStop
-    61:62:void onViewCreated(com.taobao.weex.WXSDKInstance,android.view.View) -> onViewCreated
+    222:222:void <init>(com.xzh.musicnotification.LockActivityV2) -> <init>
+    231:231:void onLoadCleared(android.graphics.drawable.Drawable) -> onLoadCleared
+    222:222:void onResourceReady(java.lang.Object,com.bumptech.glide.request.transition.Transition) -> onResourceReady
+    225:226:void onResourceReady(android.graphics.Bitmap,com.bumptech.glide.request.transition.Transition) -> onResourceReady
 com.xzh.musicnotification.MusicNotificationModule -> com.xzh.musicnotification.MusicNotificationModule:
-    34:34:void <init>() -> <init>
-    183:185:void lambda$initSongs$0(io.dcloud.feature.uniapp.bridge.UniJSCallback,java.util.List) -> a
-    34:34:java.lang.ref.WeakReference access$000(com.xzh.musicnotification.MusicNotificationModule) -> access$000
-    34:34:java.lang.ref.WeakReference access$002(com.xzh.musicnotification.MusicNotificationModule,java.lang.ref.WeakReference) -> access$002
-    34:34:com.alibaba.fastjson.JSONObject access$100(com.xzh.musicnotification.MusicNotificationModule) -> access$100
-    34:34:boolean access$200(com.xzh.musicnotification.MusicNotificationModule) -> access$200
-    34:34:boolean access$300(com.xzh.musicnotification.MusicNotificationModule) -> access$300
-    137:143:void cancel() -> cancel
-    49:88:void createNotification(io.dcloud.feature.uniapp.bridge.UniJSCallback) -> createNotification
-    124:126:void favour(com.alibaba.fastjson.JSONObject) -> favour
-    43:45:void init(com.alibaba.fastjson.JSONObject) -> init
-    180:187:void initSongs(io.dcloud.feature.uniapp.bridge.UniJSCallback) -> initSongs
-    191:198:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
-    152:157:boolean openLockActivity(com.alibaba.fastjson.JSONObject) -> openLockActivity
-    175:176:void openOverlaySetting() -> openOverlaySetting
-    162:170:com.alibaba.fastjson.JSONObject openPermissionSetting() -> openPermissionSetting
-    119:120:void playOrPause(com.alibaba.fastjson.JSONObject) -> playOrPause
-    147:148:void setWidgetStyle(com.alibaba.fastjson.JSONObject) -> setWidgetStyle
-    130:133:void switchNotification(boolean) -> switchNotification
-    92:114:com.alibaba.fastjson.JSONObject update(com.alibaba.fastjson.JSONObject) -> update
+    30:30:void <init>() -> <init>
+    30:30:java.lang.ref.WeakReference access$000(com.xzh.musicnotification.MusicNotificationModule) -> access$000
+    30:30:java.lang.ref.WeakReference access$002(com.xzh.musicnotification.MusicNotificationModule,java.lang.ref.WeakReference) -> access$002
+    30:30:com.alibaba.fastjson.JSONObject access$100(com.xzh.musicnotification.MusicNotificationModule) -> access$100
+    30:30:boolean access$200(com.xzh.musicnotification.MusicNotificationModule) -> access$200
+    30:30:boolean access$300(com.xzh.musicnotification.MusicNotificationModule) -> access$300
+    124:130:void cancel() -> cancel
+    45:81:void createNotification(io.dcloud.feature.uniapp.bridge.UniJSCallback) -> createNotification
+    113:114:void favour(com.alibaba.fastjson.JSONObject) -> favour
+    39:41:void init(com.alibaba.fastjson.JSONObject) -> init
+    167:170:void initSongs(io.dcloud.feature.uniapp.bridge.UniJSCallback) -> initSongs
+    174:177:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    139:144:boolean openLockActivity(com.alibaba.fastjson.JSONObject) -> openLockActivity
+    162:163:void openOverlaySetting() -> openOverlaySetting
+    149:157:com.alibaba.fastjson.JSONObject openPermissionSetting() -> openPermissionSetting
+    108:109:void playOrPause(com.alibaba.fastjson.JSONObject) -> playOrPause
+    134:135:void setWidgetStyle(com.alibaba.fastjson.JSONObject) -> setWidgetStyle
+    118:120:void switchNotification(boolean) -> switchNotification
+    85:103:com.alibaba.fastjson.JSONObject update(com.alibaba.fastjson.JSONObject) -> update
 com.xzh.musicnotification.MusicNotificationModule$1 -> com.xzh.musicnotification.MusicNotificationModule$1:
-    66:66:void <init>(com.xzh.musicnotification.MusicNotificationModule,io.dcloud.feature.uniapp.bridge.UniJSCallback,com.alibaba.fastjson.JSONObject) -> <init>
-    69:76:void onServiceConnected(android.content.ComponentName,android.os.IBinder) -> onServiceConnected
-    81:81:void onServiceDisconnected(android.content.ComponentName) -> onServiceDisconnected
+    62:62:void <init>(com.xzh.musicnotification.MusicNotificationModule,io.dcloud.feature.uniapp.bridge.UniJSCallback,com.alibaba.fastjson.JSONObject) -> <init>
+    65:71:void onServiceConnected(android.content.ComponentName,android.os.IBinder) -> onServiceConnected
+    76:76:void onServiceDisconnected(android.content.ComponentName) -> onServiceDisconnected
 com.xzh.musicnotification.notification.MusicNotificationV2 -> com.xzh.musicnotification.notification.MusicNotificationV2:
-    40:40:void <init>() -> <init>
-    40:40:android.graphics.Bitmap access$102(com.xzh.musicnotification.notification.MusicNotificationV2,android.graphics.Bitmap) -> access$102
-    40:40:void access$200(com.xzh.musicnotification.notification.MusicNotificationV2,android.graphics.Bitmap) -> access$200
-    40:40:android.app.Notification access$300(com.xzh.musicnotification.notification.MusicNotificationV2) -> access$300
-    40:40:android.app.NotificationManager access$400(com.xzh.musicnotification.notification.MusicNotificationV2) -> access$400
-    145:164:void buildNotification() -> buildNotification
-    167:193:void buildNotification(android.graphics.Bitmap) -> buildNotification
-    356:359:void cancel() -> cancel
-    90:142:void createNotification() -> createNotification
-    336:345:void favour(boolean) -> favour
-    197:199:androidx.core.app.NotificationCompat$Action generateAction(int,java.lang.CharSequence,int,java.lang.String) -> generateAction
-    298:305:void generateGlide(android.content.Context,com.bumptech.glide.request.target.Target,java.lang.String,float,float) -> generateGlide
-    67:72:android.app.PendingIntent getContentIntent(java.lang.String) -> getContentIntent
-    59:59:com.xzh.musicnotification.notification.MusicNotificationV2 getInstance() -> getInstance
-    205:225:android.widget.RemoteViews getRemoteViews() -> getRemoteViews
-    229:244:android.widget.RemoteViews getSmallRemoteViews() -> getSmallRemoteViews
-    82:87:void initNotification(android.content.Context,com.alibaba.fastjson.JSONObject) -> initNotification
-    313:328:void playOrPause(boolean) -> playOrPause
-    287:295:void setPicUrlBitmap(android.content.Context,android.widget.RemoteViews,java.lang.String,float,float) -> setPicUrlBitmap
-    348:353:void switchNotification(boolean) -> switchNotification
-    253:284:void updateSong(com.alibaba.fastjson.JSONObject) -> updateSong
+    44:44:void <init>() -> <init>
+    44:44:java.lang.ref.WeakReference access$100(com.xzh.musicnotification.notification.MusicNotificationV2) -> access$100
+    44:44:android.graphics.Bitmap access$202(com.xzh.musicnotification.notification.MusicNotificationV2,android.graphics.Bitmap) -> access$202
+    44:44:void access$300(com.xzh.musicnotification.notification.MusicNotificationV2,android.graphics.Bitmap) -> access$300
+    44:44:android.app.Notification access$400(com.xzh.musicnotification.notification.MusicNotificationV2) -> access$400
+    44:44:android.app.NotificationManager access$500(com.xzh.musicnotification.notification.MusicNotificationV2) -> access$500
+    181:199:void buildNotification() -> buildNotification
+    202:244:void buildNotification(android.graphics.Bitmap) -> buildNotification
+    418:421:void cancel() -> cancel
+    120:178:void createNotification() -> createNotification
+    393:407:void favour(boolean) -> favour
+    248:250:androidx.core.app.NotificationCompat$Action generateAction(int,java.lang.CharSequence,int,java.lang.String) -> generateAction
+    352:359:void generateGlide(android.content.Context,com.bumptech.glide.request.target.Target,java.lang.String,float,float) -> generateGlide
+    72:77:android.app.PendingIntent getContentIntent(java.lang.String) -> getContentIntent
+    64:64:com.xzh.musicnotification.notification.MusicNotificationV2 getInstance() -> getInstance
+    256:279:android.widget.RemoteViews getRemoteViews() -> getRemoteViews
+    283:298:android.widget.RemoteViews getSmallRemoteViews() -> getSmallRemoteViews
+    87:117:void initNotification(com.xzh.musicnotification.service.PlayServiceV2,com.alibaba.fastjson.JSONObject) -> initNotification
+    367:385:void playOrPause(boolean) -> playOrPause
+    341:349:void setPicUrlBitmap(android.content.Context,android.widget.RemoteViews,java.lang.String,float,float) -> setPicUrlBitmap
+    410:415:void switchNotification(boolean) -> switchNotification
+    307:338:void updateSong(com.alibaba.fastjson.JSONObject) -> updateSong
 com.xzh.musicnotification.notification.MusicNotificationV2$1 -> com.xzh.musicnotification.notification.MusicNotificationV2$1:
-    147:147:void <init>(com.xzh.musicnotification.notification.MusicNotificationV2) -> <init>
-    157:157:void onLoadCleared(android.graphics.drawable.Drawable) -> onLoadCleared
-    161:161:void onLoadFailed(android.graphics.drawable.Drawable) -> onLoadFailed
-    147:147:void onResourceReady(java.lang.Object,com.bumptech.glide.request.transition.Transition) -> onResourceReady
-    150:153:void onResourceReady(android.graphics.Bitmap,com.bumptech.glide.request.transition.Transition) -> onResourceReady
+    99:99:void <init>(com.xzh.musicnotification.notification.MusicNotificationV2) -> <init>
+    102:109:boolean onMediaButtonEvent(android.content.Intent) -> onMediaButtonEvent
+com.xzh.musicnotification.notification.MusicNotificationV2$2 -> com.xzh.musicnotification.notification.MusicNotificationV2$2:
+    183:183:void <init>(com.xzh.musicnotification.notification.MusicNotificationV2) -> <init>
+    193:193:void onLoadCleared(android.graphics.drawable.Drawable) -> onLoadCleared
+    197:197:void onLoadFailed(android.graphics.drawable.Drawable) -> onLoadFailed
+    183:183:void onResourceReady(java.lang.Object,com.bumptech.glide.request.transition.Transition) -> onResourceReady
+    186:189:void onResourceReady(android.graphics.Bitmap,com.bumptech.glide.request.transition.Transition) -> onResourceReady
 com.xzh.musicnotification.notification.MusicNotificationV2$SingletonHolder -> com.xzh.musicnotification.notification.MusicNotificationV2$SingletonHolder:
-    63:63:void <clinit>() -> <clinit>
-    62:62:void <init>() -> <init>
-    62:62:com.xzh.musicnotification.notification.MusicNotificationV2 access$000() -> access$000
+    68:68:void <clinit>() -> <clinit>
+    67:67:void <init>() -> <init>
+    67:67:com.xzh.musicnotification.notification.MusicNotificationV2 access$000() -> access$000
 com.xzh.musicnotification.service.NotificationReceiver -> com.xzh.musicnotification.service.NotificationReceiver:
-    20:22:void <init>(com.xzh.musicnotification.service.NotificationReceiver$IReceiverListener) -> <init>
-    26:27:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    21:23:void <init>(com.xzh.musicnotification.service.NotificationReceiver$IReceiverListener) -> <init>
+    27:36:void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.xzh.musicnotification.service.PlayServiceV2 -> com.xzh.musicnotification.service.PlayServiceV2:
     33:33:void <init>() -> <init>
-    33:33:java.lang.ref.WeakReference access$000(com.xzh.musicnotification.service.PlayServiceV2) -> access$000
-    33:33:java.lang.ref.WeakReference access$002(com.xzh.musicnotification.service.PlayServiceV2,java.lang.ref.WeakReference) -> access$002
-    33:33:com.xzh.musicnotification.service.PlayServiceV2 access$100() -> access$100
+    33:33:com.xzh.musicnotification.service.PlayServiceV2 access$000() -> access$000
+    33:33:boolean access$100(com.xzh.musicnotification.service.PlayServiceV2) -> access$100
+    33:33:boolean access$102(com.xzh.musicnotification.service.PlayServiceV2,boolean) -> access$102
     33:33:boolean access$200(com.xzh.musicnotification.service.PlayServiceV2) -> access$200
     33:33:boolean access$202(com.xzh.musicnotification.service.PlayServiceV2,boolean) -> access$202
-    33:33:boolean access$300(com.xzh.musicnotification.service.PlayServiceV2) -> access$300
-    33:33:boolean access$302(com.xzh.musicnotification.service.PlayServiceV2,boolean) -> access$302
-    33:33:com.alibaba.fastjson.JSONObject access$400(com.xzh.musicnotification.service.PlayServiceV2) -> access$400
-    33:33:com.alibaba.fastjson.JSONObject access$402(com.xzh.musicnotification.service.PlayServiceV2,com.alibaba.fastjson.JSONObject) -> access$402
-    33:33:boolean access$502(com.xzh.musicnotification.service.PlayServiceV2,boolean) -> access$502
-    33:33:boolean access$600(com.xzh.musicnotification.service.PlayServiceV2) -> access$600
-    231:237:void invoke(android.content.Context,java.lang.String,java.util.Map) -> invoke
-    88:89:android.os.IBinder onBind(android.content.Intent) -> onBind
-    64:78:void onCreate() -> onCreate
-    95:100:void onDestroy() -> onDestroy
-    110:144:void onReceive(java.lang.String,java.lang.String) -> onReceive
-    82:82:int onStartCommand(android.content.Intent,int,int) -> onStartCommand
-    104:106:void startForeground(android.app.Notification) -> startForeground
-    47:53:android.content.Intent startMusicService(android.content.Context) -> startMusicService
-    57:59:void stopMusicService(android.content.Context) -> stopMusicService
+    33:33:com.alibaba.fastjson.JSONObject access$300(com.xzh.musicnotification.service.PlayServiceV2) -> access$300
+    33:33:com.alibaba.fastjson.JSONObject access$302(com.xzh.musicnotification.service.PlayServiceV2,com.alibaba.fastjson.JSONObject) -> access$302
+    33:33:boolean access$402(com.xzh.musicnotification.service.PlayServiceV2,boolean) -> access$402
+    33:33:boolean access$500(com.xzh.musicnotification.service.PlayServiceV2) -> access$500
+    153:154:void fireGlobalEventCallback(java.lang.String,java.util.Map) -> fireGlobalEventCallback
+    242:248:void invoke(android.content.Context,java.lang.String,java.util.Map) -> invoke
+    86:87:android.os.IBinder onBind(android.content.Intent) -> onBind
+    119:123:void onBluetoothReceive(int) -> onBluetoothReceive
+    62:81:void onCreate() -> onCreate
+    93:97:void onDestroy() -> onDestroy
+    111:115:void onHeadsetReceive(int) -> onHeadsetReceive
+    127:150:void onMusicReceive(java.lang.String) -> onMusicReceive
+    106:107:void onScreenReceive() -> onScreenReceive
+    101:102:void startForeground(android.app.Notification) -> startForeground
+    46:52:android.content.Intent startMusicService(android.content.Context) -> startMusicService
+    56:57:void stopMusicService(android.content.Context) -> stopMusicService
 com.xzh.musicnotification.service.PlayServiceV2$ServiceBinder -> com.xzh.musicnotification.service.PlayServiceV2$ServiceBinder:
-    146:146:void <init>(com.xzh.musicnotification.service.PlayServiceV2) -> <init>
-    198:207:void favour(boolean) -> favour
-    225:226:void fireGlobalEventCallback(java.lang.String,java.util.Map) -> fireGlobalEventCallback
-    168:168:boolean getFavour() -> getFavour
-    172:172:boolean getPlaying() -> getPlaying
-    176:176:com.alibaba.fastjson.JSONObject getSongData() -> getSongData
-    158:161:void initNotification(com.alibaba.fastjson.JSONObject) -> initNotification
-    180:181:void lock(boolean) -> lock
-    185:194:void playOrPause(boolean) -> playOrPause
-    150:151:void setActivity(com.xzh.musicnotification.service.PlayServiceV2$OnClickListener) -> setActivity
-    154:155:void setUniSDKInstance(io.dcloud.feature.uniapp.AbsSDKInstance) -> setUniSDKInstance
-    164:165:void switchNotification(boolean) -> switchNotification
-    211:222:void update(com.alibaba.fastjson.JSONObject) -> update
-com.xzh.musicnotification.utils.ImageUtils -> com.xzh.musicnotification.utils.ImageUtils:
-    18:18:void <init>() -> <init>
-    32:49:android.graphics.Bitmap GetLocalOrNetBitmap(java.lang.String) -> GetLocalOrNetBitmap
+    156:156:void <init>(com.xzh.musicnotification.service.PlayServiceV2) -> <init>
+    207:217:void favour(boolean) -> favour
+    236:237:void fireGlobalEventCallback(java.lang.String,java.util.Map) -> fireGlobalEventCallback
+    177:177:boolean getFavour() -> getFavour
+    181:181:boolean getPlaying() -> getPlaying
+    185:185:com.alibaba.fastjson.JSONObject getSongData() -> getSongData
+    169:170:void initNotification(com.alibaba.fastjson.JSONObject) -> initNotification
+    189:190:void lock(boolean) -> lock
+    194:203:void playOrPause(boolean) -> playOrPause
+    161:162:void setActivity(com.xzh.musicnotification.service.PlayServiceV2$OnClickListener) -> setActivity
+    165:166:void setUniSDKInstance(io.dcloud.feature.uniapp.AbsSDKInstance) -> setUniSDKInstance
+    173:174:void switchNotification(boolean) -> switchNotification
+    221:233:void update(com.alibaba.fastjson.JSONObject) -> update
 com.xzh.musicnotification.utils.MusicAsyncQueryHandler -> com.xzh.musicnotification.utils.MusicAsyncQueryHandler:
     16:18:void <init>(android.content.ContentResolver,com.xzh.musicnotification.utils.MusicAsyncQueryHandler$OnCallbackListener) -> <init>
-    22:61:void onQueryComplete(int,java.lang.Object,android.database.Cursor) -> onQueryComplete
-com.xzh.musicnotification.utils.MusicAsyncQueryHandler$SongBean -> com.xzh.musicnotification.utils.MusicAsyncQueryHandler$SongBean:
-    63:69:void <init>() -> <init>
+    22:47:void onQueryComplete(int,java.lang.Object,android.database.Cursor) -> onQueryComplete
 com.xzh.musicnotification.utils.PendingIntentInfo -> com.xzh.musicnotification.utils.PendingIntentInfo:
     15:19:void <init>(int,int,java.lang.String) -> <init>
     34:41:void addOnClickPendingIntents(android.widget.RemoteViews,android.content.Context,com.xzh.musicnotification.utils.PendingIntentInfo[]) -> addOnClickPendingIntents
@@ -36138,12 +36127,12 @@ com.xzh.musicnotification.utils.PendingIntentInfo -> com.xzh.musicnotification.u
     22:22:int getId() -> getId
     26:26:int getIndex() -> getIndex
 com.xzh.musicnotification.utils.Utils -> com.xzh.musicnotification.utils.Utils:
-    21:21:void <init>() -> <init>
-    108:127:void fullScreen(android.app.Activity) -> fullScreen
-    23:29:android.content.pm.ApplicationInfo getApplicationInfo(android.content.Context) -> getApplicationInfo
-    81:101:void openLock(android.content.Context,java.lang.Class) -> openLock
-    73:77:void openOverlaySetting(android.content.Context) -> openOverlaySetting
-    34:68:boolean openPermissionSetting(android.content.Context) -> openPermissionSetting
+    17:17:void <init>() -> <init>
+    94:111:void fullScreen(android.app.Activity) -> fullScreen
+    20:24:android.content.pm.ApplicationInfo getApplicationInfo(android.content.Context) -> getApplicationInfo
+    67:87:void openLock(android.content.Context,java.lang.Class) -> openLock
+    59:63:void openOverlaySetting(android.content.Context) -> openOverlaySetting
+    29:54:boolean openPermissionSetting(android.content.Context) -> openPermissionSetting
 com.xzh.musicnotification.view.HintTextView -> com.xzh.musicnotification.view.HintTextView:
     30:38:void <init>(android.content.Context) -> <init>
     34:38:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
@@ -36167,22 +36156,22 @@ com.xzh.widget.DrawableUtils -> com.xzh.widget.DrawableUtils:
     43:59:android.graphics.drawable.Drawable roundShapeDrawable(int,int,int,int,float) -> roundShapeDrawable
     19:21:android.graphics.drawable.Drawable tintDrawable(android.graphics.drawable.Drawable,android.content.res.ColorStateList) -> tintDrawable
 com.xzh.widget.MusicWidget -> com.xzh.widget.MusicWidget:
-    28:28:void <init>() -> <init>
-    98:105:void addOnClickPendingIntents(android.widget.RemoteViews,android.content.Context,com.xzh.widget.MusicWidget$PendingIntentInfo[]) -> addOnClickPendingIntents
-    227:238:android.graphics.Bitmap getBgBitmap(android.content.Context,int) -> getBgBitmap
-    37:58:void invoke(android.content.Context,java.lang.String,java.util.Map) -> invoke
-    223:223:void onDisabled(android.content.Context) -> onDisabled
-    216:217:void onEnabled(android.content.Context) -> onEnabled
-    145:194:void onReceive(android.content.Context,android.content.Intent) -> onReceive
-    199:210:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]) -> onUpdate
-    90:95:void openAppIntent(android.widget.RemoteViews,android.content.Context,com.xzh.widget.MusicWidget$PendingIntentInfo[]) -> openAppIntent
-    110:141:void updateAppWidget(android.content.Context,android.appwidget.AppWidgetManager,int) -> updateAppWidget
+    32:32:void <init>() -> <init>
+    104:111:void addOnClickPendingIntents(android.widget.RemoteViews,android.content.Context,com.xzh.widget.MusicWidget$PendingIntentInfo[]) -> addOnClickPendingIntents
+    240:251:android.graphics.Bitmap getBgBitmap(android.content.Context,int) -> getBgBitmap
+    41:64:void invoke(android.content.Context,java.lang.String,java.util.Map) -> invoke
+    236:236:void onDisabled(android.content.Context) -> onDisabled
+    229:230:void onEnabled(android.content.Context) -> onEnabled
+    151:207:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    212:223:void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[]) -> onUpdate
+    96:101:void openAppIntent(android.widget.RemoteViews,android.content.Context,com.xzh.widget.MusicWidget$PendingIntentInfo[]) -> openAppIntent
+    116:147:void updateAppWidget(android.content.Context,android.appwidget.AppWidgetManager,int) -> updateAppWidget
 com.xzh.widget.MusicWidget$PendingIntentInfo -> com.xzh.widget.MusicWidget$PendingIntentInfo:
-    65:68:void <init>(int,int) -> <init>
-    70:74:void <init>(int,int,java.lang.String) -> <init>
-    85:85:java.lang.String getEXTRA() -> getEXTRA
-    77:77:int getId() -> getId
-    81:81:int getIndex() -> getIndex
+    71:74:void <init>(int,int) -> <init>
+    76:80:void <init>(int,int,java.lang.String) -> <init>
+    91:91:java.lang.String getEXTRA() -> getEXTRA
+    83:83:int getId() -> getId
+    87:87:int getIndex() -> getIndex
 dc.squareup.HttpConstants -> f.a.a:
     java.lang.String defaultUAConstants -> a
     1:1:java.lang.String getDefaultUA() -> a

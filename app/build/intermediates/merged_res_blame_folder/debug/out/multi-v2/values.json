@@ -21,25 +21,6 @@
                     }
                 },
                 {
-                    "source": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\musicNotification\\build\\intermediates\\packaged_res\\debug\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,17",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,90,131,190,227,264,302,343,831",
-                        "endLines": "2,3,4,5,6,7,8,16,17",
-                        "endColumns": "34,40,58,36,36,37,40,12,91",
-                        "endOffsets": "85,126,185,222,259,297,338,826,918"
-                    },
-                    "to": {
-                        "startLines": "300,558,559,560,562,564,565,1721,1729",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "19359,45936,45977,46036,46116,46208,46246,119479,119967",
-                        "endLines": "300,558,559,560,562,564,565,1728,1729",
-                        "endColumns": "34,40,58,36,36,37,40,12,91",
-                        "endOffsets": "19389,45972,46031,46068,46148,46241,46282,119962,120054"
-                    }
-                },
-                {
                     "source": "D:\\xu\\.gradle\\caches\\transforms-2\\files-2.1\\24e82aba340b759240f09c8ab46deb1a\\recyclerview-1.0.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "30,31,32,33,34,35,36,2",
@@ -164,6 +145,25 @@
                         "endLines": "3265,3727",
                         "endColumns": "22,22",
                         "endOffsets": "212639,234778"
+                    }
+                },
+                {
+                    "source": "D:\\xu\\.gradle\\caches\\transforms-2\\files-2.1\\de686b3c94ba2ba01ef26129ec601615\\jetified-musicNotification-release\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,17",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,90,131,190,227,264,302,343,831",
+                        "endLines": "2,3,4,5,6,7,8,16,17",
+                        "endColumns": "34,40,58,36,36,37,40,12,91",
+                        "endOffsets": "85,126,185,222,259,297,338,826,918"
+                    },
+                    "to": {
+                        "startLines": "300,558,559,560,562,564,565,1721,1729",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "19359,45936,45977,46036,46116,46208,46246,119479,119967",
+                        "endLines": "300,558,559,560,562,564,565,1728,1729",
+                        "endColumns": "34,40,58,36,36,37,40,12,91",
+                        "endOffsets": "19389,45972,46031,46068,46148,46241,46282,119962,120054"
                     }
                 },
                 {
