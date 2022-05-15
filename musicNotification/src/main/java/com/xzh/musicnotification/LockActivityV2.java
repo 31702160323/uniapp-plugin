@@ -31,15 +31,13 @@ import com.xzh.musicnotification.utils.Utils;
 import com.xzh.musicnotification.view.SlidingFinishLayout;
 
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
-import java.util.Map;
 
 import io.dcloud.feature.uniapp.utils.UniUtils;
 
 public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLayout.OnSlidingFinishListener, View.OnClickListener, PlayServiceV2.OnClickListener {
     private int mWidth;
     private int mHeight;
-    private boolean xzhFavour;
+    private boolean showFavour;
     private TextView tvAudio;
     private TextView tvAudioName;
     private ImageView lockDate;
@@ -99,8 +97,8 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
         ApplicationInfo info = Utils.getApplicationInfo(this);
         if (info != null) {
-            xzhFavour = info.metaData.getBoolean("xzh_favour");
-            if (xzhFavour) favouriteView.setVisibility(View.VISIBLE);
+            showFavour = info.metaData.getBoolean(Global.SHOW_FAVOUR);
+            if (showFavour) favouriteView.setVisibility(View.VISIBLE);
         }
 
         playView = findViewById(R.id.play_view);
@@ -113,8 +111,8 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     @Override
     public void onClick(View view) {
         String EXTRA_TYPE = "";
-        String eventName = "musicNotificationError";
-        Map<String, Object> data = new HashMap<>();
+        String eventName = Global.EVENT_MUSIC_NOTIFICATION_ERROR;
+        JSONObject data = new JSONObject();
         data.put("message", "更新锁屏页成功");
         data.put("code", 0);
 
@@ -134,19 +132,18 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
         switch (EXTRA_TYPE) {
             case NotificationReceiver.EXTRA_PRE:
-                eventName = "musicNotificationPrevious";
+                eventName = Global.EVENT_MUSIC_NOTIFICATION_PREVIOUS;
                 break;
             case NotificationReceiver.EXTRA_NEXT:
-                eventName = "musicNotificationNext";
+                eventName = Global.EVENT_MUSIC_NOTIFICATION_NEXT;
                 break;
             case NotificationReceiver.EXTRA_FAV:
                 mBinder.get().favour(!mBinder.get().getFavour());
-                data.put("favourite", mBinder.get().getFavour());
-                eventName = "musicNotificationFavourite";
+                eventName = Global.EVENT_MUSIC_NOTIFICATION_FAVOURITE;
                 break;
             case NotificationReceiver.EXTRA_PLAY:
                 mBinder.get().playOrPause(!mBinder.get().getPlaying());
-                eventName = "musicNotificationPause";
+                eventName = Global.EVENT_MUSIC_NOTIFICATION_PAUSE;
                 break;
             default:
                 data.put("message", "更新锁屏页失败");
@@ -189,7 +186,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
     @Override
     public void favour(boolean isFavour) {
-        if (!xzhFavour) return;
+        if (!showFavour) return;
         if (isFavour) {
             favouriteView.setImageResource(R.drawable.note_btn_loved);
         } else {
@@ -207,11 +204,11 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     }
 
     private void updateUI(JSONObject options) {
-        if (options.getString("songName") != null) {
-            tvAudioName.setText(options.getString("songName"));
+        if (options.getString(Global.KEY_SONG_NAME) != null) {
+            tvAudioName.setText(options.getString(Global.KEY_SONG_NAME));
         }
-        if (options.getString("artistsName") != null) {
-            tvAudio.setText(options.getString("artistsName"));
+        if (options.getString(Global.KEY_ARTISTS_NAME) != null) {
+            tvAudio.setText(options.getString(Global.KEY_ARTISTS_NAME));
         }
         favour(mBinder.get().getFavour());
         playOrPause(mBinder.get().getPlaying());
@@ -270,7 +267,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
                     g = Color.green(color);
                     b = Color.blue(color);
 
-                    a = (a > 255 ? 255 : (a < 0 ? 0 : a));
+                    a = (a > 255 ? 255 : Math.max(a, 0));
                     newPx[x + w * y] = Color.argb(a,r, g, b);
                 }
             }

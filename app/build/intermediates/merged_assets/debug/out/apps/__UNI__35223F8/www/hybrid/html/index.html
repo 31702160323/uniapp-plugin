@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<script type="text/javascript" src="./js/utils.js"></script>
+<script type="text/javascript">
+  const webviewIds = [];
+
+  if (window.worker) {
+    workerJSBridgeReady()
+  } else {
+    document.addEventListener('WorkerJSBridgeReady', workerJSBridgeReady, false)
+  }
+
+  function workerJSBridgeReady() {
+    worker.addEventListener('message', (event) => {
+      const { type, data } = getData(event)
+      const paramsObj = { options: { timestamp: + new Date() }, name: 'postMessage', arg: data };
+      if (webviewIds.length === 0) {
+        let webviewId = '';
+        const currentWebview = plus.webview.currentWebview();
+        if (!currentWebview) {
+          throw new Error('plus.webview.currentWebview() is undefined')
+        }
+        const parentWebview = currentWebview.parent();
+        if (parentWebview) {
+          webviewId = parentWebview.id
+        } else {
+          webviewId = currentWebview.id
+        }
+        webviewIds.push(webviewId)
+      }
+      if (plus.webview.getWebviewById('__uniapp__service')) {
+        plus.webview.postMessageToUniNView({ type: 'WEB_INVOKE_APPSERVICE', args: { data: paramsObj, webviewIds } }, '__uniapp__service')
+      } else {
+        plus.webview.getLaunchWebview().evalJS(`UniPlusBridge.subscribeHandler("WEB_INVOKE_APPSERVICE",${JSON.stringify(paramsObj)},${JSON.stringify(webviewIds)});`)
+      }
+    })
+  }
+
+  function postMessage(msg) {
+    worker.postMessage(...setData(msg))
+  }
+</script>
+
+</html>
