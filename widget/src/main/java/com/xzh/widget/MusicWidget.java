@@ -11,11 +11,15 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.AppWidgetTarget;
 import com.taobao.weex.utils.WXViewUtils;
 
@@ -27,7 +31,7 @@ import io.dcloud.feature.uniapp.utils.UniResourceUtils;
 
 public class MusicWidget extends AppWidgetProvider {
 
-    private boolean xzhFavour;
+    private boolean showFavour;
     private int themeColor;
     private int titleColor;
     private int artistColor;
@@ -38,6 +42,8 @@ public class MusicWidget extends AppWidgetProvider {
         intent.addFlags(0x01000000);
         intent.setPackage(context.getPackageName());
         intent.putExtra("type", type);
+
+        Log.d("TAG", "invoke: ");
 
         for (String key : options.keySet()) {
             Object value = options.get(key);
@@ -122,7 +128,7 @@ public class MusicWidget extends AppWidgetProvider {
                 new PendingIntentInfo(R.id.favourite_view, 4, "play_favourite")
         );
 
-        if (xzhFavour) {
+        if (showFavour) {
             views.setViewVisibility(R.id.favourite_view, View.VISIBLE);
         }
         if (themeColor != 0) {
@@ -149,14 +155,20 @@ public class MusicWidget extends AppWidgetProvider {
                 case "update":
                     views.setTextViewText(R.id.title_view, intent.getStringExtra("songName"));
                     views.setTextViewText(R.id.tip_view, intent.getStringExtra("artistsName"));
+                    if (intent.getBooleanExtra("favour", false)) {
+                        views.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_loved);
+                    } else {
+                        views.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_love_white);
+                    }
 
                     AppWidgetTarget appWidgetTarget = new AppWidgetTarget(context, R.id.image_view, views, new ComponentName(context, MusicWidget.class));
 
                     Glide.with(context.getApplicationContext())
                             .asBitmap()
                             .load(intent.getStringExtra("picUrl"))
+                            .apply(new RequestOptions().transform(new CenterCrop(), new RoundedCorners(5)))
                             .sizeMultiplier(0.8f)
-                            .override(WXViewUtils.dip2px(70), WXViewUtils.dip2px(70))
+                            .override(WXViewUtils.dip2px(75), WXViewUtils.dip2px(75))
                             .format(DecodeFormat.PREFER_RGB_565)
                             .into(appWidgetTarget);
                     break;
@@ -168,6 +180,7 @@ public class MusicWidget extends AppWidgetProvider {
                     }
                     break;
                 case "favour":
+                    Log.d("TAG", "onReceive: favour" + intent.getBooleanExtra("favour", false));
                     if (intent.getBooleanExtra("favour", false)) {
                         views.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_loved);
                     } else {
@@ -197,7 +210,7 @@ public class MusicWidget extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         try {
             ApplicationInfo info = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            xzhFavour = info.metaData.getBoolean("xzh_favour");
+            showFavour = info.metaData.getBoolean("xzh_favour");
             themeColor = info.metaData.getInt("xzh_theme_color");
             titleColor = info.metaData.getInt("xzh_title_color");
             artistColor = info.metaData.getInt("xzh_artist_color");
@@ -231,7 +244,7 @@ public class MusicWidget extends AppWidgetProvider {
         int height = context.getResources().getDimensionPixelSize(R.dimen.dp_70);
         // 圆角角度
 //        int radius = context.getResources().getDimensionPixelSize(R.dimen.dp_5);
-        int radius = 25;
+        int radius = 10;
         // 绘制背景
         Drawable drawable = DrawableUtils.roundShapeDrawable(color, alpha, width, height, radius);
         // 将绘制好的背景转换为Bitmap
