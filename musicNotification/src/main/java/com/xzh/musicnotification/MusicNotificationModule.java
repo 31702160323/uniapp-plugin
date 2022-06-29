@@ -14,7 +14,6 @@ import android.provider.Settings;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.alibaba.fastjson.JSONObject;
-import com.taobao.weex.adapter.URIAdapter;
 import com.xzh.musicnotification.service.PlayServiceV2;
 import com.xzh.musicnotification.utils.MusicAsyncQueryHandler;
 import com.xzh.musicnotification.utils.Utils;
@@ -36,48 +35,40 @@ public class MusicNotificationModule extends UniModule {
 
     @UniJSMethod(uiThread = false)
     public void init(JSONObject config) {
-        config.put("icon", mUniSDKInstance.rewriteUri(Uri.parse(config.getString("icon")), URIAdapter.FILE));
+        if (config.getString(Global.KEY_PATH) == null) config.put(Global.KEY_PATH, "");
         this.mConfig = config;
     }
 
     @UniJSMethod(uiThread = false)
     public void createNotification(UniJSCallback callback) {
         JSONObject data = new JSONObject();
-        data.put("message", "设置歌曲信息成功");
-        data.put("code", 0);
-        if (this.mConfig.get(Global.KEY_PATH) == null) {
-            data.put("message", "path不能为空");
-            data.put("code", -3);
+        try {
+            connection = new WeakReference<>(new ServiceConnection() {
+                @Override
+                public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                    mBinder = new WeakReference<>((PlayServiceV2.ServiceBinder) iBinder);
+                    mBinder.get().initNotification(mConfig);
+                    mBinder.get().setUniSDKInstance(mUniSDKInstance);
+                    mBinder.get().lock(mLock);
+                    mBinder.get().switchNotification(mSystemStyle);
+                    data.put("message", "设置歌曲信息成功");
+                    data.put("code", 0);
+                    callback.invoke(data);
+                }
+
+                @Override
+                public void onServiceDisconnected(ComponentName componentName) {
+
+                }
+            });
+
+            Context context = mUniSDKInstance.getContext();
+            context.bindService(PlayServiceV2.startMusicService(context), connection.get(), BIND_AUTO_CREATE);
+        } catch (Exception e) {
+            data.put("message", "创建通知栏失败");
+            data.put("code", 0);
             callback.invoke(data);
-            return;
         }
-
-        if (this.mConfig.get("icon") == null) {
-            data.put("message", "icon不能为空");
-            data.put("code", -4);
-            callback.invoke(data);
-            return;
-        }
-
-        connection = new WeakReference<>(new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                mBinder = new WeakReference<>((PlayServiceV2.ServiceBinder) iBinder);
-                mBinder.get().initNotification(mConfig);
-                mBinder.get().setUniSDKInstance(mUniSDKInstance);
-                mBinder.get().lock(mLock);
-                mBinder.get().switchNotification(mSystemStyle);
-                callback.invoke(data);
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName componentName) {
-
-            }
-        });
-
-        Context context = mUniSDKInstance.getContext();
-        context.bindService(PlayServiceV2.startMusicService(context), connection.get(), BIND_AUTO_CREATE);
     }
 
     @UniJSMethod(uiThread = false)
@@ -91,14 +82,18 @@ public class MusicNotificationModule extends UniModule {
         }
         if (!isNotification) {
             data.put("message", "没有通知栏权限");
+            data.put("code", -3);
+        } else if(mConfig == null) {
+            data.put("message", "请先调用init方法进行初始化操作");
             data.put("code", -2);
-        } else if (mBinder != null) {
+        } else if (mBinder == null) {
+            data.put("message", "请先调用createNotification方法进行初始化操作");
+            data.put("code", -1);
+        } else {
+            if (options.getBoolean(Global.KEY_FAVOUR) == null)  options.put(Global.KEY_FAVOUR, false);
             mBinder.get().update(options);
             data.put("message", "设置歌曲信息成功");
             data.put("code", 0);
-        } else {
-            data.put("message", "请先调用init方法进行初始化操作");
-            data.put("code", -1);
         }
         return data;
     }

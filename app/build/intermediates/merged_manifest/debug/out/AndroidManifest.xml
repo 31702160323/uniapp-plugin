@@ -52,7 +52,7 @@
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" /> <!-- 前台服务权限 -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- 后台活动权限 -->
     <uses-permission android:name="android.permission.START_ACTIVITIES_FROM_BACKGROUND" /> <!-- 修改音频设置 -->
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- 浮窗权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 蓝牙权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" /> <!-- Barcode(二维码)  end -->
     <application

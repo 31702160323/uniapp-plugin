@@ -101,15 +101,15 @@
 54    <uses-permission android:name="android.permission.START_ACTIVITIES_FROM_BACKGROUND" /> <!-- 修改音频设置 -->
 54-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:23:5-91
 54-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:23:22-88
-55    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+55    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- 浮窗权限 -->
 55-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:5-80
 55-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:22-77
 56    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 蓝牙权限 -->
-56-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:26:5-78
-56-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:26:22-75
+56-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:27:5-78
+56-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:27:22-75
 57    <uses-permission android:name="android.permission.BLUETOOTH" /> <!-- Barcode(二维码)  end -->
-57-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:28:5-68
-57-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:28:22-65
+57-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:29:5-68
+57-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:29:22-65
 58    <application
 58-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:23:5-110:19
 59        android:name="io.dcloud.application.DCloudApplication"
@@ -123,7 +123,7 @@
 63        android:debuggable="true"
 63-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:31:9-34
 64        android:extractNativeLibs="true"
-64-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4265e73416c2d10a1b31fc2420d121b0\jetified-uniapp-v8-release\AndroidManifest.xml:29:18-50
+64-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\9f1b5c5fda7662b66d18c322126fb8a4\jetified-uniapp-v8-release\AndroidManifest.xml:29:18-50
 65        android:icon="@drawable/icon"
 65-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:28:9-38
 66        android:label="@string/app_name"
@@ -296,13 +296,13 @@
 153-->[debug-server-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\23b506fd5ca51d51ea49551ef2e09b6b\jetified-debug-server-release\AndroidManifest.xml:19:13-53
 154
 155        <receiver
-155-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4265e73416c2d10a1b31fc2420d121b0\jetified-uniapp-v8-release\AndroidManifest.xml:30:9-34:20
+155-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\9f1b5c5fda7662b66d18c322126fb8a4\jetified-uniapp-v8-release\AndroidManifest.xml:30:9-34:20
 156            android:name="com.taobao.weex.WXGlobalEventReceiver"
-156-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4265e73416c2d10a1b31fc2420d121b0\jetified-uniapp-v8-release\AndroidManifest.xml:31:13-65
+156-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\9f1b5c5fda7662b66d18c322126fb8a4\jetified-uniapp-v8-release\AndroidManifest.xml:31:13-65
 157            android:enabled="true"
-157-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4265e73416c2d10a1b31fc2420d121b0\jetified-uniapp-v8-release\AndroidManifest.xml:32:13-35
+157-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\9f1b5c5fda7662b66d18c322126fb8a4\jetified-uniapp-v8-release\AndroidManifest.xml:32:13-35
 158            android:exported="false" >
-158-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\4265e73416c2d10a1b31fc2420d121b0\jetified-uniapp-v8-release\AndroidManifest.xml:33:13-37
+158-->[uniapp-v8-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\9f1b5c5fda7662b66d18c322126fb8a4\jetified-uniapp-v8-release\AndroidManifest.xml:33:13-37
 159        </receiver>
 160        <!--
 161        <activity
@@ -460,27 +460,27 @@
 245            android:permission="android.permission.BIND_JOB_SERVICE" /> <!-- android:noHistory="true" -->
 245-->[lib.5plus.base-release.aar] D:\xu\.gradle\caches\transforms-2\files-2.1\56aff92ad5b6e3505888b0c0af8aa654\jetified-lib.5plus.base-release\AndroidManifest.xml:265:13-69
 246        <activity
-246-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:33:9-41:54
+246-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:34:9-42:54
 247            android:name="com.xzh.musicnotification.LockActivityV2"
-247-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:34:13-68
+247-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:35:13-68
 248            android:excludeFromRecents="true"
-248-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:35:13-46
+248-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:36:13-46
 249            android:exported="false"
-249-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:36:13-37
+249-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:37:13-37
 250            android:launchMode="singleInstance"
-250-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:37:13-48
+250-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:38:13-48
 251            android:screenOrientation="portrait"
-251-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:38:13-49
+251-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:39:13-49
 252            android:showWhenLocked="true"
-252-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:39:13-42
+252-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:40:13-42
 253            android:taskAffinity="com.xzh.musicnotificationV2"
-253-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:40:13-63
+253-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:41:13-63
 254            android:theme="@style/LockScreenTheme" />
-254-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:41:13-51
+254-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:42:13-51
 255
 256        <service android:name="com.xzh.musicnotification.service.PlayServiceV2" />
-256-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:43:9-83
-256-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:43:18-80
+256-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:44:9-83
+256-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:44:18-80
 257
 258        <receiver android:name="com.xzh.widget.MusicWidget" >
 258-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-21:20
