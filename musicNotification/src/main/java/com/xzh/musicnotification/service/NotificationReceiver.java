@@ -24,14 +24,18 @@ public class NotificationReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
-            mListener.onScreenReceive();
-        } else if (Intent.ACTION_HEADSET_PLUG.equals(intent.getAction())) {
-            mListener.onHeadsetReceive(intent.getIntExtra("state", 0));
-        } else if (BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED.equals(intent.getAction())) {
-            mListener.onBluetoothReceive(intent.getIntExtra(BluetoothHeadset.EXTRA_STATE, 0));
-        } else {
-            mListener.onMusicReceive(intent.getStringExtra(EXTRA));
+        try {
+            if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
+                 mListener.onScreenReceive();
+            } else if (Intent.ACTION_HEADSET_PLUG.equals(intent.getAction())) {
+                mListener.onHeadsetReceive(intent.getIntExtra("state", 0));
+            } else if (BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED.equals(intent.getAction())) {
+                mListener.onBluetoothReceive(intent.getIntExtra(BluetoothHeadset.EXTRA_STATE, 0));
+            } else {
+                mListener.onMusicReceive(intent.getStringExtra(EXTRA));
+            }
+        } catch (Exception e) {
+            mListener.onMusicReceive("");
         }
     }
 

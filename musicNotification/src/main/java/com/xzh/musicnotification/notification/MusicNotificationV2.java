@@ -50,7 +50,6 @@ public class MusicNotificationV2 {
     private JSONObject songInfo;
     private boolean isPlay;
     private boolean showFavour;
-    private boolean isFavourite;
     private boolean systemStyle;
     private JSONObject mConfig;
     private WeakReference<Context> mContext;
@@ -218,14 +217,14 @@ public class MusicNotificationV2 {
         style.setShowCancelButton(true);
 
         if (showFavour) {
-            style.setShowActionsInCompactView(2, 3);
-            if (isFavourite) {
+            style.setShowActionsInCompactView(1, 2, 3);
+            if (songInfo.getBoolean(Global.KEY_FAVOUR)) {
                 builder.addAction(generateAction(R.drawable.note_btn_loved, "Favourite", 4, NotificationReceiver.EXTRA_FAV));
             } else {
                 builder.addAction(generateAction(R.drawable.note_btn_love_white, "Favourite", 4, NotificationReceiver.EXTRA_FAV));
             }
         } else {
-            style.setShowActionsInCompactView(1, 2);
+            style.setShowActionsInCompactView(0, 1, 2);
         }
 
         builder.addAction(generateAction(R.drawable.note_btn_pre_white, "Previous", 2, NotificationReceiver.EXTRA_PRE));
@@ -260,9 +259,9 @@ public class MusicNotificationV2 {
             mRemoteViews.setImageViewResource(R.id.next_view, R.drawable.note_btn_next_white);
             mRemoteViews.setImageViewResource(R.id.play_view, R.drawable.note_btn_play_white);
             mRemoteViews.setImageViewResource(R.id.previous_view, R.drawable.note_btn_pre_white);
-            mRemoteViews.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_love_white);
             if (showFavour) {
                 mRemoteViews.setViewVisibility(R.id.favourite_view, View.VISIBLE);
+                mRemoteViews.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_love_white);
             }
 
             PendingIntentInfo.addOnClickPendingIntents(mRemoteViews, mContext.get(),
@@ -305,7 +304,6 @@ public class MusicNotificationV2 {
      */
     public void updateSong(JSONObject options) {
         songInfo = options;
-        isFavourite = options.getBoolean(Global.KEY_FAVOUR) != null && options.getBoolean(Global.KEY_FAVOUR);
         if (mNotificationManager == null) {
             createNotification();
         }
@@ -320,7 +318,8 @@ public class MusicNotificationV2 {
                 if (mSmallRemoteViews != null)
                     mSmallRemoteViews.setTextViewText(R.id.tip_view, String.valueOf(options.getString(Global.KEY_ARTISTS_NAME)));
             }
-            if (isFavourite) {
+
+            if (songInfo.getBoolean(Global.KEY_FAVOUR)) {
                 mRemoteViews.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_loved);
             } else {
                 mRemoteViews.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_love_white);
@@ -390,7 +389,7 @@ public class MusicNotificationV2 {
      * @param favourite 搜藏状态
      */
     public void favour(boolean favourite) {
-        isFavourite = favourite;
+        songInfo.put(Global.KEY_FAVOUR, favourite);
         if (mNotificationManager == null) {
             createNotification();
         }
