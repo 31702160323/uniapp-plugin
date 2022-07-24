@@ -42,8 +42,9 @@ android {
         }
         debug {
             signingConfig signingConfigs.config
-            zipAlignEnabled true
-            minifyEnabled true
+            zipAlignEnabled false
+            minifyEnabled false
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -85,4 +86,5 @@ dependencies {
     // 添加uni-app插件
     implementation project(':musicNotification')
     implementation project(':widget')
+    implementation project(':calendar')
 }
