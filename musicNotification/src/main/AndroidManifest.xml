@@ -14,7 +14,8 @@
     <!-- 读取外部存储权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!-- 后台活动权限 -->
-    <uses-permission android:name="android.permission.START_ACTIVITIES_FROM_BACKGROUND" />
+    <uses-permission android:name="android.permission.START_ACTIVITIES_FROM_BACKGROUND"
+        tools:ignore="ProtectedPermissions" />
     <!-- 修改音频设置 -->
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <!-- 浮窗权限 -->
@@ -41,6 +42,30 @@
 <!--                <action android:name="android.intent.action.MEDIA_BUTTON" />-->
 <!--            </intent-filter>-->
 <!--        </receiver>-->
+
+        <meta-data
+            android:name="xzh_page"
+            android:value="pages/lock/lock"/>
+
+        <meta-data
+            android:name="xzh_favour"
+            android:value="true"/>
+
+        <meta-data
+            android:name="xzh_theme_color"
+            android:value="#55000000"/>
+
+        <meta-data
+            android:name="xzh_title_color"
+            android:value="#ffffff"/>
+
+        <meta-data
+            android:name="xzh_artist_color"
+            android:value="#ffffff"/>
+
+        <meta-data
+            android:name="xzh_account_name"
+            android:value="1850070877@qq.com"/>
     </application>
 
 </manifest>
