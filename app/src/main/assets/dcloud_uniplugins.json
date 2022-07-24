@@ -44,6 +44,15 @@
           "class": "com.xzh.pictureselectoruni.PictureSelectorModule"
         }
       ]
+    },
+    {
+      "plugins": [
+        {
+          "type": "module",
+          "name": "XZH-Calendar",
+          "class": "com.xzh.calendar.CalendarModule"
+        }
+      ]
     }
   ]
 }

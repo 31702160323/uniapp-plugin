@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.xzh.UniPlugin">
 
     <supports-screens
@@ -29,7 +30,8 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:debuggable="true"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        tools:ignore="HardcodedDebugMode">
 
         <!-- 应用入口 -->
         <activity
@@ -87,26 +89,6 @@
         <meta-data
             android:name="dcloud_appkey"
             android:value="e9269f31a55e5d46e77a3e5e4ad97b88" />
-
-        <meta-data
-            android:name="xzh_page"
-            android:value="pages/lock/lock"/>
-
-        <meta-data
-            android:name="xzh_favour"
-            android:value="true"/>
-
-        <meta-data
-            android:name="xzh_theme_color"
-            android:value="#55000000"/>
-
-        <meta-data
-            android:name="xzh_title_color"
-            android:value="#ffffff"/>
-
-        <meta-data
-            android:name="xzh_artist_color"
-            android:value="#ffffff"/>
     </application>
 
 </manifest>

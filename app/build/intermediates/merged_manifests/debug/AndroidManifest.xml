@@ -54,7 +54,9 @@
     <uses-permission android:name="android.permission.START_ACTIVITIES_FROM_BACKGROUND" /> <!-- 修改音频设置 -->
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- 浮窗权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 蓝牙权限 -->
-    <uses-permission android:name="android.permission.BLUETOOTH" /> <!-- Barcode(二维码)  end -->
+    <uses-permission android:name="android.permission.BLUETOOTH" /> <!-- 日历权限 -->
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" /> <!-- Barcode(二维码)  end -->
     <application
         android:name="io.dcloud.application.DCloudApplication"
         android:allowBackup="true"
@@ -125,21 +127,6 @@
         <meta-data
             android:name="dcloud_appkey"
             android:value="e9269f31a55e5d46e77a3e5e4ad97b88" />
-        <meta-data
-            android:name="xzh_page"
-            android:value="pages/lock/lock" />
-        <meta-data
-            android:name="xzh_favour"
-            android:value="true" />
-        <meta-data
-            android:name="xzh_theme_color"
-            android:value="#55000000" />
-        <meta-data
-            android:name="xzh_title_color"
-            android:value="#ffffff" />
-        <meta-data
-            android:name="xzh_artist_color"
-            android:value="#ffffff" />
 
         <service
             android:name="io.dcloud.debug.PullService"
@@ -253,7 +240,29 @@
             android:taskAffinity="com.xzh.musicnotificationV2"
             android:theme="@style/LockScreenTheme" />
 
-        <service android:name="com.xzh.musicnotification.service.PlayServiceV2" />
+        <service android:name="com.xzh.musicnotification.service.PlayServiceV2" /> <!-- <receiver android:name=".service.NotificationReceiver" android:exported="true" tools:ignore="Instantiatable"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MEDIA_BUTTON" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+        <meta-data
+            android:name="xzh_page"
+            android:value="pages/lock/lock" />
+        <meta-data
+            android:name="xzh_favour"
+            android:value="true" />
+        <meta-data
+            android:name="xzh_theme_color"
+            android:value="#55000000" />
+        <meta-data
+            android:name="xzh_title_color"
+            android:value="#ffffff" />
+        <meta-data
+            android:name="xzh_artist_color"
+            android:value="#ffffff" />
+        <meta-data
+            android:name="xzh_account_name"
+            android:value="1850070877@qq.com" />
 
         <receiver android:name="com.xzh.widget.MusicWidget" >
             <intent-filter>
