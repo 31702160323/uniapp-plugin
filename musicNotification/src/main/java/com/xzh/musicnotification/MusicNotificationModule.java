@@ -5,11 +5,21 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Color;
+import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.core.app.NotificationManagerCompat;
 
@@ -17,6 +27,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.xzh.musicnotification.service.PlayServiceV2;
 import com.xzh.musicnotification.utils.MusicAsyncQueryHandler;
 import com.xzh.musicnotification.utils.Utils;
+import com.xzh.musicnotification.view.FloatView;
 
 import java.lang.ref.WeakReference;
 
@@ -25,6 +36,8 @@ import io.dcloud.feature.uniapp.bridge.UniJSCallback;
 import io.dcloud.feature.uniapp.common.UniModule;
 
 import static android.content.Context.BIND_AUTO_CREATE;
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+import static android.content.Context.WINDOW_SERVICE;
 
 public class MusicNotificationModule extends UniModule {
     private JSONObject mConfig;
@@ -54,6 +67,8 @@ public class MusicNotificationModule extends UniModule {
                     data.put("message", "设置歌曲信息成功");
                     data.put("code", 0);
                     callback.invoke(data);
+
+                    FloatView.getInstance().show(mUniSDKInstance);
                 }
 
                 @Override
@@ -101,6 +116,7 @@ public class MusicNotificationModule extends UniModule {
     @UniJSMethod(uiThread = false)
     public void playOrPause(JSONObject options) {
         if (mBinder != null) mBinder.get().playOrPause(options.getBoolean(Global.KEY_PLAYING));
+        FloatView.getInstance().update(options.getBoolean(Global.KEY_PLAYING));
     }
 
     @UniJSMethod(uiThread = false)
@@ -121,6 +137,7 @@ public class MusicNotificationModule extends UniModule {
             PlayServiceV2.stopMusicService(mUniSDKInstance.getContext());
             mBinder = null;
             connection = null;
+            FloatView.getInstance().hide();
         }
     }
 

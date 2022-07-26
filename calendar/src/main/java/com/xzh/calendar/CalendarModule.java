@@ -67,13 +67,9 @@ public class CalendarModule extends UniModule {
     public void addCalendarEvent(JSONObject option) {
         Context context = mUniSDKInstance.getContext();
 
-        requestPermissions(context, () -> addEvent(option, context));
+//        requestPermissions(context, () -> addEvent(option, context));
         if (context instanceof Activity) {
-            Paint paint = new Paint();
-            ColorMatrix colorMatrix = new ColorMatrix();
-            colorMatrix.setSaturation(0.0F);
-            paint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
-            ((Activity) context).getWindow().getDecorView().setLayerType(View.LAYER_TYPE_HARDWARE, paint);
+            context.startActivity(new Intent(context, FloatingCmdAct.class));
         }
     }
 

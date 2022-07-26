@@ -4,7 +4,7 @@
             "outputFile": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v21\\values-watch-v21.xml",
             "map": [
                 {
-                    "source": "D:\\xu\\.gradle\\caches\\transforms-2\\files-2.1\\deb6da7db3da191b108446f27e37e742\\appcompat-1.0.0\\res\\values-watch-v21\\values-watch-v21.xml",
+                    "source": "D:\\xu\\.gradle\\caches\\transforms-2\\files-2.1\\44b21666f861b2b454523071d69d07d7\\appcompat-1.2.0\\res\\values-watch-v21\\values-watch-v21.xml",
                     "from": {
                         "startLines": "2,6,10",
                         "startColumns": "4,4,4",

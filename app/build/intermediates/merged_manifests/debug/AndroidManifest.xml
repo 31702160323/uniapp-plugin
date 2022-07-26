@@ -264,6 +264,13 @@
             android:name="xzh_account_name"
             android:value="1850070877@qq.com" />
 
+        <activity
+            android:name="com.xzh.calendar.FloatingCmdAct"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat" />
+
+        <service android:name="com.xzh.calendar.FloatingWindowService" />
+
         <receiver android:name="com.xzh.widget.MusicWidget" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

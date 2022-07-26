@@ -204,7 +204,7 @@ public class MusicNotificationV2 {
                 .setShowWhen(false)
                 .setOnlyAlertOnce(true)
                 .setSmallIcon(R.drawable.music_icon)
-                .setBadgeIconType(R.drawable.music_icon)
+//                .setBadgeIconType(R.drawable.music_icon)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setContentIntent(getContentIntent(mConfig.getString(Global.KEY_PATH)))
                 .setContentTitle(String.valueOf(songInfo.getString(Global.KEY_SONG_NAME)))
