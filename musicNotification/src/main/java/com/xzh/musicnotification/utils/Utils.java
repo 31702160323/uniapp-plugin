@@ -56,7 +56,7 @@ public class Utils {
     }
 
     public static void openOverlaySetting(Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + context.getPackageName()));
             ((Activity) context).startActivityForResult(intent, 0);
         }

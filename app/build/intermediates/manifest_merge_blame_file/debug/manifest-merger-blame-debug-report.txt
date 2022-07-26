@@ -111,11 +111,11 @@
 57-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:31:5-68
 57-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:31:22-65
 58    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
-58-->[:calendar] D:\htmlFile\project\UniPlugin-Hello-AS\calendar\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-73
-58-->[:calendar] D:\htmlFile\project\UniPlugin-Hello-AS\calendar\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:22-70
+58-->[:calendar] D:\htmlFile\project\UniPlugin-Hello-AS\calendar\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-73
+58-->[:calendar] D:\htmlFile\project\UniPlugin-Hello-AS\calendar\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:22-70
 59    <uses-permission android:name="android.permission.READ_CALENDAR" /> <!-- Barcode(二维码)  end -->
-59-->[:calendar] D:\htmlFile\project\UniPlugin-Hello-AS\calendar\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:5-72
-59-->[:calendar] D:\htmlFile\project\UniPlugin-Hello-AS\calendar\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:22-69
+59-->[:calendar] D:\htmlFile\project\UniPlugin-Hello-AS\calendar\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-72
+59-->[:calendar] D:\htmlFile\project\UniPlugin-Hello-AS\calendar\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:22-69
 60    <application
 60-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:24:5-92:19
 61        android:name="io.dcloud.application.DCloudApplication"
@@ -125,7 +125,7 @@
 63        android:allowClearUserData="true"
 63-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:28:9-42
 64        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-64-->[androidx.core:core:1.0.0] D:\xu\.gradle\caches\transforms-2\files-2.1\4bc29e434132fc7b689c2d24b374ddd7\core-1.0.0\AndroidManifest.xml:22:18-86
+64-->[androidx.core:core:1.5.0] D:\xu\.gradle\caches\transforms-2\files-2.1\5c4786bccfbaefa0f187e0e56044e26d\core-1.5.0\AndroidManifest.xml:24:18-86
 65        android:debuggable="true"
 65-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml:32:9-34
 66        android:extractNativeLibs="true"
@@ -498,26 +498,39 @@
 265            android:value="1850070877@qq.com" />
 265-->[:musicNotification] D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\library_manifest\debug\AndroidManifest.xml:71:13-46
 266
-267        <receiver android:name="com.xzh.widget.MusicWidget" >
-267-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-21:20
-267-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:19-60
-268            <intent-filter>
-268-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-16:29
-269                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-269-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:17-84
-269-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:25-81
-270                <action android:name="com.xzh.widget.MusicWidget" />
-270-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:17-69
-270-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:25-66
-271            </intent-filter>
-272
-273            <meta-data
-273-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-20:61
-274                android:name="android.appwidget.provider"
-274-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:17-58
-275                android:resource="@xml/music_widget_info" />
-275-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:17-58
-276        </receiver>
-277    </application>
-278
-279</manifest>
+267        <activity
+267-->[:calendar] D:\htmlFile\project\UniPlugin-Hello-AS\calendar\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:9-19:54
+268            android:name="com.xzh.calendar.FloatingCmdAct"
+268-->[:calendar] D:\htmlFile\project\UniPlugin-Hello-AS\calendar\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-59
+269            android:launchMode="singleTop"
+269-->[:calendar] D:\htmlFile\project\UniPlugin-Hello-AS\calendar\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-43
+270            android:theme="@style/Theme.AppCompat" />
+270-->[:calendar] D:\htmlFile\project\UniPlugin-Hello-AS\calendar\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-51
+271
+272        <service android:name="com.xzh.calendar.FloatingWindowService" />
+272-->[:calendar] D:\htmlFile\project\UniPlugin-Hello-AS\calendar\build\intermediates\library_manifest\debug\AndroidManifest.xml:21:9-74
+272-->[:calendar] D:\htmlFile\project\UniPlugin-Hello-AS\calendar\build\intermediates\library_manifest\debug\AndroidManifest.xml:21:18-71
+273
+274        <receiver android:name="com.xzh.widget.MusicWidget" >
+274-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-21:20
+274-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:19-60
+275            <intent-filter>
+275-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-16:29
+276                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+276-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:17-84
+276-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:25-81
+277                <action android:name="com.xzh.widget.MusicWidget" />
+277-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:17-69
+277-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:25-66
+278            </intent-filter>
+279
+280            <meta-data
+280-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-20:61
+281                android:name="android.appwidget.provider"
+281-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:17-58
+282                android:resource="@xml/music_widget_info" />
+282-->[:widget] D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:17-58
+283        </receiver>
+284    </application>
+285
+286</manifest>

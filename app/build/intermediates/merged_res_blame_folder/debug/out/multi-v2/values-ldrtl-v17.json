@@ -4,6 +4,23 @@
             "outputFile": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ldrtl-v17\\values-ldrtl-v17.xml",
             "map": [
                 {
+                    "source": "D:\\xu\\.gradle\\caches\\transforms-2\\files-2.1\\dfeb88c0c927e009433677929c093176\\material-1.4.0\\res\\values-ldrtl-v17\\values-ldrtl-v17.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,191",
+                        "endColumns": "135,140",
+                        "endOffsets": "186,327"
+                    },
+                    "to": {
+                        "startLines": "3,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "106,242",
+                        "endColumns": "135,140",
+                        "endOffsets": "237,378"
+                    }
+                },
+                {
                     "source": "D:\\xu\\.gradle\\caches\\transforms-2\\files-2.1\\9f1b5c5fda7662b66d18c322126fb8a4\\jetified-uniapp-v8-release\\res\\values-ldrtl-v17\\values-ldrtl-v17.xml",
                     "from": {
                         "startLines": "2",

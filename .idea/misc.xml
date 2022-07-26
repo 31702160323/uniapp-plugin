@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/calendar/src/main/res/layout/activity_floating_cmd.xml" value="0.36614583333333334" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/calendar/src/main/res/layout/floating_window_1.xml" value="0.17806484295845998" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/drawable/floating_window_bg.xml" value="0.217" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/layout/activity_lock.xml" value="0.36614583333333334" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/layout/floating_window.xml" value="0.36614583333333334" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/layout/notification_big_layout.xml" value="0.17806484295845998" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/layout/notification_small_layout.xml" value="0.36614583333333334" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/widget/src/main/res/layout/music_widget.xml" value="0.36614583333333334" />
+      </map>
+    </option>
+  </component>
   <component name="EntryPointsManager">
     <list size="2">
       <item index="0" class="java.lang.String" itemvalue="com.taobao.weex.annotation.JSMethod" />
