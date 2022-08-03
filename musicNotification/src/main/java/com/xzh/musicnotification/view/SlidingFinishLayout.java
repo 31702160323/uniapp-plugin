@@ -1,5 +1,6 @@
 package com.xzh.musicnotification.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -15,9 +16,9 @@ public class SlidingFinishLayout extends RelativeLayout {
     /**
      * 滑动的最小距离
      */
-    private int mTouchSlop;
+    private final int mTouchSlop;
 
-    private Scroller mScroller;
+    private final Scroller mScroller;
 
     /**
      * 父布局
@@ -80,6 +81,7 @@ public class SlidingFinishLayout extends RelativeLayout {
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getActionMasked()) {

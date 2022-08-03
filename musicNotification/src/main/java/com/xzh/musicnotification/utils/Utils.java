@@ -73,8 +73,12 @@ public class Utils {
                     | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                     | Intent.FLAG_ACTIVITY_NO_ANIMATION
                     | Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, lockScreen, 0);
-            pendingIntent.send();
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                PendingIntent.getActivity(context, 0, lockScreen, PendingIntent.FLAG_IMMUTABLE).send();
+            } else {
+                PendingIntent.getActivity(context, 0, lockScreen, 0).send();
+            }
         } catch (PendingIntent.CanceledException e) {
             Intent lockScreen = new Intent(context, clazz);
             lockScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

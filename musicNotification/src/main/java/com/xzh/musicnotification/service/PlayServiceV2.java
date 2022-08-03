@@ -111,7 +111,9 @@ public class PlayServiceV2 extends Service {
                         data.put("code", -7);
                         break;
                 }
-                mBinder.fireGlobalEventCallback(eventName, data);
+                if (mBinder != null) {
+                    mBinder.fireGlobalEventCallback(eventName, data);
+                }
             }
         });
         IntentFilter filter = new IntentFilter();
@@ -236,7 +238,6 @@ public class PlayServiceV2 extends Service {
     public static void invoke(Context context, String type, Map<String, Object> options) {
         try {
             Class<?> clazz = Class.forName("com.xzh.widget.MusicWidget");
-            if(clazz == null) return;
             if (options == null) return;
             Method method = clazz.getDeclaredMethod("invoke", Context.class, String.class, Map.class);
             method.invoke(clazz, context, type, options);

@@ -1,21 +1,21 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion '28.0.3'
-//    buildToolsVersion '29.0.2'
+    compileSdkVersion 31
+//    buildToolsVersion '28.0.3'
+    buildToolsVersion '29.0.2'
     defaultConfig {
         applicationId "com.xzh.UniPlugin"
         minSdkVersion 21
-        targetSdkVersion 26 //建议此属性值设为21 io.dcloud.PandoraEntry 作为apk入口时   必须设置 targetSDKVersion>=21 沉浸式才生效
+        targetSdkVersion 31 //建议此属性值设为21 io.dcloud.PandoraEntry 作为apk入口时   必须设置 targetSDKVersion>=21 沉浸式才生效
 
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-        ndk {
-//            abiFilters 'x86','armeabi-v7a'
-            abiFilters 'arm64-v8a'
-        }
+//        ndk {
+////            abiFilters 'x86','armeabi-v7a'
+//            abiFilters 'arm64-v8a'
+//        }
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
@@ -64,10 +64,7 @@ repositories {
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation fileTree(dir: 'libs', include: ['oaid_sdk_1.0.25.aar'])
-    implementation fileTree(dir: 'libs', include: ['uniapp-v8-release.aar'])
-    implementation fileTree(dir: 'libs', include: ['lib.5plus.base-release.aar'])
-    implementation fileTree(dir: 'libs', include: ['android-gif-drawable-release@1.2.23.aar'])
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
 
     debugImplementation fileTree(dir: 'libs', include: ['debug-server-release.aar'])
 
@@ -86,5 +83,5 @@ dependencies {
     // 添加uni-app插件
     implementation project(':musicNotification')
     implementation project(':widget')
-    implementation project(':calendar')
+//    implementation project(':calendar')
 }

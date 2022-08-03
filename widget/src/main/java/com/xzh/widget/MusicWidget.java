@@ -11,6 +11,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -92,21 +93,32 @@ public class MusicWidget extends AppWidgetProvider {
         }
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     public void openAppIntent(RemoteViews views, Context context, PendingIntentInfo... pendingIntentInfoList) {
         for (PendingIntentInfo item : pendingIntentInfoList) {
             Intent intent = new Intent(context, PandoraEntryActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            views.setOnClickPendingIntent(item.getId(), PendingIntent.getActivity(context, item.getIndex() + 1, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                views.setOnClickPendingIntent(item.getId(), PendingIntent.getActivity(context, item.getIndex() + 1, intent, PendingIntent.FLAG_IMMUTABLE));
+            } else {
+                views.setOnClickPendingIntent(item.getId(), PendingIntent.getActivity(context, item.getIndex() + 1, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+            }
         }
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     public void addOnClickPendingIntents(RemoteViews views, Context context, PendingIntentInfo... pendingIntentInfoList) {
         for (PendingIntentInfo item : pendingIntentInfoList) {
             Intent playIntent = new Intent(context.getPackageName() + ".NOTIFICATION_ACTIONS");
             playIntent.putExtra("extra",
                     item.getEXTRA());
-            views.setOnClickPendingIntent(item.getId(),
-                    PendingIntent.getBroadcast(context, item.getIndex(), playIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                views.setOnClickPendingIntent(item.getId(),
+                        PendingIntent.getBroadcast(context, item.getIndex(), playIntent, PendingIntent.FLAG_IMMUTABLE));
+            } else {
+                views.setOnClickPendingIntent(item.getId(),
+                        PendingIntent.getBroadcast(context, item.getIndex(), playIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+            }
         }
     }
 

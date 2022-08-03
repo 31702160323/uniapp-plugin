@@ -5,8 +5,13 @@
       <map>
         <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/calendar/src/main/res/layout/activity_floating_cmd.xml" value="0.36614583333333334" />
         <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/calendar/src/main/res/layout/floating_window_1.xml" value="0.17806484295845998" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/drawable-anydpi/note_btn_close.xml" value="0.217" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/drawable-anydpi/note_btn_love_white.xml" value="0.217" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/drawable-anydpi/note_btn_loved.xml" value="0.217" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/drawable-anydpi/note_btn_next_white.xml" value="0.217" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/drawable-anydpi/note_btn_pre_white.xml" value="0.217" />
         <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/drawable/floating_window_bg.xml" value="0.217" />
-        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/layout/activity_lock.xml" value="0.36614583333333334" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/layout/activity_lock.xml" value="0.25" />
         <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/layout/floating_window.xml" value="0.36614583333333334" />
         <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/layout/notification_big_layout.xml" value="0.17806484295845998" />
         <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/layout/notification_small_layout.xml" value="0.36614583333333334" />

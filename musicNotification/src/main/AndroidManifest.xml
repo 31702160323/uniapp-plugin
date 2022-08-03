@@ -26,46 +26,23 @@
     <application>
 <!--        android:noHistory="true"-->
         <activity
-            android:name=".LockActivityV2"
             android:exported="false"
+            android:name=".LockActivityV2"
             android:showWhenLocked="true"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:taskAffinity="com.xzh.musicnotificationV2"
-            android:theme="@style/LockScreenTheme" />
+            android:theme="@style/LockScreenTheme"
+            tools:targetApi="o_mr1" />
 
-        <service android:name=".service.PlayServiceV2" />
+        <service android:exported="false" android:name=".service.PlayServiceV2" />
 
 <!--        <receiver android:name=".service.NotificationReceiver" android:exported="true" tools:ignore="Instantiatable">-->
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MEDIA_BUTTON" />-->
 <!--            </intent-filter>-->
 <!--        </receiver>-->
-
-        <meta-data
-            android:name="xzh_page"
-            android:value="pages/lock/lock"/>
-
-        <meta-data
-            android:name="xzh_favour"
-            android:value="true"/>
-
-        <meta-data
-            android:name="xzh_theme_color"
-            android:value="#55000000"/>
-
-        <meta-data
-            android:name="xzh_title_color"
-            android:value="#ffffff"/>
-
-        <meta-data
-            android:name="xzh_artist_color"
-            android:value="#ffffff"/>
-
-        <meta-data
-            android:name="xzh_account_name"
-            android:value="1850070877@qq.com"/>
     </application>
 
 </manifest>
