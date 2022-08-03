@@ -1,5 +1,6 @@
 package com.xzh.musicnotification.utils;
 
+import android.annotation.SuppressLint;
 import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.database.Cursor;
@@ -17,6 +18,7 @@ public class MusicAsyncQueryHandler extends AsyncQueryHandler {
         this.mCallbackListener = callbackListener;
     }
 
+    @SuppressLint("Range")
     @Override
     protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
         super.onQueryComplete(token, cookie, cursor);
