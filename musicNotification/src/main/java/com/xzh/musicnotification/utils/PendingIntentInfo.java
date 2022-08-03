@@ -1,8 +1,10 @@
 package com.xzh.musicnotification.utils;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.widget.RemoteViews;
 
 import com.xzh.musicnotification.service.NotificationReceiver;
@@ -30,13 +32,20 @@ public class PendingIntentInfo {
         return EXTRA;
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     public static void addOnClickPendingIntents(RemoteViews views, Context context, PendingIntentInfo... pendingIntentInfoList){
         for (PendingIntentInfo item : pendingIntentInfoList) {
             Intent playIntent = new Intent(context.getPackageName() + NotificationReceiver.ACTION_STATUS_BAR);
             playIntent.putExtra(NotificationReceiver.EXTRA,
                     item.getEXTRA());
-            views.setOnClickPendingIntent( item.getId(),
-                    PendingIntent.getBroadcast(context, item.getIndex(), playIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                views.setOnClickPendingIntent( item.getId(),
+                        PendingIntent.getBroadcast(context, item.getIndex(), playIntent, PendingIntent.FLAG_IMMUTABLE));
+            } else {
+                views.setOnClickPendingIntent( item.getId(),
+                        PendingIntent.getBroadcast(context, item.getIndex(), playIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+            }
         }
     }
 }

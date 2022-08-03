@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="21"
-        android:targetSdkVersion="26" />
+        android:targetSdkVersion="31" />
 
     <supports-screens
         android:anyDensity="true"
@@ -24,8 +24,6 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="com.asus.msa.SupplementaryDID.ACCESS" />
-    <uses-permission android:name="freemme.permission.msa" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!--
@@ -47,16 +45,16 @@
         </intent>
     </queries>
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 锁屏权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.asus.msa.SupplementaryDID.ACCESS" />
+    <uses-permission android:name="freemme.permission.msa" /> <!-- 锁屏权限 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 禁用键盘锁权限 -->
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" /> <!-- 前台服务权限 -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- 后台活动权限 -->
     <uses-permission android:name="android.permission.START_ACTIVITIES_FROM_BACKGROUND" /> <!-- 修改音频设置 -->
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- 浮窗权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 蓝牙权限 -->
-    <uses-permission android:name="android.permission.BLUETOOTH" /> <!-- 日历权限 -->
-    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
-    <uses-permission android:name="android.permission.READ_CALENDAR" /> <!-- Barcode(二维码)  end -->
+    <uses-permission android:name="android.permission.BLUETOOTH" /> <!-- Barcode(二维码)  end -->
     <application
         android:name="io.dcloud.application.DCloudApplication"
         android:allowBackup="true"
@@ -76,6 +74,7 @@
         <activity
             android:name="io.dcloud.PandoraEntry"
             android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale"
+            android:exported="true"
             android:hardwareAccelerated="true"
             android:theme="@style/TranslucentTheme"
             android:windowSoftInputMode="adjustResize" >
@@ -108,6 +107,7 @@
         <activity
             android:name="io.dcloud.PandoraEntryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale|keyboard"
+            android:exported="true"
             android:hardwareAccelerated="true"
             android:launchMode="singleTask"
             android:permission="com.miui.securitycenter.permission.AppPermissionsEditor"
@@ -127,6 +127,24 @@
         <meta-data
             android:name="dcloud_appkey"
             android:value="e9269f31a55e5d46e77a3e5e4ad97b88" />
+        <meta-data
+            android:name="xzh_page"
+            android:value="pages/lock/lock" />
+        <meta-data
+            android:name="xzh_favour"
+            android:value="true" />
+        <meta-data
+            android:name="xzh_theme_color"
+            android:value="#55000000" />
+        <meta-data
+            android:name="xzh_title_color"
+            android:value="#ffffff" />
+        <meta-data
+            android:name="xzh_artist_color"
+            android:value="#ffffff" />
+        <meta-data
+            android:name="xzh_account_name"
+            android:value="1850070877@qq.com" />
 
         <service
             android:name="io.dcloud.debug.PullService"
@@ -138,12 +156,6 @@
             android:exported="true"
             android:launchMode="singleTask"
             android:theme="@style/PullActivityTheme" />
-
-        <receiver
-            android:name="com.taobao.weex.WXGlobalEventReceiver"
-            android:enabled="true"
-            android:exported="false" >
-        </receiver>
         <!--
         <activity
             android:name="io.dcloud.imagepick.CustomGalleryActivity"
@@ -224,12 +236,34 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:theme="@style/ImageEditTheme"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden" /> <!-- 广告相关配置开始 -->
+        <activity
+            android:name="io.dcloud.ads.activity.WebViewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeNoTitleBar"
+            android:windowSoftInputMode="adjustPan" />
 
         <service
             android:name="io.dcloud.ads.base.service.DownloadService"
             android:exported="false"
-            android:permission="android.permission.BIND_JOB_SERVICE" /> <!-- android:noHistory="true" -->
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <provider
+            android:name="io.dcloud.ads.base.service.provider.DCloudAdFileProvider"
+            android:authorities="com.xzh.UniPlugin.dc.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/dcloud_gg_file_provider" />
+        </provider>
+
+        <receiver
+            android:name="com.taobao.weex.WXGlobalEventReceiver"
+            android:enabled="true"
+            android:exported="false" >
+        </receiver> <!-- android:noHistory="true" -->
         <activity
             android:name="com.xzh.musicnotification.LockActivityV2"
             android:excludeFromRecents="true"
@@ -240,38 +274,13 @@
             android:taskAffinity="com.xzh.musicnotificationV2"
             android:theme="@style/LockScreenTheme" />
 
-        <service android:name="com.xzh.musicnotification.service.PlayServiceV2" /> <!-- <receiver android:name=".service.NotificationReceiver" android:exported="true" tools:ignore="Instantiatable"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.MEDIA_BUTTON" /> -->
-        <!-- </intent-filter> -->
-        <!-- </receiver> -->
-        <meta-data
-            android:name="xzh_page"
-            android:value="pages/lock/lock" />
-        <meta-data
-            android:name="xzh_favour"
-            android:value="true" />
-        <meta-data
-            android:name="xzh_theme_color"
-            android:value="#55000000" />
-        <meta-data
-            android:name="xzh_title_color"
-            android:value="#ffffff" />
-        <meta-data
-            android:name="xzh_artist_color"
-            android:value="#ffffff" />
-        <meta-data
-            android:name="xzh_account_name"
-            android:value="1850070877@qq.com" />
+        <service
+            android:name="com.xzh.musicnotification.service.PlayServiceV2"
+            android:exported="false" />
 
-        <activity
-            android:name="com.xzh.calendar.FloatingCmdAct"
-            android:launchMode="singleTop"
-            android:theme="@style/Theme.AppCompat" />
-
-        <service android:name="com.xzh.calendar.FloatingWindowService" />
-
-        <receiver android:name="com.xzh.widget.MusicWidget" >
+        <receiver
+            android:name="com.xzh.widget.MusicWidget"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="com.xzh.widget.MusicWidget" />

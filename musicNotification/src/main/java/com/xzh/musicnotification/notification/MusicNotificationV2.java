@@ -1,5 +1,6 @@
 package com.xzh.musicnotification.notification;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -67,13 +68,18 @@ public class MusicNotificationV2 {
         private static final MusicNotificationV2 instance = new MusicNotificationV2();
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     private PendingIntent getContentIntent(String path) {
         Intent intent = new Intent(mContext.get(), PandoraEntryActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (path != null) {
             intent.putExtra(Global.KEY_PATH, path);
         }
-        return PendingIntent.getActivity(mContext.get(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            return PendingIntent.getActivity(mContext.get(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            return PendingIntent.getActivity(mContext.get(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
     }
 
     /**
@@ -158,7 +164,7 @@ public class MusicNotificationV2 {
                         .setShowWhen(false)
                         .setOnlyAlertOnce(true)
                         .setSmallIcon(R.drawable.music_icon)
-                        .setBadgeIconType(R.drawable.music_icon)
+//                        .setBadgeIconType(R.drawable.music_icon)
                         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                         .setContentIntent(getContentIntent(mConfig.getString(Global.KEY_PATH)))
                         .setCustomBigContentView(getRemoteViews()) //展开视图
@@ -243,12 +249,21 @@ public class MusicNotificationV2 {
     }
 
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     private NotificationCompat.Action generateAction(int icon, CharSequence title, int requestCode, String EXTRA) {
-        return new NotificationCompat.Action(icon, title, PendingIntent.getBroadcast(mContext.get(), requestCode,
-                new Intent(mContext.get().getPackageName() + NotificationReceiver.ACTION_STATUS_BAR)
-                        .putExtra(NotificationReceiver.EXTRA, EXTRA),
-                PendingIntent.FLAG_UPDATE_CURRENT
-        ));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            return new NotificationCompat.Action(icon, title, PendingIntent.getBroadcast(mContext.get(), requestCode,
+                    new Intent(mContext.get().getPackageName() + NotificationReceiver.ACTION_STATUS_BAR)
+                            .putExtra(NotificationReceiver.EXTRA, EXTRA),
+                    PendingIntent.FLAG_IMMUTABLE
+            ));
+        } else {
+            return new NotificationCompat.Action(icon, title, PendingIntent.getBroadcast(mContext.get(), requestCode,
+                    new Intent(mContext.get().getPackageName() + NotificationReceiver.ACTION_STATUS_BAR)
+                            .putExtra(NotificationReceiver.EXTRA, EXTRA),
+                    PendingIntent.FLAG_UPDATE_CURRENT
+            ));
+        }
     }
 
     private RemoteViews getRemoteViews() {
@@ -290,6 +305,8 @@ public class MusicNotificationV2 {
             PendingIntentInfo.addOnClickPendingIntents(mSmallRemoteViews, mContext.get(),
                     //点击播放按钮要发送的广播
                     new PendingIntentInfo(R.id.play_view, 1, NotificationReceiver.EXTRA_PLAY),
+                    //点击上一首按钮要发送的广播
+                    new PendingIntentInfo(R.id.previous_view, 2, NotificationReceiver.EXTRA_PRE),
                     //点击下一首按钮要发送的广播
                     new PendingIntentInfo(R.id.next_view, 3, NotificationReceiver.EXTRA_NEXT)
             );

@@ -239,6 +239,7 @@
     <string name="dcloud_storage_write_big_error">大文件写入失败</string>
     <string name="dcloud_sync_debug_message">当前应用运行在自定义调试基座中，发布正式版请打包时不要勾选自定义调试基座。</string>
     <string name="dcloud_titlenview_back_button_description">返回</string>
+    <string name="dcloud_ua_version_verify_fail_tips">WebView版本过低</string>
     <string name="dcloud_ui_webview_not_finished">webview还没有创建完毕，请稍后执行</string>
     <string name="dcloud_wgt_appid_legal">WGT安装包中manifest.json文件的appid不匹配</string>
     <string name="dcloud_wgt_format_error">WGT/WGTU文件格式错误</string>
@@ -253,4 +254,7 @@
     <string name="dcloud_wgtu_manifest_format_error">WGTU安装包中www目录下manifest.json文件格式错误</string>
     <string name="dcloud_wgtu_not_manifest">WGTU安装包中www目录下manifest.json不存在</string>
     <string name="dcloud_wgtu_version_error">WGTU安装包中www目录下manifest.json文件的version版本不匹配</string>
+    <string name="dcloud_x5_download_progress">正在下载X5模块 %d%%</string>
+    <string name="dcloud_x5_download_without_wifi">当前处于非WiFi网络，是否允许下载x5模块？</string>
+    <string name="dcloud_x5_install_progress_tips">x5模块安装中</string>
 </resources>
