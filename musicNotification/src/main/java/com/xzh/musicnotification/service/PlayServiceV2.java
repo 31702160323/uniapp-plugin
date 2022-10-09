@@ -30,7 +30,7 @@ import io.dcloud.feature.uniapp.AbsSDKInstance;
 import static com.xzh.musicnotification.notification.MusicNotificationV2.NOTIFICATION_ID;
 
 public class PlayServiceV2 extends Service {
-    private static PlayServiceV2 serviceV2;
+    private static PlayServiceV2 service;
 
     private boolean showFavour;
     private boolean playing;
@@ -58,7 +58,7 @@ public class PlayServiceV2 extends Service {
     @SuppressLint("WrongConstant")
     public void onCreate() {
         super.onCreate();
-        serviceV2 = this;
+        service = this;
 
         ApplicationInfo info = Utils.getApplicationInfo(this);
         if (info != null) {
@@ -139,6 +139,9 @@ public class PlayServiceV2 extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        JSONObject data = new JSONObject();
+        data.put("type", "destroy");
+        fireGlobalEventCallback(Global.EVENT_MUSIC_LIFECYCLE, data);
         stopForeground(true);
         MusicNotificationV2.getInstance().cancel();
         unregisterReceiver(mReceiver);
@@ -163,10 +166,13 @@ public class PlayServiceV2 extends Service {
 
         public void setUniSDKInstance(AbsSDKInstance instance){
             mUniSDKInstance = new WeakReference<>(instance);
+            JSONObject data = new JSONObject();
+            data.put("type", "create");
+            fireGlobalEventCallback(Global.EVENT_MUSIC_LIFECYCLE, data);
         }
 
         public void initNotification(JSONObject config) {
-            MusicNotificationV2.getInstance().initNotification(serviceV2, config);
+            MusicNotificationV2.getInstance().initNotification(service, config);
         }
 
         public void switchNotification(boolean is) {
@@ -174,11 +180,11 @@ public class PlayServiceV2 extends Service {
         }
 
         public boolean getFavour(){
-            return serviceV2.songData.getBoolean(Global.KEY_FAVOUR);
+            return service.songData.getBoolean(Global.KEY_FAVOUR);
         }
 
         public boolean getPlaying(){
-            return serviceV2.playing;
+            return service.playing;
         }
 
         public JSONObject getSongData() {
@@ -197,7 +203,7 @@ public class PlayServiceV2 extends Service {
 
             Map<String, Object> options = new ArrayMap<>();
             options.put(Global.KEY_PLAYING, playing);
-            PlayServiceV2.invoke(serviceV2,"playOrPause", options);
+            PlayServiceV2.invoke(service,"playOrPause", options);
 
             MusicNotificationV2.getInstance().playOrPause(playing);
         }
@@ -209,7 +215,7 @@ public class PlayServiceV2 extends Service {
 
             if (mClickListener != null && mClickListener.get() != null) mClickListener.get().favour(isFavour);
 
-            PlayServiceV2.invoke(serviceV2,Global.KEY_FAVOUR, songData);
+            PlayServiceV2.invoke(service,Global.KEY_FAVOUR, songData);
 
             MusicNotificationV2.getInstance().favour(isFavour);
         }
@@ -225,7 +231,7 @@ public class PlayServiceV2 extends Service {
                 mClickListener.get().update(options);
             }
 
-            PlayServiceV2.invoke(serviceV2,"update", options);
+            PlayServiceV2.invoke(service,"update", options);
 
             MusicNotificationV2.getInstance().updateSong(options);
         }

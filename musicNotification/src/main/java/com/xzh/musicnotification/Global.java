@@ -3,6 +3,7 @@ package com.xzh.musicnotification;
 public class Global {
     public static final String SHOW_FAVOUR = "xzh_favour";
 
+    public static final String EVENT_MUSIC_LIFECYCLE = "musicLifecycle";
     public static final String EVENT_MUSIC_MEDIA_BUTTON = "musicMediaButton";
     public static final String EVENT_MUSIC_NOTIFICATION_PAUSE = "musicNotificationPause";
     public static final String EVENT_MUSIC_NOTIFICATION_PREVIOUS = "musicNotificationPrevious";

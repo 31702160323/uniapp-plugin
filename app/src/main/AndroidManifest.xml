@@ -90,7 +90,7 @@
 
         <meta-data
             android:name="dcloud_appkey"
-            android:value="e9269f31a55e5d46e77a3e5e4ad97b88" />
+            android:value="${DCLOUD_APPKEY}" />
 
         <meta-data
             android:name="xzh_page"

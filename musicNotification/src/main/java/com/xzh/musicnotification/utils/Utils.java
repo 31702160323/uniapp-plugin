@@ -1,5 +1,6 @@
 package com.xzh.musicnotification.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -62,6 +63,7 @@ public class Utils {
         }
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     public static void openLock(Context context, Class<?> clazz) {
         try {
             Intent lockScreen = new Intent(context, clazz);
