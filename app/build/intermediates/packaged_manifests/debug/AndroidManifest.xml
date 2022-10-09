@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="21"
-        android:targetSdkVersion="31" />
+        android:targetSdkVersion="32" />
 
     <supports-screens
         android:anyDensity="true"
@@ -147,6 +147,9 @@
             android:value="1850070877@qq.com" />
 
         <service
+            android:name="io.dcloud.debug.WebSocketService"
+            android:exported="true" />
+        <service
             android:name="io.dcloud.debug.PullService"
             android:exported="true" />
 
@@ -238,19 +241,19 @@
             android:theme="@style/ImageEditTheme"
             android:windowSoftInputMode="stateAlwaysHidden" /> <!-- 广告相关配置开始 -->
         <activity
-            android:name="io.dcloud.ads.activity.WebViewActivity"
+            android:name="io.dcloud.sdk.activity.WebViewActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeNoTitleBar"
             android:windowSoftInputMode="adjustPan" />
 
         <service
-            android:name="io.dcloud.ads.base.service.DownloadService"
+            android:name="io.dcloud.sdk.base.service.DownloadService"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <provider
-            android:name="io.dcloud.ads.base.service.provider.DCloudAdFileProvider"
+            android:name="io.dcloud.sdk.base.service.provider.DCloudAdFileProvider"
             android:authorities="com.xzh.UniPlugin.dc.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true" >
@@ -276,6 +279,9 @@
 
         <service
             android:name="com.xzh.musicnotification.service.PlayServiceV2"
+            android:exported="false" />
+        <service
+            android:name="com.xzh.musicnotification.service.PlayServiceV3"
             android:exported="false" />
 
         <receiver

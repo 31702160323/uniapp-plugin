@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#161c1e"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/top"
+        layout="@layout/dcloud_gallery_picker_actionbar" />
+
+    <RelativeLayout
+        android:clickable="true"
+        android:id="@+id/footer"
+        android:background="#21282C"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+
+        <Button
+            android:visibility="visible"
+            android:id="@+id/preview"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:minHeight="1dp"
+            android:text="@string/dcloud_gallery_preview"
+            android:minWidth="1dp"
+            android:background="@null"
+            android:textColor="@color/dcloud_gallery_default_text_color"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/category_btn"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/dcloud_gallery_default_text_color"
+            android:textSize="15sp"
+            android:layout_alignParentLeft="true"
+            android:text="@string/dcloud_gallery_all_dir_name"
+            android:gravity="center_vertical"
+            android:drawableRight="@drawable/dcloud_gallery_text_indicator"
+            android:drawablePadding="5dp"
+            android:background="@null"
+            android:ellipsize="end"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_toLeftOf="@id/preview"
+            android:layout_toRightOf="@id/category_btn"
+            android:gravity="center"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/check_origin_image_layout"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/check_origin_image"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="7dp"
+                    android:src="@drawable/dcloud_gallery_btn_selected_drawable" />
+                <TextView
+                    android:id="@+id/select_origin_image_text"
+                    android:layout_centerVertical="true"
+                    android:text="@string/dcloud_gallery_edit_image_original"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/dcloud_gallery_default_text_color"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/footer"
+        android:layout_below="@+id/top" />
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/dcloud_dialog_loading"
+        android:visibility="gone"/>
+
+</RelativeLayout>

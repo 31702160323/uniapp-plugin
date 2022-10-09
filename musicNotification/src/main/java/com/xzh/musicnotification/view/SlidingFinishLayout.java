@@ -96,12 +96,10 @@ public class SlidingFinishLayout extends RelativeLayout {
                 if (Math.abs(moveX - downX) > mTouchSlop
                         && Math.abs((int) event.getRawY() - downY) < mTouchSlop) {
                     isSliding = true;
-
                 }
 
                 if (moveX - downX >= 0 && isSliding) {
                     mParentView.scrollBy(deltaX, 0);
-
                 }
                 break;
             case MotionEvent.ACTION_UP:

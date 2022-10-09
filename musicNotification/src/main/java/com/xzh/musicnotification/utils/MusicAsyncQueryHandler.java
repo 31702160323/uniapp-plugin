@@ -11,11 +11,19 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 public class MusicAsyncQueryHandler extends AsyncQueryHandler {
-    private final OnCallbackListener mCallbackListener;
+    private OnCallbackListener mCallbackListener;
 
-    public MusicAsyncQueryHandler(ContentResolver cr, OnCallbackListener callbackListener) {
+    public MusicAsyncQueryHandler(ContentResolver cr) {
         super(cr);
+    }
+
+    public MusicAsyncQueryHandler setOnCallbackListener(OnCallbackListener callbackListener) {
         this.mCallbackListener = callbackListener;
+        return this;
+    }
+
+    public void startQuery() {
+        super.startQuery(0, null, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null, null, MediaStore.Audio.AudioColumns.IS_MUSIC);
     }
 
     @SuppressLint("Range")
@@ -45,7 +53,9 @@ public class MusicAsyncQueryHandler extends AsyncQueryHandler {
             // 释放资源
             cursor.close();
         }
-        this.mCallbackListener.onCallbackListener(list);
+        if (this.mCallbackListener != null) {
+            this.mCallbackListener.onCallbackListener(list);
+        }
     }
 
     public interface OnCallbackListener {

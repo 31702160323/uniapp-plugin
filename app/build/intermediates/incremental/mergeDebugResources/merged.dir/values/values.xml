@@ -176,10 +176,6 @@
     <dimen name="dcloud_wel_base_content_text_min_size">15sp</dimen>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
-    <dimen name="dp_250">250dp</dimen>
-    <dimen name="dp_320">320dp</dimen>
-    <dimen name="dp_40">40dp</dimen>
-    <dimen name="dp_70">70dp</dimen>
     <dimen name="fastscroll_default_thickness">8dp</dimen>
     <dimen name="fastscroll_margin">0dp</dimen>
     <dimen name="fastscroll_minimum_range">50dp</dimen>
@@ -223,7 +219,6 @@
     <dimen name="tooltip_vertical_padding">6.5dp</dimen>
     <dimen name="tooltip_y_offset_non_touch">0dp</dimen>
     <dimen name="tooltip_y_offset_touch">16dp</dimen>
-    <dimen name="widget_margin">8dp</dimen>
     <drawable name="notification_template_icon_bg">#3333B5E5</drawable>
     <drawable name="notification_template_icon_low_bg">#0cffffff</drawable>
     <item name="action_bar_activity_content" type="id"/>
@@ -289,9 +284,7 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with <ns1:g example="Mail" id="application_name">%s</ns1:g></string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <string name="add_widget">开启美好的一天</string>
     <string name="app_name">uni原生插件</string>
-    <string name="bg">背景图</string>
     <string name="dcloud_Init_fail_tips">Application configuration error detected, please modify according to the document configuration</string>
     <string name="dcloud_audio_abnormal_rebuild">the playback is abnormal and needs to be recreated</string>
     <string name="dcloud_audio_no_mp3_module_added">no recording support mp3 format file module is added when packaging, please refer to</string>
@@ -553,13 +546,7 @@
     <string name="dcloud_x5_download_progress">Downloading X5 %d%%</string>
     <string name="dcloud_x5_download_without_wifi">Currently on a non-WiFi network, is the x5 module allowed to be downloaded?</string>
     <string name="dcloud_x5_install_progress_tips">x5 module installation in progress</string>
-    <string name="favourite">收藏</string>
-    <string name="hint_text"><![CDATA[>>> 滑动解锁]]></string>
-    <string name="img">专辑图片</string>
     <string name="in_package">apk</string>
-    <string name="next">下一首</string>
-    <string name="play">播放按钮</string>
-    <string name="previous">上一首</string>
     <string name="search_menu_title">Search</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="stream_my">最近流应用</string>
@@ -1715,15 +1702,6 @@
         <item name="android:windowAnimationStyle">@style/ImageDialogAnimation</item>
 
     </style>
-    <style name="LockScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:backgroundDimEnabled">false</item>
-        <item name="android:windowAnimationStyle">@null</item>
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
-    <style name="NotificationInfo" parent="android:TextAppearance.StatusBar.EventContent"/>
     <style name="NotificationText" parent="android:TextAppearance.StatusBar.EventContent">
         <item name="android:textColor">#bb000000</item>
         <item name="android:textSize">13dp</item>

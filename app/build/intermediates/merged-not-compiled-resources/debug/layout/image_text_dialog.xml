@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:padding="12dp">
+
+    <FrameLayout
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/dcloud_gallery_edit_image_cancel"
+            android:textColor="@color/image_color_primary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/dcloud_gallery_edit_image_done"
+            android:textColor="@color/image_color_white"
+            android:background="@drawable/image_btn_finish"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:textSize="14sp" />
+
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/et_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_title"
+        android:layout_marginTop="22dp"
+        android:gravity="top"
+        android:minHeight="30dp"
+        android:cursorVisible="true"
+        android:hint=" "
+        android:includeFontPadding="false"
+        android:textStyle="bold"
+        android:inputType="text|textMultiLine"
+        android:background="@drawable/image_edit_trans_background"
+        android:textCursorDrawable="@drawable/image_edit_cursor"
+        android:textColor="@color/image_color_primary"
+        android:textSize="40sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textview_1"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/image_bg_edit_check"
+            android:gravity="center"
+            android:text="T"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:layout_marginEnd="6dp"
+            android:textColor="@color/image_color_backgroud" />
+
+        <include
+            android:layout_marginStart="6dp"
+            layout="@layout/image_color_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>

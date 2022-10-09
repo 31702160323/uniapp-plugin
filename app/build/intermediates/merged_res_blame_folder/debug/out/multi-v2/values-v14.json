@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v14\\values-v14.xml",
+            "outputFile": "com.xzh.UniPlugin.app-mergeDebugResources-3:/values-v14/values-v14.xml",
             "map": [
                 {
                     "source": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\widget\\build\\intermediates\\packaged_res\\debug\\values-v14\\values-v14.xml",
