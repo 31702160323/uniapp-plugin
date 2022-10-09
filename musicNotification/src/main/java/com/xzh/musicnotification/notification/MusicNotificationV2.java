@@ -5,6 +5,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -88,7 +89,7 @@ public class MusicNotificationV2 {
      * @param service MusicNotificationV2.NotificationHelperListener
      * @param config  JSONObject
      */
-    public void initNotification(PlayServiceV2 service, JSONObject config) {
+    public void initNotification(Service service, JSONObject config) {
         mContext = new WeakReference<>(service);
         mConfig = config;
 
@@ -247,7 +248,6 @@ public class MusicNotificationV2 {
 
         mNotification = builder.build();
     }
-
 
     @SuppressLint("UnspecifiedImmutableFlag")
     private NotificationCompat.Action generateAction(int icon, CharSequence title, int requestCode, String EXTRA) {

@@ -37,6 +37,7 @@
             tools:targetApi="o_mr1" />
 
         <service android:exported="false" android:name=".service.PlayServiceV2" />
+        <service android:exported="false" android:name=".service.PlayServiceV3" />
 
 <!--        <receiver android:name=".service.NotificationReceiver" android:exported="true" tools:ignore="Instantiatable">-->
 <!--            <intent-filter>-->

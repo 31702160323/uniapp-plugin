@@ -39,7 +39,6 @@ public class FloatView {
     private String textColor = "";
     private boolean playing;
     private boolean isFavour;
-    private boolean showFavour;
 
     private FloatView() {}
 
@@ -92,7 +91,7 @@ public class FloatView {
 
             ApplicationInfo info = Utils.getApplicationInfo(instance.getContext());
             if (info != null) {
-                showFavour = info.metaData.getBoolean(Global.SHOW_FAVOUR);
+                boolean showFavour = info.metaData.getBoolean(Global.SHOW_FAVOUR);
                 if (showFavour) {
                     floatView.findViewById(R.id.favourite_view).setVisibility(View.VISIBLE);
                     floatView.findViewById(R.id.favourite_view).setOnClickListener(v -> instance.fireGlobalEventCallback(Global.EVENT_MUSIC_NOTIFICATION_FAVOURITE, data));

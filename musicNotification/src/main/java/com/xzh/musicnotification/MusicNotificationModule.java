@@ -5,10 +5,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
-import android.provider.MediaStore;
 import android.provider.Settings;
 
 import androidx.core.app.NotificationManagerCompat;
@@ -29,8 +27,8 @@ import static android.content.Context.BIND_AUTO_CREATE;
 
 public class MusicNotificationModule extends UniModule {
     private JSONObject mConfig;
-    private boolean mLock;
-    private boolean mSystemStyle;
+    private boolean lockActivity;
+    private boolean systemStyle;
     private WeakReference<ServiceConnection> connection;
     private WeakReference<PlayServiceV2.ServiceBinder> mBinder;
 
@@ -50,8 +48,8 @@ public class MusicNotificationModule extends UniModule {
                     mBinder = new WeakReference<>((PlayServiceV2.ServiceBinder) iBinder);
                     mBinder.get().initNotification(mConfig);
                     mBinder.get().setUniSDKInstance(mUniSDKInstance);
-                    mBinder.get().lock(mLock);
-                    mBinder.get().switchNotification(mSystemStyle);
+                    mBinder.get().switchNotification(systemStyle);
+                    mBinder.get().lock(lockActivity);
                     data.put("message", "设置歌曲信息成功");
                     data.put("code", 0);
                     callback.invoke(data);
@@ -117,8 +115,8 @@ public class MusicNotificationModule extends UniModule {
 
     @UniJSMethod(uiThread = false)
     public void switchNotification(boolean is) {
-        mSystemStyle = is;
-        if (mBinder != null) mBinder.get().switchNotification(mSystemStyle);
+        systemStyle = is;
+        if (mBinder != null) mBinder.get().switchNotification(systemStyle);
     }
 
     @UniJSMethod(uiThread = false)
@@ -163,8 +161,8 @@ public class MusicNotificationModule extends UniModule {
     @UniJSMethod(uiThread = false)
     public boolean openLockActivity(JSONObject options) {
         if(checkOverlayDisplayPermission()) {
-            mLock = options.getBoolean(Global.KEY_LOCK);
-            if (mBinder != null) mBinder.get().lock(mLock);
+            lockActivity = options.getBoolean(Global.KEY_LOCK);
+            if (mBinder != null) mBinder.get().lock(lockActivity);
             return true;
         }
         return false;
@@ -200,9 +198,9 @@ public class MusicNotificationModule extends UniModule {
 
     @UniJSMethod(uiThread = false)
     public void initSongs(UniJSCallback callback) {
-        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        MusicAsyncQueryHandler asyncQueryHandler = new MusicAsyncQueryHandler(mUniSDKInstance.getContext().getContentResolver(), callback::invoke);
-        asyncQueryHandler.startQuery(0, null, uri, null, null, null, MediaStore.Audio.AudioColumns.IS_MUSIC);
+         new MusicAsyncQueryHandler(mUniSDKInstance.getContext().getContentResolver())
+                .setOnCallbackListener(callback::invoke)
+                .startQuery();
     }
 
     @Override

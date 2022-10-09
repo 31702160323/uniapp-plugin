@@ -266,22 +266,19 @@
 -keep class com.dmcbig.mediapicker.PickerActivity { <init>(); }
 -keep class com.dmcbig.mediapicker.PreviewActivity { <init>(); }
 -keep class com.taobao.weex.WXGlobalEventReceiver { <init>(); }
--keep class com.xzh.musicnotification.LockActivityV2 { <init>(); }
--keep class com.xzh.musicnotification.service.PlayServiceV2 { <init>(); }
--keep class com.xzh.widget.MusicWidget { <init>(); }
 -keep class io.dcloud.PandoraEntry { <init>(); }
 -keep class io.dcloud.PandoraEntryActivity { <init>(); }
 -keep class io.dcloud.ProcessMediator { <init>(); }
 -keep class io.dcloud.WebAppActivity { <init>(); }
 -keep class io.dcloud.WebviewActivity { <init>(); }
--keep class io.dcloud.ads.base.service.DownloadService { <init>(); }
 -keep class io.dcloud.application.DCloudApplication { <init>(); }
 -keep class io.dcloud.common.adapter.io.DownloadReceiver { <init>(); }
 -keep class io.dcloud.common.util.DCloud_FileProvider { <init>(); }
--keep class io.dcloud.debug.PullDebugActivity { <init>(); }
--keep class io.dcloud.debug.PullService { <init>(); }
 -keep class io.dcloud.feature.gallery.imageedit.IMGEditActivity { <init>(); }
 -keep class io.dcloud.feature.nativeObj.photoview.PhotoActivity { <init>(); }
+-keep class io.dcloud.sdk.activity.WebViewActivity { <init>(); }
+-keep class io.dcloud.sdk.base.service.DownloadService { <init>(); }
+-keep class io.dcloud.sdk.base.service.provider.DCloudAdFileProvider { <init>(); }
 -keep class android.widget.Space { <init>(android.content.Context, android.util.AttributeSet); }
 
 -keep class androidx.appcompat.app.AlertController$RecycleListView { <init>(android.content.Context, android.util.AttributeSet); }
@@ -334,10 +331,6 @@
 
 -keep class com.taobao.weex.ui.view.listview.WXRecyclerView { <init>(android.content.Context, android.util.AttributeSet); }
 
--keep class com.xzh.musicnotification.view.HintTextView { <init>(android.content.Context, android.util.AttributeSet); }
-
--keep class com.xzh.musicnotification.view.SlidingFinishLayout { <init>(android.content.Context, android.util.AttributeSet); }
-
 -keep class io.dcloud.common.ui.GifImageView { <init>(android.content.Context, android.util.AttributeSet); }
 
 -keep class io.dcloud.feature.gallery.imageedit.view.IMGColorGroup { <init>(android.content.Context, android.util.AttributeSet); }
@@ -352,18 +345,15 @@
 
 
 # End of content from D:\htmlFile\project\UniPlugin-Hello-AS\app\build\intermediates\aapt_proguard_file\debug\aapt_rules.txt
-# The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\0a89d77de82c19940f307bb28a4c6765\jetified-oaid_sdk_1.0.25\proguard.txt
-
-# End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\0a89d77de82c19940f307bb28a4c6765\jetified-oaid_sdk_1.0.25\proguard.txt
-# The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\4e5ddf07fcf40de5b289452d40b4ea65\jetified-android-gif-drawable-release@1.2.23\proguard.txt
+# The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\4eac68a450e144c89dd6f64624cd8cc3\jetified-android-gif-drawable-release@1.2.23\proguard.txt
 -keep public class pl.droidsonroids.gif.GifIOException{<init>(int, java.lang.String);}
 #Prevents warnings for consumers not using AndroidX
 -dontwarn androidx.annotation.**
 
-# End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\4e5ddf07fcf40de5b289452d40b4ea65\jetified-android-gif-drawable-release@1.2.23\proguard.txt
-# The proguard configuration file for the following section is D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
+# End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\4eac68a450e144c89dd6f64624cd8cc3\jetified-android-gif-drawable-release@1.2.23\proguard.txt
+# The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\a46dba1d7e6c0fe5ca404929cea9dbb6\jetified-oaid_sdk_1.0.25\proguard.txt
 
-# End of content from D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
+# End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\a46dba1d7e6c0fe5ca404929cea9dbb6\jetified-oaid_sdk_1.0.25\proguard.txt
 # The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\deb6da7db3da191b108446f27e37e742\appcompat-1.0.0\proguard.txt
 # Copyright (C) 2018 The Android Open Source Project
 #
@@ -410,7 +400,7 @@
 }
 
 # End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\24e82aba340b759240f09c8ab46deb1a\recyclerview-1.0.0\proguard.txt
-# The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\063f161a826f627d1e41043ce9696a71\jetified-glide-4.9.0\proguard.txt
+# The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\f79be0846acb884e5ac5fc6e38550791\jetified-glide-4.9.0\proguard.txt
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
 -keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
@@ -420,10 +410,7 @@
 
 # Uncomment for DexGuard only
 #-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
-# End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\063f161a826f627d1e41043ce9696a71\jetified-glide-4.9.0\proguard.txt
-# The proguard configuration file for the following section is D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
-
-# End of content from D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\consumer_proguard_dir\debug\lib0\proguard.txt
+# End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\f79be0846acb884e5ac5fc6e38550791\jetified-glide-4.9.0\proguard.txt
 # The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\7f64c1045ae362310688a10253c2a109\media-1.0.0\proguard.txt
 # Copyright (C) 2017 The Android Open Source Project
 #
@@ -552,7 +539,7 @@
 }
 
 # End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\f0c3f7902276b15c6fcd26ab7a162286\rules\lib\META-INF\proguard\androidx-annotations.pro
-# The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\7a4c57e77bfb1762efe4b7fb40eca4b2\jetified-fbcore-1.13.0\proguard.txt
+# The proguard configuration file for the following section is D:\xu\.gradle\caches\transforms-2\files-2.1\e3deffe29c2dc642937d3efd16c28886\jetified-fbcore-1.13.0\proguard.txt
 # Keep our interfaces so they can be used by other ProGuard rules.
 # See http://sourceforge.net/p/proguard/bugs/466/
 -keep,allowobfuscation @interface com.facebook.common.internal.DoNotStrip
@@ -582,7 +569,7 @@
 -dontwarn com.android.volley.toolbox.**
 -dontwarn com.facebook.infer.**
 
-# End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\7a4c57e77bfb1762efe4b7fb40eca4b2\jetified-fbcore-1.13.0\proguard.txt
+# End of content from D:\xu\.gradle\caches\transforms-2\files-2.1\e3deffe29c2dc642937d3efd16c28886\jetified-fbcore-1.13.0\proguard.txt
 # The proguard configuration file for the following section is <unknown>
 -ignorewarnings
 # End of content from <unknown>
