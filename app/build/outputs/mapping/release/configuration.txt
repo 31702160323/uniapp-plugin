@@ -272,6 +272,8 @@
 -keep class com.dmcbig.mediapicker.PickerActivity { <init>(); }
 -keep class com.dmcbig.mediapicker.PreviewActivity { <init>(); }
 -keep class com.taobao.weex.WXGlobalEventReceiver { <init>(); }
+-keep class com.xzh.UniPlugin.BaseApplication { <init>(); }
+-keep class com.xzh.autostart.AutoStartBroadReceiver { <init>(); }
 -keep class com.xzh.musicnotification.LockActivityV2 { <init>(); }
 -keep class com.xzh.musicnotification.service.PlayServiceV2 { <init>(); }
 -keep class com.xzh.widget.MusicWidget { <init>(); }
@@ -280,7 +282,6 @@
 -keep class io.dcloud.ProcessMediator { <init>(); }
 -keep class io.dcloud.WebAppActivity { <init>(); }
 -keep class io.dcloud.WebviewActivity { <init>(); }
--keep class io.dcloud.application.DCloudApplication { <init>(); }
 -keep class io.dcloud.common.adapter.io.DownloadReceiver { <init>(); }
 -keep class io.dcloud.common.util.DCloud_FileProvider { <init>(); }
 -keep class io.dcloud.debug.PullDebugActivity { <init>(); }
@@ -430,6 +431,9 @@
 # Uncomment for DexGuard only
 #-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 # End of content from D:\xu\.gradle\caches\transforms-3\3c1774aa159a2ba73e1ba0efdfe6b3ff\transformed\jetified-glide-4.9.0\proguard.txt
+# The proguard configuration file for the following section is D:\htmlFile\project\UniPlugin-Hello-AS\autostart\build\intermediates\consumer_proguard_dir\release\lib0\proguard.txt
+
+# End of content from D:\htmlFile\project\UniPlugin-Hello-AS\autostart\build\intermediates\consumer_proguard_dir\release\lib0\proguard.txt
 # The proguard configuration file for the following section is D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\consumer_proguard_dir\release\lib0\proguard.txt
 
 # End of content from D:\htmlFile\project\UniPlugin-Hello-AS\widget\build\intermediates\consumer_proguard_dir\release\lib0\proguard.txt

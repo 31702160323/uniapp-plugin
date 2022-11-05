@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xzh.UniPlugin"
+    android:sharedUserId="android.uid.system"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="21"
-        android:targetSdkVersion="32" />
+        android:targetSdkVersion="31" />
 
     <supports-screens
         android:anyDensity="true"
@@ -54,9 +55,10 @@
     <uses-permission android:name="android.permission.START_ACTIVITIES_FROM_BACKGROUND" /> <!-- 修改音频设置 -->
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- 浮窗权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 蓝牙权限 -->
-    <uses-permission android:name="android.permission.BLUETOOTH" /> <!-- Barcode(二维码)  end -->
+    <uses-permission android:name="android.permission.BLUETOOTH" /> <!-- 开机监听 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> <!-- Barcode(二维码)  end -->
     <application
-        android:name="io.dcloud.application.DCloudApplication"
+        android:name="com.xzh.UniPlugin.BaseApplication"
         android:allowBackup="true"
         android:allowClearUserData="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -126,13 +128,13 @@
 
         <meta-data
             android:name="dcloud_appkey"
-            android:value="e9269f31a55e5d46e77a3e5e4ad97b88" />
+            android:value="3962ee207b721a20e35bb6ae110fed34" />
         <meta-data
             android:name="xzh_page"
             android:value="pages/lock/lock" />
         <meta-data
             android:name="xzh_favour"
-            android:value="true" />
+            android:value="false" />
         <meta-data
             android:name="xzh_theme_color"
             android:value="#55000000" />
@@ -279,11 +281,25 @@
 
         <service
             android:name="com.xzh.musicnotification.service.PlayServiceV2"
-            android:exported="false" />
-        <service
-            android:name="com.xzh.musicnotification.service.PlayServiceV3"
-            android:exported="false" />
-
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name="io.dcloud.PandoraEntry" -->
+        <!-- android:exported="true"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- <category android:name="android.intent.category.HOME" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <category android:name="android.intent.category.MONKEY" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
+        <receiver
+            android:name="com.xzh.autostart.AutoStartBroadReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter android:priority="1000" >
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
         <receiver
             android:name="com.xzh.widget.MusicWidget"
             android:exported="true" >

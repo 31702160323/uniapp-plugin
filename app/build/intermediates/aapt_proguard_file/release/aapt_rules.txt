@@ -2,6 +2,8 @@
 -keep class com.dmcbig.mediapicker.PickerActivity { <init>(); }
 -keep class com.dmcbig.mediapicker.PreviewActivity { <init>(); }
 -keep class com.taobao.weex.WXGlobalEventReceiver { <init>(); }
+-keep class com.xzh.UniPlugin.BaseApplication { <init>(); }
+-keep class com.xzh.autostart.AutoStartBroadReceiver { <init>(); }
 -keep class com.xzh.musicnotification.LockActivityV2 { <init>(); }
 -keep class com.xzh.musicnotification.service.PlayServiceV2 { <init>(); }
 -keep class com.xzh.widget.MusicWidget { <init>(); }
@@ -10,7 +12,6 @@
 -keep class io.dcloud.ProcessMediator { <init>(); }
 -keep class io.dcloud.WebAppActivity { <init>(); }
 -keep class io.dcloud.WebviewActivity { <init>(); }
--keep class io.dcloud.application.DCloudApplication { <init>(); }
 -keep class io.dcloud.common.adapter.io.DownloadReceiver { <init>(); }
 -keep class io.dcloud.common.util.DCloud_FileProvider { <init>(); }
 -keep class io.dcloud.debug.PullDebugActivity { <init>(); }

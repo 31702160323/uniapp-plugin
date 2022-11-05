@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:sharedUserId="android.uid.system"
     package="com.xzh.UniPlugin">
 
     <supports-screens
@@ -22,7 +23,6 @@
     <!-- Barcode(二维码)  end -->
 
     <application
-        android:networkSecurityConfig="@xml/network_security_config"
         android:name="io.dcloud.application.DCloudApplication"
         android:allowBackup="true"
         android:allowClearUserData="true"
@@ -31,7 +31,9 @@
         android:largeHeap="true"
         android:debuggable="true"
         android:supportsRtl="true"
-        tools:ignore="HardcodedDebugMode">
+        android:networkSecurityConfig="@xml/network_security_config"
+        tools:ignore="HardcodedDebugMode"
+        tools:targetApi="n">
 
         <!-- 应用入口 -->
         <activity
@@ -98,7 +100,7 @@
 
         <meta-data
             android:name="xzh_favour"
-            android:value="true"/>
+            android:value="false"/>
 
         <meta-data
             android:name="xzh_theme_color"

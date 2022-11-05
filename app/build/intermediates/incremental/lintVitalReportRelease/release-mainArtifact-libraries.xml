@@ -40,9 +40,9 @@
       proguardRules="proguard.txt"/>
   <library
       name="__local_aars__:D:\htmlFile\project\UniPlugin-Hello-AS\app\libs\lib.5plus.base-release.aar:unspecified@jar"
-      jars="D:\xu\.gradle\caches\transforms-3\95f5974a5f4cc1089ba03122548656d7\transformed\jetified-lib.5plus.base-release\jars\classes.jar"
+      jars="D:\xu\.gradle\caches\transforms-3\dec0d298d302e3cc8dbd59245f02d19c\transformed\jetified-lib.5plus.base-release\jars\classes.jar"
       resolved="__local_aars__:D:\htmlFile\project\UniPlugin-Hello-AS\app\libs\lib.5plus.base-release.aar:unspecified"
-      folder="D:\xu\.gradle\caches\transforms-3\95f5974a5f4cc1089ba03122548656d7\transformed\jetified-lib.5plus.base-release"
+      folder="D:\xu\.gradle\caches\transforms-3\dec0d298d302e3cc8dbd59245f02d19c\transformed\jetified-lib.5plus.base-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -66,9 +66,9 @@
       proguardRules="proguard.txt"/>
   <library
       name="__local_aars__:D:\htmlFile\project\UniPlugin-Hello-AS\app\libs\uniapp-v8-release.aar:unspecified@jar"
-      jars="D:\xu\.gradle\caches\transforms-3\ce9630c60590c953b95691cf0a694617\transformed\jetified-uniapp-v8-release\jars\classes.jar;D:\xu\.gradle\caches\transforms-3\ce9630c60590c953b95691cf0a694617\transformed\jetified-uniapp-v8-release\jars\libs\bindingx-core-1.0.9.6.jar;D:\xu\.gradle\caches\transforms-3\ce9630c60590c953b95691cf0a694617\transformed\jetified-uniapp-v8-release\jars\libs\bindingx_weex_plugin-1.0.9.6.jar"
+      jars="D:\xu\.gradle\caches\transforms-3\f3c628efa91221fc92438cd3afbcd7d7\transformed\jetified-uniapp-v8-release\jars\classes.jar;D:\xu\.gradle\caches\transforms-3\f3c628efa91221fc92438cd3afbcd7d7\transformed\jetified-uniapp-v8-release\jars\libs\bindingx-core-1.0.9.6.jar;D:\xu\.gradle\caches\transforms-3\f3c628efa91221fc92438cd3afbcd7d7\transformed\jetified-uniapp-v8-release\jars\libs\bindingx_weex_plugin-1.0.9.6.jar"
       resolved="__local_aars__:D:\htmlFile\project\UniPlugin-Hello-AS\app\libs\uniapp-v8-release.aar:unspecified"
-      folder="D:\xu\.gradle\caches\transforms-3\ce9630c60590c953b95691cf0a694617\transformed\jetified-uniapp-v8-release"
+      folder="D:\xu\.gradle\caches\transforms-3\f3c628efa91221fc92438cd3afbcd7d7\transformed\jetified-uniapp-v8-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -159,6 +159,19 @@
       name="com.alibaba:fastjson:1.1.46.android@jar"
       jars="D:\xu\.gradle\caches\modules-2\files-2.1\com.alibaba\fastjson\1.1.46.android\108717c93f7aec31fb86db57cb4ad1e26034c638\fastjson-1.1.46.android.jar"
       resolved="com.alibaba:fastjson:1.1.46.android"/>
+  <library
+      name="D:\htmlFile\project\UniPlugin-Hello-AS@@:autostart::release"
+      jars="D:\htmlFile\project\UniPlugin-Hello-AS\autostart\build\.transforms\76d08276cc2961f8882002bbee1eaf99\transformed\out\jars\classes.jar"
+      resolved="UniPlugin-Hello-AS:autostart:unspecified"
+      folder="D:\htmlFile\project\UniPlugin-Hello-AS\autostart\build\.transforms\76d08276cc2961f8882002bbee1eaf99\transformed\out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
   <library
       name="D:\htmlFile\project\UniPlugin-Hello-AS@@:musicNotification::release"
       jars="D:\htmlFile\project\UniPlugin-Hello-AS\musicNotification\build\.transforms\39bd0fa0ee226181425a74ea3d02d054\transformed\out\jars\classes.jar"
