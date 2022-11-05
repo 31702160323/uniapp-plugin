@@ -12,7 +12,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -27,7 +26,6 @@ import com.taobao.weex.utils.WXViewUtils;
 import java.util.Map;
 import java.util.Objects;
 
-import io.dcloud.PandoraEntryActivity;
 import io.dcloud.feature.uniapp.utils.UniResourceUtils;
 
 public class MusicWidget extends AppWidgetProvider {
@@ -43,8 +41,6 @@ public class MusicWidget extends AppWidgetProvider {
         intent.addFlags(0x01000000);
         intent.setPackage(context.getPackageName());
         intent.putExtra("type", type);
-
-        Log.d("TAG", "invoke: ");
 
         for (String key : options.keySet()) {
             Object value = options.get(key);
@@ -96,7 +92,8 @@ public class MusicWidget extends AppWidgetProvider {
     @SuppressLint("UnspecifiedImmutableFlag")
     public void openAppIntent(RemoteViews views, Context context, PendingIntentInfo... pendingIntentInfoList) {
         for (PendingIntentInfo item : pendingIntentInfoList) {
-            Intent intent = new Intent(context, PandoraEntryActivity.class);
+            Intent intent = new Intent("android.intent.action.MAIN");
+            intent.setClassName(context.getPackageName(), "io.dcloud.PandoraEntryActivity");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 views.setOnClickPendingIntent(item.getId(), PendingIntent.getActivity(context, item.getIndex() + 1, intent, PendingIntent.FLAG_IMMUTABLE));
@@ -167,11 +164,7 @@ public class MusicWidget extends AppWidgetProvider {
                 case "update":
                     views.setTextViewText(R.id.title_view, intent.getStringExtra("songName"));
                     views.setTextViewText(R.id.tip_view, intent.getStringExtra("artistsName"));
-                    if (intent.getBooleanExtra("favour", false)) {
-                        views.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_loved);
-                    } else {
-                        views.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_love_white);
-                    }
+                    views.setImageViewResource(R.id.favourite_view, intent.getBooleanExtra("favour", false) ? R.drawable.note_btn_loved : R.drawable.note_btn_love_white);
 
                     AppWidgetTarget appWidgetTarget = new AppWidgetTarget(context, R.id.image_view, views, new ComponentName(context, MusicWidget.class));
 
@@ -185,19 +178,10 @@ public class MusicWidget extends AppWidgetProvider {
                             .into(appWidgetTarget);
                     break;
                 case "playOrPause":
-                    if (intent.getBooleanExtra("playing", false)) {
-                        views.setImageViewResource(R.id.play_view, R.drawable.note_btn_pause_white);
-                    } else {
-                        views.setImageViewResource(R.id.play_view, R.drawable.note_btn_play_white);
-                    }
+                    views.setImageViewResource(R.id.play_view, intent.getBooleanExtra("playing", false) ? R.drawable.note_btn_pause_white : R.drawable.note_btn_play_white);
                     break;
                 case "favour":
-                    Log.d("TAG", "onReceive: favour" + intent.getBooleanExtra("favour", false));
-                    if (intent.getBooleanExtra("favour", false)) {
-                        views.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_loved);
-                    } else {
-                        views.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_love_white);
-                    }
+                    views.setImageViewResource(R.id.favourite_view, intent.getBooleanExtra("favour", false) ? R.drawable.note_btn_loved : R.drawable.note_btn_love_white);
                     break;
                 case "bg":
                     if (intent.getStringExtra("themeColor") != null) {
@@ -239,6 +223,9 @@ public class MusicWidget extends AppWidgetProvider {
     public void onEnabled(Context context) {
         // 在第一个 widget 被创建时，开启服务
         super.onEnabled(context);
+        Intent intent = new Intent(context.getPackageName() + ".NOTIFICATION_ACTIONS");
+        intent.putExtra("extra", "enabled");
+        context.sendBroadcast(intent);
     }
 
     // 最后一个widget被删除时调用

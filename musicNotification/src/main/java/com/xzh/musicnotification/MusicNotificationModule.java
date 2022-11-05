@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.ApplicationInfo;
 import android.os.Build;
 import android.os.IBinder;
 import android.provider.Settings;
@@ -18,6 +19,7 @@ import com.xzh.musicnotification.utils.Utils;
 import com.xzh.musicnotification.view.FloatView;
 
 import java.lang.ref.WeakReference;
+import java.util.Map;
 
 import io.dcloud.feature.uniapp.annotation.UniJSMethod;
 import io.dcloud.feature.uniapp.bridge.UniJSCallback;
@@ -25,8 +27,9 @@ import io.dcloud.feature.uniapp.common.UniModule;
 
 import static android.content.Context.BIND_AUTO_CREATE;
 
-public class MusicNotificationModule extends UniModule {
+public class MusicNotificationModule extends UniModule implements PlayServiceV2.OnEventListener {
     private JSONObject mConfig;
+    private boolean showFavour;
     private boolean lockActivity;
     private boolean systemStyle;
     private WeakReference<ServiceConnection> connection;
@@ -36,6 +39,11 @@ public class MusicNotificationModule extends UniModule {
     public void init(JSONObject config) {
         if (config.getString(Global.KEY_PATH) == null) config.put(Global.KEY_PATH, "");
         this.mConfig = config;
+
+        ApplicationInfo info = Utils.getApplicationInfo(mUniSDKInstance.getContext());
+        if (info != null) {
+            showFavour = info.metaData.getBoolean(Global.SHOW_FAVOUR);
+        }
     }
 
     @UniJSMethod(uiThread = false)
@@ -47,12 +55,17 @@ public class MusicNotificationModule extends UniModule {
                 public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
                     mBinder = new WeakReference<>((PlayServiceV2.ServiceBinder) iBinder);
                     mBinder.get().initNotification(mConfig);
-                    mBinder.get().setUniSDKInstance(mUniSDKInstance);
                     mBinder.get().switchNotification(systemStyle);
+                    mBinder.get().setShowFavour(showFavour);
                     mBinder.get().lock(lockActivity);
+                    mBinder.get().setEventListener(MusicNotificationModule.this);
                     data.put("message", "设置歌曲信息成功");
                     data.put("code", 0);
                     callback.invoke(data);
+
+                    JSONObject object = new JSONObject();
+                    object.put("type", "create");
+                    mUniSDKInstance.fireGlobalEventCallback(Global.EVENT_MUSIC_LIFECYCLE, object);
                 }
 
                 @Override
@@ -107,6 +120,7 @@ public class MusicNotificationModule extends UniModule {
 
     @UniJSMethod(uiThread = false)
     public void favour(JSONObject options) {
+        if (!showFavour) return;
         if (mBinder != null) {
             mBinder.get().favour(options.getBoolean(Global.KEY_FAVOUR));
             FloatView.getInstance().favour(options.getBoolean(Global.KEY_FAVOUR));
@@ -208,5 +222,10 @@ public class MusicNotificationModule extends UniModule {
         JSONObject map = new JSONObject();
         map.put("type", requestCode == 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && Settings.canDrawOverlays(mUniSDKInstance.getContext()));
         mUniSDKInstance.fireGlobalEventCallback(Global.EVENT_OPEN_LOCK_ACTIVITY, map);
+    }
+
+    @Override
+    public void sendMessage(String eventName, Map<String, Object> params) {
+        mUniSDKInstance.fireGlobalEventCallback(eventName, params);
     }
 }

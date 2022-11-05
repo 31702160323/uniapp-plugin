@@ -1,4 +1,4 @@
-package com.xzh.musicnotification;
+package com.xzh.autostart;
 
 import org.junit.Test;
 

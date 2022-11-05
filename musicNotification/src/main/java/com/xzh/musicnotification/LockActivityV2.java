@@ -26,7 +26,7 @@ import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.xzh.musicnotification.service.NotificationReceiver;
-import com.xzh.musicnotification.service.PlayServiceV3;
+import com.xzh.musicnotification.service.PlayServiceV2;
 import com.xzh.musicnotification.utils.Utils;
 import com.xzh.musicnotification.view.SlidingFinishLayout;
 
@@ -34,17 +34,16 @@ import java.lang.ref.WeakReference;
 
 import io.dcloud.feature.uniapp.utils.UniUtils;
 
-public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLayout.OnSlidingFinishListener, View.OnClickListener, PlayServiceV3.OnClickListener {
+public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLayout.OnSlidingFinishListener, View.OnClickListener, PlayServiceV2.OnClickListener {
     private int mWidth;
     private int mHeight;
-    private boolean showFavour;
     private TextView tvAudio;
     private TextView tvAudioName;
     private ImageView lockDate;
     private ImageView playView;
     private ImageView favouriteView;
     private ServiceConnection connection;
-    private WeakReference<PlayServiceV3.ServiceBinder> mBinder;
+    private WeakReference<PlayServiceV2.ServiceBinder> mBinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +66,8 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
         connection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                mBinder = new WeakReference<>((PlayServiceV3.ServiceBinder) iBinder);
-                mBinder.get().setActivity(LockActivityV2.this);
+                mBinder = new WeakReference<>((PlayServiceV2.ServiceBinder) iBinder);
+                mBinder.get().setClickListener(LockActivityV2.this);
                 if (UniUtils.isUiThread()) {
                     update(mBinder.get().getSongData());
                 } else {
@@ -82,7 +81,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
             }
         };
 
-        bindService(new Intent(this, PlayServiceV3.class), connection, BIND_AUTO_CREATE);
+        bindService(new Intent(this, PlayServiceV2.class), connection, BIND_AUTO_CREATE);
     }
 
     private void initView() {
@@ -97,7 +96,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
         ApplicationInfo info = Utils.getApplicationInfo(this);
         if (info != null) {
-            showFavour = info.metaData.getBoolean(Global.SHOW_FAVOUR);
+            boolean showFavour = info.metaData.getBoolean(Global.SHOW_FAVOUR);
             if (showFavour) favouriteView.setVisibility(View.VISIBLE);
         }
 
@@ -151,7 +150,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
                 break;
         }
 
-        mBinder.get().fireGlobalEventCallback(eventName, data);
+        mBinder.get().sendMessage(eventName, data);
     }
 
     /**
@@ -186,7 +185,6 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
     @Override
     public void favour(boolean isFavour) {
-        if (!showFavour) return;
         if (isFavour) {
             favouriteView.setImageResource(R.drawable.note_btn_loved);
         } else {
