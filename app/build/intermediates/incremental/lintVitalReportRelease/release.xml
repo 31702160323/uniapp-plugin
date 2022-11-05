@@ -2,7 +2,7 @@
     name="release"
     package="com.xzh.UniPlugin"
     minSdkVersion="21"
-    targetSdkVersion="32"
+    targetSdkVersion="31"
     shrinking="true"
     mergedManifest="build\intermediates\merged_manifest\release\AndroidManifest.xml"
     manifestMergeReport="build\outputs\logs\manifest-merger-release-report.txt"
@@ -30,7 +30,7 @@
   <manifestPlaceholders>
     <placeholder
         name="DCLOUD_APPKEY"
-        value="e9269f31a55e5d46e77a3e5e4ad97b88" />
+        value="3962ee207b721a20e35bb6ae110fed34" />
   </manifestPlaceholders>
   <mainArtifact
       classOutputs="build\intermediates\javac\release\classes;build\intermediates\compile_and_runtime_not_namespaced_r_class_jar\release\R.jar"

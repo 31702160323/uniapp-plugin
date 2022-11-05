@@ -7,7 +7,6 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.support.v4.media.MediaMetadataCompat;
@@ -22,7 +21,6 @@ import com.bumptech.glide.request.target.Target;
 import com.taobao.weex.utils.WXViewUtils;
 import com.xzh.musicnotification.Global;
 import com.xzh.musicnotification.service.PlayServiceV2;
-import com.xzh.musicnotification.utils.Utils;
 
 import java.lang.ref.WeakReference;
 
@@ -88,11 +86,6 @@ public abstract class BaseMusicNotification {
                 return true;
             }
         });
-
-        ApplicationInfo info = Utils.getApplicationInfo(service);
-        if (info != null) {
-            showFavour = info.metaData.getBoolean(Global.SHOW_FAVOUR);
-        }
     }
 
     public abstract void createNotification();
@@ -131,6 +124,10 @@ public abstract class BaseMusicNotification {
 
     public void cancel() {
         if (mNotificationManager != null) mNotificationManager.cancel(NOTIFICATION_ID);
+    }
+
+    public void setShowFavour(boolean show) {
+        showFavour = show;
     }
 
     protected void generateGlide(Context context, Target<Bitmap> target, String picUrl, float width, float height) {

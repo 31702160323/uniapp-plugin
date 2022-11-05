@@ -635,7 +635,7 @@ library {
 }
 library {
   digests {
-    sha256: "\251:\353\337\252\004\337\006z\244\037Fon\262\024g\231\235\323}\037^_/\030\374\200J]\226X"
+    sha256: "W:$\304\005 \270\005~\311c|k\211R\000w\236\253\3158\314\320?\233\a\030\306\037j\375\340"
   }
 }
 library {
@@ -645,7 +645,7 @@ library {
 }
 library {
   digests {
-    sha256: "P\221\000\023\305\257\'\256\037\345\251yi\334\374sm\235\'C\266\2457\372\353\221d\342\370\323\265\213"
+    sha256: "\362U\273\357\376\364xG\211\005\246\025Zo\372\0236L\020\264S\210]\220\037N\310_\327\ba\353"
   }
 }
 library_dependencies {
@@ -922,6 +922,7 @@ module_dependencies {
   dependency_index: 42
   dependency_index: 45
   dependency_index: 49
+  dependency_index: 8
   dependency_index: 50
   dependency_index: 51
   dependency_index: 52

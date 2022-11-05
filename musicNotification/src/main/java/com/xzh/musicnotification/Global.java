@@ -19,7 +19,9 @@ public class Global {
     public static final String KEY_PATH = "path";
     public static final String KEY_LOCK = "lock";
     public static final String KEY_FAVOUR = "favour";
+    public static final String KEY_UPDATE = "update";
     public static final String KEY_PLAYING = "playing";
     public static final String KEY_SONG_NAME = "songName";
     public static final String KEY_ARTISTS_NAME = "artistsName";
+    public static final String KEY_PLAY_OR_PAUSE = "playOrPause";
 }

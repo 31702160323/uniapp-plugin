@@ -6,9 +6,9 @@
     maven="UniPlugin-Hello-AS:app:"
     gradle="7.2.1"
     buildFolder="build"
-    bootClassPath="D:\xu\AppData\Local\Android\Sdk\platforms\android-32\android.jar;D:\xu\AppData\Local\Android\Sdk\build-tools\30.0.3\core-lambda-stubs.jar"
+    bootClassPath="D:\xu\AppData\Local\Android\Sdk\platforms\android-31\android.jar;D:\xu\AppData\Local\Android\Sdk\build-tools\30.0.3\core-lambda-stubs.jar"
     javaSourceLevel="1.8"
-    compileTarget="android-32">
+    compileTarget="android-31">
   <lintOptions
       abortOnError="true"
       absolutePaths="true"

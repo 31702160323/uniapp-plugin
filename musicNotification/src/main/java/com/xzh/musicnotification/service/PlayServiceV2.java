@@ -7,7 +7,6 @@ import android.bluetooth.BluetoothHeadset;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.ApplicationInfo;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
@@ -25,14 +24,11 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import io.dcloud.feature.uniapp.AbsSDKInstance;
-
 import static com.xzh.musicnotification.notification.MusicNotificationV2.NOTIFICATION_ID;
 
 public class PlayServiceV2 extends Service {
     private static PlayServiceV2 service;
 
-    private boolean showFavour;
     private boolean playing;
     private boolean lockActivity;
 
@@ -59,11 +55,6 @@ public class PlayServiceV2 extends Service {
     public void onCreate() {
         super.onCreate();
         service = this;
-
-        ApplicationInfo info = Utils.getApplicationInfo(this);
-        if (info != null) {
-            showFavour = info.metaData.getBoolean(Global.SHOW_FAVOUR);
-        }
 
         mReceiver = new NotificationReceiver(new NotificationReceiver.IReceiverListener() {
             @Override
@@ -106,13 +97,20 @@ public class PlayServiceV2 extends Service {
                     case NotificationReceiver.EXTRA_FAV:
                         eventName = Global.EVENT_MUSIC_NOTIFICATION_FAVOURITE;
                         break;
+                    case "enabled":
+                        PlayServiceV2.invoke(service, Global.KEY_UPDATE, songData);
+
+                        Map<String, Object> options = new ArrayMap<>();
+                        options.put(Global.KEY_PLAYING, playing);
+                        PlayServiceV2.invoke(service,Global.KEY_PLAY_OR_PAUSE, options);
+                        break;
                     default:
                         data.put("message", "触发回调事件失败");
                         data.put("code", -7);
                         break;
                 }
                 if (mBinder != null) {
-                    mBinder.fireGlobalEventCallback(eventName, data);
+                    mBinder.sendMessage(eventName, data);
                 }
             }
         });
@@ -145,6 +143,7 @@ public class PlayServiceV2 extends Service {
         stopForeground(true);
         MusicNotificationV2.getInstance().cancel();
         unregisterReceiver(mReceiver);
+        service = null;
     }
 
     public final void startForeground(Notification notification) {
@@ -153,22 +152,19 @@ public class PlayServiceV2 extends Service {
     }
 
     public void fireGlobalEventCallback(String eventName, Map<String, Object> params){
-        mBinder.fireGlobalEventCallback(eventName, params);
+        mBinder.sendMessage(eventName, params);
     }
 
     public class ServiceBinder extends Binder {
         private WeakReference<OnClickListener> mClickListener;
-        private WeakReference<AbsSDKInstance> mUniSDKInstance;
+        private WeakReference<OnEventListener> mEventListener;
 
-        public void setActivity(OnClickListener clickListener){
-            mClickListener = new WeakReference<>(clickListener);
+        public void setEventListener(OnEventListener eventListener){
+            mEventListener = new WeakReference<>(eventListener);
         }
 
-        public void setUniSDKInstance(AbsSDKInstance instance){
-            mUniSDKInstance = new WeakReference<>(instance);
-            JSONObject data = new JSONObject();
-            data.put("type", "create");
-            fireGlobalEventCallback(Global.EVENT_MUSIC_LIFECYCLE, data);
+        public void setClickListener(OnClickListener clickListener){
+            mClickListener = new WeakReference<>(clickListener);
         }
 
         public void initNotification(JSONObject config) {
@@ -203,48 +199,53 @@ public class PlayServiceV2 extends Service {
 
             Map<String, Object> options = new ArrayMap<>();
             options.put(Global.KEY_PLAYING, playing);
-            PlayServiceV2.invoke(service,"playOrPause", options);
+            PlayServiceV2.invoke(service,Global.KEY_PLAY_OR_PAUSE, options);
 
             MusicNotificationV2.getInstance().playOrPause(playing);
         }
 
         @SuppressLint("WrongConstant")
-        public void favour(boolean isFavour){
-            if (!showFavour) return;
-            songData.put(Global.KEY_FAVOUR, isFavour);
+        public void favour(boolean favour){
+            songData.put(Global.KEY_FAVOUR, favour);
 
-            if (mClickListener != null && mClickListener.get() != null) mClickListener.get().favour(isFavour);
+            if (mClickListener != null && mClickListener.get() != null) mClickListener.get().favour(favour);
 
             PlayServiceV2.invoke(service,Global.KEY_FAVOUR, songData);
 
-            MusicNotificationV2.getInstance().favour(isFavour);
+            MusicNotificationV2.getInstance().favour(favour);
         }
 
         @SuppressLint("WrongConstant")
-        public void update(JSONObject options){
-            songData = options;
-            if (options.getBoolean(Global.KEY_FAVOUR) != null) {
-                songData.put(Global.KEY_FAVOUR, options.getBoolean(Global.KEY_FAVOUR));
+        public void update(JSONObject option){
+            songData = option;
+            if (option.getBoolean(Global.KEY_FAVOUR) != null) {
+                songData.put(Global.KEY_FAVOUR, option.getBoolean(Global.KEY_FAVOUR));
             }
 
             if (mClickListener != null && mClickListener.get() != null) {
-                mClickListener.get().update(options);
+                mClickListener.get().update(option);
             }
 
-            PlayServiceV2.invoke(service,"update", options);
+            PlayServiceV2.invoke(service, Global.KEY_UPDATE, option);
 
-            MusicNotificationV2.getInstance().updateSong(options);
+            MusicNotificationV2.getInstance().updateSong(option);
         }
 
-        public void fireGlobalEventCallback(String eventName, Map<String, Object> params){
-            if (mUniSDKInstance != null && mUniSDKInstance.get() != null) mUniSDKInstance.get().fireGlobalEventCallback(eventName, params);
+        public void setShowFavour(boolean show) {
+            MusicNotificationV2.getInstance().setShowFavour(show);
+        }
+
+        public void sendMessage(String eventName, Map<String, Object> params){
+            if (mEventListener != null && mEventListener.get() != null) mEventListener.get().sendMessage(eventName, params);
         }
     }
 
     public static void invoke(Context context, String type, Map<String, Object> options) {
         try {
-            Class<?> clazz = Class.forName("com.xzh.widget.MusicWidget");
+            if (type == null) return;
+            if (context == null) return;
             if (options == null) return;
+            Class<?> clazz = Class.forName("com.xzh.widget.MusicWidget");
             Method method = clazz.getDeclaredMethod("invoke", Context.class, String.class, Map.class);
             method.invoke(clazz, context, type, options);
         } catch (Exception e) {
@@ -256,5 +257,9 @@ public class PlayServiceV2 extends Service {
         void update(JSONObject options);
         void favour(boolean favour);
         void playOrPause(boolean playing);
+    }
+
+    public interface OnEventListener {
+        void sendMessage(String eventName, Map<String, Object> params);
     }
 }

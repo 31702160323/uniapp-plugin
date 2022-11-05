@@ -4,7 +4,7 @@
             "outputFile": "com.xzh.UniPlugin.app-mergeReleaseResources-3:/values-ldltr-v17/values-ldltr-v17.xml",
             "map": [
                 {
-                    "source": "D:\\xu\\.gradle\\caches\\transforms-3\\f668adf47d6206a46e60e68f64d5773e\\transformed\\jetified-uniapp-v8-release\\res\\values-ldltr-v17\\values-ldltr-v17.xml",
+                    "source": "D:\\xu\\.gradle\\caches\\transforms-3\\f3c628efa91221fc92438cd3afbcd7d7\\transformed\\jetified-uniapp-v8-release\\res\\values-ldltr-v17\\values-ldltr-v17.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
