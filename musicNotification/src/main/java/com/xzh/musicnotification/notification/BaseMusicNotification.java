@@ -18,23 +18,23 @@ import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.request.target.Target;
-import com.taobao.weex.utils.WXViewUtils;
 import com.xzh.musicnotification.Global;
 import com.xzh.musicnotification.service.PlayServiceV2;
+import com.xzh.musicnotification.utils.Utils;
 
 import java.lang.ref.WeakReference;
 
 import io.dcloud.PandoraEntryActivity;
 
 public abstract class BaseMusicNotification {
-    public static final int NOTIFICATION_ID = 0x111;
-    public static final String CHANNEL_ID = "music_id_audio";
-    public static final String CHANNEL_NAME = "music_name_audio";
+    protected int NOTIFICATION_ID = 0x111;
+    protected static final String CHANNEL_ID = "music_id_audio";
+    protected static final String CHANNEL_NAME = "music_name_audio";
 
-    protected JSONObject songInfo;
+    protected static JSONObject mConfig;
+    protected static boolean showFavour;
     protected boolean isPlay;
-    protected boolean showFavour;
-    protected JSONObject mConfig;
+    protected JSONObject songInfo;
     protected WeakReference<Context> mContext;
     protected Notification mNotification;
     protected MediaSessionCompat mMediaSession;
@@ -54,15 +54,18 @@ public abstract class BaseMusicNotification {
         }
     }
 
+    public static void init(JSONObject config) {
+        mConfig = config;
+    }
+
     /**
      * 创建Notification,
      *
      * @param service BaseMusicNotification.NotificationHelperListener
-     * @param config  JSONObject
      */
-    public void initNotification(Service service, JSONObject config) {
+    public void initNotification(Service service) {
         mContext = new WeakReference<>(service);
-        mConfig = config;
+        NOTIFICATION_ID++;
 
         mMediaSession = new MediaSessionCompat(service, BaseMusicNotification.CHANNEL_ID);
         mMediaSession.setActive(true);
@@ -86,11 +89,12 @@ public abstract class BaseMusicNotification {
                 return true;
             }
         });
+        createNotification();
     }
 
     public abstract void createNotification();
 
-    protected abstract void buildNotification();
+    protected abstract void updateNotification();
 
     /**
      * 更新 Notification 信息
@@ -99,7 +103,7 @@ public abstract class BaseMusicNotification {
      */
     public void updateSong(JSONObject options) {
         songInfo = options;
-        buildNotification();
+        updateNotification();
     }
 
     /**
@@ -109,7 +113,7 @@ public abstract class BaseMusicNotification {
      */
     public void playOrPause(boolean isPlay) {
         this.isPlay = isPlay;
-        buildNotification();
+        updateNotification();
     }
 
     /**
@@ -118,15 +122,15 @@ public abstract class BaseMusicNotification {
      * @param favourite 搜藏状态
      */
     public void favour(boolean favourite) {
-        songInfo.put(Global.KEY_FAVOUR, favourite);
-        buildNotification();
+        if(songInfo != null) songInfo.put(Global.KEY_FAVOUR, favourite);
+        updateNotification();
     }
 
     public void cancel() {
         if (mNotificationManager != null) mNotificationManager.cancel(NOTIFICATION_ID);
     }
 
-    public void setShowFavour(boolean show) {
+    public static void setShowFavour(boolean show) {
         showFavour = show;
     }
 
@@ -136,7 +140,7 @@ public abstract class BaseMusicNotification {
                 .load(picUrl)
                 .sizeMultiplier(0.8f)
                 .format(DecodeFormat.PREFER_RGB_565)
-                .override(WXViewUtils.dip2px(width), WXViewUtils.dip2px(height))
+                .override(Utils.dip2px(width), Utils.dip2px(height))
                 .into(target);
     }
 }

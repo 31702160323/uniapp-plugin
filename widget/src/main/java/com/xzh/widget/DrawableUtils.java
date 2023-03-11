@@ -2,6 +2,7 @@ package com.xzh.widget;
 
 
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PixelFormat;
@@ -9,6 +10,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
+import android.util.TypedValue;
 
 import androidx.annotation.IntRange;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -57,5 +59,9 @@ public final class DrawableUtils {
         shapeDrawable.setIntrinsicWidth(width);
         shapeDrawable.setIntrinsicHeight(height);
         return shapeDrawable;
+    }
+
+    public static int dip2px(float dpValue) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpValue, Resources.getSystem().getDisplayMetrics());
     }
 }

@@ -13,52 +13,58 @@ import android.provider.Settings;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xzh.musicnotification.notification.MusicNotificationV2;
 import com.xzh.musicnotification.service.PlayServiceV2;
 import com.xzh.musicnotification.utils.MusicAsyncQueryHandler;
 import com.xzh.musicnotification.utils.Utils;
 import com.xzh.musicnotification.view.FloatView;
 
-import java.lang.ref.WeakReference;
 import java.util.Map;
 
 import io.dcloud.feature.uniapp.annotation.UniJSMethod;
 import io.dcloud.feature.uniapp.bridge.UniJSCallback;
 import io.dcloud.feature.uniapp.common.UniModule;
 
-import static android.content.Context.BIND_AUTO_CREATE;
-
 public class MusicNotificationModule extends UniModule implements PlayServiceV2.OnEventListener {
-    private JSONObject mConfig;
+    private boolean isInit;
     private boolean showFavour;
     private boolean lockActivity;
     private boolean systemStyle;
-    private WeakReference<ServiceConnection> connection;
-    private WeakReference<PlayServiceV2.ServiceBinder> mBinder;
+    private ServiceConnection connection;
+    private PlayServiceV2.ServiceBinder mBinder;
 
     @UniJSMethod(uiThread = false)
     public void init(JSONObject config) {
         if (config.getString(Global.KEY_PATH) == null) config.put(Global.KEY_PATH, "");
-        this.mConfig = config;
 
         ApplicationInfo info = Utils.getApplicationInfo(mUniSDKInstance.getContext());
         if (info != null) {
             showFavour = info.metaData.getBoolean(Global.SHOW_FAVOUR);
         }
+
+        MusicNotificationV2.init(config);
+        MusicNotificationV2.setShowFavour(showFavour);
+        isInit = true;
     }
 
     @UniJSMethod(uiThread = false)
     public void createNotification(UniJSCallback callback) {
+        this.cancel();
         JSONObject data = new JSONObject();
+        if(!isInit) {
+            data.put("message", "请先调用init方法进行初始化操作");
+            data.put("code", -2);
+            callback.invoke(data);
+            return;
+        }
         try {
-            connection = new WeakReference<>(new ServiceConnection() {
+            connection = new ServiceConnection() {
                 @Override
                 public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                    mBinder = new WeakReference<>((PlayServiceV2.ServiceBinder) iBinder);
-                    mBinder.get().initNotification(mConfig);
-                    mBinder.get().switchNotification(systemStyle);
-                    mBinder.get().setShowFavour(showFavour);
-                    mBinder.get().lock(lockActivity);
-                    mBinder.get().setEventListener(MusicNotificationModule.this);
+                    mBinder = (PlayServiceV2.ServiceBinder) iBinder;
+                    mBinder.lock(lockActivity);
+                    mBinder.switchNotification(systemStyle);
+                    mBinder.setEventListener(MusicNotificationModule.this);
                     data.put("message", "设置歌曲信息成功");
                     data.put("code", 0);
                     callback.invoke(data);
@@ -72,10 +78,10 @@ public class MusicNotificationModule extends UniModule implements PlayServiceV2.
                 public void onServiceDisconnected(ComponentName componentName) {
 
                 }
-            });
+            };
 
             Context context = mUniSDKInstance.getContext();
-            context.bindService(PlayServiceV2.startMusicService(context), connection.get(), BIND_AUTO_CREATE);
+            context.bindService(PlayServiceV2.startMusicService(context), connection, Context.BIND_AUTO_CREATE);
         } catch (Exception e) {
             data.put("message", "创建通知栏失败");
             data.put("code", 0);
@@ -95,7 +101,7 @@ public class MusicNotificationModule extends UniModule implements PlayServiceV2.
         if (!isNotification) {
             data.put("message", "没有通知栏权限");
             data.put("code", -3);
-        } else if(mConfig == null) {
+        } else if(!isInit) {
             data.put("message", "请先调用init方法进行初始化操作");
             data.put("code", -2);
         } else if (mBinder == null) {
@@ -103,7 +109,7 @@ public class MusicNotificationModule extends UniModule implements PlayServiceV2.
             data.put("code", -1);
         } else {
             if (options.getBoolean(Global.KEY_FAVOUR) == null)  options.put(Global.KEY_FAVOUR, false);
-            mBinder.get().update(options);
+            mBinder.update(options);
             data.put("message", "设置歌曲信息成功");
             data.put("code", 0);
         }
@@ -111,33 +117,33 @@ public class MusicNotificationModule extends UniModule implements PlayServiceV2.
     }
 
     @UniJSMethod(uiThread = false)
-    public void playOrPause(JSONObject options) {
+    public void playOrPause(boolean is) {
         if (mBinder != null) {
-            mBinder.get().playOrPause(options.getBoolean(Global.KEY_PLAYING));
-            FloatView.getInstance().playOrPause(options.getBoolean(Global.KEY_PLAYING));
+            mBinder.playOrPause(is);
+            FloatView.getInstance().playOrPause(is);
         }
     }
 
     @UniJSMethod(uiThread = false)
-    public void favour(JSONObject options) {
+    public void favour(boolean is) {
         if (!showFavour) return;
         if (mBinder != null) {
-            mBinder.get().favour(options.getBoolean(Global.KEY_FAVOUR));
-            FloatView.getInstance().favour(options.getBoolean(Global.KEY_FAVOUR));
+            mBinder.favour(is);
+            FloatView.getInstance().favour(is);
         }
     }
 
     @UniJSMethod(uiThread = false)
     public void switchNotification(boolean is) {
         systemStyle = is;
-        if (mBinder != null) mBinder.get().switchNotification(systemStyle);
+        if (mBinder != null) mBinder.switchNotification(systemStyle);
     }
 
     @UniJSMethod(uiThread = false)
     public void cancel() {
         if (connection != null) {
             hideFloatWindow();
-            mUniSDKInstance.getContext().unbindService(connection.get());
+            mUniSDKInstance.getContext().unbindService(connection);
             PlayServiceV2.stopMusicService(mUniSDKInstance.getContext());
             mBinder = null;
             connection = null;
@@ -173,10 +179,10 @@ public class MusicNotificationModule extends UniModule implements PlayServiceV2.
     }
 
     @UniJSMethod(uiThread = false)
-    public boolean openLockActivity(JSONObject options) {
+    public boolean openLockActivity(boolean is) {
         if(checkOverlayDisplayPermission()) {
-            lockActivity = options.getBoolean(Global.KEY_LOCK);
-            if (mBinder != null) mBinder.get().lock(lockActivity);
+            lockActivity = is;
+            if (mBinder != null) mBinder.lock(lockActivity);
             return true;
         }
         return false;
@@ -211,7 +217,7 @@ public class MusicNotificationModule extends UniModule implements PlayServiceV2.
     }
 
     @UniJSMethod(uiThread = false)
-    public void initSongs(UniJSCallback callback) {
+    public void getLocalSong(UniJSCallback callback) {
          new MusicAsyncQueryHandler(mUniSDKInstance.getContext().getContentResolver())
                 .setOnCallbackListener(callback::invoke)
                 .startQuery();
@@ -220,8 +226,14 @@ public class MusicNotificationModule extends UniModule implements PlayServiceV2.
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         JSONObject map = new JSONObject();
-        map.put("type", requestCode == 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && Settings.canDrawOverlays(mUniSDKInstance.getContext()));
+        map.put("type", requestCode == 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Settings.canDrawOverlays(mUniSDKInstance.getContext()));
         mUniSDKInstance.fireGlobalEventCallback(Global.EVENT_OPEN_LOCK_ACTIVITY, map);
+    }
+
+    @Override
+    public void onActivityDestroy() {
+        super.onActivityDestroy();
+        this.cancel();
     }
 
     @Override

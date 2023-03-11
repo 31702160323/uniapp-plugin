@@ -21,11 +21,18 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    //导入aar需要的配置
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    compileOnly fileTree(dir: '../app/libs', include: ['*.jar', '*.aar'])
+    implementation fileTree(include: ['*.?ar'], dir: 'libs')
+    compileOnly fileTree(include: ['*.?ar'], dir: '../app/libs')
 
     implementation 'androidx.media:media:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
@@ -21,12 +22,9 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.AppWidgetTarget;
-import com.taobao.weex.utils.WXViewUtils;
 
 import java.util.Map;
 import java.util.Objects;
-
-import io.dcloud.feature.uniapp.utils.UniResourceUtils;
 
 public class MusicWidget extends AppWidgetProvider {
 
@@ -157,6 +155,7 @@ public class MusicWidget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, final Intent intent) {
+        super.onReceive(context, intent);
         if ("com.xzh.widget.MusicWidget".equals(intent.getAction()) && context.getPackageName().equals(intent.getPackage())) {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.music_widget);
 
@@ -173,7 +172,7 @@ public class MusicWidget extends AppWidgetProvider {
                             .load(intent.getStringExtra("picUrl"))
                             .apply(new RequestOptions().transform(new CenterCrop(), new RoundedCorners(5)))
                             .sizeMultiplier(0.8f)
-                            .override(WXViewUtils.dip2px(75), WXViewUtils.dip2px(75))
+                            .override(DrawableUtils.dip2px(75), DrawableUtils.dip2px(75))
                             .format(DecodeFormat.PREFER_RGB_565)
                             .into(appWidgetTarget);
                     break;
@@ -185,13 +184,13 @@ public class MusicWidget extends AppWidgetProvider {
                     break;
                 case "bg":
                     if (intent.getStringExtra("themeColor") != null) {
-                        views.setImageViewBitmap(R.id.bg_view, getBgBitmap(context, UniResourceUtils.getColor(intent.getStringExtra("themeColor"))));
+                        views.setImageViewBitmap(R.id.bg_view, getBgBitmap(context, Color.parseColor(intent.getStringExtra("themeColor"))));
                     }
                     if (intent.getStringExtra("titleColor") != null) {
-                        views.setInt(R.id.title_view, "setTextColor", UniResourceUtils.getColor(intent.getStringExtra("titleColor")));
+                        views.setInt(R.id.title_view, "setTextColor", Color.parseColor(intent.getStringExtra("titleColor")));
                     }
                     if (intent.getStringExtra("artistColor") != null) {
-                        views.setInt(R.id.tip_view, "setTextColor", UniResourceUtils.getColor(intent.getStringExtra("artistColor")));
+                        views.setInt(R.id.tip_view, "setTextColor", Color.parseColor(intent.getStringExtra("artistColor")));
                     }
                     break;
                 default:
@@ -199,7 +198,6 @@ public class MusicWidget extends AppWidgetProvider {
             }
             AppWidgetManager.getInstance(context).updateAppWidget(new ComponentName(context, MusicWidget.class), views);
         }
-        super.onReceive(context, intent);
     }
 
     @Override
