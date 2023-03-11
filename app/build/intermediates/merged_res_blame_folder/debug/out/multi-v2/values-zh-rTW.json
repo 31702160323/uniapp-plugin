@@ -4,6 +4,23 @@
             "outputFile": "com.xzh.UniPlugin.app-mergeDebugResources-3:/values-zh-rTW/values-zh-rTW.xml",
             "map": [
                 {
+                    "source": "D:\\xu\\.gradle\\caches\\transforms-3\\74f0d96b6387e8afac16a455da3402d9\\transformed\\core-1.1.0\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "86",
+                        "startColumns": "4",
+                        "startOffsets": "6174",
+                        "endColumns": "100",
+                        "endOffsets": "6270"
+                    }
+                },
+                {
                     "source": "D:\\xu\\.gradle\\caches\\transforms-3\\500d961bcb0b5d815367365c7b2a7852\\transformed\\appcompat-1.0.0\\res\\values-zh-rTW\\values-zh-rTW.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
@@ -21,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "D:\\xu\\.gradle\\caches\\transforms-3\\dec0d298d302e3cc8dbd59245f02d19c\\transformed\\jetified-lib.5plus.base-release\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "source": "D:\\xu\\.gradle\\caches\\transforms-3\\fe381dc6d6760d1b171836e76e7a8898\\transformed\\jetified-lib.5plus.base-release\\res\\values-zh-rTW\\values-zh-rTW.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -35,23 +52,6 @@
                         "startOffsets": "2675,2726,2778,2829,2883,2933,2983,3035,3085,3140,3188,3238,3291,3342,3394,3446,3497,3547,3605,3657,3721,3779,3837,3906,3964,4015,4066,4135,4199,4261,4323,4387,4475,4581,4646,4723,4789,4854,4917,4981,5043,5105,5167,5237,5313,5367,5444,5497,5564,5625,5689,5756,5808,5871,5936,6018",
                         "endColumns": "50,51,50,53,49,49,51,49,54,47,49,52,50,51,51,50,49,57,51,63,57,57,68,57,50,50,68,63,61,61,63,87,105,64,76,65,64,62,63,61,61,61,69,75,53,76,52,66,60,63,66,51,62,64,81,77",
                         "endOffsets": "2721,2773,2824,2878,2928,2978,3030,3080,3135,3183,3233,3286,3337,3389,3441,3492,3542,3600,3652,3716,3774,3832,3901,3959,4010,4061,4130,4194,4256,4318,4382,4470,4576,4641,4718,4784,4849,4912,4976,5038,5100,5162,5232,5308,5362,5439,5492,5559,5620,5684,5751,5803,5866,5931,6013,6091"
-                    }
-                },
-                {
-                    "source": "D:\\xu\\.gradle\\caches\\transforms-3\\b435c9c9cde5a7559bf6855b099cbe7a\\transformed\\core-1.0.0\\res\\values-zh-rTW\\values-zh-rTW.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "86",
-                        "startColumns": "4",
-                        "startOffsets": "6174",
-                        "endColumns": "100",
-                        "endOffsets": "6270"
                     }
                 }
             ]

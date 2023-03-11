@@ -1,7 +1,7 @@
 package com.xzh.musicnotification.service;
 
 import android.annotation.SuppressLint;
-import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.bluetooth.BluetoothHeadset;
 import android.content.Context;
@@ -24,15 +24,13 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import static com.xzh.musicnotification.notification.MusicNotificationV2.NOTIFICATION_ID;
-
-public class PlayServiceV2 extends Service {
+public class PlayServiceV2 extends Service implements NotificationReceiver.IReceiverListener {
     private static PlayServiceV2 service;
 
     private boolean playing;
     private boolean lockActivity;
 
-    private JSONObject songData;
+    private JSONObject songInfo;
     private ServiceBinder mBinder;
     private NotificationReceiver mReceiver;
 
@@ -56,64 +54,10 @@ public class PlayServiceV2 extends Service {
         super.onCreate();
         service = this;
 
-        mReceiver = new NotificationReceiver(new NotificationReceiver.IReceiverListener() {
-            @Override
-            public void onScreenReceive() {
-                if (lockActivity) Utils.openLock(PlayServiceV2.this, LockActivityV2.class);
-            }
+        MusicNotificationV2.getInstance().initNotification(service);
 
-            @Override
-            public void onHeadsetReceive(int extra) {
-                JSONObject data = new JSONObject();
-                data.put("type", Global.MEDIA_BUTTON_HEADSET);
-                data.put("keyCode", extra);
-                fireGlobalEventCallback(Global.EVENT_MUSIC_MEDIA_BUTTON, data);
-            }
+        mReceiver = new NotificationReceiver(this);
 
-            @Override
-            public void onBluetoothReceive(int extra) {
-                JSONObject data = new JSONObject();
-                data.put("type", Global.MEDIA_BUTTON_BLUETOOTH);
-                data.put("keyCode", extra);
-                fireGlobalEventCallback(Global.EVENT_MUSIC_MEDIA_BUTTON, data);
-            }
-
-            @Override
-            public void onMusicReceive(String extra) {
-                String eventName = Global.EVENT_MUSIC_NOTIFICATION_ERROR;
-                JSONObject data = new JSONObject();
-                data.put("message", "触发回调事件成功");
-                data.put("code", 0);
-                switch (extra) {
-                    case NotificationReceiver.EXTRA_PLAY:
-                        eventName = Global.EVENT_MUSIC_NOTIFICATION_PAUSE;
-                        break;
-                    case NotificationReceiver.EXTRA_PRE:
-                        eventName = Global.EVENT_MUSIC_NOTIFICATION_PREVIOUS;
-                        break;
-                    case NotificationReceiver.EXTRA_NEXT:
-                        eventName = Global.EVENT_MUSIC_NOTIFICATION_NEXT;
-                        break;
-                    case NotificationReceiver.EXTRA_FAV:
-                        eventName = Global.EVENT_MUSIC_NOTIFICATION_FAVOURITE;
-                        break;
-                    case "enabled":
-                        PlayServiceV2.invoke(service, Global.KEY_UPDATE, songData);
-
-                        Map<String, Object> options = new ArrayMap<>();
-                        options.put(Global.KEY_PLAYING, playing);
-                        PlayServiceV2.invoke(service,Global.KEY_PLAY_OR_PAUSE, options);
-                        break;
-                    default:
-                        data.put("message", "触发回调事件失败");
-                        data.put("code", -7);
-                        break;
-                }
-                if (mBinder != null) {
-                    mBinder.sendMessage(eventName, data);
-                }
-            }
-        });
         IntentFilter filter = new IntentFilter();
         // 锁屏广播
         filter.addAction(Intent.ACTION_SCREEN_OFF);
@@ -146,13 +90,71 @@ public class PlayServiceV2 extends Service {
         service = null;
     }
 
-    public final void startForeground(Notification notification) {
-        // 设置为前台Service
-        startForeground(NOTIFICATION_ID, notification);
+    @Override
+    public void onScreenReceive() {
+        try {
+            if (lockActivity) Utils.openLock(PlayServiceV2.this, LockActivityV2.class);
+        } catch (PendingIntent.CanceledException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onHeadsetReceive(int extra) {
+        JSONObject data = new JSONObject();
+        data.put("type", Global.MEDIA_BUTTON_HEADSET);
+        data.put("keyCode", extra);
+        fireGlobalEventCallback(Global.EVENT_MUSIC_MEDIA_BUTTON, data);
+    }
+
+    @Override
+    public void onBluetoothReceive(int extra) {
+        JSONObject data = new JSONObject();
+        data.put("type", Global.MEDIA_BUTTON_BLUETOOTH);
+        data.put("keyCode", extra);
+        fireGlobalEventCallback(Global.EVENT_MUSIC_MEDIA_BUTTON, data);
+    }
+
+    @Override
+    public void onMusicReceive(String extra) {
+        String eventName = Global.EVENT_MUSIC_NOTIFICATION_ERROR;
+        JSONObject data = new JSONObject();
+        data.put("message", "触发回调事件成功");
+        data.put("code", 0);
+        switch (extra) {
+            case NotificationReceiver.EXTRA_PLAY:
+                eventName = Global.EVENT_MUSIC_NOTIFICATION_PAUSE;
+                break;
+            case NotificationReceiver.EXTRA_PRE:
+                eventName = Global.EVENT_MUSIC_NOTIFICATION_PREVIOUS;
+                break;
+            case NotificationReceiver.EXTRA_NEXT:
+                eventName = Global.EVENT_MUSIC_NOTIFICATION_NEXT;
+                break;
+            case NotificationReceiver.EXTRA_FAV:
+                eventName = Global.EVENT_MUSIC_NOTIFICATION_FAVOURITE;
+                break;
+            case "enabled":
+                if (songInfo != null) PlayServiceV2.invoke(service, Global.KEY_UPDATE, songInfo);
+
+                Map<String, Object> options = new ArrayMap<>();
+                options.put(Global.KEY_PLAYING, playing);
+                PlayServiceV2.invoke(service,Global.KEY_PLAY_OR_PAUSE, options);
+                break;
+            default:
+                data.put("message", "触发回调事件失败");
+                data.put("code", -7);
+                break;
+        }
+        if (mBinder != null) {
+            mBinder.sendMessage(eventName, data);
+        }
     }
 
     public void fireGlobalEventCallback(String eventName, Map<String, Object> params){
-        mBinder.sendMessage(eventName, params);
+        if (mBinder != null) {
+            mBinder.sendMessage(eventName, params);
+        }
     }
 
     public class ServiceBinder extends Binder {
@@ -167,16 +169,12 @@ public class PlayServiceV2 extends Service {
             mClickListener = new WeakReference<>(clickListener);
         }
 
-        public void initNotification(JSONObject config) {
-            MusicNotificationV2.getInstance().initNotification(service, config);
-        }
-
         public void switchNotification(boolean is) {
             MusicNotificationV2.getInstance().switchNotification(is);
         }
 
         public boolean getFavour(){
-            return service.songData.getBoolean(Global.KEY_FAVOUR);
+            return songInfo != null ? service.songInfo.getBoolean(Global.KEY_FAVOUR) : false;
         }
 
         public boolean getPlaying(){
@@ -184,7 +182,7 @@ public class PlayServiceV2 extends Service {
         }
 
         public JSONObject getSongData() {
-            return songData;
+            return songInfo;
         }
 
         public void lock(boolean locking) {
@@ -206,21 +204,19 @@ public class PlayServiceV2 extends Service {
 
         @SuppressLint("WrongConstant")
         public void favour(boolean favour){
-            songData.put(Global.KEY_FAVOUR, favour);
+            if (songInfo != null) {
+                songInfo.put(Global.KEY_FAVOUR, favour);
+                PlayServiceV2.invoke(service,Global.KEY_FAVOUR, songInfo);
+            }
 
             if (mClickListener != null && mClickListener.get() != null) mClickListener.get().favour(favour);
-
-            PlayServiceV2.invoke(service,Global.KEY_FAVOUR, songData);
 
             MusicNotificationV2.getInstance().favour(favour);
         }
 
         @SuppressLint("WrongConstant")
         public void update(JSONObject option){
-            songData = option;
-            if (option.getBoolean(Global.KEY_FAVOUR) != null) {
-                songData.put(Global.KEY_FAVOUR, option.getBoolean(Global.KEY_FAVOUR));
-            }
+            songInfo = option;
 
             if (mClickListener != null && mClickListener.get() != null) {
                 mClickListener.get().update(option);
@@ -229,10 +225,6 @@ public class PlayServiceV2 extends Service {
             PlayServiceV2.invoke(service, Global.KEY_UPDATE, option);
 
             MusicNotificationV2.getInstance().updateSong(option);
-        }
-
-        public void setShowFavour(boolean show) {
-            MusicNotificationV2.getInstance().setShowFavour(show);
         }
 
         public void sendMessage(String eventName, Map<String, Object> params){

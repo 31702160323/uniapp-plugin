@@ -49,9 +49,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            setShowWhenLocked(true);
-        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) setShowWhenLocked(true);
         Utils.fullScreen(this);
         setContentView(R.layout.activity_lock);
 
@@ -109,6 +107,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
     @Override
     public void onClick(View view) {
+        if (mBinder.get() == null) return;
         String EXTRA_TYPE = "";
         String eventName = Global.EVENT_MUSIC_NOTIFICATION_ERROR;
         JSONObject data = new JSONObject();
@@ -194,6 +193,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
     @Override
     public void update(JSONObject options) {
+        if (options == null) return;
         if (UniUtils.isUiThread()) {
             updateUI(options);
         } else {
@@ -202,25 +202,35 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     }
 
     private void updateUI(JSONObject options) {
+        favour(mBinder.get().getFavour());
+        playOrPause(mBinder.get().getPlaying());
+
         if (options.getString(Global.KEY_SONG_NAME) != null) {
             tvAudioName.setText(options.getString(Global.KEY_SONG_NAME));
         }
         if (options.getString(Global.KEY_ARTISTS_NAME) != null) {
             tvAudio.setText(options.getString(Global.KEY_ARTISTS_NAME));
         }
-        favour(mBinder.get().getFavour());
-        playOrPause(mBinder.get().getPlaying());
 
+        Utils.debounce(() -> updatePicUrl(options.getString("picUrl")), 500);
+    }
+
+    private void updatePicUrl(String picUrl) {
+        if (picUrl == null) return;
         Glide.with(this.getApplicationContext())
                 .asBitmap()
-                .load(options.getString("picUrl"))
+                .load(picUrl)
                 .sizeMultiplier(0.8f)
                 .override(mWidth, mHeight)
                 .format(DecodeFormat.PREFER_RGB_565)
                 .into(new CustomTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        lockDate.setImageBitmap(changeAlpha(resource));
+                        if (UniUtils.isUiThread()) {
+                            lockDate.setImageBitmap(changeAlpha(resource));
+                        } else {
+                            runOnUiThread(() -> lockDate.setImageBitmap(changeAlpha(resource)));
+                        }
                     }
 
                     @Override
@@ -233,12 +243,12 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     public Bitmap changeAlpha(Bitmap bitmap) {
         try {
             int w = bitmap.getWidth();
-            int h = bitmap .getHeight();
+            int h = bitmap.getHeight();
 
             int height = mHeight * w / mWidth;
             Bitmap result = Bitmap.createBitmap(w, height, Bitmap.Config.ARGB_8888);
 
-            int r,g,b,a,color;
+            int r, g, b, a, color;
 
             int[] oldPx = new int[w * h];
             int[] newPx = new int[w * height];
@@ -265,7 +275,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
                     b = Color.blue(color);
 
                     a = (a > 255 ? 255 : Math.max(a, 0));
-                    newPx[x + w * y] = Color.argb(a,r, g, b);
+                    newPx[x + w * y] = Color.argb(a, r, g, b);
                 }
             }
             result.setPixels(newPx, 0, w, 0, 0, w, height);

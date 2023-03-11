@@ -20,7 +20,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 -keep public class * extends io.dcloud.feature.uniapp.common.UniModule{*;}
-#-keep public class com.xzh.musicnotification.utils.MusicAsyncQueryHandler$SongBean
+-keep public class * extends io.dcloud.feature.uniapp.ui.component.UniComponent{*;}
 
 #####方法名等混淆指定配置
 -obfuscationdictionary ./proguard_keywords.txt

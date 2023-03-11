@@ -5,6 +5,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,12 +21,11 @@ import androidx.core.app.NotificationCompat;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.target.NotificationTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.taobao.weex.utils.WXViewUtils;
 import com.xzh.musicnotification.Global;
 import com.xzh.musicnotification.R;
 import com.xzh.musicnotification.service.NotificationReceiver;
-import com.xzh.musicnotification.service.PlayServiceV2;
 import com.xzh.musicnotification.utils.PendingIntentInfo;
+import com.xzh.musicnotification.utils.Utils;
 
 public class MusicNotificationV2 extends BaseMusicNotification {
     private boolean systemStyle;
@@ -41,7 +41,11 @@ public class MusicNotificationV2 extends BaseMusicNotification {
     }
 
     public void createNotification() {
+        cancel();
+        if (mConfig == null) return;
         mNotificationManager = (NotificationManager) mContext.get().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        String path = String.valueOf(mConfig.getString(Global.KEY_PATH));
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1) { //Android 5.1 以下
             mNotification = new Notification.Builder(mContext.get())
@@ -51,7 +55,7 @@ public class MusicNotificationV2 extends BaseMusicNotification {
                     .setContent(getRemoteViews())
                     .setSmallIcon(R.drawable.music_icon)
                     .setPriority(Notification.PRIORITY_LOW)
-                    .setContentIntent(getContentIntent(mConfig.getString(Global.KEY_PATH)))
+                    .setContentIntent(getContentIntent(path))
                     .build();
         } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) { //Android 8.0以下
             mNotification = new NotificationCompat.Builder(mContext.get(), CHANNEL_ID)
@@ -64,7 +68,7 @@ public class MusicNotificationV2 extends BaseMusicNotification {
                     .setPriority(Notification.PRIORITY_LOW)
                     .setCustomBigContentView(getRemoteViews()) //展开视图
                     .setCustomContentView(getSmallRemoteViews())
-                    .setContentIntent(getContentIntent(mConfig.getString(Global.KEY_PATH)))
+                    .setContentIntent(getContentIntent(path))
                     .build();
         } else {
             NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_LOW);
@@ -73,9 +77,7 @@ public class MusicNotificationV2 extends BaseMusicNotification {
             notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
             mNotificationManager.createNotificationChannel(notificationChannel);
 
-            if (systemStyle) {
-                buildNotification();
-            } else {
+            if (!systemStyle) {
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext.get(), CHANNEL_ID)
                         .setOngoing(true)
                         .setColorized(true)
@@ -84,117 +86,100 @@ public class MusicNotificationV2 extends BaseMusicNotification {
                         .setSmallIcon(R.drawable.music_icon)
 //                        .setBadgeIconType(R.drawable.music_icon)
                         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                        .setContentIntent(getContentIntent(mConfig.getString(Global.KEY_PATH)))
+                        .setContentIntent(getContentIntent(path))
                         .setCustomBigContentView(getRemoteViews()) //展开视图
                         .setCustomContentView(getSmallRemoteViews());
 
                 mNotification = builder.build();
-
-                if (songInfo != null) {
-                    updateSong(songInfo);
-                    playOrPause(isPlay);
-                }
             }
         }
 
-        ((PlayServiceV2) mContext.get()).startForeground(mNotification);
+        updateSong(songInfo);
+        playOrPause(isPlay);
+
+        // 设置为前台Service
+        ((Service) mContext.get()).startForeground(NOTIFICATION_ID, mNotification);
     }
 
     @Override
-    protected void buildNotification() {
-        if (mNotificationManager == null) {
-            createNotification();
-        }
-        if (systemStyle) {
-            generateGlide(mContext.get(), new CustomTarget<Bitmap>() {
-                @Override
-                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext.get(), CHANNEL_ID)
-                            .setOngoing(true)
-                            .setColorized(true)
-                            .setShowWhen(false)
-                            .setOnlyAlertOnce(true)
-                            .setSmallIcon(R.drawable.music_icon)
-//                .setBadgeIconType(R.drawable.music_icon)
-                            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                            .setContentIntent(getContentIntent(mConfig.getString(Global.KEY_PATH)))
-                            .setContentTitle(String.valueOf(songInfo.getString(Global.KEY_SONG_NAME)))
-                            .setContentText(String.valueOf(songInfo.getString(Global.KEY_ARTISTS_NAME)))
-                            .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)
-                            .setLargeIcon(resource);
+    protected void updateNotification() {
+        if (mConfig == null) return;
+        if (songInfo == null) return;
+        if (mNotificationManager == null) createNotification();
+        Utils.debounce(() -> {
+            String picUrl = String.valueOf(songInfo.getString("picUrl"));
+            String songName = String.valueOf(songInfo.getString(Global.KEY_SONG_NAME));
+            String artistsName = String.valueOf(songInfo.getString(Global.KEY_ARTISTS_NAME));
+            int play = isPlay ? R.drawable.note_btn_pause_white : R.drawable.note_btn_play_white;
+            int favour = songInfo.getBoolean(Global.KEY_FAVOUR) != null && songInfo.getBoolean(Global.KEY_FAVOUR) ? R.drawable.note_btn_loved : R.drawable.note_btn_love_white;
+            if (systemStyle) {
+                int dip64 = Utils.dip2px(64);
+                generateGlide(mContext.get(), new CustomTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext.get(), CHANNEL_ID)
+                                .setOngoing(true)
+                                .setColorized(true)
+                                .setShowWhen(false)
+                                .setOnlyAlertOnce(true)
+                                .setSmallIcon(R.drawable.music_icon)
+//                            .setBadgeIconType(R.drawable.music_icon)
+                                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                                .setContentIntent(getContentIntent(String.valueOf(mConfig.getString(Global.KEY_PATH))))
+                                .setContentTitle(songName)
+                                .setContentText(artistsName)
+                                .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)
+                                .setLargeIcon(resource);
 
-                    androidx.media.app.NotificationCompat.MediaStyle style = new androidx.media.app.NotificationCompat.MediaStyle();
-                    style.setMediaSession(mMediaSession.getSessionToken());
-                    style.setShowCancelButton(true);
+                        androidx.media.app.NotificationCompat.MediaStyle style = new androidx.media.app.NotificationCompat.MediaStyle();
+                        style.setMediaSession(mMediaSession.getSessionToken());
+                        style.setShowCancelButton(true);
 
-                    if (showFavour) {
-                        style.setShowActionsInCompactView(1, 2, 3);
-                        if (songInfo.getBoolean(Global.KEY_FAVOUR)) {
-                            builder.addAction(generateAction(R.drawable.note_btn_loved, "Favourite", 4, NotificationReceiver.EXTRA_FAV));
+                        if (showFavour) {
+                            style.setShowActionsInCompactView(1, 2, 3);
+                            builder.addAction(generateAction(favour, "Favourite", 4, NotificationReceiver.EXTRA_FAV));
                         } else {
-                            builder.addAction(generateAction(R.drawable.note_btn_love_white, "Favourite", 4, NotificationReceiver.EXTRA_FAV));
+                            style.setShowActionsInCompactView(0, 1, 2);
                         }
-                    } else {
-                        style.setShowActionsInCompactView(0, 1, 2);
+
+                        builder.addAction(generateAction(R.drawable.note_btn_pre_white, "Previous", 2, NotificationReceiver.EXTRA_PRE));
+                        builder.addAction(generateAction(play, "Play", 1, NotificationReceiver.EXTRA_PLAY));
+                        builder.addAction(generateAction(R.drawable.note_btn_next_white, "Next", 3, NotificationReceiver.EXTRA_NEXT));
+                        builder.setStyle(style);
+
+                        mNotification = builder.build();
+                        mNotificationManager.notify(NOTIFICATION_ID, mNotification);
                     }
 
-                    builder.addAction(generateAction(R.drawable.note_btn_pre_white, "Previous", 2, NotificationReceiver.EXTRA_PRE));
-
-                    if (isPlay) {
-                        builder.addAction(generateAction(R.drawable.note_btn_pause_white, "Play", 1, NotificationReceiver.EXTRA_PLAY));
-                    } else {
-                        builder.addAction(generateAction(R.drawable.note_btn_play_white, "Play", 1, NotificationReceiver.EXTRA_PLAY));
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
                     }
 
-                    builder.addAction(generateAction(R.drawable.note_btn_next_white, "Next", 3, NotificationReceiver.EXTRA_NEXT));
-
-                    builder.setStyle(style);
-
-                    mNotification = builder.build();
-                    mNotificationManager.notify(NOTIFICATION_ID, mNotification);
-                }
-
-                @Override
-                public void onLoadCleared(@Nullable Drawable placeholder) {
-                }
-
-                @Override
-                public void onLoadFailed(@Nullable Drawable errorDrawable) {
-                }
-            }, String.valueOf(songInfo.getString("picUrl")), WXViewUtils.dip2px(WXViewUtils.dip2px(64)), WXViewUtils.dip2px(WXViewUtils.dip2px(64)));
-        } else {
-            if (isPlay) {
-                mRemoteViews.setImageViewResource(R.id.play_view, R.drawable.note_btn_pause_white);
-                if (mSmallRemoteViews != null)
-                    mSmallRemoteViews.setImageViewResource(R.id.play_view, R.drawable.note_btn_pause_white);
+                    @Override
+                    public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                    }
+                }, picUrl, dip64, dip64);
             } else {
-                mRemoteViews.setImageViewResource(R.id.play_view, R.drawable.note_btn_play_white);
-                if (mSmallRemoteViews != null)
-                    mSmallRemoteViews.setImageViewResource(R.id.play_view, R.drawable.note_btn_play_white);
-            }
+                if (showFavour) {
+                    mRemoteViews.setImageViewResource(R.id.favourite_view, favour);
+                }
 
-            if (songInfo.getString(Global.KEY_SONG_NAME) != null) {
-                mRemoteViews.setTextViewText(R.id.title_view, String.valueOf(songInfo.getString(Global.KEY_SONG_NAME)));
-                if (mSmallRemoteViews != null)
-                    mSmallRemoteViews.setTextViewText(R.id.title_view, String.valueOf(songInfo.getString(Global.KEY_SONG_NAME)));
-            }
-            if (songInfo.getString(Global.KEY_ARTISTS_NAME) != null) {
-                mRemoteViews.setTextViewText(R.id.tip_view, String.valueOf(songInfo.getString(Global.KEY_ARTISTS_NAME)));
-                if (mSmallRemoteViews != null)
-                    mSmallRemoteViews.setTextViewText(R.id.tip_view, String.valueOf(songInfo.getString(Global.KEY_ARTISTS_NAME)));
-            }
+                int dip112 = Utils.dip2px(112);
+                mRemoteViews.setTextViewText(R.id.title_view, songName);
+                mRemoteViews.setTextViewText(R.id.tip_view, artistsName);
+                mRemoteViews.setImageViewResource(R.id.play_view, play);
+                setPicUrlBitmap(mContext.get(), mRemoteViews, picUrl, dip112, dip112);
 
-            if (songInfo.getBoolean(Global.KEY_FAVOUR)) {
-                mRemoteViews.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_loved);
-            } else {
-                mRemoteViews.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_love_white);
+                if (mSmallRemoteViews != null) {
+                    int dip64 = Utils.dip2px(64);
+                    mSmallRemoteViews.setTextViewText(R.id.tip_view, artistsName);
+                    mSmallRemoteViews.setTextViewText(R.id.title_view, songName);
+                    mSmallRemoteViews.setImageViewResource(R.id.play_view, play);
+                    setPicUrlBitmap(mContext.get(), mSmallRemoteViews, picUrl, dip64, dip64);
+                }
+                mNotificationManager.notify(NOTIFICATION_ID, mNotification);
             }
-
-            setPicUrlBitmap(mContext.get(), mRemoteViews, String.valueOf(songInfo.getString("picUrl")), WXViewUtils.dip2px(112), WXViewUtils.dip2px(112));
-            if (mSmallRemoteViews != null) {
-                setPicUrlBitmap(mContext.get(), mSmallRemoteViews, String.valueOf(songInfo.getString("picUrl")), WXViewUtils.dip2px(64), WXViewUtils.dip2px(64));
-            }
-        }
+        }, 500);
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")
@@ -276,7 +261,6 @@ public class MusicNotificationV2 extends BaseMusicNotification {
     public void switchNotification(boolean is) {
         systemStyle = is;
         if (mNotificationManager != null) {
-            cancel();
             createNotification();
         }
     }
