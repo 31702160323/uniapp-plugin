@@ -8,13 +8,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Utils {
     public static ApplicationInfo getApplicationInfo(Context context) {
@@ -65,7 +70,7 @@ public class Utils {
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")
-    public static void openLock(Context context, Class<?> clazz) {
+    public static void openLock(Context context, Class<?> clazz) throws PendingIntent.CanceledException {
         try {
             Intent lockScreen = new Intent(context, clazz);
             lockScreen.setPackage(context.getPackageName());
@@ -160,5 +165,26 @@ public class Utils {
         }
         intent.setComponent(componentName);
         return intent;
+    }
+
+    public static int dip2px(float dpValue) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpValue, Resources.getSystem().getDisplayMetrics());
+    }
+
+    private static Timer timer;
+    public static void debounce(ICallBack doThing, long duration) {
+        if (timer != null) timer.cancel();
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                doThing.invoke();
+                timer = null;
+            }
+        }, duration);
+    }
+
+    public interface ICallBack {
+        void invoke();
     }
 }

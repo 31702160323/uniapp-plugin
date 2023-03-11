@@ -3,7 +3,7 @@
     package="com.xzh.widget">
 
     <application>
-        <receiver android:exported="true" android:name=".MusicWidget">
+        <receiver android:exported="false" android:name=".MusicWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
 

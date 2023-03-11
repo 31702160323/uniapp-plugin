@@ -6,6 +6,11 @@
           "type": "module",
           "name": "XZH-musicNotification",
           "class": "com.xzh.musicnotification.MusicNotificationModule"
+        },
+        {
+          "type": "component",
+          "name": "gray-view",
+          "class": "com.xzh.musicnotification.GrayView"
         }
       ]
     },
@@ -51,6 +56,15 @@
           "type": "module",
           "name": "XZH-Calendar",
           "class": "com.xzh.calendar.CalendarModule"
+        }
+      ]
+    },
+    {
+      "plugins": [
+        {
+          "type": "component",
+          "name": "gray-view",
+          "class": "com.xzh.view.GrayView"
         }
       ]
     }

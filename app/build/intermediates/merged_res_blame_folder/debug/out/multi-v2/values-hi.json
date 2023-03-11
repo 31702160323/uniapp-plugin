@@ -4,7 +4,7 @@
             "outputFile": "com.xzh.UniPlugin.app-mergeDebugResources-3:/values-hi/values-hi.xml",
             "map": [
                 {
-                    "source": "D:\\xu\\.gradle\\caches\\transforms-3\\b435c9c9cde5a7559bf6855b099cbe7a\\transformed\\core-1.0.0\\res\\values-hi\\values-hi.xml",
+                    "source": "D:\\xu\\.gradle\\caches\\transforms-3\\74f0d96b6387e8afac16a455da3402d9\\transformed\\core-1.1.0\\res\\values-hi\\values-hi.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

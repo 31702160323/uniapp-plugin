@@ -15,8 +15,13 @@
         <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/layout/floating_window.xml" value="0.36614583333333334" />
         <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/layout/notification_big_layout.xml" value="0.17806484295845998" />
         <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/musicNotification/src/main/res/layout/notification_small_layout.xml" value="0.36614583333333334" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/widget/src/main/res/drawable-anydpi/note_btn_love_white.xml" value="0.2315" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/widget/src/main/res/drawable-anydpi/note_btn_loved.xml" value="0.2315" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/widget/src/main/res/drawable-anydpi/note_btn_next_white.xml" value="0.2315" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/widget/src/main/res/drawable-anydpi/note_btn_pause_white.xml" value="0.2315" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/widget/src/main/res/drawable-anydpi/note_btn_play_white.xml" value="0.2315" />
         <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/widget/src/main/res/drawable-anydpi/note_btn_pre_white.xml" value="0.211" />
-        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/widget/src/main/res/layout/music_widget.xml" value="0.36614583333333334" />
+        <entry key="..\:/htmlFile/project/UniPlugin-Hello-AS/widget/src/main/res/layout/music_widget.xml" value="0.1" />
       </map>
     </option>
   </component>
@@ -26,7 +31,7 @@
       <item index="1" class="java.lang.String" itemvalue="io.dcloud.feature.uniapp.annotation.UniJSMethod" />
     </list>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
