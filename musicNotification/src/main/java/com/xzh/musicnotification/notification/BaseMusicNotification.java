@@ -89,7 +89,6 @@ public abstract class BaseMusicNotification {
                 return true;
             }
         });
-        createNotification();
     }
 
     public abstract void createNotification();
@@ -138,7 +137,7 @@ public abstract class BaseMusicNotification {
         Glide.with(context)
                 .asBitmap()
                 .load(picUrl)
-                .sizeMultiplier(0.8f)
+                .sizeMultiplier(0.5f)
                 .format(DecodeFormat.PREFER_RGB_565)
                 .override(Utils.dip2px(width), Utils.dip2px(height))
                 .into(target);

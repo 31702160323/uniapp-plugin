@@ -67,7 +67,12 @@ public class PlayServiceV2 extends Service implements NotificationReceiver.IRece
         filter.addAction(BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED);
         // 自定义广播
         filter.addAction(getPackageName() + NotificationReceiver.ACTION_STATUS_BAR);
-        registerReceiver(mReceiver, filter);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(mReceiver, filter, Context.RECEIVER_EXPORTED);
+        } else {
+            registerReceiver(mReceiver, filter);
+        }
     }
 
     @Nullable

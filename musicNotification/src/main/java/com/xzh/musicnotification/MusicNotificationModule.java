@@ -1,16 +1,23 @@
 package com.xzh.musicnotification;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.util.Log;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xzh.musicnotification.notification.MusicNotificationV2;
@@ -32,6 +39,7 @@ public class MusicNotificationModule extends UniModule implements PlayServiceV2.
     private boolean systemStyle;
     private ServiceConnection connection;
     private PlayServiceV2.ServiceBinder mBinder;
+    private UniJSCallback mCallback;
 
     @UniJSMethod(uiThread = false)
     public void init(JSONObject config) {
@@ -49,43 +57,85 @@ public class MusicNotificationModule extends UniModule implements PlayServiceV2.
 
     @UniJSMethod(uiThread = false)
     public void createNotification(UniJSCallback callback) {
-        this.cancel();
-        JSONObject data = new JSONObject();
-        if(!isInit) {
-            data.put("message", "请先调用init方法进行初始化操作");
-            data.put("code", -2);
-            callback.invoke(data);
-            return;
+        Activity activity = (Activity) mUniSDKInstance.getContext();
+        this.mCallback = callback;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ActivityCompat.checkSelfPermission(activity, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            //动态申请
+//            Log.d("TAG", "createNotification: " + String.valueOf(ActivityCompat.checkSelfPermission(activity, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED));
+//            if(ActivityCompat.checkSelfPermission(activity, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(activity, new String[]{ Manifest.permission.POST_NOTIFICATIONS }, 1);
+                enableNotification(activity);
+//            }
+        } else if (!NotificationManagerCompat.from(activity).areNotificationsEnabled()) {
+            enableNotification(activity);
         }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ActivityCompat.checkSelfPermission(activity, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+//            enableNotification(activity);
+//        } else if (!NotificationManagerCompat.from(activity).areNotificationsEnabled()) {
+//            enableNotification(activity);
+//            return;
+//        }
+        else {
+            this.cancel();
+            JSONObject data = new JSONObject();
+            if(!isInit) {
+                data.put("message", "请先调用init方法进行初始化操作");
+                data.put("code", -2);
+                callback.invoke(data);
+                return;
+            }
+            try {
+                connection = new ServiceConnection() {
+                    @Override
+                    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                        mBinder = (PlayServiceV2.ServiceBinder) iBinder;
+                        mBinder.lock(lockActivity);
+                        mBinder.switchNotification(systemStyle);
+                        mBinder.setEventListener(MusicNotificationModule.this);
+                        data.put("message", "设置歌曲信息成功");
+                        data.put("code", 0);
+                        callback.invoke(data);
+                        mCallback = null;
+
+                        JSONObject object = new JSONObject();
+                        object.put("type", "create");
+                        mUniSDKInstance.fireGlobalEventCallback(Global.EVENT_MUSIC_LIFECYCLE, object);
+                    }
+
+                    @Override
+                    public void onServiceDisconnected(ComponentName componentName) {
+
+                    }
+                };
+
+                Context context = mUniSDKInstance.getContext();
+                context.bindService(PlayServiceV2.startMusicService(context), connection, Context.BIND_AUTO_CREATE);
+            } catch (Exception e) {
+                data.put("message", "创建通知栏失败");
+                data.put("code", 0);
+                callback.invoke(data);
+            }
+        }
+    }
+
+    public static void enableNotification(Context context) {
         try {
-            connection = new ServiceConnection() {
-                @Override
-                public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                    mBinder = (PlayServiceV2.ServiceBinder) iBinder;
-                    mBinder.lock(lockActivity);
-                    mBinder.switchNotification(systemStyle);
-                    mBinder.setEventListener(MusicNotificationModule.this);
-                    data.put("message", "设置歌曲信息成功");
-                    data.put("code", 0);
-                    callback.invoke(data);
-
-                    JSONObject object = new JSONObject();
-                    object.put("type", "create");
-                    mUniSDKInstance.fireGlobalEventCallback(Global.EVENT_MUSIC_LIFECYCLE, object);
-                }
-
-                @Override
-                public void onServiceDisconnected(ComponentName componentName) {
-
-                }
-            };
-
-            Context context = mUniSDKInstance.getContext();
-            context.bindService(PlayServiceV2.startMusicService(context), connection, Context.BIND_AUTO_CREATE);
+            Intent intent = new Intent();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                intent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+                intent.putExtra(Settings.EXTRA_APP_PACKAGE,context. getPackageName());
+                intent.putExtra(Settings.EXTRA_CHANNEL_ID, context.getApplicationInfo().uid);
+            }
+            intent.putExtra("app_package", context.getPackageName());
+            intent.putExtra("app_uid", context.getApplicationInfo().uid);
+            ((Activity) context).startActivityForResult(intent, 1);
         } catch (Exception e) {
-            data.put("message", "创建通知栏失败");
-            data.put("code", 0);
-            callback.invoke(data);
+            e.printStackTrace();
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            Uri uri = Uri.fromParts("package",context. getPackageName(), null);
+            intent.setData(uri);
+            ((Activity) context).startActivityForResult(intent, 1);
         }
     }
 
@@ -218,16 +268,41 @@ public class MusicNotificationModule extends UniModule implements PlayServiceV2.
 
     @UniJSMethod(uiThread = false)
     public void getLocalSong(UniJSCallback callback) {
-         new MusicAsyncQueryHandler(mUniSDKInstance.getContext().getContentResolver())
-                .setOnCallbackListener(callback::invoke)
-                .startQuery();
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ActivityCompat.checkSelfPermission((Activity) mUniSDKInstance.getContext(), Manifest.permission.READ_MEDIA_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions((Activity) mUniSDKInstance.getContext(),new String[]{Manifest.permission.READ_MEDIA_AUDIO},2);
+//        } else if(ActivityCompat.checkSelfPermission((Activity) mUniSDKInstance.getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions((Activity) mUniSDKInstance.getContext(),new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},2);
+//        } else {
+            new MusicAsyncQueryHandler(mUniSDKInstance.getContext().getContentResolver())
+                    .setOnCallbackListener(callback::invoke)
+                    .startQuery();
+//        }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        JSONObject map = new JSONObject();
-        map.put("type", requestCode == 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Settings.canDrawOverlays(mUniSDKInstance.getContext()));
-        mUniSDKInstance.fireGlobalEventCallback(Global.EVENT_OPEN_LOCK_ACTIVITY, map);
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 0:
+                JSONObject map = new JSONObject();
+                map.put("type", Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Settings.canDrawOverlays(mUniSDKInstance.getContext()));
+                mUniSDKInstance.fireGlobalEventCallback(Global.EVENT_OPEN_LOCK_ACTIVITY, map);
+                break;
+            case 1:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ActivityCompat.checkSelfPermission(mUniSDKInstance.getContext(), Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                    this.createNotification(this.mCallback);
+                } else if(NotificationManagerCompat.from(mUniSDKInstance.getContext()).areNotificationsEnabled()) {
+                    this.createNotification(this.mCallback);
+                }
+                break;
+//            case 2:
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ActivityCompat.checkSelfPermission((Activity) mUniSDKInstance.getContext(), Manifest.permission.READ_MEDIA_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+//                    this.createNotification(this.mCallback);
+//                } else if(NotificationManagerCompat.from(mUniSDKInstance.getContext()).areNotificationsEnabled()) {
+//                    this.createNotification(this.mCallback);
+//                }
+//                break;
+        }
     }
 
     @Override
