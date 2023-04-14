@@ -35,16 +35,16 @@ public class PendingIntentInfo {
     @SuppressLint("UnspecifiedImmutableFlag")
     public static void addOnClickPendingIntents(RemoteViews views, Context context, PendingIntentInfo... pendingIntentInfoList){
         for (PendingIntentInfo item : pendingIntentInfoList) {
-            Intent playIntent = new Intent(context.getPackageName() + NotificationReceiver.ACTION_STATUS_BAR);
-            playIntent.putExtra(NotificationReceiver.EXTRA,
+            Intent intent = new Intent(context.getPackageName() + NotificationReceiver.ACTION_STATUS_BAR);
+            intent.putExtra(NotificationReceiver.EXTRA,
                     item.getEXTRA());
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 views.setOnClickPendingIntent( item.getId(),
-                        PendingIntent.getBroadcast(context, item.getIndex(), playIntent, PendingIntent.FLAG_IMMUTABLE));
+                        PendingIntent.getBroadcast(context, item.getIndex(), intent, PendingIntent.FLAG_IMMUTABLE));
             } else {
                 views.setOnClickPendingIntent( item.getId(),
-                        PendingIntent.getBroadcast(context, item.getIndex(), playIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+                        PendingIntent.getBroadcast(context, item.getIndex(), intent, PendingIntent.FLAG_UPDATE_CURRENT));
             }
         }
     }

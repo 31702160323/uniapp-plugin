@@ -212,7 +212,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
             tvAudio.setText(options.getString(Global.KEY_ARTISTS_NAME));
         }
 
-        Utils.debounce(() -> updatePicUrl(options.getString("picUrl")), 500);
+        updatePicUrl(options.getString("picUrl"));
     }
 
     private void updatePicUrl(String picUrl) {
