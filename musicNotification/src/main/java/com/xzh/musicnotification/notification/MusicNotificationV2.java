@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -42,6 +43,7 @@ public class MusicNotificationV2 extends BaseMusicNotification {
 
     public void createNotification() {
         cancel();
+        Log.d("TAG", "createNotification: " + systemStyle);
         if (mConfig == null) return;
         mNotificationManager = (NotificationManager) mContext.get().getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -98,7 +100,7 @@ public class MusicNotificationV2 extends BaseMusicNotification {
         playOrPause(isPlay);
 
         // 设置为前台Service
-        ((Service) mContext.get()).startForeground(NOTIFICATION_ID, mNotification);
+        if(mNotification != null) ((Service) mContext.get()).startForeground(NOTIFICATION_ID, mNotification);
     }
 
     @Override
@@ -123,7 +125,8 @@ public class MusicNotificationV2 extends BaseMusicNotification {
                                 .setShowWhen(false)
                                 .setOnlyAlertOnce(true)
                                 .setSmallIcon(R.drawable.music_icon)
-//                            .setBadgeIconType(R.drawable.music_icon)
+//                                .setBadgeIconType(R.drawable.music_icon)
+                                .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE)
                                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                                 .setContentIntent(getContentIntent(String.valueOf(mConfig.getString(Global.KEY_PATH))))
                                 .setContentTitle(songName)
@@ -149,6 +152,7 @@ public class MusicNotificationV2 extends BaseMusicNotification {
 
                         mNotification = builder.build();
                         mNotificationManager.notify(NOTIFICATION_ID, mNotification);
+                        ((Service) mContext.get()).startForeground(NOTIFICATION_ID, mNotification);
                     }
 
                     @Override
@@ -164,18 +168,16 @@ public class MusicNotificationV2 extends BaseMusicNotification {
                     mRemoteViews.setImageViewResource(R.id.favourite_view, favour);
                 }
 
-                int dip112 = Utils.dip2px(112);
                 mRemoteViews.setTextViewText(R.id.title_view, songName);
                 mRemoteViews.setTextViewText(R.id.tip_view, artistsName);
                 mRemoteViews.setImageViewResource(R.id.play_view, play);
-                setPicUrlBitmap(mContext.get(), mRemoteViews, picUrl, dip112, dip112);
+                setPicUrlBitmap(mContext.get(), mRemoteViews, picUrl, 112, 112);
 
                 if (mSmallRemoteViews != null) {
-                    int dip64 = Utils.dip2px(64);
                     mSmallRemoteViews.setTextViewText(R.id.tip_view, artistsName);
                     mSmallRemoteViews.setTextViewText(R.id.title_view, songName);
                     mSmallRemoteViews.setImageViewResource(R.id.play_view, play);
-                    setPicUrlBitmap(mContext.get(), mSmallRemoteViews, picUrl, dip64, dip64);
+                    setPicUrlBitmap(mContext.get(), mSmallRemoteViews, picUrl, 64, 64);
                 }
                 mNotificationManager.notify(NOTIFICATION_ID, mNotification);
             }
@@ -184,19 +186,17 @@ public class MusicNotificationV2 extends BaseMusicNotification {
 
     @SuppressLint("UnspecifiedImmutableFlag")
     private NotificationCompat.Action generateAction(int icon, CharSequence title, int requestCode, String EXTRA) {
+        PendingIntent pendingIntent;
+        Intent intent = new Intent(mContext.get().getPackageName() + NotificationReceiver.ACTION_STATUS_BAR);
+//        Intent intent = new Intent(mContext.get(), NotificationReceiver.class);
+//        intent.setAction(mContext.get().getPackageName() + NotificationReceiver.ACTION_STATUS_BAR);
+        intent.putExtra(NotificationReceiver.EXTRA, EXTRA);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            return new NotificationCompat.Action(icon, title, PendingIntent.getBroadcast(mContext.get(), requestCode,
-                    new Intent(mContext.get().getPackageName() + NotificationReceiver.ACTION_STATUS_BAR)
-                            .putExtra(NotificationReceiver.EXTRA, EXTRA),
-                    PendingIntent.FLAG_IMMUTABLE
-            ));
+            pendingIntent = PendingIntent.getBroadcast(mContext.get(), requestCode, intent, PendingIntent.FLAG_IMMUTABLE);
         } else {
-            return new NotificationCompat.Action(icon, title, PendingIntent.getBroadcast(mContext.get(), requestCode,
-                    new Intent(mContext.get().getPackageName() + NotificationReceiver.ACTION_STATUS_BAR)
-                            .putExtra(NotificationReceiver.EXTRA, EXTRA),
-                    PendingIntent.FLAG_UPDATE_CURRENT
-            ));
+            pendingIntent = PendingIntent.getBroadcast(mContext.get(), requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         }
+        return new NotificationCompat.Action(icon, title, pendingIntent);
     }
 
     private RemoteViews getRemoteViews() {

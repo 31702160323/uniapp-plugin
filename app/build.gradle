@@ -5,8 +5,8 @@ import org.json.JSONObject
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion '30.0.3'
+    compileSdk 33
+//    buildToolsVersion '30.0.3'
 
     def xml = new XmlParser().parse("${projectDir}/src/main/assets/data/dcloud_control.xml")
     def appid = xml.apps.app[0].attributes().get("appid")
@@ -14,20 +14,21 @@ android {
 
     defaultConfig {
         applicationId "com.xzh.UniPlugin"
-        minSdkVersion 21
-        targetSdkVersion 31 //建议此属性值设为21 io.dcloud.PandoraEntry 作为apk入口时   必须设置 targetSDKVersion>=21 沉浸式才生效
+        minSdk 21
+        targetSdk 31 //建议此属性值设为21 io.dcloud.PandoraEntry 作为apk入口时   必须设置 targetSDKVersion>=21 沉浸式才生效
         versionCode = Integer.parseInt(manifest.get("version").get("code"))
         versionName = manifest.get("version").get("name")
 
         ndk {
-            abiFilters 'x86'
+//            abiFilters 'x86'
+            abiFilters 'x86_64'
             abiFilters 'arm64-v8a'
 //            abiFilters 'armeabi-v7a'
         }
         resConfigs("zh-rCN")
         compileOptions {
-            sourceCompatibility JavaVersion.VERSION_1_8
-            targetCompatibility JavaVersion.VERSION_1_8
+            sourceCompatibility JavaVersion.VERSION_11
+            targetCompatibility JavaVersion.VERSION_11
         }
     }
 
