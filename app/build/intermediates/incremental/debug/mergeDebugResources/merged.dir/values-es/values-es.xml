@@ -44,6 +44,11 @@
     <string name="dcloud_common_set_up">Configuración</string>
     <string name="dcloud_common_share">Compartir</string>
     <string name="dcloud_common_tips">Prompt</string>
+    <string name="dcloud_feature_media_player_bullet">Pantalla de bala</string>
+    <string name="dcloud_feature_media_player_restore_screen">Restaurar pantalla</string>
+    <string name="dcloud_feature_media_player_second_unit">Segundos</string>
+    <string name="dcloud_feature_media_player_toast_bullet_not_prepared">La pantalla no está lista.</string>
+    <string name="dcloud_feature_media_player_toast_no_content">Contenido vacío</string>
     <string name="dcloud_gallery_Next">Siguiente paso</string>
     <string name="dcloud_gallery_all_dir_name">Todas las imágenes y vídeos</string>
     <string name="dcloud_gallery_all_image">Todas las imágenes</string>

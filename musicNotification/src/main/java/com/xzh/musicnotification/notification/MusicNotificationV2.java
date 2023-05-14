@@ -81,9 +81,13 @@ public class MusicNotificationV2 extends BaseMusicNotification {
 
             if (!systemStyle) {
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext.get(), CHANNEL_ID)
-                        .setOngoing(true)
-                        .setColorized(true)
-                        .setShowWhen(false)
+//                        .setOngoing(true)
+//                        .setColorized(true)
+//                        .setShowWhen(false)
+//                        .setOnlyAlertOnce(true)
+                        .setOngoing(false)
+                        .setShowWhen(true)
+                        .setAutoCancel(true)
                         .setOnlyAlertOnce(true)
                         .setSmallIcon(R.drawable.music_icon)
 //                        .setBadgeIconType(R.drawable.music_icon)
@@ -120,9 +124,10 @@ public class MusicNotificationV2 extends BaseMusicNotification {
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext.get(), CHANNEL_ID)
-                                .setOngoing(true)
-                                .setColorized(true)
-                                .setShowWhen(false)
+//                                .setColorized(true)
+                                .setOngoing(false)
+                                .setShowWhen(true)
+                                .setAutoCancel(true)
                                 .setOnlyAlertOnce(true)
                                 .setSmallIcon(R.drawable.music_icon)
 //                                .setBadgeIconType(R.drawable.music_icon)
@@ -140,14 +145,14 @@ public class MusicNotificationV2 extends BaseMusicNotification {
 
                         if (showFavour) {
                             style.setShowActionsInCompactView(1, 2, 3);
-                            builder.addAction(generateAction(favour, "Favourite", 4, NotificationReceiver.EXTRA_FAV));
+                            builder.addAction(generateAction(favour, "Favourite", 3, NotificationReceiver.EXTRA_FAV));
                         } else {
                             style.setShowActionsInCompactView(0, 1, 2);
                         }
 
-                        builder.addAction(generateAction(R.drawable.note_btn_pre_white, "Previous", 2, NotificationReceiver.EXTRA_PRE));
-                        builder.addAction(generateAction(play, "Play", 1, NotificationReceiver.EXTRA_PLAY));
-                        builder.addAction(generateAction(R.drawable.note_btn_next_white, "Next", 3, NotificationReceiver.EXTRA_NEXT));
+                        builder.addAction(generateAction(R.drawable.note_btn_pre_white, "Previous", 1, NotificationReceiver.EXTRA_PRE));
+                        builder.addAction(generateAction(play, "Play", 0, NotificationReceiver.EXTRA_PLAY));
+                        builder.addAction(generateAction(R.drawable.note_btn_next_white, "Next", 2, NotificationReceiver.EXTRA_NEXT));
                         builder.setStyle(style);
 
                         mNotification = builder.build();
@@ -190,13 +195,14 @@ public class MusicNotificationV2 extends BaseMusicNotification {
         Intent intent = new Intent(mContext.get().getPackageName() + NotificationReceiver.ACTION_STATUS_BAR);
 //        Intent intent = new Intent(mContext.get(), NotificationReceiver.class);
 //        intent.setAction(mContext.get().getPackageName() + NotificationReceiver.ACTION_STATUS_BAR);
+        intent.setPackage(mContext.get().getPackageName());
         intent.putExtra(NotificationReceiver.EXTRA, EXTRA);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             pendingIntent = PendingIntent.getBroadcast(mContext.get(), requestCode, intent, PendingIntent.FLAG_IMMUTABLE);
         } else {
             pendingIntent = PendingIntent.getBroadcast(mContext.get(), requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         }
-        return new NotificationCompat.Action(icon, title, pendingIntent);
+        return new NotificationCompat.Action.Builder(icon, title, pendingIntent).build();
     }
 
     private RemoteViews getRemoteViews() {

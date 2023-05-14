@@ -12,6 +12,7 @@ import android.os.Build;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
+import android.util.Log;
 import android.view.KeyEvent;
 
 import com.alibaba.fastjson.JSONObject;
@@ -67,15 +68,31 @@ public abstract class BaseMusicNotification {
         mContext = new WeakReference<>(service);
         NOTIFICATION_ID++;
 
-        mMediaSession = new MediaSessionCompat(service, BaseMusicNotification.CHANNEL_ID);
+        mMediaSession = new MediaSessionCompat(service, CHANNEL_ID);
         mMediaSession.setActive(true);
         mMediaSession.setMetadata(new MediaMetadataCompat.Builder().build());
-        mMediaSession.setPlaybackState((new PlaybackStateCompat.Builder()).setActions(PlaybackStateCompat.ACTION_PLAY
-                | PlaybackStateCompat.ACTION_PLAY_PAUSE
-                | PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID
-                | PlaybackStateCompat.ACTION_PAUSE
-                | PlaybackStateCompat.ACTION_SKIP_TO_NEXT
-                | PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS).build());
+        mMediaSession.setPlaybackState((new PlaybackStateCompat.Builder())
+//                .setActions(
+////                PlaybackStateCompat.ACTION_PLAY
+////                | PlaybackStateCompat.ACTION_PLAY_PAUSE
+////                | PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID
+////                | PlaybackStateCompat.ACTION_PAUSE
+////                | PlaybackStateCompat.ACTION_SKIP_TO_NEXT
+////                | PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS
+//                        PlaybackStateCompat.ACTION_PLAY_PAUSE
+//                                | PlaybackStateCompat.ACTION_PLAY
+//                                | PlaybackStateCompat.ACTION_PAUSE
+//                                | PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID
+//                                | PlaybackStateCompat.ACTION_SEEK_TO
+//                                | PlaybackStateCompat.ACTION_FAST_FORWARD
+//                                | PlaybackStateCompat.ACTION_REWIND
+//                                | PlaybackStateCompat.ACTION_STOP
+//                                | PlaybackStateCompat.ACTION_SET_REPEAT_MODE
+//                                | PlaybackStateCompat.ACTION_SET_SHUFFLE_MODE
+//                                | PlaybackStateCompat.ACTION_SKIP_TO_NEXT
+//                                | PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS
+//                )
+                .build());
         mMediaSession.setCallback(new MediaSessionCompat.Callback() {
             @Override
             public boolean onMediaButtonEvent(Intent intent) {
@@ -121,7 +138,7 @@ public abstract class BaseMusicNotification {
      * @param favourite 搜藏状态
      */
     public void favour(boolean favourite) {
-        if(songInfo != null) songInfo.put(Global.KEY_FAVOUR, favourite);
+        if (songInfo != null) songInfo.put(Global.KEY_FAVOUR, favourite);
         updateNotification();
     }
 
@@ -141,5 +158,9 @@ public abstract class BaseMusicNotification {
                 .format(DecodeFormat.PREFER_RGB_565)
                 .override(Utils.dip2px(width), Utils.dip2px(height))
                 .into(target);
+    }
+
+    public int getID() {
+        return this.NOTIFICATION_ID;
     }
 }

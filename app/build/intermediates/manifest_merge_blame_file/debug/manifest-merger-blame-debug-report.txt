@@ -7,7 +7,7 @@
 7    <uses-sdk
 8        android:minSdkVersion="21"
 8-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
-9        android:targetSdkVersion="31" />
+9        android:targetSdkVersion="33" />
 9-->D:\htmlFile\project\UniPlugin-Hello-AS\app\src\main\AndroidManifest.xml
 10
 11    <supports-screens
