@@ -161,4 +161,9 @@ dependencies {
     implementation project(':widget')
 //    implementation project(':calendar')
     implementation project(':view')
+    implementation(":musicNotification")
+    implementation(":widget")
+    implementation(":varyDesktopIcons")
+    implementation(":pictureSelectorUni")
+    implementation(":shortcuts")
 }
