@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId "com.xzh.UniPlugin"
         minSdk 21
-        targetSdk 31 //建议此属性值设为21 io.dcloud.PandoraEntry 作为apk入口时   必须设置 targetSDKVersion>=21 沉浸式才生效
+        targetSdk 33 //建议此属性值设为21 io.dcloud.PandoraEntry 作为apk入口时   必须设置 targetSDKVersion>=21 沉浸式才生效
         versionCode = Integer.parseInt(manifest.get("version").get("code"))
         versionName = manifest.get("version").get("name")
 
@@ -114,7 +114,7 @@ android {
             }
 
             //删除assets文件夹下的所有zip文件，或者指定文件。(删除文件夹：文件夹名/**/*)
-            delete(fileTree(dir: variant.mergeAssetsProvider.get().outputDir, includes: includes))
+//            delete(fileTree(dir: variant.mergeAssetsProvider.get().outputDir, includes: includes))
 
             def findTargetFile = false
             outputs.files.getFiles().find {
@@ -160,5 +160,5 @@ dependencies {
     implementation project(':musicNotification')
     implementation project(':widget')
 //    implementation project(':calendar')
-//    implementation project(':view')
+    implementation project(':view')
 }
