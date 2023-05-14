@@ -1,6 +1,7 @@
 package com.xzh.widget;
 
 import android.annotation.SuppressLint;
+import android.app.LocaleManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -10,27 +11,29 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.AppWidgetTarget;
-import com.taobao.weex.utils.WXViewUtils;
 
 import java.util.Map;
 import java.util.Objects;
 
-import io.dcloud.PandoraEntryActivity;
-import io.dcloud.feature.uniapp.utils.UniResourceUtils;
-
 public class MusicWidget extends AppWidgetProvider {
 
-    private boolean xzhFavour;
-    private int themeColor;
-    private int titleColor;
-    private int artistColor;
+    private boolean showFavour;
+    private Integer themeColor;
+    private Integer titleColor;
+    private Integer artistColor;
 
     @SuppressLint("WrongConstant")
     public static void invoke(Context context, String type, Map<String, Object> options) {
@@ -86,21 +89,34 @@ public class MusicWidget extends AppWidgetProvider {
         }
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     public void openAppIntent(RemoteViews views, Context context, PendingIntentInfo... pendingIntentInfoList) {
         for (PendingIntentInfo item : pendingIntentInfoList) {
-            Intent intent = new Intent(context, PandoraEntryActivity.class);
+            Intent intent = new Intent("android.intent.action.MAIN");
+            intent.setClassName(context, "io.dcloud.PandoraEntryActivity");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            views.setOnClickPendingIntent(item.getId(), PendingIntent.getActivity(context, item.getIndex() + 1, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                views.setOnClickPendingIntent(item.getId(), PendingIntent.getActivity(context, item.getIndex() + 1, intent, PendingIntent.FLAG_IMMUTABLE));
+            } else {
+                views.setOnClickPendingIntent(item.getId(), PendingIntent.getActivity(context, item.getIndex() + 1, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+            }
         }
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     public void addOnClickPendingIntents(RemoteViews views, Context context, PendingIntentInfo... pendingIntentInfoList) {
         for (PendingIntentInfo item : pendingIntentInfoList) {
-            Intent playIntent = new Intent(context.getPackageName() + ".NOTIFICATION_ACTIONS");
-            playIntent.putExtra("extra",
+            Intent intent = new Intent(context.getPackageName() + ".NOTIFICATION_ACTIONS");
+            intent.putExtra("extra",
                     item.getEXTRA());
-            views.setOnClickPendingIntent(item.getId(),
-                    PendingIntent.getBroadcast(context, item.getIndex(), playIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                views.setOnClickPendingIntent( item.getId(),
+                        PendingIntent.getBroadcast(context, item.getIndex(), intent, PendingIntent.FLAG_MUTABLE));
+            } else {
+                views.setOnClickPendingIntent( item.getId(),
+                        PendingIntent.getBroadcast(context, item.getIndex(), intent, PendingIntent.FLAG_UPDATE_CURRENT));
+            }
         }
     }
 
@@ -122,17 +138,18 @@ public class MusicWidget extends AppWidgetProvider {
                 new PendingIntentInfo(R.id.favourite_view, 4, "play_favourite")
         );
 
-        if (xzhFavour) {
+        if (showFavour) {
             views.setViewVisibility(R.id.favourite_view, View.VISIBLE);
         }
-        if (themeColor != 0) {
+        Log.d("TAG", "updateAppWidget: " + themeColor);
+        if (themeColor != null) {
             // 将转换好的Bitmap设置到ImageView上
             views.setImageViewBitmap(R.id.bg_view, getBgBitmap(context, themeColor));
         }
-        if (titleColor != 0) {
+        if (titleColor != null) {
             views.setInt(R.id.title_view, "setTextColor", titleColor);
         }
-        if (artistColor != 0) {
+        if (artistColor != null) {
             views.setInt(R.id.tip_view, "setTextColor", artistColor);
         }
 
@@ -142,47 +159,55 @@ public class MusicWidget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, final Intent intent) {
+        super.onReceive(context, intent);
         if ("com.xzh.widget.MusicWidget".equals(intent.getAction()) && context.getPackageName().equals(intent.getPackage())) {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.music_widget);
+
+            //打开应用
+            this.openAppIntent(views, context, new PendingIntentInfo(R.id.image_view, 0));
+            this.addOnClickPendingIntents(views, context,
+                    //点击播放按钮要发送的广播
+                    new PendingIntentInfo(R.id.play_view, 1, "play_pause"),
+                    //点击上一首按钮要发送的广播
+                    new PendingIntentInfo(R.id.previous_view, 2, "play_previous"),
+                    //点击下一首按钮要发送的广播
+                    new PendingIntentInfo(R.id.next_view, 3, "play_next"),
+                    //点击收藏按钮要发送的广播
+                    new PendingIntentInfo(R.id.favourite_view, 4, "play_favourite")
+            );
 
             switch (Objects.requireNonNull(intent.getStringExtra("type"))) {
                 case "update":
                     views.setTextViewText(R.id.title_view, intent.getStringExtra("songName"));
                     views.setTextViewText(R.id.tip_view, intent.getStringExtra("artistsName"));
+                    views.setImageViewResource(R.id.favourite_view, intent.getBooleanExtra("favour", false) ? R.drawable.note_btn_loved : R.drawable.note_btn_love_white);
 
                     AppWidgetTarget appWidgetTarget = new AppWidgetTarget(context, R.id.image_view, views, new ComponentName(context, MusicWidget.class));
 
                     Glide.with(context.getApplicationContext())
                             .asBitmap()
                             .load(intent.getStringExtra("picUrl"))
+                            .apply(new RequestOptions().transform(new CenterCrop(), new RoundedCorners(5)))
                             .sizeMultiplier(0.8f)
-                            .override(WXViewUtils.dip2px(70), WXViewUtils.dip2px(70))
+                            .override(DrawableUtils.dip2px(75), DrawableUtils.dip2px(75))
                             .format(DecodeFormat.PREFER_RGB_565)
                             .into(appWidgetTarget);
                     break;
                 case "playOrPause":
-                    if (intent.getBooleanExtra("playing", false)) {
-                        views.setImageViewResource(R.id.play_view, R.drawable.note_btn_pause_white);
-                    } else {
-                        views.setImageViewResource(R.id.play_view, R.drawable.note_btn_play_white);
-                    }
+                    views.setImageViewResource(R.id.play_view, intent.getBooleanExtra("playing", false) ? R.drawable.note_btn_pause_white : R.drawable.note_btn_play_white);
                     break;
                 case "favour":
-                    if (intent.getBooleanExtra("favour", false)) {
-                        views.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_loved);
-                    } else {
-                        views.setImageViewResource(R.id.favourite_view, R.drawable.note_btn_love_white);
-                    }
+                    views.setImageViewResource(R.id.favourite_view, intent.getBooleanExtra("favour", false) ? R.drawable.note_btn_loved : R.drawable.note_btn_love_white);
                     break;
                 case "bg":
                     if (intent.getStringExtra("themeColor") != null) {
-                        views.setImageViewBitmap(R.id.bg_view, getBgBitmap(context, UniResourceUtils.getColor(intent.getStringExtra("themeColor"))));
+                        views.setImageViewBitmap(R.id.bg_view, getBgBitmap(context, Color.parseColor(intent.getStringExtra("themeColor"))));
                     }
                     if (intent.getStringExtra("titleColor") != null) {
-                        views.setInt(R.id.title_view, "setTextColor", UniResourceUtils.getColor(intent.getStringExtra("titleColor")));
+                        views.setInt(R.id.title_view, "setTextColor", Color.parseColor(intent.getStringExtra("titleColor")));
                     }
                     if (intent.getStringExtra("artistColor") != null) {
-                        views.setInt(R.id.tip_view, "setTextColor", UniResourceUtils.getColor(intent.getStringExtra("artistColor")));
+                        views.setInt(R.id.tip_view, "setTextColor", Color.parseColor(intent.getStringExtra("artistColor")));
                     }
                     break;
                 default:
@@ -190,14 +215,13 @@ public class MusicWidget extends AppWidgetProvider {
             }
             AppWidgetManager.getInstance(context).updateAppWidget(new ComponentName(context, MusicWidget.class), views);
         }
-        super.onReceive(context, intent);
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         try {
             ApplicationInfo info = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            xzhFavour = info.metaData.getBoolean("xzh_favour");
+            showFavour = info.metaData.getBoolean("xzh_favour");
             themeColor = info.metaData.getInt("xzh_theme_color");
             titleColor = info.metaData.getInt("xzh_title_color");
             artistColor = info.metaData.getInt("xzh_artist_color");
@@ -214,6 +238,9 @@ public class MusicWidget extends AppWidgetProvider {
     public void onEnabled(Context context) {
         // 在第一个 widget 被创建时，开启服务
         super.onEnabled(context);
+        Intent intent = new Intent(context.getPackageName() + ".NOTIFICATION_ACTIONS");
+        intent.putExtra("extra", "enabled");
+        context.sendBroadcast(intent);
     }
 
     // 最后一个widget被删除时调用
@@ -231,7 +258,7 @@ public class MusicWidget extends AppWidgetProvider {
         int height = context.getResources().getDimensionPixelSize(R.dimen.dp_70);
         // 圆角角度
 //        int radius = context.getResources().getDimensionPixelSize(R.dimen.dp_5);
-        int radius = 25;
+        int radius = 0;
         // 绘制背景
         Drawable drawable = DrawableUtils.roundShapeDrawable(color, alpha, width, height, radius);
         // 将绘制好的背景转换为Bitmap

@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/rl"
     android:padding="@dimen/widget_margin">
 
@@ -9,30 +9,30 @@
         android:id="@+id/bg_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"/>
+        android:scaleType="fitXY" />
 
     <ImageView
         android:id="@+id/image_view"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:minWidth="@dimen/dp_70"
         android:layout_centerVertical="true"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/bg" />
+        android:layout_margin="5dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/bg"
+        android:scaleType="fitXY"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_toEndOf="@id/image_view"
+        android:layout_margin="5dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/title_view"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
 
             android:ellipsize="marquee"
             android:focusable="true"
@@ -50,8 +50,6 @@
             android:id="@+id/tip_view"
             android:layout_width="match_parent"
             android:layout_height="15dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
 
             android:ellipsize="marquee"
             android:focusable="true"
@@ -71,20 +69,20 @@
 
             <ImageButton
                 android:id="@+id/favourite_view"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginEnd="15dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/favourite"
                 android:scaleType="fitXY"
                 android:src="@drawable/note_btn_love_white"
-                android:visibility="gone" />
+                android:visibility="invisible" />
 
             <ImageButton
                 android:id="@+id/previous_view"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="15dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="20dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/previous"
                 android:scaleType="fitXY"
@@ -92,9 +90,9 @@
 
             <ImageButton
                 android:id="@+id/play_view"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_marginEnd="15dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="20dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/play"
                 android:scaleType="fitXY"
@@ -102,12 +100,21 @@
 
             <ImageButton
                 android:id="@+id/next_view"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/next"
                 android:scaleType="fitXY"
                 android:src="@drawable/note_btn_next_white" />
+
+            <ImageButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="15dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/favourite"
+                android:scaleType="fitXY"
+                android:visibility="invisible" />
         </LinearLayout>
     </LinearLayout>
 

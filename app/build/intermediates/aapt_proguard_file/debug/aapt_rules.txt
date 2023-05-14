@@ -2,23 +2,19 @@
 -keep class com.dmcbig.mediapicker.PickerActivity { <init>(); }
 -keep class com.dmcbig.mediapicker.PreviewActivity { <init>(); }
 -keep class com.taobao.weex.WXGlobalEventReceiver { <init>(); }
--keep class com.xzh.musicnotification.LockActivityV2 { <init>(); }
--keep class com.xzh.musicnotification.LockActivityV3 { <init>(); }
--keep class com.xzh.musicnotification.service.PlayServiceV2 { <init>(); }
--keep class com.xzh.widget.MusicWidget { <init>(); }
 -keep class io.dcloud.PandoraEntry { <init>(); }
 -keep class io.dcloud.PandoraEntryActivity { <init>(); }
 -keep class io.dcloud.ProcessMediator { <init>(); }
 -keep class io.dcloud.WebAppActivity { <init>(); }
 -keep class io.dcloud.WebviewActivity { <init>(); }
--keep class io.dcloud.ads.base.service.DownloadService { <init>(); }
 -keep class io.dcloud.application.DCloudApplication { <init>(); }
 -keep class io.dcloud.common.adapter.io.DownloadReceiver { <init>(); }
 -keep class io.dcloud.common.util.DCloud_FileProvider { <init>(); }
--keep class io.dcloud.debug.PullDebugActivity { <init>(); }
--keep class io.dcloud.debug.PullService { <init>(); }
 -keep class io.dcloud.feature.gallery.imageedit.IMGEditActivity { <init>(); }
 -keep class io.dcloud.feature.nativeObj.photoview.PhotoActivity { <init>(); }
+-keep class io.dcloud.sdk.activity.WebViewActivity { <init>(); }
+-keep class io.dcloud.sdk.base.service.DownloadService { <init>(); }
+-keep class io.dcloud.sdk.base.service.provider.DCloudAdFileProvider { <init>(); }
 -keep class android.widget.Space { <init>(android.content.Context, android.util.AttributeSet); }
 
 -keep class androidx.appcompat.app.AlertController$RecycleListView { <init>(android.content.Context, android.util.AttributeSet); }
@@ -70,10 +66,6 @@
 -keep class com.dmcbig.mediapicker.view.HackyViewPager { <init>(android.content.Context, android.util.AttributeSet); }
 
 -keep class com.taobao.weex.ui.view.listview.WXRecyclerView { <init>(android.content.Context, android.util.AttributeSet); }
-
--keep class com.xzh.musicnotification.view.HintTextView { <init>(android.content.Context, android.util.AttributeSet); }
-
--keep class com.xzh.musicnotification.view.SlidingFinishLayout { <init>(android.content.Context, android.util.AttributeSet); }
 
 -keep class io.dcloud.common.ui.GifImageView { <init>(android.content.Context, android.util.AttributeSet); }
 

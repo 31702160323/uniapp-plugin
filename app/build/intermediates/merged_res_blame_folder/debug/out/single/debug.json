@@ -1,18 +1,18 @@
 [
     {
-        "merged": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_splash.9.png.flat",
-        "source": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\src\\main\\res\\drawable-xxhdpi\\splash.9.png"
+        "merged": "com.xzh.UniPlugin.app-merged_res-5:/drawable-xxhdpi_splash.9.png.flat",
+        "source": "com.xzh.UniPlugin.app-main-7:/drawable-xxhdpi/splash.9.png"
     },
     {
-        "merged": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_icon.png.flat",
-        "source": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\src\\main\\res\\drawable-xxhdpi\\icon.png"
+        "merged": "com.xzh.UniPlugin.app-merged_res-5:/xml_network_security_config.xml.flat",
+        "source": "com.xzh.UniPlugin.app-main-7:/xml/network_security_config.xml"
     },
     {
-        "merged": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_push.png.flat",
-        "source": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\src\\main\\res\\drawable-xxhdpi\\push.png"
+        "merged": "com.xzh.UniPlugin.app-merged_res-5:/drawable-xxhdpi_push.png.flat",
+        "source": "com.xzh.UniPlugin.app-main-7:/drawable-xxhdpi/push.png"
     },
     {
-        "merged": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\build\\intermediates\\res\\merged\\debug\\xml_network_security_config.xml.flat",
-        "source": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\src\\main\\res\\xml\\network_security_config.xml"
+        "merged": "com.xzh.UniPlugin.app-merged_res-5:/drawable-xxhdpi_icon.png.flat",
+        "source": "com.xzh.UniPlugin.app-main-7:/drawable-xxhdpi/icon.png"
     }
 ]

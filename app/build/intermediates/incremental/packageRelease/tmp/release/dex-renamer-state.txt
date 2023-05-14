@@ -1,0 +1,4 @@
+#Fri Oct 28 00:31:01 CST 2022
+base.0=D\:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\build\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

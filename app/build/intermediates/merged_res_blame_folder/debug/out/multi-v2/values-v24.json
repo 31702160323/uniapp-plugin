@@ -1,10 +1,20 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+            "outputFile": "com.xzh.UniPlugin.app-mergeDebugResources-3:/values-v24/values-v24.xml",
             "map": [
                 {
-                    "source": "D:\\xu\\.gradle\\caches\\transforms-2\\files-2.1\\7f64c1045ae362310688a10253c2a109\\media-1.0.0\\res\\values-v24\\values-v24.xml",
+                    "source": "D:\\xu\\.gradle\\caches\\transforms-3\\b67f4328b4efe183ac5e80d64fdf86af\\transformed\\appcompat-1.0.0\\res\\values-v24\\values-v24.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,212",
+                        "endColumns": "156,134",
+                        "endOffsets": "207,342"
+                    }
+                },
+                {
+                    "source": "D:\\xu\\.gradle\\caches\\transforms-3\\42110669a31843abea58d9764e0867c7\\transformed\\media-1.0.0\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -18,16 +28,6 @@
                         "startOffsets": "347,413,474,540",
                         "endColumns": "65,60,65,66",
                         "endOffsets": "408,469,535,602"
-                    }
-                },
-                {
-                    "source": "D:\\xu\\.gradle\\caches\\transforms-2\\files-2.1\\deb6da7db3da191b108446f27e37e742\\appcompat-1.0.0\\res\\values-v24\\values-v24.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,212",
-                        "endColumns": "156,134",
-                        "endOffsets": "207,342"
                     }
                 }
             ]

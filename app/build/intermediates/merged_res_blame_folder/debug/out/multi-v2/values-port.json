@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
+            "outputFile": "com.xzh.UniPlugin.app-mergeDebugResources-3:/values-port/values-port.xml",
             "map": [
                 {
-                    "source": "D:\\xu\\.gradle\\caches\\transforms-2\\files-2.1\\deb6da7db3da191b108446f27e37e742\\appcompat-1.0.0\\res\\values-port\\values-port.xml",
+                    "source": "D:\\xu\\.gradle\\caches\\transforms-3\\b67f4328b4efe183ac5e80d64fdf86af\\transformed\\appcompat-1.0.0\\res\\values-port\\values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -1,10 +1,10 @@
 package com.xzh.musicnotification.service;
 
 
+import android.bluetooth.BluetoothHeadset;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 /**
  * 接收Notification发送的广播
@@ -24,10 +24,25 @@ public class NotificationReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        mListener.onReceive(intent.getAction(), intent.getStringExtra(EXTRA));
+        try {
+            if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
+                 mListener.onScreenReceive();
+            } else if (Intent.ACTION_HEADSET_PLUG.equals(intent.getAction())) {
+                mListener.onHeadsetReceive(intent.getIntExtra("state", 0));
+            } else if (BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED.equals(intent.getAction())) {
+                mListener.onBluetoothReceive(intent.getIntExtra(BluetoothHeadset.EXTRA_STATE, 0));
+            } else {
+                mListener.onMusicReceive(intent.getStringExtra(EXTRA));
+            }
+        } catch (Exception e) {
+            mListener.onMusicReceive("");
+        }
     }
 
     public interface IReceiverListener {
-        void onReceive(String action, String extra);
+        void onScreenReceive();
+        void onHeadsetReceive(int extra);
+        void onBluetoothReceive(int extra);
+        void onMusicReceive(String extra);
     }
 }

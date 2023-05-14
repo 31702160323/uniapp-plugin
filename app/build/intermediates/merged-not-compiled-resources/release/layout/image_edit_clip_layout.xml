@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<io.dcloud.feature.gallery.imageedit.view.WindowInsertLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:weightSum="100">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:background="@drawable/image_bg_bottom"
+        android:fitsSystemWindows="true"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="16dp"
+            android:paddingBottom="20dp">
+
+            <ImageButton
+                android:id="@+id/ib_clip_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="40dp"
+                android:background="@null"
+                android:padding="8dp"
+                android:contentDescription="@string/dcloud_gallery_edit_image_cancel"
+                android:onClick="onClick"
+                android:src="@mipmap/dcloud_gallery_edit_cancel" />
+
+            <ImageButton
+                android:id="@+id/ib_clip_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginEnd="40dp"
+                android:background="@null"
+                android:contentDescription="@string/dcloud_gallery_edit_image_done"
+                android:onClick="onClick"
+                android:padding="8dp"
+                android:src="@mipmap/dcloud_gallery_edit_ok" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/ib_clip_done"
+                android:layout_toEndOf="@id/ib_clip_cancel"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+
+                <ImageButton
+                    android:id="@+id/tv_clip_reset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:contentDescription="@string/dcloud_gallery_edit_image_reset"
+                    android:onClick="onClick"
+                    android:src="@mipmap/dcloud_gallery_edit_revert" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:id="@+id/ib_clip_rotate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:contentDescription="@string/dcloud_gallery_edit_image_rotate"
+                    android:onClick="onClick"
+                    android:src="@mipmap/dcloud_gallery_edit_rotate" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</io.dcloud.feature.gallery.imageedit.view.WindowInsertLinearLayout>

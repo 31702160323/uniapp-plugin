@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.xzh.UniPlugin">
 
     <supports-screens
@@ -21,7 +22,6 @@
     <!-- Barcode(二维码)  end -->
 
     <application
-        android:networkSecurityConfig="@xml/network_security_config"
         android:name="io.dcloud.application.DCloudApplication"
         android:allowBackup="true"
         android:allowClearUserData="true"
@@ -29,7 +29,10 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:debuggable="true"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        tools:ignore="HardcodedDebugMode"
+        tools:targetApi="n">
 
         <!-- 应用入口 -->
         <activity
@@ -37,7 +40,8 @@
             android:theme="@style/TranslucentTheme"
             android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true">
             <intent-filter>
                 <data android:scheme="hbuilder"/>
                 <action android:name="android.intent.action.VIEW"/>
@@ -66,7 +70,8 @@
             android:permission="com.miui.securitycenter.permission.AppPermissionsEditor"
             android:screenOrientation="user"
             android:theme="@style/DCloudTheme"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true">
 
             <intent-filter>
 
@@ -86,7 +91,7 @@
 
         <meta-data
             android:name="dcloud_appkey"
-            android:value="e9269f31a55e5d46e77a3e5e4ad97b88" />
+            android:value="${DCLOUD_APPKEY}" />
 
         <meta-data
             android:name="xzh_page"
@@ -94,7 +99,7 @@
 
         <meta-data
             android:name="xzh_favour"
-            android:value="false"/>
+            android:value="true"/>
 
         <meta-data
             android:name="xzh_theme_color"
@@ -107,6 +112,10 @@
         <meta-data
             android:name="xzh_artist_color"
             android:value="#ffffff"/>
+
+        <meta-data
+            android:name="xzh_account_name"
+            android:value="1850070877@qq.com"/>
     </application>
 
 </manifest>

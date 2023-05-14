@@ -1,0 +1,18 @@
+<lint-module
+    format="1"
+    dir="D:\htmlFile\project\UniPlugin-Hello-AS\app"
+    name=":app"
+    type="APP"
+    maven="UniPlugin-Hello-AS:app:"
+    gradle="7.2.1"
+    buildFolder="build"
+    bootClassPath="D:\xu\AppData\Local\Android\Sdk\platforms\android-31\android.jar;D:\xu\AppData\Local\Android\Sdk\build-tools\30.0.3\core-lambda-stubs.jar"
+    javaSourceLevel="1.8"
+    compileTarget="android-31">
+  <lintOptions
+      abortOnError="true"
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true"/>
+  <variant name="release"/>
+</lint-module>

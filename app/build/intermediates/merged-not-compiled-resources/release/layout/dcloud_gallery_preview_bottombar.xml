@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:clickable="true"
+    android:id="@+id/footer"
+    android:background="#21282C"
+    android:layout_alignParentBottom="true"
+    android:layout_width="match_parent"
+    android:layout_height="48dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="@string/dcloud_gallery_edit"
+        android:contentDescription="@string/dcloud_gallery_edit"
+        android:id="@+id/gallery_preview_edit"
+        android:gravity="center"
+        android:textColor="@color/dcloud_gallery_default_text_color"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="match_parent"/>
+    <LinearLayout
+        android:id="@+id/check_origin_image_layout"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/check_origin_image"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="7dp"
+            android:src="@drawable/dcloud_gallery_btn_selected_drawable" />
+        <TextView
+            android:id="@+id/select_origin_image_text"
+            android:layout_centerVertical="true"
+            android:text="@string/dcloud_gallery_edit_image_original"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/dcloud_gallery_default_text_color"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/check_layout"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/check_image"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="7dp"
+            android:src="@drawable/dcloud_gallery_btn_selected" />
+        <TextView
+            android:id="@+id/select_text"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:text="@string/dcloud_gallery_select"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/dcloud_gallery_default_text_color"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>
