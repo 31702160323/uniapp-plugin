@@ -16,7 +16,7 @@ import androidx.appcompat.widget.AppCompatTextView;
  */
 public class HintTextView extends AppCompatTextView {
 
-    private Paint paint;
+    private final Paint paint;
     
     private int mWidth;
     private LinearGradient gradient;
@@ -62,10 +62,11 @@ public class HintTextView extends AppCompatTextView {
             if(deltaX > 2 * mWidth){
                 deltaX = -mWidth;
             }
+
+            //通过矩阵的平移实现
+            matrix.setTranslate(deltaX, 0);
+            gradient.setLocalMatrix(matrix);
+            postInvalidateDelayed(100);
         }
-        //通过矩阵的平移实现
-        matrix.setTranslate(deltaX, 0);
-        gradient.setLocalMatrix(matrix);
-        postInvalidateDelayed(100);
     }
 }

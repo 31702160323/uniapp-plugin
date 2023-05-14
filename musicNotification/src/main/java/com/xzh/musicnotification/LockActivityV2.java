@@ -7,12 +7,10 @@ import android.content.pm.ApplicationInfo;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -33,15 +31,12 @@ import com.xzh.musicnotification.utils.Utils;
 import com.xzh.musicnotification.view.SlidingFinishLayout;
 
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
-import java.util.Map;
 
 import io.dcloud.feature.uniapp.utils.UniUtils;
 
 public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLayout.OnSlidingFinishListener, View.OnClickListener, PlayServiceV2.OnClickListener {
     private int mWidth;
     private int mHeight;
-    private boolean xzhFavour;
     private TextView tvAudio;
     private TextView tvAudioName;
     private ImageView lockDate;
@@ -54,9 +49,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            setShowWhenLocked(true);
-        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) setShowWhenLocked(true);
         Utils.fullScreen(this);
         setContentView(R.layout.activity_lock);
 
@@ -72,7 +65,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
                 mBinder = new WeakReference<>((PlayServiceV2.ServiceBinder) iBinder);
-                mBinder.get().setActivity(LockActivityV2.this);
+                mBinder.get().setClickListener(LockActivityV2.this);
                 if (UniUtils.isUiThread()) {
                     update(mBinder.get().getSongData());
                 } else {
@@ -101,8 +94,8 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
         ApplicationInfo info = Utils.getApplicationInfo(this);
         if (info != null) {
-            xzhFavour = info.metaData.getBoolean("xzh_favour");
-            if (xzhFavour) favouriteView.setVisibility(View.VISIBLE);
+            boolean showFavour = info.metaData.getBoolean(Global.SHOW_FAVOUR);
+            if (showFavour) favouriteView.setVisibility(View.VISIBLE);
         }
 
         playView = findViewById(R.id.play_view);
@@ -114,9 +107,10 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
     @Override
     public void onClick(View view) {
+        if (mBinder.get() == null) return;
         String EXTRA_TYPE = "";
-        String eventName = "musicNotificationError";
-        Map<String, Object> data = new HashMap<>();
+        String eventName = Global.EVENT_MUSIC_NOTIFICATION_ERROR;
+        JSONObject data = new JSONObject();
         data.put("message", "更新锁屏页成功");
         data.put("code", 0);
 
@@ -136,19 +130,18 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
         switch (EXTRA_TYPE) {
             case NotificationReceiver.EXTRA_PRE:
-                eventName = "musicNotificationPrevious";
+                eventName = Global.EVENT_MUSIC_NOTIFICATION_PREVIOUS;
                 break;
             case NotificationReceiver.EXTRA_NEXT:
-                eventName = "musicNotificationNext";
+                eventName = Global.EVENT_MUSIC_NOTIFICATION_NEXT;
                 break;
             case NotificationReceiver.EXTRA_FAV:
                 mBinder.get().favour(!mBinder.get().getFavour());
-                data.put("favourite", mBinder.get().getFavour());
-                eventName = "musicNotificationFavourite";
+                eventName = Global.EVENT_MUSIC_NOTIFICATION_FAVOURITE;
                 break;
             case NotificationReceiver.EXTRA_PLAY:
                 mBinder.get().playOrPause(!mBinder.get().getPlaying());
-                eventName = "musicNotificationPause";
+                eventName = Global.EVENT_MUSIC_NOTIFICATION_PAUSE;
                 break;
             default:
                 data.put("message", "更新锁屏页失败");
@@ -156,7 +149,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
                 break;
         }
 
-        mBinder.get().fireGlobalEventCallback(eventName, data);
+        mBinder.get().sendMessage(eventName, data);
     }
 
     /**
@@ -191,7 +184,6 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
     @Override
     public void favour(boolean isFavour) {
-        if (!xzhFavour) return;
         if (isFavour) {
             favouriteView.setImageResource(R.drawable.note_btn_loved);
         } else {
@@ -201,6 +193,7 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
     @Override
     public void update(JSONObject options) {
+        if (options == null) return;
         if (UniUtils.isUiThread()) {
             updateUI(options);
         } else {
@@ -209,25 +202,35 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
     }
 
     private void updateUI(JSONObject options) {
-        if (options.getString("songName") != null) {
-            tvAudioName.setText(options.getString("songName"));
-        }
-        if (options.getString("artistsName") != null) {
-            tvAudio.setText(options.getString("artistsName"));
-        }
         favour(mBinder.get().getFavour());
         playOrPause(mBinder.get().getPlaying());
 
+        if (options.getString(Global.KEY_SONG_NAME) != null) {
+            tvAudioName.setText(options.getString(Global.KEY_SONG_NAME));
+        }
+        if (options.getString(Global.KEY_ARTISTS_NAME) != null) {
+            tvAudio.setText(options.getString(Global.KEY_ARTISTS_NAME));
+        }
+
+        updatePicUrl(options.getString("picUrl"));
+    }
+
+    private void updatePicUrl(String picUrl) {
+        if (picUrl == null) return;
         Glide.with(this.getApplicationContext())
                 .asBitmap()
-                .load(options.getString("picUrl"))
+                .load(picUrl)
                 .sizeMultiplier(0.8f)
                 .override(mWidth, mHeight)
                 .format(DecodeFormat.PREFER_RGB_565)
                 .into(new CustomTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        lockDate.setImageBitmap(changeAlpha(resource));
+                        if (UniUtils.isUiThread()) {
+                            lockDate.setImageBitmap(changeAlpha(resource));
+                        } else {
+                            runOnUiThread(() -> lockDate.setImageBitmap(changeAlpha(resource)));
+                        }
                     }
 
                     @Override
@@ -235,18 +238,17 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
 
                     }
                 });
-//                .into(lockDate);
     }
 
     public Bitmap changeAlpha(Bitmap bitmap) {
         try {
             int w = bitmap.getWidth();
-            int h = bitmap .getHeight();
+            int h = bitmap.getHeight();
 
             int height = mHeight * w / mWidth;
             Bitmap result = Bitmap.createBitmap(w, height, Bitmap.Config.ARGB_8888);
 
-            int r,g,b,a,color;
+            int r, g, b, a, color;
 
             int[] oldPx = new int[w * h];
             int[] newPx = new int[w * height];
@@ -272,8 +274,8 @@ public class LockActivityV2 extends AppCompatActivity implements SlidingFinishLa
                     g = Color.green(color);
                     b = Color.blue(color);
 
-                    a = (a > 255 ? 255 : (a < 0 ? 0 : a));
-                    newPx[x + w * y] = Color.argb(a,r, g, b);
+                    a = (a > 255 ? 255 : Math.max(a, 0));
+                    newPx[x + w * y] = Color.argb(a, r, g, b);
                 }
             }
             result.setPixels(newPx, 0, w, 0, 0, w, height);

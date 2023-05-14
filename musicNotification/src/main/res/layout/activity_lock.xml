@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:scaleType="fitStart"
-        android:contentDescription="@string/img" />
+        android:contentDescription="@string/img"
+        android:scaleType="fitStart" />
 
     <TextClock
         android:id="@+id/lock_time"
@@ -42,33 +42,33 @@
 
     <TextView
         android:id="@+id/tv_audio_name"
-        android:layout_above="@id/tv_audio"
-        android:layout_centerHorizontal="true"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_above="@id/tv_audio"
+        android:layout_centerHorizontal="true"
         android:ellipsize="marquee"
         android:focusable="true"
         android:focusableInTouchMode="true"
+        android:gravity="center"
         android:singleLine="true"
-        android:textSize="20sp"
-        android:textColor="#ffffff"/>
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tv_audio"
-        android:layout_above="@id/btns_view"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="50dp"
-        android:layout_centerHorizontal="true"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_above="@id/btns_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="50dp"
         android:ellipsize="marquee"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:singleLine="true"
         android:gravity="center"
-        android:textSize="16sp"
-        android:textColor="#ffffff"/>
+        android:singleLine="true"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
 
     <LinearLayout
         android:id="@+id/btns_view"
@@ -79,20 +79,28 @@
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/previous_view"
+            android:visibility="invisible"
+            android:id="@+id/favourite_view"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:src="@drawable/note_btn_love_white"
+            android:contentDescription="@string/favourite" />
+
+        <ImageView
+            android:id="@+id/previous_view"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/note_btn_pre_white"
             android:contentDescription="@string/previous" />
 
         <ImageView
             android:id="@+id/play_view"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:src="@drawable/note_btn_play_white"
             android:contentDescription="@string/play" />
 
@@ -100,19 +108,15 @@
             android:id="@+id/next_view"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:src="@drawable/note_btn_next_white"
             android:contentDescription="@string/next" />
 
         <ImageView
-            android:visibility="gone"
-            android:id="@+id/favourite_view"
+            android:visibility="invisible"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:src="@drawable/note_btn_love_white"
             android:contentDescription="@string/favourite" />
     </LinearLayout>
 

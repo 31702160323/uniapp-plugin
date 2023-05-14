@@ -6,6 +6,11 @@
           "type": "module",
           "name": "XZH-musicNotification",
           "class": "com.xzh.musicnotification.MusicNotificationModule"
+        },
+        {
+          "type": "component",
+          "name": "gray-view",
+          "class": "com.xzh.musicnotification.GrayView"
         }
       ]
     },
@@ -42,6 +47,34 @@
           "type": "module",
           "name": "XZH-PictureSelector",
           "class": "com.xzh.pictureselectoruni.PictureSelectorModule"
+        }
+      ]
+    },
+    {
+      "plugins": [
+        {
+          "type": "module",
+          "name": "XZH-Calendar",
+          "class": "com.xzh.calendar.CalendarModule"
+        }
+      ]
+    },
+    {
+      "plugins": [
+        {
+          "type": "component",
+          "name": "gray-view",
+          "class": "com.xzh.view.GrayView"
+        },
+        {
+          "type": "module",
+          "name": "XZH-FloatView",
+          "class": "com.xzh.view.FloatViewModule"
+        },
+        {
+          "type": "component",
+          "name": "float-view",
+          "class": "com.xzh.view.FloatView"
         }
       ]
     }

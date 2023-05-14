@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.xzh.musicnotification">
 
+    <!-- 网路权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 锁屏权限 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 禁用键盘锁权限 -->
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <!-- 前台服务权限 -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.START_ACTIVITIES_FROM_BACKGROUND" />
+    <!-- 读取外部存储权限 -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+    <!-- 后台活动权限 -->
+    <uses-permission android:name="android.permission.START_ACTIVITIES_FROM_BACKGROUND"
+        tools:ignore="ProtectedPermissions" />
+    <!-- 修改音频设置 -->
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <!-- 浮窗权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- 蓝牙权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <!-- 发送通知权限-->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application>
 <!--        android:noHistory="true"-->
         <activity
+            android:exported="false"
             android:name=".LockActivityV2"
-            android:exported="false"
             android:showWhenLocked="true"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:taskAffinity="com.xzh.musicnotificationV2"
-            android:theme="@style/LockScreenTheme" />
+            android:theme="@style/LockScreenTheme"
+            tools:targetApi="o_mr1" />
 
-        <activity
-            android:name=".LockActivityV3"
-            android:exported="false"
-            android:showWhenLocked="true"
-            android:excludeFromRecents="true"
-            android:launchMode="singleInstance"
-            android:screenOrientation="portrait"
-            android:taskAffinity="com.xzh.musicnotificationV2"
-            android:theme="@style/LockScreenTheme"/>
-
-        <service android:name=".service.PlayServiceV2" />
+        <service android:exported="false" android:name=".service.PlayServiceV2" />
     </application>
 
 </manifest>

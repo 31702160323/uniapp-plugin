@@ -1,1 +1,32 @@
-!function(t){var e={};function r(n){if(e[n])return e[n].exports;var o=e[n]={i:n,l:!1,exports:{}};return t[n].call(o.exports,o,o.exports,r),o.l=!0,o.exports}r.m=t,r.c=e,r.d=function(t,e,n){r.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:n})},r.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},r.t=function(t,e){if(1&e&&(t=r(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var o in t)r.d(n,o,function(e){return t[e]}.bind(null,o));return n},r.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return r.d(e,"a",e),e},r.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},r.p="",r(r.s=17)}([function(t,e){t.exports={"@VERSION":2}},function(t,e,r){"use strict";function n(t,e,r,n,o,i,u,a,s,l){var f,c="function"==typeof t?t.options:t;if(s){c.components||(c.components={});var p=Object.prototype.hasOwnProperty;for(var y in s)p.call(s,y)&&!p.call(c.components,y)&&(c.components[y]=s[y])}if(l&&((l.beforeCreate||(l.beforeCreate=[])).unshift((function(){this[l.__module]=this})),(c.mixins||(c.mixins=[])).push(l)),e&&(c.render=e,c.staticRenderFns=r,c._compiled=!0),n&&(c.functional=!0),i&&(c._scopeId="data-v-"+i),u?(f=function(t){(t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),o&&o.call(this,t),t&&t._registeredComponents&&t._registeredComponents.add(u)},c._ssrRegister=f):o&&(f=a?function(){o.call(this,this.$root.$options.shadowRoot)}:o),f)if(c.functional){c._injectStyles=f;var d=c.render;c.render=function(t,e){return f.call(e),d(t,e)}}else{var _=c.beforeCreate;c.beforeCreate=_?[].concat(_,f):[f]}return{exports:t,options:c}}r.d(e,"a",(function(){return n}))},,function(t,e,r){"use strict";var n=r(10),o=r(7),i=r(1);var u=Object(i.a)(o.default,n.b,n.c,!1,null,null,"afc35d36",!1,n.a,void 0);(function(t){this.options.style||(this.options.style={}),Vue.prototype.__merge_style&&Vue.prototype.__$appStyle__&&Vue.prototype.__merge_style(Vue.prototype.__$appStyle__,this.options.style)}).call(u),e.default=u.exports},,,,function(t,e,r){"use strict";var n=r(8),o=r.n(n);e.default=o.a},function(t,e,r){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0;e.default={data:function(){return{}},methods:{}}},,function(t,e,r){"use strict";r.d(e,"b",(function(){return n})),r.d(e,"c",(function(){return o})),r.d(e,"a",(function(){}));var n=function(){var t=this.$createElement,e=this._self._c||t;return e("scroll-view",{staticStyle:{flexDirection:"column"},attrs:{scrollY:!0,showScrollbar:!0,enableBackToTop:!0,bubble:"true"}},[e("view",[e("u-text",[this._v("test")])])])},o=[]},function(t,e,r){Vue.prototype.__$appStyle__={},Vue.prototype.__merge_style&&Vue.prototype.__merge_style(r(12).default,Vue.prototype.__$appStyle__)},function(t,e,r){"use strict";r.r(e);var n=r(0),o=r.n(n);for(var i in n)"default"!==i&&function(t){r.d(e,t,(function(){return n[t]}))}(i);e.default=o.a},function(t,e){if("undefined"==typeof Promise||Promise.prototype.finally||(Promise.prototype.finally=function(t){var e=this.constructor;return this.then((function(r){return e.resolve(t()).then((function(){return r}))}),(function(r){return e.resolve(t()).then((function(){throw r}))}))}),"undefined"!=typeof uni&&uni&&uni.requireGlobal){var r=uni.requireGlobal();ArrayBuffer=r.ArrayBuffer,Int8Array=r.Int8Array,Uint8Array=r.Uint8Array,Uint8ClampedArray=r.Uint8ClampedArray,Int16Array=r.Int16Array,Uint16Array=r.Uint16Array,Int32Array=r.Int32Array,Uint32Array=r.Uint32Array,Float32Array=r.Float32Array,Float64Array=r.Float64Array,BigInt64Array=r.BigInt64Array,BigUint64Array=r.BigUint64Array}},,,,function(t,e,r){"use strict";r.r(e);r(11),r(13);var n=r(3);n.default.mpType="page",n.default.route="pages/test/test",n.default.el="#root",new Vue(n.default)}]);
+"use weex:vue";
+
+if (typeof Promise !== 'undefined' && !Promise.prototype.finally) {
+  Promise.prototype.finally = function(callback) {
+    const promise = this.constructor
+    return this.then(
+      value => promise.resolve(callback()).then(() => value),
+      reason => promise.resolve(callback()).then(() => {
+        throw reason
+      })
+    )
+  }
+};
+
+if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
+  const global = uni.requireGlobal()
+  ArrayBuffer = global.ArrayBuffer
+  Int8Array = global.Int8Array
+  Uint8Array = global.Uint8Array
+  Uint8ClampedArray = global.Uint8ClampedArray
+  Int16Array = global.Int16Array
+  Uint16Array = global.Uint16Array
+  Int32Array = global.Int32Array
+  Uint32Array = global.Uint32Array
+  Float32Array = global.Float32Array
+  Float64Array = global.Float64Array
+  BigInt64Array = global.BigInt64Array
+  BigUint64Array = global.BigUint64Array
+};
+
+
+(()=>{var u=Object.create;var p=Object.defineProperty;var i=Object.getOwnPropertyDescriptor;var g=Object.getOwnPropertyNames;var f=Object.getPrototypeOf,d=Object.prototype.hasOwnProperty;var m=(e,t)=>()=>(t||e((t={exports:{}}).exports,t),t.exports);var w=(e,t,o,r)=>{if(t&&typeof t=="object"||typeof t=="function")for(let s of g(t))!d.call(e,s)&&s!==o&&p(e,s,{get:()=>t[s],enumerable:!(r=i(t,s))||r.enumerable});return e};var v=(e,t,o)=>(o=e!=null?u(f(e)):{},w(t||!e||!e.__esModule?p(o,"default",{value:e,enumerable:!0}):o,e));var _=m((A,a)=>{a.exports=Vue});var l=v(_());function y(e,t,...o){uni.__log__?uni.__log__(e,t,...o):console[e].apply(console,[...o,t])}var b=(e,t)=>{let o=e.__vccOpts||e;for(let[r,s]of t)o[r]=s;return o},h={data(){return{}},onLoad(e){y("log","at pages/test/test.nvue:16",e)},methods:{}};function x(e,t,o,r,s,$){return(0,l.openBlock)(),(0,l.createElementBlock)("scroll-view",{scrollY:!0,showScrollbar:!0,enableBackToTop:!0,bubble:"true",style:{flexDirection:"column"}},[(0,l.createElementVNode)("view",null,[(0,l.createElementVNode)("view",null,[(0,l.createElementVNode)("u-image",{mode:"widthFix",src:"/static/101297089.jpg"})])])])}var n=b(h,[["render",x]]);var c=plus.webview.currentWebview();if(c){let e=parseInt(c.id),t="pages/test/test",o={};try{o=JSON.parse(c.__query__)}catch(s){}n.mpType="page";let r=Vue.createPageApp(n,{$store:getApp({allowDefault:!0}).$store,__pageId:e,__pagePath:t,__pageQuery:o});r.provide("__globalStyles",Vue.useCssStyles([...__uniConfig.styles,...n.styles||[]])),r.mount("#root")}})();
