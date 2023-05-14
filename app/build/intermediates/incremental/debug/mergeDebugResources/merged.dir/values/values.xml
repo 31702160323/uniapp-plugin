@@ -94,6 +94,14 @@
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
     <color name="tooltip_background_dark">#e6616161</color>
     <color name="tooltip_background_light">#e6FFFFFF</color>
+    <color name="video_background_gray">#ffa5a5a5</color>
+    <color name="video_background_gray_light">#ffbababa</color>
+    <color name="video_bg_video_view">#80000000</color>
+    <color name="video_recover_screen_text">#f06292</color>
+    <color name="video_seek_background">#809e9e9e</color>
+    <color name="video_seek_ball">#ffffffff</color>
+    <color name="video_seek_progress">#ffffffff</color>
+    <color name="video_seek_secondary_progress">#809e9898</color>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
     <dimen name="abc_action_bar_content_inset_with_nav">72dp</dimen>
     <dimen name="abc_action_bar_default_height_material">56dp</dimen>
@@ -228,6 +236,14 @@
     <dimen name="tooltip_vertical_padding">6.5dp</dimen>
     <dimen name="tooltip_y_offset_non_touch">0dp</dimen>
     <dimen name="tooltip_y_offset_touch">16dp</dimen>
+    <dimen name="video_aspect_btn_height">20dp</dimen>
+    <dimen name="video_aspect_btn_size">30dp</dimen>
+    <dimen name="video_control_bar_height">46dp</dimen>
+    <dimen name="video_danmaku_input_options_color_radio_btn_height">25.0dip</dimen>
+    <dimen name="video_danmaku_input_options_color_radio_btn_margin">5.0dip</dimen>
+    <dimen name="video_danmaku_input_options_color_radio_btn_size">42.0dip</dimen>
+    <dimen name="video_danmaku_input_options_color_radio_btn_width">32.0dip</dimen>
+    <dimen name="video_danmaku_input_options_height">48dp</dimen>
     <dimen name="widget_margin">8dp</dimen>
     <drawable name="notification_template_icon_bg">#3333B5E5</drawable>
     <drawable name="notification_template_icon_low_bg">#0cffffff</drawable>
@@ -453,11 +469,19 @@
     <string name="dcloud_feature_barcode2_no_camera_permission">no camera permission</string>
     <string name="dcloud_feature_error_tips">please check whether %s related nodes are added in assets/data/properties.xml file.</string>
     <string name="dcloud_feature_error_tips2">%s module was not added when packaging, please refer to</string>
+    <string name="dcloud_feature_media_player_bullet">Bullet screen</string>
+    <string name="dcloud_feature_media_player_restore_screen">restore screen</string>
+    <string name="dcloud_feature_media_player_second_unit">s</string>
+    <string name="dcloud_feature_media_player_toast_bullet_not_prepared">Bullet screen not prepared</string>
+    <string name="dcloud_feature_media_player_toast_no_content">no content</string>
     <string name="dcloud_feature_weex_jsfk_not_found_tips">The current environment cannot run the uni app application of "%s" version!</string>
     <string name="dcloud_feature_weex_msg_cannot_find_file_by_path">can not find file by path</string>
     <string name="dcloud_feature_weex_msg_page_destroyed">page had destroyed</string>
     <string name="dcloud_feature_weex_msg_param_empty">param is empty</string>
     <string name="dcloud_feature_weex_msg_param_invalid">param invalid</string>
+    <string name="dcloud_feature_weex_video_bottom_bullet">Bullet</string>
+    <string name="dcloud_feature_weex_video_bottom_restore">Restore</string>
+    <string name="dcloud_feature_weex_video_second_unit">s</string>
     <string name="dcloud_gallery_Next">Next</string>
     <string name="dcloud_gallery_all_dir_name">All Pictures &amp; Videos</string>
     <string name="dcloud_gallery_all_image">All Photos</string>
@@ -2139,6 +2163,31 @@
         <item name="android:colorEdgeEffect">#333333</item>
         <item name="android:windowBackground">@null</item>
         <item name="android:forceDarkAllowed">false</item>
+    </style>
+    <style name="Video_AspectRatioButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/video_aspect_btn_height</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:button">@null</item>
+    </style>
+    <style name="Video_DanmakuInputOptionRadioButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">8.0dip</item>
+        <item name="android:layout_marginRight">8.0dip</item>
+        <item name="android:button">@null</item>
+    </style>
+    <style name="Video_ProgressBarBattery" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:layout_width">72px</item>
+        <item name="android:layout_height">43px</item>
+        <item name="android:background">@drawable/video_ic_battery</item>
+        <item name="android:paddingTop">6px</item>
+        <item name="android:paddingBottom">6px</item>
+        <item name="android:paddingLeft">6px</item>
+        <item name="android:paddingRight">10px</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+        <item name="android:progressDrawable">@drawable/video_layer_battery_progress</item>
     </style>
     <style name="Widget.AppCompat.ActionBar" parent="Base.Widget.AppCompat.ActionBar">
     </style>

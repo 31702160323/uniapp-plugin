@@ -45,6 +45,11 @@
     <string name="dcloud_common_share">分享</string>
     <string name="dcloud_common_tips">提示</string>
     <string name="dcloud_dialog_loading">正在加載...</string>
+    <string name="dcloud_feature_media_player_bullet">彈幕</string>
+    <string name="dcloud_feature_media_player_restore_screen">還原荧幕</string>
+    <string name="dcloud_feature_media_player_second_unit">秒</string>
+    <string name="dcloud_feature_media_player_toast_bullet_not_prepared">彈幕還沒準備好</string>
+    <string name="dcloud_feature_media_player_toast_no_content">內容為空</string>
     <string name="dcloud_gallery_Next">下一步</string>
     <string name="dcloud_gallery_all_dir_name">所有圖片和視頻</string>
     <string name="dcloud_gallery_all_image">所有圖片</string>

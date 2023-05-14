@@ -89,7 +89,11 @@ public class PlayServiceV2 extends Service implements NotificationReceiver.IRece
         JSONObject data = new JSONObject();
         data.put("type", "destroy");
         fireGlobalEventCallback(Global.EVENT_MUSIC_LIFECYCLE, data);
-        stopForeground(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            stopForeground(MusicNotificationV2.getInstance().getID());
+        } else {
+            stopForeground(true);
+        }
         MusicNotificationV2.getInstance().cancel();
         unregisterReceiver(mReceiver);
         service = null;

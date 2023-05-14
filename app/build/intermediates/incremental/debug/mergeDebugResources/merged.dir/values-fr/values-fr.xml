@@ -44,6 +44,11 @@
     <string name="dcloud_common_set_up">Paramètres</string>
     <string name="dcloud_common_share">Partager</string>
     <string name="dcloud_common_tips">Conseils</string>
+    <string name="dcloud_feature_media_player_bullet">Rideau d\'obus</string>
+    <string name="dcloud_feature_media_player_restore_screen">Restaurer l\'écran</string>
+    <string name="dcloud_feature_media_player_second_unit">Secondes</string>
+    <string name="dcloud_feature_media_player_toast_bullet_not_prepared">Le rideau n\'est pas prêt.</string>
+    <string name="dcloud_feature_media_player_toast_no_content">Le contenu est vide</string>
     <string name="dcloud_short_cut_created">"%s"Icône de bureau créée</string>
     <string name="dcloud_short_cut_created_removed_manually">, Veuillez supprimer la copie manuellement</string>
     <string name="dcloud_short_cut_if_create_tips">Voulez - vous installer l application “%s” sur votre Bureau mobile"</string>
