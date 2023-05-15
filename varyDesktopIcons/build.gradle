@@ -1,4 +1,6 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+}
 
 android {
     compileSdk 33
@@ -18,8 +20,8 @@ android {
 
     buildTypes {
         release {
-            zipAlignEnabled false
-            minifyEnabled false
+            zipAlignEnabled true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -33,12 +35,9 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.?ar'], dir: 'libs')
     compileOnly fileTree(include: ['*.?ar'], dir: '../app/libs')
-
-    implementation 'androidx.media:media:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation fileTree(include: ['*.?ar'], dir: 'libs')
 
     compileOnly 'com.alibaba:fastjson:1.1.46.android'
+    compileOnly 'com.facebook.fresco:fresco:1.13.0'
 }
