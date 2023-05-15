@@ -1,7 +1,0 @@
-#Sat Apr 15 14:18:59 CST 2023
-base.1=D\:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\4\\classes.dex
-path.1=4/classes.dex
-base.0=D\:\\htmlFile\\project\\UniPlugin-Hello-AS\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex
-renamed.1=classes2.dex
-renamed.0=classes.dex
-path.0=0/classes.dex

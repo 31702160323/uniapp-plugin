@@ -1,5 +1,0 @@
-com.xzh.UniPlugin.test.app-androidTest-0 D:\htmlFile\project\UniPlugin-Hello-AS\app\build\generated\res\resValues\androidTest\debug
-com.xzh.UniPlugin.test.app-androidTest-1 D:\htmlFile\project\UniPlugin-Hello-AS\app\build\generated\res\rs\androidTest\debug
-com.xzh.UniPlugin.test.app-mergeDebugAndroidTestResources-2 D:\htmlFile\project\UniPlugin-Hello-AS\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-com.xzh.UniPlugin.test.app-mergeDebugAndroidTestResources-3 D:\htmlFile\project\UniPlugin-Hello-AS\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-com.xzh.UniPlugin.test.app-merged_res-4 D:\htmlFile\project\UniPlugin-Hello-AS\app\build\intermediates\merged_res\debugAndroidTest
