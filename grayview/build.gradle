@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+    namespace 'com.xzh.grayview'
     compileSdk 33
 
     defaultConfig {

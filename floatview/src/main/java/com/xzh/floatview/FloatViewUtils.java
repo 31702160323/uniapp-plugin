@@ -1,9 +1,10 @@
-package com.xzh.grayview;
+package com.xzh.floatview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.util.ArrayMap;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class FloatViewUtils {
     }
 
     @SuppressLint({"InflateParams", "ClickableViewAccessibility"})
-    public void show(Context context, ViewGroup view) {
+    public void show(Context context, ViewGroup view, int absoluteX, int absoluteY) {
         if (windowManagers.get(view) == null && view != null) {
             WindowManager windowManager = (WindowManager) context.getSystemService(WINDOW_SERVICE);
             WindowManager.LayoutParams floatLp = floatLps.get(view);
@@ -46,6 +47,9 @@ public class FloatViewUtils {
                         WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                         PixelFormat.TRANSLUCENT
                 );
+                floatLp.gravity= Gravity.LEFT | Gravity.TOP;
+                floatLp.x = absoluteX;
+                floatLp.y = absoluteY;
             }
             View.OnTouchListener touchListener = new View.OnTouchListener() {
                 private double lastX = 0.0f;

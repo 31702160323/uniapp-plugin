@@ -64,17 +64,16 @@
         {
           "type": "component",
           "name": "gray-view",
-          "class": "com.xzh.view.GrayView"
-        },
-        {
-          "type": "module",
-          "name": "XZH-FloatView",
-          "class": "com.xzh.view.FloatViewModule"
-        },
+          "class": "com.xzh.grayview.GrayView"
+        }
+      ]
+    },
+    {
+      "plugins": [
         {
           "type": "component",
           "name": "float-view",
-          "class": "com.xzh.view.FloatView"
+          "class": "com.xzh.floatview.FloatView"
         }
       ]
     }
