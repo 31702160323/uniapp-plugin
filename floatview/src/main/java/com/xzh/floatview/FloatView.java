@@ -13,9 +13,13 @@ import android.view.WindowInsets;
 import androidx.annotation.NonNull;
 
 import com.taobao.weex.WXSDKInstance;
+import com.taobao.weex.dom.WXStyle;
 import com.taobao.weex.ui.action.BasicComponentData;
+import com.taobao.weex.ui.component.WXComponent;
 import com.taobao.weex.ui.component.WXVContainer;
 import com.taobao.weex.ui.view.WXFrameLayout;
+
+import java.util.Map;
 
 import io.dcloud.feature.uniapp.annotation.UniJSMethod;
 import io.dcloud.feature.uniapp.utils.UniViewUtils;
@@ -53,6 +57,11 @@ public class FloatView extends DCWXView {
         headHeight += UniViewUtils.getScreenHeight(getContext()) - UniViewUtils.getUniHeight(getInstanceId());
     }
 
+    @Override
+    public void updateNativeStyle(String key, Object value) {
+        super.updateNativeStyle(key, value);
+    }
+
     @UniJSMethod
     public void show() {
         if(layout == null) {
@@ -70,8 +79,8 @@ public class FloatView extends DCWXView {
 
     @Override
     public void destroy() {
+        FloatViewUtils.getInstance().hide(layout);
         super.destroy();
-        hide();
         layout = null;
     }
 
