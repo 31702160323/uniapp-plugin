@@ -9,6 +9,7 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
+            android:enabled="true"
             android:name="com.xzh.shortcuts.TrampolineActivity"
             android:theme="@style/TranslucentNoTitleDialogTheme"
             android:excludeFromRecents="true"

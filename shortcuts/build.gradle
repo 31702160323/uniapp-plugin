@@ -1,6 +1,10 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
 
 android {
+    namespace 'com.xzh.shortcuts'
     compileSdk 33
 
     defaultConfig {
@@ -18,8 +22,8 @@ android {
 
     buildTypes {
         release {
-            zipAlignEnabled true
-            minifyEnabled true
+            zipAlignEnabled false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -32,11 +36,12 @@ android {
     }
 }
 
-dependencies {
-    compileOnly fileTree(include: ['*.?ar'], dir: '../app/libs')
-    implementation fileTree(include: ['*.?ar'], dir: 'libs')
 
-    compileOnly 'androidx.appcompat:appcompat:1.0.0'
-    compileOnly 'com.alibaba:fastjson:1.1.46.android'
+dependencies {
+    implementation fileTree(include: ['*.?ar'], dir: 'libs')
+    compileOnly fileTree(include: ['*.?ar'], dir: '../app/libs')
+
+    compileOnly 'androidx.core:core-ktx:1.8.0'
+    compileOnly 'com.alibaba:fastjson:1.2.83'
     compileOnly 'com.facebook.fresco:fresco:1.13.0'
 }

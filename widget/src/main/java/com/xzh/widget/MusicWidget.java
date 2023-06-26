@@ -70,10 +70,10 @@ public class MusicWidget extends AppWidgetProvider {
             this.Index = index;
         }
 
-        public PendingIntentInfo(int id, int index, String EXTRA) {
+        public PendingIntentInfo(int id, int index, String extra) {
             this.Id = id;
             this.Index = index;
-            this.EXTRA = EXTRA;
+            this.EXTRA = extra;
         }
 
         public int getId() {

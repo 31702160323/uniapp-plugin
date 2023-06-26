@@ -1,6 +1,10 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
 
 android {
+    namespace 'com.xzh.musicnotification'
     compileSdk 33
 
     defaultConfig {
@@ -32,10 +36,13 @@ android {
     }
 }
 
+
 dependencies {
     implementation fileTree(include: ['*.?ar'], dir: 'libs')
     compileOnly fileTree(include: ['*.?ar'], dir: '../app/libs')
 
+    compileOnly 'androidx.core:core-ktx:1.8.0'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.0"
     implementation 'androidx.media:media:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     compileOnly 'com.alibaba:fastjson:1.2.83'

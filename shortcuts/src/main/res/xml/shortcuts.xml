@@ -65,7 +65,7 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="com.xzh.shortcuts.TrampolineActivity"
-            android:targetPackage="com.xzh.UniPlugin">s
+            android:targetPackage="com.xzh.UniPlugin">
 
             <extra
                 android:name="path"

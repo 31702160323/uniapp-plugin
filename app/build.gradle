@@ -2,7 +2,10 @@ import groovy.xml.XmlParser
 import org.json.JSONException
 import org.json.JSONObject
 
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
 
 android {
     compileSdk 33
@@ -29,6 +32,9 @@ android {
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_11
             targetCompatibility JavaVersion.VERSION_11
+        }
+        kotlinOptions {
+            jvmTarget = '11'
         }
     }
 
@@ -142,6 +148,8 @@ dependencies {
     debugImplementation 'com.squareup.okhttp3:okhttp:3.12.12'
     debugImplementation 'com.squareup.okio:okio:1.15.0'
 
+    implementation 'androidx.core:core-ktx:1.8.0'
+//    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
 
@@ -160,9 +168,9 @@ dependencies {
     implementation project(':floatview')
 //    implementation project(':autostart')
 //    implementation project(':calendar')
-//    implementation(":musicNotification")
-//    implementation(":widget")
+    implementation project(":musicNotification")
+    implementation project(":widget")
 //    implementation(":varyDesktopIcons")
 //    implementation(":pictureSelectorUni")
-//    implementation(":shortcuts")
+    implementation project(":shortcuts")
 }
