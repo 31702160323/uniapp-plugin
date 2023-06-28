@@ -9,7 +9,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Build
-import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.view.KeyEvent
@@ -26,18 +25,25 @@ import java.lang.ref.WeakReference
 abstract class BaseMusicNotification {
     var iD = 0x111
         protected set
+
     @JvmField
     protected var isPlay = false
+
     @JvmField
     protected var songInfo: JSONObject? = null
+
     @JvmField
     protected var mContext: WeakReference<Context>? = null
+
     @JvmField
     protected var mNotification: Notification? = null
+
     @JvmField
     protected var mMediaSession: MediaSessionCompat? = null
+
     @JvmField
     protected var mNotificationManager: NotificationManager? = null
+
     @SuppressLint("UnspecifiedImmutableFlag")
     protected fun getContentIntent(path: String?): PendingIntent {
         val intent = Intent(mContext!!.get(), PandoraEntryActivity::class.java)
@@ -67,30 +73,32 @@ abstract class BaseMusicNotification {
         iD++
         mMediaSession = MediaSessionCompat(service, CHANNEL_ID)
         mMediaSession!!.isActive = true
-        mMediaSession!!.setMetadata(MediaMetadataCompat.Builder().build())
-        mMediaSession!!.setPlaybackState(
-            PlaybackStateCompat.Builder() //                .setActions(
-                ////                PlaybackStateCompat.ACTION_PLAY
-                ////                | PlaybackStateCompat.ACTION_PLAY_PAUSE
-                ////                | PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID
-                ////                | PlaybackStateCompat.ACTION_PAUSE
-                ////                | PlaybackStateCompat.ACTION_SKIP_TO_NEXT
-                ////                | PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS
-                //                        PlaybackStateCompat.ACTION_PLAY_PAUSE
-                //                                | PlaybackStateCompat.ACTION_PLAY
-                //                                | PlaybackStateCompat.ACTION_PAUSE
-                //                                | PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID
-                //                                | PlaybackStateCompat.ACTION_SEEK_TO
-                //                                | PlaybackStateCompat.ACTION_FAST_FORWARD
-                //                                | PlaybackStateCompat.ACTION_REWIND
-                //                                | PlaybackStateCompat.ACTION_STOP
-                //                                | PlaybackStateCompat.ACTION_SET_REPEAT_MODE
-                //                                | PlaybackStateCompat.ACTION_SET_SHUFFLE_MODE
-                //                                | PlaybackStateCompat.ACTION_SKIP_TO_NEXT
-                //                                | PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS
-                //                )
-                .build()
-        )
+//        mMediaSession!!.setMetadata(MediaMetadataCompat.Builder().build())
+
+
+        // 使用新的播放状态更新MediaSessionCompat实例
+        mMediaSession!!.setPlaybackState(PlaybackStateCompat.Builder()
+//            .setActions(
+////                PlaybackStateCompat.ACTION_PLAY
+////                        or PlaybackStateCompat.ACTION_PLAY_PAUSE
+////                        or PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID
+////                        or PlaybackStateCompat.ACTION_PAUSE
+////                        or PlaybackStateCompat.ACTION_SKIP_TO_NEXT
+////                        or PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS
+//            PlaybackStateCompat.ACTION_PLAY
+//                    or PlaybackStateCompat.ACTION_PAUSE
+//                    or PlaybackStateCompat.ACTION_PLAY_PAUSE
+//                    or PlaybackStateCompat.ACTION_SKIP_TO_NEXT
+//                    or PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS
+//                    or PlaybackStateCompat.ACTION_STOP
+//                    or PlaybackStateCompat.ACTION_SEEK_TO
+////                        or PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID
+////                        or PlaybackStateCompat.ACTION_FAST_FORWARD
+////                        or PlaybackStateCompat.ACTION_REWIND
+////                        or PlaybackStateCompat.ACTION_SET_REPEAT_MODE
+////                        or PlaybackStateCompat.ACTION_SET_SHUFFLE_MODE
+//        )
+            .build())
         mMediaSession!!.setCallback(object : MediaSessionCompat.Callback() {
             override fun onMediaButtonEvent(intent: Intent): Boolean {
                 val keyEvent = intent.getParcelableExtra<KeyEvent>(Intent.EXTRA_KEY_EVENT)
@@ -142,7 +150,10 @@ abstract class BaseMusicNotification {
     }
 
     fun cancel() {
-        if (mNotificationManager != null) mNotificationManager!!.cancel(iD)
+        if (mNotificationManager != null) {
+            mNotification = null
+            mNotificationManager!!.cancel(iD)
+        }
     }
 
     protected fun generateGlide(

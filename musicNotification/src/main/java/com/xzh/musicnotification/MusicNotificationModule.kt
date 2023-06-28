@@ -159,9 +159,14 @@ class MusicNotificationModule : UniModule(), PlayServiceV2.OnEventListener {
     }
 
     @UniJSMethod(uiThread = false)
-    fun switchNotification(`is`: Boolean) {
-        systemStyle = `is`
-        if (mBinder != null) mBinder!!.switchNotification(systemStyle)
+    fun switchNotification(style: Boolean) {
+        systemStyle = style
+        if (mBinder != null) mBinder!!.switchNotification(style)
+    }
+
+    @UniJSMethod(uiThread = false)
+    fun setPosition(position: Int) {
+        if (mBinder != null) mBinder!!.setPosition(position.toLong())
     }
 
     @UniJSMethod(uiThread = false)

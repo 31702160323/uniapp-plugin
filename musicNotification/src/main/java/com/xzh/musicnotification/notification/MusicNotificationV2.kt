@@ -7,7 +7,8 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.util.Log
+import android.support.v4.media.MediaMetadataCompat
+import android.support.v4.media.session.PlaybackStateCompat
 import android.view.View
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
@@ -22,9 +23,12 @@ import com.xzh.musicnotification.service.NotificationReceiver
 import com.xzh.musicnotification.utils.PendingIntentInfo
 import com.xzh.musicnotification.utils.Utils
 
+
 @Suppress("DEPRECATION")
 open class MusicNotificationV2 : BaseMusicNotification() {
     private var systemStyle = false
+
+    private var position = 0L
 
     // 大布局
     private var mRemoteViews: RemoteViews? = null
@@ -38,7 +42,6 @@ open class MusicNotificationV2 : BaseMusicNotification() {
 
     override fun createNotification() {
         cancel()
-        Log.d("TAG", "createNotification: $systemStyle")
         if (mConfig == null) return
         mNotificationManager =
             mContext!!.get()!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -102,30 +105,45 @@ open class MusicNotificationV2 : BaseMusicNotification() {
         )
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun updateNotification() {
         if (mConfig == null) return
-        if (songInfo == null) return
-        if (mNotificationManager == null) createNotification()
+        if (this@MusicNotificationV2.songInfo == null) return
+        if (this@MusicNotificationV2.mNotificationManager == null) createNotification()
         Utils.debounce({
-            val picUrl = songInfo!!.getString("picUrl").toString()
-            val songName = songInfo!!.getString(Global.KEY_SONG_NAME).toString()
-            val artistsName = songInfo!!.getString(Global.KEY_ARTISTS_NAME).toString()
+            val picUrl = this@MusicNotificationV2.songInfo!!.getString("picUrl").toString()
+            val songName = this@MusicNotificationV2.songInfo!!.getString(Global.KEY_SONG_NAME).toString()
+            val artistsName = this@MusicNotificationV2.songInfo!!.getString(Global.KEY_ARTISTS_NAME).toString()
+            val duration = this@MusicNotificationV2.songInfo!!.getLong(Global.KEY_DURATION).toLong()
             val play =
-                if (isPlay) R.drawable.note_btn_pause_white else R.drawable.note_btn_play_white
+                if (this@MusicNotificationV2.isPlay) R.drawable.note_btn_pause_white else R.drawable.note_btn_play_white
             val favour =
-                if (songInfo!!.getBoolean(Global.KEY_FAVOUR) != null && songInfo!!.getBoolean(
+                if (this@MusicNotificationV2.songInfo!!.getBoolean(Global.KEY_FAVOUR) != null && songInfo!!.getBoolean(
                         Global.KEY_FAVOUR
                     )
                 ) R.drawable.note_btn_loved else R.drawable.note_btn_love_white
-            if (systemStyle) {
+            if (this@MusicNotificationV2.systemStyle) {
                 val dip64 = Utils.dip2px(64f)
-                generateGlide(mContext!!.get(), object : CustomTarget<Bitmap?>() {
+                generateGlide(this@MusicNotificationV2.mContext!!.get(), object : CustomTarget<Bitmap?>() {
                     override fun onResourceReady(
                         resource: Bitmap,
                         transition: Transition<in Bitmap?>?
                     ) {
+                        mMediaSession!!.setMetadata(
+                            MediaMetadataCompat.Builder()
+                            .putString(MediaMetadataCompat.METADATA_KEY_TITLE, songName)
+                            .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, artistsName)
+                            .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, duration)
+                            .build())
+
+                        // 设置播放状态为正在播放，并设置媒体播放的当前位置
+                        mMediaSession!!.setPlaybackState(PlaybackStateCompat.Builder()
+                            .setState(if(this@MusicNotificationV2.isPlay) PlaybackStateCompat.STATE_PLAYING else PlaybackStateCompat.STATE_STOPPED,
+                                this@MusicNotificationV2.position, 1.0f)
+                            .build())
+
                         val builder = NotificationCompat.Builder(
-                            mContext!!.get()!!, CHANNEL_ID
+                            this@MusicNotificationV2.mContext!!.get()!!, CHANNEL_ID
                         ) //                                .setColorized(true)
                             .setOngoing(false)
                             .setShowWhen(true)
@@ -143,8 +161,9 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                             .setContentText(artistsName)
                             .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)
                             .setLargeIcon(resource)
+//                            .setProgress(60 * 4 * 1000, 60 * 500, false)
                         val style = androidx.media.app.NotificationCompat.MediaStyle()
-                        style.setMediaSession(mMediaSession!!.sessionToken)
+                        style.setMediaSession(this@MusicNotificationV2.mMediaSession!!.sessionToken)
                         style.setShowCancelButton(true)
                         if (showFavour) {
                             style.setShowActionsInCompactView(1, 2, 3)
@@ -184,9 +203,13 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                             )
                         )
                         builder.setStyle(style)
-                        mNotification = builder.build()
-                        mNotificationManager!!.notify(iD, mNotification)
-                        (mContext!!.get() as Service?)!!.startForeground(iD, mNotification)
+                        val notification = builder.build()
+                        if (this@MusicNotificationV2.mNotification == null) {
+                            (mContext!!.get() as Service?)!!.startForeground(iD, notification)
+                        } else {
+                            this@MusicNotificationV2.mNotificationManager!!.notify(iD, notification)
+                        }
+                        this@MusicNotificationV2.mNotification = notification
                     }
 
                     override fun onLoadCleared(placeholder: Drawable?) {}
@@ -194,19 +217,19 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                 } as Target<Bitmap>, picUrl, dip64.toFloat(), dip64.toFloat())
             } else {
                 if (showFavour) {
-                    mRemoteViews!!.setImageViewResource(R.id.favourite_view, favour)
+                    this@MusicNotificationV2.mRemoteViews!!.setImageViewResource(R.id.favourite_view, favour)
                 }
-                mRemoteViews!!.setTextViewText(R.id.title_view, songName)
-                mRemoteViews!!.setTextViewText(R.id.tip_view, artistsName)
-                mRemoteViews!!.setImageViewResource(R.id.play_view, play)
-                setPicUrlBitmap(mContext!!.get(), mRemoteViews, picUrl, 112f, 112f)
-                if (mSmallRemoteViews != null) {
-                    mSmallRemoteViews!!.setTextViewText(R.id.tip_view, artistsName)
-                    mSmallRemoteViews!!.setTextViewText(R.id.title_view, songName)
-                    mSmallRemoteViews!!.setImageViewResource(R.id.play_view, play)
-                    setPicUrlBitmap(mContext!!.get(), mSmallRemoteViews, picUrl, 64f, 64f)
+                this@MusicNotificationV2.mRemoteViews!!.setTextViewText(R.id.title_view, songName)
+                this@MusicNotificationV2.mRemoteViews!!.setTextViewText(R.id.tip_view, artistsName)
+                this@MusicNotificationV2.mRemoteViews!!.setImageViewResource(R.id.play_view, play)
+                setPicUrlBitmap(mContext!!.get(), this@MusicNotificationV2.mRemoteViews, picUrl, 112f, 112f)
+                if (this@MusicNotificationV2.mSmallRemoteViews != null) {
+                    this@MusicNotificationV2.mSmallRemoteViews!!.setTextViewText(R.id.tip_view, artistsName)
+                    this@MusicNotificationV2.mSmallRemoteViews!!.setTextViewText(R.id.title_view, songName)
+                    this@MusicNotificationV2.mSmallRemoteViews!!.setImageViewResource(R.id.play_view, play)
+                    setPicUrlBitmap(mContext!!.get(), this@MusicNotificationV2.mSmallRemoteViews, picUrl, 64f, 64f)
                 }
-                mNotificationManager!!.notify(iD, mNotification)
+                this@MusicNotificationV2.mNotificationManager!!.notify(this@MusicNotificationV2.iD, this@MusicNotificationV2.mNotification)
             }
         }, 500)
     }
@@ -340,11 +363,15 @@ open class MusicNotificationV2 : BaseMusicNotification() {
         generateGlide(context, target, picUrl, width, height)
     }
 
-    fun switchNotification(`is`: Boolean) {
-        systemStyle = `is`
-        if (mNotificationManager != null) {
-            createNotification()
+    fun switchNotification(style: Boolean) {
+        systemStyle = style
+        if (this.mNotificationManager != null) {
+            this.createNotification()
         }
+    }
+
+    fun setPosition(position: Long) {
+        this.position = position
     }
 
     companion object {

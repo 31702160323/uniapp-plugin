@@ -19,6 +19,7 @@ object Global {
     const val KEY_UPDATE = "update"
     const val KEY_PLAYING = "playing"
     const val KEY_SONG_NAME = "songName"
+    const val KEY_DURATION = "duration"
     const val KEY_ARTISTS_NAME = "artistsName"
     const val KEY_PLAY_OR_PAUSE = "playOrPause"
 }

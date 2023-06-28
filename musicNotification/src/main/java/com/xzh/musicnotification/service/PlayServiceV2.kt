@@ -135,8 +135,12 @@ class PlayServiceV2 : Service(), IReceiverListener {
             mClickListener = WeakReference(clickListener)
         }
 
-        fun switchNotification(`is`: Boolean) {
-            MusicNotificationV2.instance.switchNotification(`is`)
+        fun switchNotification(style: Boolean) {
+            MusicNotificationV2.instance.switchNotification(style)
+        }
+
+        fun setPosition(position: Long) {
+            MusicNotificationV2.instance.setPosition(position)
         }
 
         val favour: Boolean
