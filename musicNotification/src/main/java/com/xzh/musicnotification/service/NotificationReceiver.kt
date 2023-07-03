@@ -40,5 +40,6 @@ class NotificationReceiver internal constructor(private val mListener: IReceiver
         const val EXTRA_NEXT = "play_next"
         const val EXTRA_PRE = "play_previous"
         const val EXTRA_FAV = "play_favourite"
+        const val EXTRA_CLOSE = "close"
     }
 }

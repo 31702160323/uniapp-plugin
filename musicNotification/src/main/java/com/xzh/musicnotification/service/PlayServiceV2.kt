@@ -11,6 +11,7 @@ import android.os.Binder
 import android.os.Build
 import android.os.IBinder
 import android.util.ArrayMap
+import android.util.Log
 import com.alibaba.fastjson.JSONObject
 import com.xzh.musicnotification.Global
 import com.xzh.musicnotification.LockActivityV2
@@ -100,6 +101,7 @@ class PlayServiceV2 : Service(), IReceiverListener {
             NotificationReceiver.EXTRA_PRE -> eventName = Global.EVENT_MUSIC_NOTIFICATION_PREVIOUS
             NotificationReceiver.EXTRA_NEXT -> eventName = Global.EVENT_MUSIC_NOTIFICATION_NEXT
             NotificationReceiver.EXTRA_FAV -> eventName = Global.EVENT_MUSIC_NOTIFICATION_FAVOURITE
+            NotificationReceiver.EXTRA_CLOSE -> eventName = Global.EVENT_MUSIC_NOTIFICATION_CLOSE
             "enabled" -> {
                 if (songData != null) service?.let {
                     invoke(it, Global.KEY_UPDATE, songData!!)

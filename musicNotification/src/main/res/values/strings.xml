@@ -6,4 +6,6 @@
     <string name="play">播放按钮</string>
     <string name="next">下一首</string>
     <string name="favourite">收藏</string>
+    <string name="close">关闭</string>
+    <string name="title_view">未知歌曲</string>
 </resources>

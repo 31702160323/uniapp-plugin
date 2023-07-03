@@ -150,11 +150,11 @@ class MusicNotificationModule : UniModule(), PlayServiceV2.OnEventListener {
     }
 
     @UniJSMethod(uiThread = false)
-    fun favour(`is`: Boolean) {
+    fun favour(isFavour: Boolean) {
         if (!showFavour) return
         if (mBinder != null) {
-            mBinder!!.favour(`is`)
-            instance?.favour(`is`)
+            mBinder!!.favour(isFavour)
+            instance?.favour(isFavour)
         }
     }
 

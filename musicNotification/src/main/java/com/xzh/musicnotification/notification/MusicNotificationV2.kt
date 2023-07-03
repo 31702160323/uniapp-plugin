@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.PlaybackStateCompat
+import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
@@ -111,125 +112,187 @@ open class MusicNotificationV2 : BaseMusicNotification() {
         if (this@MusicNotificationV2.songInfo == null) return
         if (this@MusicNotificationV2.mNotificationManager == null) createNotification()
         Utils.debounce({
-            val picUrl = this@MusicNotificationV2.songInfo!!.getString("picUrl").toString()
-            val songName = this@MusicNotificationV2.songInfo!!.getString(Global.KEY_SONG_NAME).toString()
-            val artistsName = this@MusicNotificationV2.songInfo!!.getString(Global.KEY_ARTISTS_NAME).toString()
-            val duration = this@MusicNotificationV2.songInfo!!.getLong(Global.KEY_DURATION).toLong()
-            val play =
-                if (this@MusicNotificationV2.isPlay) R.drawable.note_btn_pause_white else R.drawable.note_btn_play_white
-            val favour =
-                if (this@MusicNotificationV2.songInfo!!.getBoolean(Global.KEY_FAVOUR) != null && songInfo!!.getBoolean(
-                        Global.KEY_FAVOUR
-                    )
-                ) R.drawable.note_btn_loved else R.drawable.note_btn_love_white
-            if (this@MusicNotificationV2.systemStyle) {
-                val dip64 = Utils.dip2px(64f)
-                generateGlide(this@MusicNotificationV2.mContext!!.get(), object : CustomTarget<Bitmap?>() {
-                    override fun onResourceReady(
-                        resource: Bitmap,
-                        transition: Transition<in Bitmap?>?
-                    ) {
-                        mMediaSession!!.setMetadata(
-                            MediaMetadataCompat.Builder()
-                            .putString(MediaMetadataCompat.METADATA_KEY_TITLE, songName)
-                            .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, artistsName)
-                            .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, duration)
-                            .build())
-
-                        // 设置播放状态为正在播放，并设置媒体播放的当前位置
-                        mMediaSession!!.setPlaybackState(PlaybackStateCompat.Builder()
-                            .setState(if(this@MusicNotificationV2.isPlay) PlaybackStateCompat.STATE_PLAYING else PlaybackStateCompat.STATE_STOPPED,
-                                this@MusicNotificationV2.position, 1.0f)
-                            .build())
-
-                        val builder = NotificationCompat.Builder(
-                            this@MusicNotificationV2.mContext!!.get()!!, CHANNEL_ID
-                        ) //                                .setColorized(true)
-                            .setOngoing(false)
-                            .setShowWhen(true)
-                            .setAutoCancel(true)
-                            .setOnlyAlertOnce(true)
-                            .setSmallIcon(R.drawable.music_icon) //                                .setBadgeIconType(R.drawable.music_icon)
-                            .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE)
-                            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                            .setContentIntent(
-                                getContentIntent(
-                                    mConfig!!.getString(Global.KEY_PATH).toString()
+            this@MusicNotificationV2.songInfo?.run {
+                val picUrl = this.getString("picUrl").toString()
+                val songName = this.getString(Global.KEY_SONG_NAME).toString()
+                val artistsName = this.getString(Global.KEY_ARTISTS_NAME).toString()
+                val duration =
+                    if (this.getLong(Global.KEY_DURATION) == null) 0 else this.getLong(Global.KEY_DURATION)
+                Log.d("TAG", "updateNotification: " + duration)
+                val play =
+                    if (this@MusicNotificationV2.isPlay) R.drawable.note_btn_pause_white else R.drawable.note_btn_play_white
+                val favour =
+                    if (this.getBoolean(Global.KEY_FAVOUR) != null && this.getBoolean(
+                            Global.KEY_FAVOUR
+                        )
+                    ) R.drawable.note_btn_loved else R.drawable.note_btn_love_white
+                if (this@MusicNotificationV2.systemStyle) {
+                    val dip64 = Utils.dip2px(64f)
+                    generateGlide(
+                        this@MusicNotificationV2.mContext!!.get(),
+                        object : CustomTarget<Bitmap?>() {
+                            override fun onResourceReady(
+                                resource: Bitmap,
+                                transition: Transition<in Bitmap?>?
+                            ) {
+                                mMediaSession!!.setMetadata(
+                                    MediaMetadataCompat.Builder()
+                                        .putString(MediaMetadataCompat.METADATA_KEY_TITLE, songName)
+                                        .putString(
+                                            MediaMetadataCompat.METADATA_KEY_ARTIST,
+                                            artistsName
+                                        )
+                                        .putLong(
+                                            MediaMetadataCompat.METADATA_KEY_DURATION,
+                                            duration
+                                        )
+                                        .build()
                                 )
-                            )
-                            .setContentTitle(songName)
-                            .setContentText(artistsName)
-                            .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)
-                            .setLargeIcon(resource)
+
+                                // 设置播放状态为正在播放，并设置媒体播放的当前位置
+                                mMediaSession!!.setPlaybackState(
+                                    PlaybackStateCompat.Builder()
+                                        .setState(
+                                            if (this@MusicNotificationV2.isPlay) PlaybackStateCompat.STATE_PLAYING else PlaybackStateCompat.STATE_STOPPED,
+                                            this@MusicNotificationV2.position, 1.0f
+                                        )
+                                        .build()
+                                )
+
+                                val builder = NotificationCompat.Builder(
+                                    this@MusicNotificationV2.mContext!!.get()!!, CHANNEL_ID
+                                ) //                                .setColorized(true)
+                                    .setOngoing(false)
+                                    .setShowWhen(true)
+                                    .setAutoCancel(true)
+                                    .setOnlyAlertOnce(true)
+                                    .setSmallIcon(R.drawable.music_icon) //                                .setBadgeIconType(R.drawable.music_icon)
+                                    .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE)
+                                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                                    .setContentIntent(
+                                        getContentIntent(
+                                            mConfig!!.getString(Global.KEY_PATH).toString()
+                                        )
+                                    )
+                                    .setContentTitle(songName)
+                                    .setContentText(artistsName)
+                                    .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)
+                                    .setLargeIcon(resource)
 //                            .setProgress(60 * 4 * 1000, 60 * 500, false)
-                        val style = androidx.media.app.NotificationCompat.MediaStyle()
-                        style.setMediaSession(this@MusicNotificationV2.mMediaSession!!.sessionToken)
-                        style.setShowCancelButton(true)
-                        if (showFavour) {
-                            style.setShowActionsInCompactView(1, 2, 3)
-                            builder.addAction(
-                                generateAction(
-                                    favour,
-                                    "Favourite",
-                                    3,
-                                    NotificationReceiver.EXTRA_FAV
+                                val style = androidx.media.app.NotificationCompat.MediaStyle()
+                                style.setMediaSession(this@MusicNotificationV2.mMediaSession!!.sessionToken)
+                                style.setShowCancelButton(true)
+                                if (showFavour) {
+                                    style.setShowActionsInCompactView(1, 2, 3)
+                                    builder.addAction(
+                                        generateAction(
+                                            favour,
+                                            "Favourite",
+                                            3,
+                                            NotificationReceiver.EXTRA_FAV
+                                        )
+                                    )
+                                } else {
+                                    style.setShowActionsInCompactView(0, 1, 2)
+                                }
+                                builder.addAction(
+                                    generateAction(
+                                        R.drawable.note_btn_pre_white,
+                                        "Previous",
+                                        1,
+                                        NotificationReceiver.EXTRA_PRE
+                                    )
                                 )
-                            )
-                        } else {
-                            style.setShowActionsInCompactView(0, 1, 2)
-                        }
-                        builder.addAction(
-                            generateAction(
-                                R.drawable.note_btn_pre_white,
-                                "Previous",
-                                1,
-                                NotificationReceiver.EXTRA_PRE
-                            )
-                        )
-                        builder.addAction(
-                            generateAction(
-                                play,
-                                "Play",
-                                0,
-                                NotificationReceiver.EXTRA_PLAY
-                            )
-                        )
-                        builder.addAction(
-                            generateAction(
-                                R.drawable.note_btn_next_white,
-                                "Next",
-                                2,
-                                NotificationReceiver.EXTRA_NEXT
-                            )
-                        )
-                        builder.setStyle(style)
-                        val notification = builder.build()
-                        if (this@MusicNotificationV2.mNotification == null) {
-                            (mContext!!.get() as Service?)!!.startForeground(iD, notification)
-                        } else {
-                            this@MusicNotificationV2.mNotificationManager!!.notify(iD, notification)
-                        }
-                        this@MusicNotificationV2.mNotification = notification
-                    }
+                                builder.addAction(
+                                    generateAction(
+                                        play,
+                                        "Play",
+                                        0,
+                                        NotificationReceiver.EXTRA_PLAY
+                                    )
+                                )
+                                builder.addAction(
+                                    generateAction(
+                                        R.drawable.note_btn_next_white,
+                                        "Next",
+                                        2,
+                                        NotificationReceiver.EXTRA_NEXT
+                                    )
+                                )
+                                builder.setStyle(style)
+                                val notification = builder.build()
+                                if (this@MusicNotificationV2.mNotification == null) {
+                                    (mContext!!.get() as Service?)!!.startForeground(
+                                        iD,
+                                        notification
+                                    )
+                                } else {
+                                    this@MusicNotificationV2.mNotificationManager!!.notify(
+                                        iD,
+                                        notification
+                                    )
+                                }
+                                this@MusicNotificationV2.mNotification = notification
+                            }
 
-                    override fun onLoadCleared(placeholder: Drawable?) {}
-                    override fun onLoadFailed(errorDrawable: Drawable?) {}
-                } as Target<Bitmap>, picUrl, dip64.toFloat(), dip64.toFloat())
-            } else {
-                if (showFavour) {
-                    this@MusicNotificationV2.mRemoteViews!!.setImageViewResource(R.id.favourite_view, favour)
+                            override fun onLoadCleared(placeholder: Drawable?) {}
+                            override fun onLoadFailed(errorDrawable: Drawable?) {}
+                        } as Target<Bitmap>,
+                        picUrl,
+                        dip64.toFloat(),
+                        dip64.toFloat())
+                } else {
+                    if (showFavour) {
+                        this@MusicNotificationV2.mRemoteViews!!.setImageViewResource(
+                            R.id.favourite_view,
+                            favour
+                        )
+                    }
+                    this@MusicNotificationV2.mRemoteViews!!.setTextViewText(
+                        R.id.title_view,
+                        songName
+                    )
+                    this@MusicNotificationV2.mRemoteViews!!.setTextViewText(
+                        R.id.tip_view,
+                        artistsName
+                    )
+                    this@MusicNotificationV2.mRemoteViews!!.setImageViewResource(
+                        R.id.play_view,
+                        play
+                    )
+                    setPicUrlBitmap(
+                        mContext!!.get(),
+                        this@MusicNotificationV2.mRemoteViews,
+                        picUrl,
+                        112f,
+                        112f
+                    )
+                    if (this@MusicNotificationV2.mSmallRemoteViews != null) {
+                        this@MusicNotificationV2.mSmallRemoteViews!!.setTextViewText(
+                            R.id.tip_view,
+                            artistsName
+                        )
+                        this@MusicNotificationV2.mSmallRemoteViews!!.setTextViewText(
+                            R.id.title_view,
+                            songName
+                        )
+                        this@MusicNotificationV2.mSmallRemoteViews!!.setImageViewResource(
+                            R.id.play_view,
+                            play
+                        )
+                        setPicUrlBitmap(
+                            mContext!!.get(),
+                            this@MusicNotificationV2.mSmallRemoteViews,
+                            picUrl,
+                            64f,
+                            64f
+                        )
+                    }
+                    this@MusicNotificationV2.mNotificationManager!!.notify(
+                        this@MusicNotificationV2.iD,
+                        this@MusicNotificationV2.mNotification
+                    )
                 }
-                this@MusicNotificationV2.mRemoteViews!!.setTextViewText(R.id.title_view, songName)
-                this@MusicNotificationV2.mRemoteViews!!.setTextViewText(R.id.tip_view, artistsName)
-                this@MusicNotificationV2.mRemoteViews!!.setImageViewResource(R.id.play_view, play)
-                setPicUrlBitmap(mContext!!.get(), this@MusicNotificationV2.mRemoteViews, picUrl, 112f, 112f)
-                if (this@MusicNotificationV2.mSmallRemoteViews != null) {
-                    this@MusicNotificationV2.mSmallRemoteViews!!.setTextViewText(R.id.tip_view, artistsName)
-                    this@MusicNotificationV2.mSmallRemoteViews!!.setTextViewText(R.id.title_view, songName)
-                    this@MusicNotificationV2.mSmallRemoteViews!!.setImageViewResource(R.id.play_view, play)
-                    setPicUrlBitmap(mContext!!.get(), this@MusicNotificationV2.mSmallRemoteViews, picUrl, 64f, 64f)
-                }
-                this@MusicNotificationV2.mNotificationManager!!.notify(this@MusicNotificationV2.iD, this@MusicNotificationV2.mNotification)
             }
         }, 500)
     }
@@ -305,7 +368,9 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                         3,
                         NotificationReceiver.EXTRA_NEXT
                     ),  //点击收藏按钮要发送的广播
-                    PendingIntentInfo(R.id.favourite_view, 4, NotificationReceiver.EXTRA_FAV)
+                    PendingIntentInfo(R.id.favourite_view, 4, NotificationReceiver.EXTRA_FAV),
+                    //点击关闭按钮要发送的广播
+                    PendingIntentInfo(R.id.note_close, 5, NotificationReceiver.EXTRA_CLOSE)
                 )
             }
             return mRemoteViews!!
@@ -340,7 +405,9 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                         2,
                         NotificationReceiver.EXTRA_PRE
                     ),  //点击下一首按钮要发送的广播
-                    PendingIntentInfo(R.id.next_view, 3, NotificationReceiver.EXTRA_NEXT)
+                    PendingIntentInfo(R.id.next_view, 3, NotificationReceiver.EXTRA_NEXT),
+                    // 点击关闭按钮要发送的广播
+                    PendingIntentInfo(R.id.note_close, 5, NotificationReceiver.EXTRA_CLOSE)
                 )
             }
             return mSmallRemoteViews!!

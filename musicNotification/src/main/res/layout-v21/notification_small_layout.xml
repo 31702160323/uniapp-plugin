@@ -16,7 +16,7 @@
 
     <LinearLayout
         android:layout_weight="1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
         android:gravity="center_vertical"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:textSize="10sp"
+            android:textSize="11sp"
             style="@style/NotificationInfo"
             android:ellipsize="marquee"
             android:focusable="true"
@@ -57,9 +57,10 @@
         android:paddingVertical="22dp"
         android:paddingHorizontal="10dp"
         android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"
         android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/previous" />
+        android:src="@drawable/note_btn_pre_white"
+        android:contentDescription="@string/previous"
+        android:focusable="true" />
 
     <ImageView
         android:id="@+id/play_view"
@@ -70,9 +71,10 @@
         android:paddingVertical="22dp"
         android:paddingHorizontal="10dp"
         android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"
         android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/play" />
+        android:src="@drawable/note_btn_play_white"
+        android:contentDescription="@string/play"
+        android:focusable="true" />
 
     <ImageView
         android:id="@+id/next_view"
@@ -83,7 +85,19 @@
         android:paddingVertical="22dp"
         android:paddingHorizontal="10dp"
         android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"
         android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/next" />
+        android:contentDescription="@string/next"
+        android:src="@drawable/note_btn_next_white"
+        android:focusable="true" />
+
+    <ImageView
+        android:id="@+id/note_close"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:paddingVertical="25dp"
+        android:paddingHorizontal="10dp"
+        android:src="@drawable/note_btn_close"
+        android:contentDescription="@string/close" />
 </LinearLayout>
