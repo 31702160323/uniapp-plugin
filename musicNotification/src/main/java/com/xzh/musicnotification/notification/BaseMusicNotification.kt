@@ -77,7 +77,8 @@ abstract class BaseMusicNotification {
 
 
         // 使用新的播放状态更新MediaSessionCompat实例
-        mMediaSession!!.setPlaybackState(PlaybackStateCompat.Builder()
+        mMediaSession!!.setPlaybackState(
+            PlaybackStateCompat.Builder()
 //            .setActions(
 ////                PlaybackStateCompat.ACTION_PLAY
 ////                        or PlaybackStateCompat.ACTION_PLAY_PAUSE
