@@ -35,6 +35,8 @@ plugins {
     id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
 }
 
+apply from: "config.gradle"
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

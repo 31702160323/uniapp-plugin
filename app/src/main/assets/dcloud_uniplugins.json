@@ -72,7 +72,7 @@
       "plugins": [
         {
           "type": "component",
-          "name": "float-view",
+          "name": "xzh-float-view",
           "class": "com.xzh.floatview.FloatView"
         }
       ]
