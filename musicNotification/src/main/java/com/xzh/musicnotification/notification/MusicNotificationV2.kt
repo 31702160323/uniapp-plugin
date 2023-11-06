@@ -29,8 +29,6 @@ import com.xzh.musicnotification.utils.Utils
 open class MusicNotificationV2 : BaseMusicNotification() {
     private var systemStyle = false
 
-    private var position = 0L
-
     // 大布局
     private var mRemoteViews: RemoteViews? = null
 
@@ -43,12 +41,13 @@ open class MusicNotificationV2 : BaseMusicNotification() {
 
     override fun createNotification() {
         cancel()
+        val context = mContext!!.get()
         if (mConfig == null) return
-        mNotificationManager =
-            mContext!!.get()!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (context === null) return
+        if (mNotificationManager === null) mNotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val path = mConfig!!.getString(Global.KEY_PATH).toString()
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1) { //Android 5.1 以下
-            mNotification = Notification.Builder(mContext!!.get())
+            mNotification = Notification.Builder(context)
                 .setOngoing(true)
                 .setShowWhen(false)
                 .setOnlyAlertOnce(true)
@@ -58,7 +57,7 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                 .setContentIntent(getContentIntent(path))
                 .build()
         } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) { //Android 8.0以下
-            mNotification = NotificationCompat.Builder(mContext!!.get()!!, CHANNEL_ID)
+            mNotification = NotificationCompat.Builder(context, CHANNEL_ID)
                 .setOngoing(true)
                 .setColorized(true)
                 .setShowWhen(false)
@@ -79,7 +78,7 @@ open class MusicNotificationV2 : BaseMusicNotification() {
             mNotificationManager!!.createNotificationChannel(notificationChannel)
             if (!systemStyle) {
                 val builder = NotificationCompat.Builder(
-                    mContext!!.get()!!, CHANNEL_ID
+                    context, CHANNEL_ID
                 ) //                        .setOngoing(true)
                     //                        .setColorized(true)
                     //                        .setShowWhen(false)
@@ -100,7 +99,7 @@ open class MusicNotificationV2 : BaseMusicNotification() {
         playOrPause(isPlay)
 
         // 设置为前台Service
-        if (mNotification != null) (mContext!!.get() as Service?)!!.startForeground(
+        if (mNotification != null) (context as Service?)!!.startForeground(
             iD,
             mNotification
         )
@@ -108,7 +107,9 @@ open class MusicNotificationV2 : BaseMusicNotification() {
 
     @Suppress("UNCHECKED_CAST")
     override fun updateNotification() {
+        val context = mContext!!.get()
         if (mConfig == null) return
+        if (context === null) return
         if (this@MusicNotificationV2.songInfo == null) return
         if (this@MusicNotificationV2.mNotificationManager == null) createNotification()
         Utils.debounce({
@@ -129,7 +130,7 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                 if (this@MusicNotificationV2.systemStyle) {
                     val dip64 = Utils.dip2px(64f)
                     generateGlide(
-                        this@MusicNotificationV2.mContext!!.get(),
+                        context,
                         object : CustomTarget<Bitmap?>() {
                             override fun onResourceReady(
                                 resource: Bitmap,
@@ -160,7 +161,7 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                                 )
 
                                 val builder = NotificationCompat.Builder(
-                                    this@MusicNotificationV2.mContext!!.get()!!, CHANNEL_ID
+                                    context, CHANNEL_ID
                                 ) //                                .setColorized(true)
                                     .setOngoing(false)
                                     .setShowWhen(true)
@@ -222,7 +223,7 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                                 builder.setStyle(style)
                                 val notification = builder.build()
                                 if (this@MusicNotificationV2.mNotification == null) {
-                                    (mContext!!.get() as Service?)!!.startForeground(
+                                    (context as Service).startForeground(
                                         iD,
                                         notification
                                     )
@@ -261,7 +262,7 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                         play
                     )
                     setPicUrlBitmap(
-                        mContext!!.get(),
+                        context,
                         this@MusicNotificationV2.mRemoteViews,
                         picUrl,
                         112f,
@@ -281,7 +282,7 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                             play
                         )
                         setPicUrlBitmap(
-                            mContext!!.get(),
+                            context,
                             this@MusicNotificationV2.mSmallRemoteViews,
                             picUrl,
                             64f,
@@ -305,21 +306,22 @@ open class MusicNotificationV2 : BaseMusicNotification() {
         EXTRA: String
     ): NotificationCompat.Action {
         val pendingIntent: PendingIntent
-        val intent = Intent(mContext!!.get()!!.packageName + NotificationReceiver.ACTION_STATUS_BAR)
+        val context = mContext!!.get()!!
+        val intent = Intent(context.packageName + NotificationReceiver.ACTION_STATUS_BAR)
         //        Intent intent = new Intent(mContext.get(), NotificationReceiver.class);
 //        intent.setAction(mContext.get().getPackageName() + NotificationReceiver.ACTION_STATUS_BAR);
-        intent.setPackage(mContext!!.get()!!.packageName)
+        intent.setPackage(context.packageName)
         intent.putExtra(NotificationReceiver.EXTRA, EXTRA)
         pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.getBroadcast(
-                mContext!!.get(),
+                context,
                 requestCode,
                 intent,
                 PendingIntent.FLAG_IMMUTABLE
             )
         } else {
             PendingIntent.getBroadcast(
-                mContext!!.get(),
+                context,
                 requestCode,
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT
@@ -435,10 +437,6 @@ open class MusicNotificationV2 : BaseMusicNotification() {
         if (this.mNotificationManager != null) {
             this.createNotification()
         }
-    }
-
-    fun setPosition(position: Long) {
-        this.position = position
     }
 
     companion object {

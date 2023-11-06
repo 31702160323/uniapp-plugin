@@ -98,9 +98,9 @@ class MusicNotificationModule : UniModule(), PlayServiceV2.OnEventListener {
                     data["code"] = 0
                     callback!!.invoke(data)
                     createNotificationCallback = null
-                    val `object` = JSONObject()
-                    `object`["type"] = "create"
-                    mUniSDKInstance.fireGlobalEventCallback(Global.EVENT_MUSIC_LIFECYCLE, `object`)
+                    val jsonObject = JSONObject()
+                    jsonObject["type"] = "create"
+                    mUniSDKInstance.fireGlobalEventCallback(Global.EVENT_MUSIC_LIFECYCLE, jsonObject)
                 }
 
                 override fun onServiceDisconnected(componentName: ComponentName) {}

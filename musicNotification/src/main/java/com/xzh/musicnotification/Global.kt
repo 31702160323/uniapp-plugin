@@ -4,6 +4,7 @@ object Global {
     const val SHOW_FAVOUR = "xzh_favour"
     const val EVENT_MUSIC_LIFECYCLE = "musicLifecycle"
     const val EVENT_MUSIC_MEDIA_BUTTON = "musicMediaButton"
+    const val EVENT_MUSIC_SEEK_TO = "musicSeekTo"
     const val EVENT_MUSIC_NOTIFICATION_PAUSE = "musicNotificationPause"
     const val EVENT_MUSIC_NOTIFICATION_PREVIOUS = "musicNotificationPrevious"
     const val EVENT_MUSIC_NOTIFICATION_NEXT = "musicNotificationNext"

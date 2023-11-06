@@ -19,6 +19,7 @@ import com.xzh.musicnotification.notification.MusicNotificationV2
 import com.xzh.musicnotification.service.NotificationReceiver.IReceiverListener
 import com.xzh.musicnotification.utils.Utils
 import java.lang.ref.WeakReference
+import kotlin.math.log
 
 class PlayServiceV2 : Service(), IReceiverListener {
     private var playing = false
@@ -29,8 +30,8 @@ class PlayServiceV2 : Service(), IReceiverListener {
     @SuppressLint("WrongConstant")
     override fun onCreate() {
         super.onCreate()
-        service = this
         MusicNotificationV2.instance.initNotification(this)
+        MusicNotificationV2.instance.createNotification()
         mReceiver = NotificationReceiver(this)
         val filter = IntentFilter()
         // 锁屏广播
@@ -46,6 +47,7 @@ class PlayServiceV2 : Service(), IReceiverListener {
         } else {
             registerReceiver(mReceiver, filter)
         }
+        service = this
     }
 
     override fun onBind(intent: Intent): IBinder? {

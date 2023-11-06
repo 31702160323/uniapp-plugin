@@ -11,6 +11,7 @@ import android.graphics.Bitmap
 import android.os.Build
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
+import android.util.Log
 import android.view.KeyEvent
 import com.alibaba.fastjson.JSONObject
 import com.bumptech.glide.Glide
@@ -25,6 +26,9 @@ import java.lang.ref.WeakReference
 abstract class BaseMusicNotification {
     var iD = 0x111
         protected set
+
+    @JvmField
+    protected var position = 0L
 
     @JvmField
     protected var isPlay = false
@@ -114,6 +118,29 @@ abstract class BaseMusicNotification {
                 }
                 return true
             }
+
+            override fun onSeekTo(pos: Long) {
+                super.onSeekTo(pos)
+                this@BaseMusicNotification.setPosition(pos)
+
+
+                // 设置播放状态为正在播放，并设置媒体播放的当前位置
+                mMediaSession!!.setPlaybackState(
+                    PlaybackStateCompat.Builder()
+                        .setState(
+                            if (this@BaseMusicNotification.isPlay) PlaybackStateCompat.STATE_PLAYING else PlaybackStateCompat.STATE_STOPPED,
+                            this@BaseMusicNotification.position, 1.0f
+                        )
+                        .build()
+                )
+
+                val data = JSONObject()
+                data["position"] = pos / 1000
+                (mContext!!.get() as PlayServiceV2?)!!.fireGlobalEventCallback(
+                    Global.EVENT_MUSIC_SEEK_TO,
+                    data
+                )
+            }
         })
     }
 
@@ -138,6 +165,10 @@ abstract class BaseMusicNotification {
     fun playOrPause(isPlay: Boolean) {
         this.isPlay = isPlay
         updateNotification()
+    }
+
+    fun setPosition(position: Long) {
+        this.position = position
     }
 
     /**
