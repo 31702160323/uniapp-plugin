@@ -119,7 +119,7 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                 val artistsName = this.getString(Global.KEY_ARTISTS_NAME).toString()
                 val duration =
                     if (this.getLong(Global.KEY_DURATION) == null) 0 else this.getLong(Global.KEY_DURATION)
-                Log.d("TAG", "updateNotification: " + duration)
+                Log.d("TAG", "updateNotification: $duration")
                 val play =
                     if (this@MusicNotificationV2.isPlay) R.drawable.note_btn_pause_white else R.drawable.note_btn_play_white
                 val favour =
@@ -179,7 +179,7 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                                     .setContentText(artistsName)
                                     .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)
                                     .setLargeIcon(resource)
-//                            .setProgress(60 * 4 * 1000, 60 * 500, false)
+                                    .setProgress(0, 0, true)
                                 val style = androidx.media.app.NotificationCompat.MediaStyle()
                                 style.setMediaSession(this@MusicNotificationV2.mMediaSession!!.sessionToken)
                                 style.setShowCancelButton(true)
@@ -438,6 +438,8 @@ open class MusicNotificationV2 : BaseMusicNotification() {
             this.createNotification()
         }
     }
+
+    
 
     companion object {
         val instance: MusicNotificationV2

@@ -143,6 +143,7 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
     /**
      * 重写物理返回键，使不能回退
      */
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {}
     override fun onDestroy() {
         unbindService(connection!!)
@@ -175,9 +176,9 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
      override fun update(options: JSONObject?) {
          if (options == null) return
         if (UniUtils.isUiThread()) {
-            updateUI(options!!)
+            updateUI(options)
         } else {
-            runOnUiThread { updateUI(options!!) }
+            runOnUiThread { updateUI(options) }
         }
     }
 

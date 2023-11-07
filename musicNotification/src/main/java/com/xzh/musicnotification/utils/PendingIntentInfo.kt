@@ -8,7 +8,7 @@ import android.os.Build
 import android.widget.RemoteViews
 import com.xzh.musicnotification.service.NotificationReceiver
 
-class PendingIntentInfo(val id: Int, val index: Int, val eXTRA: String) {
+class PendingIntentInfo(val id: Int, val index: Int, val EXTRA: String) {
 
     companion object {
         @SuppressLint("UnspecifiedImmutableFlag")
@@ -21,7 +21,7 @@ class PendingIntentInfo(val id: Int, val index: Int, val eXTRA: String) {
                 val intent = Intent(context.packageName + NotificationReceiver.ACTION_STATUS_BAR)
                 intent.putExtra(
                     NotificationReceiver.EXTRA,
-                    item.eXTRA
+                    item.EXTRA
                 )
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     views.setOnClickPendingIntent(

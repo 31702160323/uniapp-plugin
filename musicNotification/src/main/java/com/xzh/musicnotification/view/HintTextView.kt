@@ -12,15 +12,15 @@ class HintTextView : AppCompatTextView {
     private var paint: Paint? = null
     private var mWidth = 0
     private var gradient: LinearGradient? = null
-    private var matrix: Matrix? = null
+    private var mMatrix: Matrix? = null
 
     /**
      * 渐变的速度
      */
     private var deltaX = 0
 
-    constructor(context: Context?) : super(context, null) {}
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {}
+    constructor(context: Context?) : super(context, null)
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
 
     init {
         paint = getPaint()
@@ -43,21 +43,21 @@ class HintTextView : AppCompatTextView {
                 Shader.TileMode.CLAMP
             )
             paint!!.shader = gradient
-            matrix = Matrix()
+            mMatrix = Matrix()
         }
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        if (matrix != null) {
+        if (mMatrix != null) {
             deltaX += mWidth / 8
             if (deltaX > 2 * mWidth) {
                 deltaX = -mWidth
             }
 
             //通过矩阵的平移实现
-            matrix!!.setTranslate(deltaX.toFloat(), 0f)
-            gradient!!.setLocalMatrix(matrix)
+            mMatrix!!.setTranslate(deltaX.toFloat(), 0f)
+            gradient!!.setLocalMatrix(mMatrix)
             postInvalidateDelayed(100)
         }
     }

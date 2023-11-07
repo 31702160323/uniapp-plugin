@@ -132,21 +132,21 @@ class FloatView private constructor() {
             val data = JSONObject()
             data["message"] = "更新成功"
             data["code"] = 0
-            closeView!!.setOnClickListener { v: View? -> hide() }
-            lyricView!!.setOnClickListener { v: View? -> hideBackground() }
-            nextView!!.setOnClickListener { v: View? ->
+            closeView!!.setOnClickListener { hide() }
+            lyricView!!.setOnClickListener { hideBackground() }
+            nextView!!.setOnClickListener {
                 instance.fireGlobalEventCallback(
                     Global.EVENT_MUSIC_NOTIFICATION_NEXT,
                     data
                 )
             }
-            playView!!.setOnClickListener { v: View? ->
+            playView!!.setOnClickListener {
                 instance.fireGlobalEventCallback(
                     Global.EVENT_MUSIC_NOTIFICATION_PAUSE,
                     data
                 )
             }
-            previousView!!.setOnClickListener { v: View? ->
+            previousView!!.setOnClickListener {
                 instance.fireGlobalEventCallback(
                     Global.EVENT_MUSIC_NOTIFICATION_PREVIOUS,
                     data
@@ -159,7 +159,7 @@ class FloatView private constructor() {
                 favouriteView!!.layoutParams = favouriteViewLp
                 favouriteView!!.scaleType = ImageView.ScaleType.FIT_XY
                 favouriteView!!.setImageResource(R.drawable.note_btn_love_white)
-                favouriteView!!.setOnClickListener { v: View? ->
+                favouriteView!!.setOnClickListener {
                     instance.fireGlobalEventCallback(
                         Global.EVENT_MUSIC_NOTIFICATION_FAVOURITE, data
                     )

@@ -11,7 +11,6 @@ import android.os.Binder
 import android.os.Build
 import android.os.IBinder
 import android.util.ArrayMap
-import android.util.Log
 import com.alibaba.fastjson.JSONObject
 import com.xzh.musicnotification.Global
 import com.xzh.musicnotification.LockActivityV2
@@ -19,7 +18,6 @@ import com.xzh.musicnotification.notification.MusicNotificationV2
 import com.xzh.musicnotification.service.NotificationReceiver.IReceiverListener
 import com.xzh.musicnotification.utils.Utils
 import java.lang.ref.WeakReference
-import kotlin.math.log
 
 class PlayServiceV2 : Service(), IReceiverListener {
     private var playing = false

@@ -8,6 +8,7 @@ import android.view.ViewConfiguration
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.Scroller
+import kotlin.math.abs
 
 /**
  * @author ztk
@@ -47,8 +48,8 @@ class SlidingFinishLayout : RelativeLayout {
     private var onSlidingFinishListener: OnSlidingFinishListener? = null
     private var isFinish = false
 
-    constructor(context: Context?) : super(context) {}
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {}
+    constructor(context: Context?) : super(context)
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
 
     init {
         mTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
@@ -89,8 +90,8 @@ class SlidingFinishLayout : RelativeLayout {
                 val moveX = event.rawX.toInt()
                 val deltaX = tempX - moveX
                 tempX = moveX
-                if (Math.abs(moveX - downX) > mTouchSlop
-                    && Math.abs(event.rawY.toInt() - downY) < mTouchSlop
+                if (abs(moveX - downX) > mTouchSlop
+                    && abs(event.rawY.toInt() - downY) < mTouchSlop
                 ) {
                     isSliding = true
                 }
@@ -118,7 +119,7 @@ class SlidingFinishLayout : RelativeLayout {
         //滚动出界面
         mScroller!!.startScroll(
             mParentView!!.scrollX, 0, -delta + 1, 0,
-            Math.abs(delta)
+            abs(delta)
         )
         postInvalidate()
     }
@@ -128,7 +129,7 @@ class SlidingFinishLayout : RelativeLayout {
         //滚动到起始位置
         mScroller!!.startScroll(
             mParentView!!.scrollX, 0, -delta, 0,
-            Math.abs(delta)
+            abs(delta)
         )
         postInvalidate()
     }

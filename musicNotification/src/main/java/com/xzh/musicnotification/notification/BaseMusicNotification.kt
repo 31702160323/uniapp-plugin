@@ -11,7 +11,6 @@ import android.graphics.Bitmap
 import android.os.Build
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
-import android.util.Log
 import android.view.KeyEvent
 import com.alibaba.fastjson.JSONObject
 import com.bumptech.glide.Glide
@@ -22,6 +21,7 @@ import com.xzh.musicnotification.service.PlayServiceV2
 import com.xzh.musicnotification.utils.Utils
 import io.dcloud.PandoraEntryActivity
 import java.lang.ref.WeakReference
+
 
 abstract class BaseMusicNotification {
     var iD = 0x111
@@ -83,31 +83,42 @@ abstract class BaseMusicNotification {
         // 使用新的播放状态更新MediaSessionCompat实例
         mMediaSession!!.setPlaybackState(
             PlaybackStateCompat.Builder()
-//            .setActions(
-////                PlaybackStateCompat.ACTION_PLAY
-////                        or PlaybackStateCompat.ACTION_PLAY_PAUSE
-////                        or PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID
-////                        or PlaybackStateCompat.ACTION_PAUSE
-////                        or PlaybackStateCompat.ACTION_SKIP_TO_NEXT
-////                        or PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS
-//            PlaybackStateCompat.ACTION_PLAY
-//                    or PlaybackStateCompat.ACTION_PAUSE
-//                    or PlaybackStateCompat.ACTION_PLAY_PAUSE
-//                    or PlaybackStateCompat.ACTION_SKIP_TO_NEXT
-//                    or PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS
-//                    or PlaybackStateCompat.ACTION_STOP
-//                    or PlaybackStateCompat.ACTION_SEEK_TO
-////                        or PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID
-////                        or PlaybackStateCompat.ACTION_FAST_FORWARD
-////                        or PlaybackStateCompat.ACTION_REWIND
-////                        or PlaybackStateCompat.ACTION_SET_REPEAT_MODE
-////                        or PlaybackStateCompat.ACTION_SET_SHUFFLE_MODE
-//        )
-            .build())
+                .setActions(
+                    PlaybackStateCompat.ACTION_STOP or
+                            PlaybackStateCompat.ACTION_PAUSE or
+                            PlaybackStateCompat.ACTION_PLAY or
+                            PlaybackStateCompat.ACTION_REWIND or
+                            PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
+                            PlaybackStateCompat.ACTION_SKIP_TO_NEXT or
+                            PlaybackStateCompat.ACTION_FAST_FORWARD or
+//                            PlaybackStateCompat.ACTION_SET_RATING or
+                            PlaybackStateCompat.ACTION_SEEK_TO or
+                            PlaybackStateCompat.ACTION_PLAY_PAUSE or
+//                            PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID or
+//                            PlaybackStateCompat.ACTION_PLAY_FROM_SEARCH or
+                            PlaybackStateCompat.ACTION_SKIP_TO_QUEUE_ITEM or
+//                            PlaybackStateCompat.ACTION_PLAY_FROM_URI or
+//                            PlaybackStateCompat.ACTION_PREPARE or
+//                            PlaybackStateCompat.ACTION_PREPARE_FROM_MEDIA_ID or
+//                            PlaybackStateCompat.ACTION_PREPARE_FROM_SEARCH or
+//                            PlaybackStateCompat.ACTION_PREPARE_FROM_URI or
+                            PlaybackStateCompat.ACTION_SET_REPEAT_MODE or
+                            PlaybackStateCompat.ACTION_SET_SHUFFLE_MODE
+//                            PlaybackStateCompat.ACTION_SET_CAPTIONING_ENABLED or
+//                            PlaybackStateCompat.ACTION_SET_PLAYBACK_SPEED
+                )
+                .build()
+        )
+
+
         mMediaSession!!.setCallback(object : MediaSessionCompat.Callback() {
             override fun onMediaButtonEvent(intent: Intent): Boolean {
-                val keyEvent = intent.getParcelableExtra<KeyEvent>(Intent.EXTRA_KEY_EVENT)
-                if (keyEvent!!.action == 0) {
+                val keyEvent: KeyEvent? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT, KeyEvent::class.java)
+                } else {
+                    intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT)
+                }
+                if (keyEvent?.action == 0) {
                     val data = JSONObject()
                     data["type"] = Global.MEDIA_BUTTON
                     data["keyCode"] = keyEvent.keyCode
@@ -167,6 +178,7 @@ abstract class BaseMusicNotification {
         updateNotification()
     }
 
+    @JvmName("setBasePosition")
     fun setPosition(position: Long) {
         this.position = position
     }
