@@ -11,6 +11,7 @@ import android.graphics.Bitmap
 import android.os.Build
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
+import android.util.Log
 import android.view.KeyEvent
 import com.alibaba.fastjson.JSONObject
 import com.bumptech.glide.Glide
@@ -48,6 +49,9 @@ abstract class BaseMusicNotification {
     @JvmField
     protected var mNotificationManager: NotificationManager? = null
 
+    @JvmField
+    protected var mPlaybackStateBuilder: PlaybackStateCompat.Builder? = null
+
     @SuppressLint("UnspecifiedImmutableFlag")
     protected fun getContentIntent(path: String?): PendingIntent {
         val intent = Intent(mContext!!.get(), PandoraEntryActivity::class.java)
@@ -74,50 +78,49 @@ abstract class BaseMusicNotification {
      */
     fun initNotification(service: Service) {
         mContext = WeakReference(service)
-        iD++
+        iD += 1
         mMediaSession = MediaSessionCompat(service, CHANNEL_ID)
         mMediaSession!!.isActive = true
 //        mMediaSession!!.setMetadata(MediaMetadataCompat.Builder().build())
 
-
-        // 使用新的播放状态更新MediaSessionCompat实例
-        mMediaSession!!.setPlaybackState(
-            PlaybackStateCompat.Builder()
-                .setActions(
-                    PlaybackStateCompat.ACTION_STOP or
-                            PlaybackStateCompat.ACTION_PAUSE or
-                            PlaybackStateCompat.ACTION_PLAY or
-                            PlaybackStateCompat.ACTION_REWIND or
-                            PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
-                            PlaybackStateCompat.ACTION_SKIP_TO_NEXT or
-                            PlaybackStateCompat.ACTION_FAST_FORWARD or
+        mPlaybackStateBuilder = PlaybackStateCompat.Builder()
+            .setActions(
+                PlaybackStateCompat.ACTION_STOP or
+                        PlaybackStateCompat.ACTION_PAUSE or
+                        PlaybackStateCompat.ACTION_PLAY or
+                        PlaybackStateCompat.ACTION_REWIND or
+                        PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
+                        PlaybackStateCompat.ACTION_SKIP_TO_NEXT or
+                        PlaybackStateCompat.ACTION_FAST_FORWARD or
 //                            PlaybackStateCompat.ACTION_SET_RATING or
-                            PlaybackStateCompat.ACTION_SEEK_TO or
-                            PlaybackStateCompat.ACTION_PLAY_PAUSE or
+                        PlaybackStateCompat.ACTION_SEEK_TO or
+                        PlaybackStateCompat.ACTION_PLAY_PAUSE or
 //                            PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID or
 //                            PlaybackStateCompat.ACTION_PLAY_FROM_SEARCH or
-                            PlaybackStateCompat.ACTION_SKIP_TO_QUEUE_ITEM or
+                        PlaybackStateCompat.ACTION_SKIP_TO_QUEUE_ITEM or
 //                            PlaybackStateCompat.ACTION_PLAY_FROM_URI or
 //                            PlaybackStateCompat.ACTION_PREPARE or
 //                            PlaybackStateCompat.ACTION_PREPARE_FROM_MEDIA_ID or
 //                            PlaybackStateCompat.ACTION_PREPARE_FROM_SEARCH or
 //                            PlaybackStateCompat.ACTION_PREPARE_FROM_URI or
-                            PlaybackStateCompat.ACTION_SET_REPEAT_MODE or
-                            PlaybackStateCompat.ACTION_SET_SHUFFLE_MODE
+                        PlaybackStateCompat.ACTION_SET_REPEAT_MODE or
+                        PlaybackStateCompat.ACTION_SET_SHUFFLE_MODE
 //                            PlaybackStateCompat.ACTION_SET_CAPTIONING_ENABLED or
 //                            PlaybackStateCompat.ACTION_SET_PLAYBACK_SPEED
-                )
-                .build()
-        )
+            )
+
+        // 使用新的播放状态更新MediaSessionCompat实例
+        mMediaSession!!.setPlaybackState(mPlaybackStateBuilder?.build())
 
 
         mMediaSession!!.setCallback(object : MediaSessionCompat.Callback() {
             override fun onMediaButtonEvent(intent: Intent): Boolean {
-                val keyEvent: KeyEvent? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT, KeyEvent::class.java)
-                } else {
-                    intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT)
-                }
+                val keyEvent: KeyEvent? =
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT, KeyEvent::class.java)
+                    } else {
+                        intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT)
+                    }
                 if (keyEvent?.action == 0) {
                     val data = JSONObject()
                     data["type"] = Global.MEDIA_BUTTON
@@ -134,15 +137,14 @@ abstract class BaseMusicNotification {
                 super.onSeekTo(pos)
                 this@BaseMusicNotification.setPosition(pos)
 
-
                 // 设置播放状态为正在播放，并设置媒体播放的当前位置
                 mMediaSession!!.setPlaybackState(
-                    PlaybackStateCompat.Builder()
-                        .setState(
+                    mPlaybackStateBuilder
+                        ?.setState(
                             if (this@BaseMusicNotification.isPlay) PlaybackStateCompat.STATE_PLAYING else PlaybackStateCompat.STATE_STOPPED,
-                            this@BaseMusicNotification.position, 1.0f
+                            this@BaseMusicNotification.position, 1.0F
                         )
-                        .build()
+                        ?.build()
                 )
 
                 val data = JSONObject()

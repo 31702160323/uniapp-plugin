@@ -136,7 +136,7 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                                 resource: Bitmap,
                                 transition: Transition<in Bitmap?>?
                             ) {
-                                mMediaSession!!.setMetadata(
+                                mMediaSession?.setMetadata(
                                     MediaMetadataCompat.Builder()
                                         .putString(MediaMetadataCompat.METADATA_KEY_TITLE, songName)
                                         .putString(
@@ -151,25 +151,30 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                                 )
 
                                 // 设置播放状态为正在播放，并设置媒体播放的当前位置
-                                mMediaSession!!.setPlaybackState(
-                                    PlaybackStateCompat.Builder()
-                                        .setState(
+                                mMediaSession?.setPlaybackState(
+                                    mPlaybackStateBuilder?.setState(
                                             if (this@MusicNotificationV2.isPlay) PlaybackStateCompat.STATE_PLAYING else PlaybackStateCompat.STATE_STOPPED,
-                                            this@MusicNotificationV2.position, 1.0f
+                                            this@MusicNotificationV2.position, 1.0F
                                         )
-                                        .build()
+                                        ?.build()
                                 )
+
+                                val mediaStyle = androidx.media.app.NotificationCompat.MediaStyle()
+                                mediaStyle.setMediaSession(this@MusicNotificationV2.mMediaSession!!.sessionToken)
+                                mediaStyle.setShowCancelButton(true)
 
                                 val builder = NotificationCompat.Builder(
                                     context, CHANNEL_ID
                                 ) //                                .setColorized(true)
                                     .setOngoing(false)
-                                    .setShowWhen(true)
-                                    .setAutoCancel(true)
+                                    .setShowWhen(false)
+                                    .setAutoCancel(false)
                                     .setOnlyAlertOnce(true)
                                     .setSmallIcon(R.drawable.music_icon) //                                .setBadgeIconType(R.drawable.music_icon)
+//                                    .setLargeIcon()
                                     .setBadgeIconType(NotificationCompat.BADGE_ICON_LARGE)
                                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                                    .setPriority(NotificationCompat.PRIORITY_LOW)
                                     .setContentIntent(
                                         getContentIntent(
                                             mConfig!!.getString(Global.KEY_PATH).toString()
@@ -180,11 +185,10 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                                     .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)
                                     .setLargeIcon(resource)
                                     .setProgress(0, 0, true)
-                                val style = androidx.media.app.NotificationCompat.MediaStyle()
-                                style.setMediaSession(this@MusicNotificationV2.mMediaSession!!.sessionToken)
-                                style.setShowCancelButton(true)
+                                    .setStyle(mediaStyle)
+
                                 if (showFavour) {
-                                    style.setShowActionsInCompactView(1, 2, 3)
+                                    mediaStyle.setShowActionsInCompactView(1, 2, 3)
                                     builder.addAction(
                                         generateAction(
                                             favour,
@@ -194,34 +198,32 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                                         )
                                     )
                                 } else {
-                                    style.setShowActionsInCompactView(0, 1, 2)
+                                    mediaStyle.setShowActionsInCompactView(0, 1, 2)
                                 }
-                                builder.addAction(
+
+                                val notification = builder.addAction(
                                     generateAction(
                                         R.drawable.note_btn_pre_white,
                                         "Previous",
                                         1,
                                         NotificationReceiver.EXTRA_PRE
                                     )
-                                )
-                                builder.addAction(
+                                ).addAction(
                                     generateAction(
                                         play,
                                         "Play",
                                         0,
                                         NotificationReceiver.EXTRA_PLAY
                                     )
-                                )
-                                builder.addAction(
+                                ).addAction(
                                     generateAction(
                                         R.drawable.note_btn_next_white,
                                         "Next",
                                         2,
                                         NotificationReceiver.EXTRA_NEXT
                                     )
-                                )
-                                builder.setStyle(style)
-                                val notification = builder.build()
+                                ).build()
+
                                 if (this@MusicNotificationV2.mNotification == null) {
                                     (context as Service).startForeground(
                                         iD,
