@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.PlaybackStateCompat
-import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
@@ -27,6 +26,22 @@ import com.xzh.musicnotification.utils.Utils
 
 @Suppress("DEPRECATION")
 open class MusicNotificationV2 : BaseMusicNotification() {
+
+    companion object {
+        val instance: MusicNotificationV2
+            get() = SingletonHolder.instance
+
+        @JvmStatic
+        fun initConfig(config: JSONObject?) {
+            mConfig = config
+        }
+
+        @JvmStatic
+        fun setShowFavour(show: Boolean) {
+            showFavour = show
+        }
+    }
+
     private var systemStyle = false
 
     // 大布局
@@ -119,7 +134,6 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                 val artistsName = this.getString(Global.KEY_ARTISTS_NAME).toString()
                 val duration =
                     if (this.getLong(Global.KEY_DURATION) == null) 0 else this.getLong(Global.KEY_DURATION)
-                Log.d("TAG", "updateNotification: $duration")
                 val play =
                     if (this@MusicNotificationV2.isPlay) R.drawable.note_btn_pause_white else R.drawable.note_btn_play_white
                 val favour =
@@ -184,7 +198,7 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                                     .setContentText(artistsName)
                                     .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)
                                     .setLargeIcon(resource)
-                                    .setProgress(0, 0, true)
+//                                    .setProgress(0, 0, true)
                                     .setStyle(mediaStyle)
 
                                 if (showFavour) {
@@ -438,23 +452,6 @@ open class MusicNotificationV2 : BaseMusicNotification() {
         systemStyle = style
         if (this.mNotificationManager != null) {
             this.createNotification()
-        }
-    }
-
-    
-
-    companion object {
-        val instance: MusicNotificationV2
-            get() = SingletonHolder.instance
-
-        @JvmStatic
-        fun initConfig(config: JSONObject?) {
-            mConfig = config
-        }
-
-        @JvmStatic
-        fun setShowFavour(show: Boolean) {
-            showFavour = show
         }
     }
 }

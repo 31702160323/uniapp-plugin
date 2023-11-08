@@ -12,7 +12,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import android.provider.Settings
-import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationManagerCompat
 import com.alibaba.fastjson.JSONArray
@@ -34,7 +33,31 @@ import io.dcloud.feature.uniapp.annotation.UniJSMethod
 import io.dcloud.feature.uniapp.bridge.UniJSCallback
 import io.dcloud.feature.uniapp.common.UniModule
 
-class MusicNotificationModule : UniModule(), PlayServiceV2.OnEventListener {
+class MusicNotificationModule : UniModule() {
+
+    companion object {
+        fun enableNotification(context: Context) {
+            try {
+                val intent = Intent()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    intent.action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
+                    intent.putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                    intent.putExtra(Settings.EXTRA_CHANNEL_ID, context.applicationInfo.uid)
+                }
+                intent.putExtra("app_package", context.packageName)
+                intent.putExtra("app_uid", context.applicationInfo.uid)
+                (context as Activity).startActivityForResult(intent, 1)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                val intent = Intent()
+                intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                val uri = Uri.fromParts("package", context.packageName, null)
+                intent.data = uri
+                (context as Activity).startActivityForResult(intent, 1)
+            }
+        }
+    }
+
     private var isInit = false
     private var showFavour = false
     private var lockActivity = false
@@ -93,7 +116,11 @@ class MusicNotificationModule : UniModule(), PlayServiceV2.OnEventListener {
                     mBinder = iBinder as ServiceBinder
                     mBinder!!.lock(lockActivity)
                     mBinder!!.switchNotification(systemStyle)
-                    mBinder!!.setEventListener(this@MusicNotificationModule)
+                    mBinder!!.setEventListener(object : PlayServiceV2.OnEventListener {
+                        override fun sendMessage(eventName: String, params: Map<String, Any>) {
+                            mUniSDKInstance.fireGlobalEventCallback(eventName, params)
+                        }
+                    })
                     data["message"] = "设置歌曲信息成功"
                     data["code"] = 0
                     callback!!.invoke(data)
@@ -270,7 +297,6 @@ class MusicNotificationModule : UniModule(), PlayServiceV2.OnEventListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.d("TAG", "onActivityResult: $requestCode")
         when (requestCode) {
             0 -> {
                 val map = JSONObject()
@@ -306,32 +332,5 @@ class MusicNotificationModule : UniModule(), PlayServiceV2.OnEventListener {
     override fun onActivityDestroy() {
         super.onActivityDestroy()
         cancel()
-    }
-
-    override fun sendMessage(eventName: String, params: Map<String, Any>) {
-        mUniSDKInstance.fireGlobalEventCallback(eventName, params)
-    }
-
-    companion object {
-        fun enableNotification(context: Context) {
-            try {
-                val intent = Intent()
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    intent.action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
-                    intent.putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
-                    intent.putExtra(Settings.EXTRA_CHANNEL_ID, context.applicationInfo.uid)
-                }
-                intent.putExtra("app_package", context.packageName)
-                intent.putExtra("app_uid", context.applicationInfo.uid)
-                (context as Activity).startActivityForResult(intent, 1)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                val intent = Intent()
-                intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                val uri = Uri.fromParts("package", context.packageName, null)
-                intent.data = uri
-                (context as Activity).startActivityForResult(intent, 1)
-            }
-        }
     }
 }

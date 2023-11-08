@@ -6,7 +6,6 @@ import android.content.ContentResolver
 import android.database.Cursor
 import android.os.Build
 import android.provider.MediaStore
-import android.util.Log
 import com.alibaba.fastjson.JSONArray
 import com.alibaba.fastjson.JSONObject
 
@@ -35,7 +34,6 @@ class MusicAsyncQueryHandler(cr: ContentResolver?) : AsyncQueryHandler(cr) {
     override fun onQueryComplete(token: Int, cookie: Any?, cursor: Cursor?) {
         super.onQueryComplete(token, cookie, cursor)
         val list = JSONArray()
-        Log.d("TAG", "onQueryComplete: ")
         cursor?.run {
             while (cursor.moveToNext()) {
                 if (cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE)) > 1000 * 800) {

@@ -11,20 +11,28 @@ import android.graphics.Bitmap
 import android.os.Build
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
-import android.util.Log
 import android.view.KeyEvent
 import com.alibaba.fastjson.JSONObject
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.request.target.Target
 import com.xzh.musicnotification.Global
-import com.xzh.musicnotification.service.PlayServiceV2
 import com.xzh.musicnotification.utils.Utils
 import io.dcloud.PandoraEntryActivity
 import java.lang.ref.WeakReference
 
 
 abstract class BaseMusicNotification {
+
+    companion object {
+        internal const val CHANNEL_ID = "music_id_audio"
+
+        internal const val CHANNEL_NAME = "music_name_audio"
+        internal var mConfig: JSONObject? = null
+
+        internal var showFavour = false
+    }
+
     var iD = 0x111
         protected set
 
@@ -48,6 +56,9 @@ abstract class BaseMusicNotification {
 
     @JvmField
     protected var mNotificationManager: NotificationManager? = null
+
+    @JvmField
+    protected var mMusicEventListener: OnMusicEventListener? = null
 
     @JvmField
     protected var mPlaybackStateBuilder: PlaybackStateCompat.Builder? = null
@@ -76,8 +87,9 @@ abstract class BaseMusicNotification {
      *
      * @param service BaseMusicNotification.NotificationHelperListener
      */
-    fun initNotification(service: Service) {
+    fun initNotification(service: Service, listener: OnMusicEventListener) {
         mContext = WeakReference(service)
+        mMusicEventListener = listener;
         iD += 1
         mMediaSession = MediaSessionCompat(service, CHANNEL_ID)
         mMediaSession!!.isActive = true
@@ -85,35 +97,34 @@ abstract class BaseMusicNotification {
 
         mPlaybackStateBuilder = PlaybackStateCompat.Builder()
             .setActions(
-                PlaybackStateCompat.ACTION_STOP or
-                        PlaybackStateCompat.ACTION_PAUSE or
+//            PlaybackStateCompat.ACTION_STOP or
+                PlaybackStateCompat.ACTION_PAUSE or
                         PlaybackStateCompat.ACTION_PLAY or
                         PlaybackStateCompat.ACTION_REWIND or
                         PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
                         PlaybackStateCompat.ACTION_SKIP_TO_NEXT or
                         PlaybackStateCompat.ACTION_FAST_FORWARD or
-//                            PlaybackStateCompat.ACTION_SET_RATING or
+//                        PlaybackStateCompat.ACTION_SET_RATING or
                         PlaybackStateCompat.ACTION_SEEK_TO or
-                        PlaybackStateCompat.ACTION_PLAY_PAUSE or
-//                            PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID or
-//                            PlaybackStateCompat.ACTION_PLAY_FROM_SEARCH or
-                        PlaybackStateCompat.ACTION_SKIP_TO_QUEUE_ITEM or
-//                            PlaybackStateCompat.ACTION_PLAY_FROM_URI or
-//                            PlaybackStateCompat.ACTION_PREPARE or
-//                            PlaybackStateCompat.ACTION_PREPARE_FROM_MEDIA_ID or
-//                            PlaybackStateCompat.ACTION_PREPARE_FROM_SEARCH or
-//                            PlaybackStateCompat.ACTION_PREPARE_FROM_URI or
-                        PlaybackStateCompat.ACTION_SET_REPEAT_MODE or
-                        PlaybackStateCompat.ACTION_SET_SHUFFLE_MODE
-//                            PlaybackStateCompat.ACTION_SET_CAPTIONING_ENABLED or
-//                            PlaybackStateCompat.ACTION_SET_PLAYBACK_SPEED
+                        PlaybackStateCompat.ACTION_PLAY_PAUSE
+//                        PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID or
+//                        PlaybackStateCompat.ACTION_PLAY_FROM_SEARCH or
+//                        PlaybackStateCompat.ACTION_SKIP_TO_QUEUE_ITEM or
+//                        PlaybackStateCompat.ACTION_PLAY_FROM_URI or
+//                        PlaybackStateCompat.ACTION_PREPARE or
+//                        PlaybackStateCompat.ACTION_PREPARE_FROM_MEDIA_ID or
+//                        PlaybackStateCompat.ACTION_PREPARE_FROM_SEARCH or
+//                        PlaybackStateCompat.ACTION_PREPARE_FROM_URI or
+//                        PlaybackStateCompat.ACTION_SET_REPEAT_MODE or
+//                    PlaybackStateCompat.ACTION_SET_SHUFFLE_MODE
+//                        PlaybackStateCompat.ACTION_SET_CAPTIONING_ENABLED or
+//                        PlaybackStateCompat.ACTION_SET_PLAYBACK_SPEED
             )
 
         // 使用新的播放状态更新MediaSessionCompat实例
-        mMediaSession!!.setPlaybackState(mPlaybackStateBuilder?.build())
+        mMediaSession?.setPlaybackState(mPlaybackStateBuilder?.build())
 
-
-        mMediaSession!!.setCallback(object : MediaSessionCompat.Callback() {
+        mMediaSession?.setCallback(object : MediaSessionCompat.Callback() {
             override fun onMediaButtonEvent(intent: Intent): Boolean {
                 val keyEvent: KeyEvent? =
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -122,37 +133,39 @@ abstract class BaseMusicNotification {
                         intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT)
                     }
                 if (keyEvent?.action == 0) {
-                    val data = JSONObject()
-                    data["type"] = Global.MEDIA_BUTTON
-                    data["keyCode"] = keyEvent.keyCode
-                    (mContext!!.get() as PlayServiceV2?)!!.fireGlobalEventCallback(
-                        Global.EVENT_MUSIC_MEDIA_BUTTON,
-                        data
-                    )
+                    mMusicEventListener?.onMediaButtonEvent(keyEvent.keyCode)
                 }
                 return true
             }
 
-            override fun onSeekTo(pos: Long) {
-                super.onSeekTo(pos)
-                this@BaseMusicNotification.setPosition(pos)
+            override fun onPlay() {
+                mMusicEventListener?.onPlay()
+            }
 
+            override fun onPause() {
+                mMusicEventListener?.onPause()
+            }
+
+            override fun onSkipToNext() {
+                mMusicEventListener?.onSkipToNext()
+            }
+
+            override fun onSkipToPrevious() {
+                mMusicEventListener?.onSkipToPrevious()
+            }
+
+            override fun onSeekTo(pos: Long) {
+                this@BaseMusicNotification.setPosition(pos)
                 // 设置播放状态为正在播放，并设置媒体播放的当前位置
                 mMediaSession!!.setPlaybackState(
                     mPlaybackStateBuilder
                         ?.setState(
                             if (this@BaseMusicNotification.isPlay) PlaybackStateCompat.STATE_PLAYING else PlaybackStateCompat.STATE_STOPPED,
-                            this@BaseMusicNotification.position, 1.0F
+                            pos, 1.0F
                         )
                         ?.build()
                 )
-
-                val data = JSONObject()
-                data["position"] = pos / 1000
-                (mContext!!.get() as PlayServiceV2?)!!.fireGlobalEventCallback(
-                    Global.EVENT_MUSIC_SEEK_TO,
-                    data
-                )
+                mMusicEventListener?.onSeekTo(pos)
             }
         })
     }
@@ -218,12 +231,12 @@ abstract class BaseMusicNotification {
             .into(target)
     }
 
-    companion object {
-        internal const val CHANNEL_ID = "music_id_audio"
-
-        internal const val CHANNEL_NAME = "music_name_audio"
-        internal var mConfig: JSONObject? = null
-
-        internal var showFavour = false
+    interface OnMusicEventListener {
+        fun onMediaButtonEvent(keyCode: Int)
+        fun onPlay()
+        fun onPause()
+        fun onSkipToNext()
+        fun onSkipToPrevious()
+        fun onSeekTo(pos: Long)
     }
 }
