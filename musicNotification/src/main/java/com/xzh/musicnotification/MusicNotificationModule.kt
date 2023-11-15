@@ -113,7 +113,7 @@ class MusicNotificationModule : UniModule() {
         try {
             connection = object : ServiceConnection {
                 override fun onServiceConnected(componentName: ComponentName, iBinder: IBinder) {
-                    mBinder = iBinder as ServiceBinder
+                    mBinder = IMusicServiceAidlInterface.Stub.asInterface(iBinder).service as ServiceBinder
                     mBinder!!.lock(lockActivity)
                     mBinder!!.switchNotification(systemStyle)
                     mBinder!!.setEventListener(object : PlayServiceV2.OnEventListener {

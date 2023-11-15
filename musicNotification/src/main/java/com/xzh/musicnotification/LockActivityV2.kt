@@ -29,7 +29,6 @@ import com.xzh.musicnotification.utils.Utils
 import com.xzh.musicnotification.view.SlidingFinishLayout
 import com.xzh.musicnotification.view.SlidingFinishLayout.OnSlidingFinishListener
 import io.dcloud.feature.uniapp.utils.UniUtils
-import java.lang.ref.WeakReference
 import kotlin.math.max
 
 
@@ -43,7 +42,7 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
     private var playView: ImageView? = null
     private var favouriteView: ImageView? = null
     private var connection: ServiceConnection? = null
-    private var mBinder: WeakReference<ServiceBinder?>? = null
+    private var mBinder: ServiceBinder? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Utils.fullScreen(this)
@@ -68,12 +67,12 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
         mHeight = displayMetrics.heightPixels
         connection = object : ServiceConnection {
             override fun onServiceConnected(componentName: ComponentName, iBinder: IBinder) {
-                mBinder = WeakReference(iBinder as ServiceBinder)
-                mBinder!!.get()!!.setClickListener(this@LockActivityV2)
+                mBinder = IMusicServiceAidlInterface.Stub.asInterface(iBinder).service as ServiceBinder
+                mBinder?.setClickListener(this@LockActivityV2)
                 if (UniUtils.isUiThread()) {
-                    this@LockActivityV2.update(mBinder!!.get()!!.getSongData())
+                    this@LockActivityV2.update(mBinder?.getSongData())
                 } else {
-                    runOnUiThread { this@LockActivityV2.update(mBinder!!.get()!!.getSongData()) }
+                    runOnUiThread { this@LockActivityV2.update(mBinder?.getSongData()) }
                 }
             }
 
@@ -102,7 +101,7 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
     }
 
     override fun onClick(view: View) {
-        if (mBinder!!.get() == null) return
+        if (mBinder == null) return
         var extraType = ""
         var eventName = Global.EVENT_MUSIC_NOTIFICATION_ERROR
         val data = JSONObject()
@@ -125,11 +124,11 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
             NotificationReceiver.EXTRA_PRE -> eventName = Global.EVENT_MUSIC_NOTIFICATION_PREVIOUS
             NotificationReceiver.EXTRA_NEXT -> eventName = Global.EVENT_MUSIC_NOTIFICATION_NEXT
             NotificationReceiver.EXTRA_FAV -> {
-                mBinder!!.get()!!.favour(!mBinder!!.get()!!.favour)
+                mBinder?.favour?.let { mBinder?.favour(it) }
                 eventName = Global.EVENT_MUSIC_NOTIFICATION_FAVOURITE
             }
             NotificationReceiver.EXTRA_PLAY -> {
-                mBinder!!.get()!!.playOrPause(!mBinder!!.get()!!.getPlaying())
+                mBinder?.getPlaying()?.let { mBinder?.playOrPause(it) }
                 eventName = Global.EVENT_MUSIC_NOTIFICATION_PAUSE
             }
             else -> {
@@ -137,7 +136,7 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
                 data["code"] = -6
             }
         }
-        mBinder!!.get()!!.sendMessage(eventName, data)
+        mBinder?.sendMessage(eventName, data)
     }
 
     /**
@@ -183,8 +182,8 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
     }
 
     private fun updateUI(options: JSONObject) {
-        favour(mBinder!!.get()!!.favour)
-        playOrPause(mBinder!!.get()!!.getPlaying())
+        mBinder?.favour?.let { favour(it) }
+        mBinder?.getPlaying()?.let { playOrPause(it) }
         if (options.getString(Global.KEY_SONG_NAME) != null) {
             tvAudioName!!.text = options.getString(Global.KEY_SONG_NAME)
         }

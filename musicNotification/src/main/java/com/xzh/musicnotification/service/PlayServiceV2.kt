@@ -13,6 +13,7 @@ import android.os.IBinder
 import android.util.ArrayMap
 import com.alibaba.fastjson.JSONObject
 import com.xzh.musicnotification.Global
+import com.xzh.musicnotification.IMusicServiceAidlInterface
 import com.xzh.musicnotification.LockActivityV2
 import com.xzh.musicnotification.notification.BaseMusicNotification
 import com.xzh.musicnotification.notification.MusicNotificationV2
@@ -61,7 +62,7 @@ class PlayServiceV2 : Service(), IReceiverListener {
     private var playing = false
     private var lockActivity = false
     var songData: JSONObject? = null
-    private var mBinder: ServiceBinder? = null
+    private var mBinder: IMusicServiceAidlInterface.Stub? = null
     private var mReceiver: NotificationReceiver? = null
 
     @SuppressLint("WrongConstant")
@@ -133,7 +134,13 @@ class PlayServiceV2 : Service(), IReceiverListener {
     }
 
     override fun onBind(intent: Intent): IBinder? {
-        mBinder = ServiceBinder()
+//        mBinder = ServiceBinder()
+        mBinder = object : IMusicServiceAidlInterface.Stub() {
+            private var serviceBinder = ServiceBinder()
+            override fun getService(): IBinder {
+                return serviceBinder
+            }
+        }
         return mBinder
     }
 
@@ -201,12 +208,12 @@ class PlayServiceV2 : Service(), IReceiverListener {
             }
         }
         if (mBinder != null) {
-            mBinder?.sendMessage(eventName, data)
+            (mBinder?.service as ServiceBinder).sendMessage(eventName, data)
         }
     }
 
     fun sendMessage(eventName: String, params: Map<String, Any>) {
-        mBinder?.sendMessage(eventName, params)
+        (mBinder?.service as ServiceBinder).sendMessage(eventName, params)
     }
 
     inner class ServiceBinder : Binder() {
