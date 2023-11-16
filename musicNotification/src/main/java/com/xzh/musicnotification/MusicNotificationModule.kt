@@ -12,19 +12,12 @@ import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import android.provider.Settings
-import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationManagerCompat
-import com.alibaba.fastjson.JSONArray
 import com.alibaba.fastjson.JSONObject
-import com.xzh.musicnotification.notification.MusicNotificationV2.Companion.initConfig
-import com.xzh.musicnotification.notification.MusicNotificationV2.Companion.setShowFavour
-import com.xzh.musicnotification.service.PlayServiceV2.Companion.invoke
-import com.xzh.musicnotification.service.PlayServiceV2.Companion.startMusicService
-import com.xzh.musicnotification.service.PlayServiceV2.Companion.stopMusicService
+import com.xzh.musicnotification.service.PlayServiceV2
 import com.xzh.musicnotification.utils.MusicAsyncQueryHandler
 import com.xzh.musicnotification.utils.MusicAsyncQueryHandler.OnCallbackListener
-import com.xzh.musicnotification.utils.Utils.getApplicationInfo
 import com.xzh.musicnotification.utils.Utils.openOverlaySetting
 import com.xzh.musicnotification.utils.Utils.openPermissionSetting
 import com.xzh.musicnotification.view.FloatView.Companion.instance
@@ -33,34 +26,10 @@ import io.dcloud.feature.uniapp.bridge.UniJSCallback
 import io.dcloud.feature.uniapp.common.UniModule
 
 class MusicNotificationModule : UniModule() {
-
-    companion object {
-        fun enableNotification(context: Context) {
-            try {
-                val intent = Intent()
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    intent.action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
-                    intent.putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
-                    intent.putExtra(Settings.EXTRA_CHANNEL_ID, context.applicationInfo.uid)
-                }
-                intent.putExtra("app_package", context.packageName)
-                intent.putExtra("app_uid", context.applicationInfo.uid)
-                (context as Activity).startActivityForResult(intent, 1)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                val intent = Intent()
-                intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                val uri = Uri.fromParts("package", context.packageName, null)
-                intent.data = uri
-                (context as Activity).startActivityForResult(intent, 1)
-            }
-        }
-    }
-
     private var isInit = false
-    private var showFavour = false
     private var lockActivity = false
     private var systemStyle = false
+    private var mConfig: JSONObject? = null
     private var connection: ServiceConnection? = null
     private var mBinder: IMusicServiceAidlInterface? = null
     private var createNotificationCallback: UniJSCallback? = null
@@ -69,12 +38,7 @@ class MusicNotificationModule : UniModule() {
     @UniJSMethod(uiThread = false)
     fun init(config: JSONObject) {
         if (config.getString(Global.KEY_PATH) == null) config[Global.KEY_PATH] = ""
-        val info = getApplicationInfo(mUniSDKInstance.context)
-        if (info != null) {
-            showFavour = info.metaData.getBoolean(Global.SHOW_FAVOUR)
-        }
-        initConfig(config)
-        setShowFavour(showFavour)
+        mConfig = config
         isInit = true
     }
 
@@ -113,21 +77,18 @@ class MusicNotificationModule : UniModule() {
             connection = object : ServiceConnection {
                 override fun onServiceConnected(componentName: ComponentName, iBinder: IBinder) {
                     mBinder = IMusicServiceAidlInterface.Stub.asInterface(iBinder)
+                    mBinder?.initConfig(mConfig)
                     mBinder?.lock(lockActivity)
                     mBinder?.switchNotification(systemStyle)
-                    mBinder?.setEventListener(object :
+                    mBinder?.setServiceEventListener(object :
                         IMusicServiceCallbackAidlInterface.Stub() {
                         override fun sendMessage(eventName: String?, params: MutableMap<Any?, Any?>?
                         ) {
-                            Log.d("TAG", "sendMessage: $eventName : $params")
-                            mUniSDKInstance.fireGlobalEventCallback(eventName, params as MutableMap<String, Any>)
+                            val data = JSONObject()
+                            data.putAll(params as Map<out String, Any>)
+                            mUniSDKInstance.fireGlobalEventCallback(eventName, data)
                         }
                     })
-//                    mBinder!!.setEventListener(object : PlayServiceV2.OnEventListener {
-//                        override fun sendMessage(eventName: String, params: Map<String, Any>) {
-//                            mUniSDKInstance.fireGlobalEventCallback(eventName, params)
-//                        }
-//                    })
                     data["message"] = "设置歌曲信息成功"
                     data["code"] = 0
                     callback!!.invoke(data)
@@ -137,14 +98,44 @@ class MusicNotificationModule : UniModule() {
                     mUniSDKInstance.fireGlobalEventCallback(Global.EVENT_MUSIC_LIFECYCLE, jsonObject)
                 }
 
-                override fun onServiceDisconnected(componentName: ComponentName) {}
+                override fun onServiceDisconnected(componentName: ComponentName) {
+                    mBinder = null
+                }
             }
             val context = mUniSDKInstance.context
-            context.bindService(startMusicService(context), connection!!, Context.BIND_AUTO_CREATE)
+
+            val intent = Intent(context, PlayServiceV2::class.java)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context.startForegroundService(intent)
+            } else {
+                context.startService(intent)
+            }
+            context.bindService(intent, connection!!, Context.BIND_AUTO_CREATE)
         } catch (e: Exception) {
             data["message"] = "创建通知栏失败"
             data["code"] = 0
             callback!!.invoke(data)
+        }
+    }
+
+    private fun enableNotification(context: Context) {
+        try {
+            val intent = Intent()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                intent.action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
+                intent.putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                intent.putExtra(Settings.EXTRA_CHANNEL_ID, context.applicationInfo.uid)
+            }
+            intent.putExtra("app_package", context.packageName)
+            intent.putExtra("app_uid", context.applicationInfo.uid)
+            (context as Activity).startActivityForResult(intent, 1)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            val intent = Intent()
+            intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+            val uri = Uri.fromParts("package", context.packageName, null)
+            intent.data = uri
+            (context as Activity).startActivityForResult(intent, 1)
         }
     }
 
@@ -185,7 +176,6 @@ class MusicNotificationModule : UniModule() {
 
     @UniJSMethod(uiThread = false)
     fun favour(isFavour: Boolean) {
-        if (!showFavour) return
         if (mBinder != null) {
             mBinder?.favour = isFavour
             instance?.favour(isFavour)
@@ -205,10 +195,11 @@ class MusicNotificationModule : UniModule() {
 
     @UniJSMethod(uiThread = false)
     fun cancel() {
+        val context = mUniSDKInstance.context
         if (connection != null) {
             hideFloatWindow()
-            mUniSDKInstance.context.unbindService(connection!!)
-            stopMusicService(mUniSDKInstance.context)
+            context.unbindService(connection!!)
+            context.stopService(Intent(context, PlayServiceV2::class.java))
             mBinder = null
             connection = null
         }
@@ -239,7 +230,19 @@ class MusicNotificationModule : UniModule() {
 
     @UniJSMethod(uiThread = false)
     fun setWidgetStyle(options: JSONObject) {
-        invoke(mUniSDKInstance.context, "bg", options)
+        try {
+            val clazz = Class.forName("com.xzh.widget.MusicWidget")
+
+            val method = clazz.getDeclaredMethod(
+                "invoke",
+                Context::class.java,
+                String::class.java,
+                MutableMap::class.java
+            )
+            method.invoke(clazz, mUniSDKInstance.context, "bg", options)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     @UniJSMethod(uiThread = false)
@@ -294,7 +297,7 @@ class MusicNotificationModule : UniModule() {
 //        }
         MusicAsyncQueryHandler(mUniSDKInstance.context.contentResolver)
             .setOnCallbackListener(object : OnCallbackListener {
-                override fun onCallbackListener(list: JSONArray?) {
+                override fun onCallbackListener(list: ArrayList<Any>) {
                     callback.invoke(list)
                 }
             })

@@ -12,7 +12,6 @@ import android.support.v4.media.session.PlaybackStateCompat
 import android.view.View
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
-import com.alibaba.fastjson.JSONObject
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.NotificationTarget
 import com.bumptech.glide.request.target.Target
@@ -30,16 +29,6 @@ open class MusicNotificationV2 : BaseMusicNotification() {
     companion object {
         val instance: MusicNotificationV2
             get() = SingletonHolder.instance
-
-        @JvmStatic
-        fun initConfig(config: JSONObject?) {
-            mConfig = config
-        }
-
-        @JvmStatic
-        fun setShowFavour(show: Boolean) {
-            showFavour = show
-        }
     }
 
     private var systemStyle = false
@@ -57,10 +46,9 @@ open class MusicNotificationV2 : BaseMusicNotification() {
     override fun createNotification() {
         cancel()
         val context = mContext!!.get()
-        if (mConfig == null) return
         if (context === null) return
         if (mNotificationManager === null) mNotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val path = mConfig!!.getString(Global.KEY_PATH).toString()
+        val path = mConfig?.get(Global.KEY_PATH).toString()
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1) { //Android 5.1 以下
             mNotification = Notification.Builder(context)
                 .setOngoing(true)
@@ -110,20 +98,23 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                 mNotification = builder.build()
             }
         }
-        updateSong(songInfo!!)
+        if (songInfo != null) {
+            updateSong(songInfo!!)
+        }
         playOrPause(isPlay)
 
         // 设置为前台Service
-        if (mNotification != null) (context as Service?)!!.startForeground(
-            iD,
-            mNotification
-        )
+        if (mNotification != null) {
+            (context as Service?)!!.startForeground(
+                iD,
+                mNotification
+            )
+        }
     }
 
     @Suppress("UNCHECKED_CAST")
     override fun updateNotification() {
         val context = mContext!!.get()
-        if (mConfig == null) return
         if (context === null) return
         if (this@MusicNotificationV2.songInfo == null) return
         if (this@MusicNotificationV2.mNotificationManager == null) createNotification()
@@ -133,7 +124,7 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                 val songName = this[Global.KEY_SONG_NAME].toString()
                 val artistsName = this[Global.KEY_ARTISTS_NAME].toString()
                 val duration =
-                    if (this[Global.KEY_DURATION] == null) 0 else this[Global.KEY_DURATION] as Long
+                    if (this[Global.KEY_DURATION] == null) 0L else this[Global.KEY_DURATION] as Int
                 val play =
                     if (this@MusicNotificationV2.isPlay) R.drawable.note_btn_pause_white else R.drawable.note_btn_play_white
                 val favour =
@@ -157,7 +148,7 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                                         )
                                         .putLong(
                                             MediaMetadataCompat.METADATA_KEY_DURATION,
-                                            duration
+                                            duration.toLong()
                                         )
                                         .build()
                                 )
@@ -189,7 +180,7 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                                     .setPriority(NotificationCompat.PRIORITY_LOW)
                                     .setContentIntent(
                                         getContentIntent(
-                                            mConfig!!.getString(Global.KEY_PATH).toString()
+                                            mConfig?.get(Global.KEY_PATH).toString()
                                         )
                                     )
                                     .setContentTitle(songName)

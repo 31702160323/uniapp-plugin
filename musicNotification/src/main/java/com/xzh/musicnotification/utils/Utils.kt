@@ -4,6 +4,7 @@ package com.xzh.musicnotification.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ActivityManager
 import android.app.PendingIntent
 import android.app.PendingIntent.CanceledException
 import android.content.ComponentName
@@ -15,6 +16,7 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
+import android.os.Process
 import android.provider.Settings
 import android.util.TypedValue
 import android.view.View
@@ -201,5 +203,40 @@ object Utils {
                 timer = null
             }
         }, duration)
+    }
+
+    private fun isPidOfProcessName(context: Context, pid: Int, name: String?): Boolean {
+        if (name == null) return false
+        var isMain = false
+        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        //遍历所有进程
+        for (process in am.runningAppProcesses) {
+            if (process.pid == pid) {
+                //进程ID相同时判断该进程名是否一致
+                if (process.processName.equals(name)) {
+                    isMain = true;
+                }
+                break
+            }
+        }
+        return isMain
+    }
+
+    /**
+     * 获取主进程名
+     * @param context 上下文
+     * @return 主进程名
+     */
+    private fun getMainProcessName(context: Context): String {
+        return context.packageManager.getApplicationInfo(context.packageName, 0).processName;
+    }
+
+    /**
+     * 判断是否主进程
+     * @param context 上下文
+     * @return true是主进程
+     */
+    fun isMainProcess(context: Context): Boolean {
+        return isPidOfProcessName(context, Process.myPid(), getMainProcessName(context));
     }
 }

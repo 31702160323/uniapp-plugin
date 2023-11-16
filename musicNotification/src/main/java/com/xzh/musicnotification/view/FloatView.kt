@@ -15,7 +15,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
-import com.alibaba.fastjson.JSONObject
 import com.xzh.musicnotification.Global
 import com.xzh.musicnotification.R
 import com.xzh.musicnotification.utils.Utils.dip2px
@@ -129,7 +128,7 @@ class FloatView private constructor() {
             nextView!!.setImageResource(R.drawable.note_btn_next_white)
             layoutBottom!!.addView(nextView)
             floatView!!.addView(layoutBottom)
-            val data = JSONObject()
+            val data = hashMapOf<String, Any>()
             data["message"] = "更新成功"
             data["code"] = 0
             closeView!!.setOnClickListener { hide() }

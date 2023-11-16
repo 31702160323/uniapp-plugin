@@ -6,8 +6,6 @@ import android.content.ContentResolver
 import android.database.Cursor
 import android.os.Build
 import android.provider.MediaStore
-import com.alibaba.fastjson.JSONArray
-import com.alibaba.fastjson.JSONObject
 
 
 class MusicAsyncQueryHandler(cr: ContentResolver?) : AsyncQueryHandler(cr) {
@@ -33,11 +31,11 @@ class MusicAsyncQueryHandler(cr: ContentResolver?) : AsyncQueryHandler(cr) {
     @SuppressLint("Range")
     override fun onQueryComplete(token: Int, cookie: Any?, cursor: Cursor?) {
         super.onQueryComplete(token, cookie, cursor)
-        val list = JSONArray()
+        val list = arrayListOf<Any>()
         cursor?.run {
             while (cursor.moveToNext()) {
                 if (cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE)) > 1000 * 800) {
-                    val songBean = JSONObject()
+                    val songBean = hashMapOf<String, Any>()
                     songBean["id"] =
                         cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)) //ID
                     songBean["musicName"] =
@@ -69,6 +67,6 @@ class MusicAsyncQueryHandler(cr: ContentResolver?) : AsyncQueryHandler(cr) {
     }
 
     interface OnCallbackListener {
-        fun onCallbackListener(list: JSONArray?)
+        fun onCallbackListener(list: ArrayList<Any>)
     }
 }

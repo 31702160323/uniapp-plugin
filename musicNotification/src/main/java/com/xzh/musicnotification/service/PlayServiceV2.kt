@@ -7,13 +7,11 @@ import android.bluetooth.BluetoothHeadset
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.os.Binder
 import android.os.Build
 import android.os.IBinder
-import android.util.ArrayMap
-import android.util.Log
-import com.alibaba.fastjson.JSONObject
+import android.os.Process
 import com.xzh.musicnotification.Global
+import com.xzh.musicnotification.IMusicActivityCallbackAidlInterface
 import com.xzh.musicnotification.IMusicServiceAidlInterface
 import com.xzh.musicnotification.IMusicServiceCallbackAidlInterface
 import com.xzh.musicnotification.LockActivityV2
@@ -23,97 +21,61 @@ import com.xzh.musicnotification.service.NotificationReceiver.IReceiverListener
 import com.xzh.musicnotification.utils.Utils
 
 class PlayServiceV2 : Service(), IReceiverListener {
-
-    companion object {
-        private var service: PlayServiceV2? = null
-
-        @JvmStatic
-        fun startMusicService(context: Context): Intent {
-            val intent = Intent(context, PlayServiceV2::class.java)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                context.startForegroundService(intent)
-            } else {
-                context.startService(intent)
-            }
-            return intent
-        }
-
-        @JvmStatic
-        fun stopMusicService(context: Context) {
-            context.stopService(Intent(context, PlayServiceV2::class.java))
-        }
-
-        @JvmStatic
-        operator fun invoke(context: Context, type: String, options: MutableMap<String, Any?>) {
-            try {
-                val clazz = Class.forName("com.xzh.widget.MusicWidget")
-
-                val method = clazz.getDeclaredMethod(
-                    "invoke",
-                    Context::class.java,
-                    String::class.java,
-                    MutableMap::class.java
-                )
-                method.invoke(clazz, context, type, options)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
-
     private var playing = false
     private var lockActivity = false
     var songData: MutableMap<String, Any?>? = null
     private var mReceiver: NotificationReceiver? = null
-    private var mEventListener: IMusicServiceCallbackAidlInterface? = null
-    private var mBinder: IMusicServiceAidlInterface.Stub? = null
+    private var mServiceEventListener: IMusicServiceCallbackAidlInterface? = null
+    private var mActivityEventListener: IMusicActivityCallbackAidlInterface? = null
 
     @SuppressLint("WrongConstant")
     override fun onCreate() {
         super.onCreate()
-
         MusicNotificationV2.instance.initNotification(
             this,
             object : BaseMusicNotification.OnMusicEventListener {
                 override fun onMediaButtonEvent(keyCode: Int) {
-                    val data = JSONObject()
+                    val data = hashMapOf<String, Any>()
                     data["type"] = Global.MEDIA_BUTTON
                     data["keyCode"] = keyCode
-                    mEventListener?.sendMessage(Global.EVENT_MUSIC_MEDIA_BUTTON, data)
+                    mServiceEventListener?.sendMessage(Global.EVENT_MUSIC_MEDIA_BUTTON, data)
                 }
 
                 override fun onPlay() {
-                    val data = JSONObject()
+                    val data = hashMapOf<String, Any>()
                     data["message"] = "更新成功"
                     data["code"] = 0
-                    mEventListener?.sendMessage(Global.EVENT_MUSIC_NOTIFICATION_PAUSE, data)
+                    mServiceEventListener?.sendMessage(Global.EVENT_MUSIC_NOTIFICATION_PAUSE, data)
                 }
 
                 override fun onPause() {
-                    val data = JSONObject()
+                    val data = hashMapOf<String, Any>()
                     data["message"] = "更新成功"
                     data["code"] = 0
-                    mEventListener?.sendMessage(Global.EVENT_MUSIC_NOTIFICATION_PAUSE, data)
+                    mServiceEventListener?.sendMessage(Global.EVENT_MUSIC_NOTIFICATION_PAUSE, data)
                 }
 
                 override fun onSkipToNext() {
-                    val data = JSONObject()
+                    val data = hashMapOf<String, Any>()
                     data["message"] = "更新成功"
                     data["code"] = 0
-                    mEventListener?.sendMessage(Global.EVENT_MUSIC_NOTIFICATION_NEXT, data)
+                    mServiceEventListener?.sendMessage(Global.EVENT_MUSIC_NOTIFICATION_NEXT, data)
                 }
 
                 override fun onSkipToPrevious() {
-                    val data = JSONObject()
+                    val data = hashMapOf<String, Any>()
                     data["message"] = "更新成功"
                     data["code"] = 0
-                    mEventListener?.sendMessage(Global.EVENT_MUSIC_NOTIFICATION_PREVIOUS, data)
+                    mServiceEventListener?.sendMessage(
+                        Global.EVENT_MUSIC_NOTIFICATION_PREVIOUS,
+                        data
+                    )
                 }
 
                 override fun onSeekTo(pos: Long) {
-                    val data = JSONObject()
+                    val data = hashMapOf<String, Any>()
                     data["position"] = pos / 1000
-                    mEventListener?.sendMessage(Global.EVENT_MUSIC_SEEK_TO, data)
+                    mServiceEventListener?.sendMessage(Global.EVENT_MUSIC_SEEK_TO, data)
                 }
             })
 
@@ -133,16 +95,23 @@ class PlayServiceV2 : Service(), IReceiverListener {
         } else {
             registerReceiver(mReceiver, filter)
         }
-        service = this
     }
 
     override fun onBind(intent: Intent): IBinder {
-        this.mBinder = object : IMusicServiceAidlInterface.Stub() {
-            override fun setEventListener(listener: IMusicServiceCallbackAidlInterface?) {
-                mEventListener = listener
-                val data = JSONObject()
+        return object : IMusicServiceAidlInterface.Stub() {
+            override fun initConfig(config: MutableMap<Any?, Any?>?) {
+                MusicNotificationV2.instance.initConfig(config)
+            }
+
+            override fun setServiceEventListener(listener: IMusicServiceCallbackAidlInterface?) {
+                mServiceEventListener = listener
+                val data = hashMapOf<String, Any>()
                 data["type"] = "destroy"
                 listener?.sendMessage("setEventListener", data)
+            }
+
+            override fun setActivityEventListener(listener: IMusicActivityCallbackAidlInterface?) {
+                mActivityEventListener = listener
             }
 
             override fun switchNotification(style: Boolean) {
@@ -154,11 +123,11 @@ class PlayServiceV2 : Service(), IReceiverListener {
             }
 
             override fun getFavour(): Boolean {
-                return if (songData != null) service?.songData!![Global.KEY_FAVOUR] as Boolean else false
+                return if (this@PlayServiceV2.songData != null) this@PlayServiceV2.songData!![Global.KEY_FAVOUR] as Boolean else false
             }
 
             override fun getPlaying(): Boolean {
-                return service!!.playing
+                return this@PlayServiceV2.playing
             }
 
             override fun getSongData(): MutableMap<String, Any?>? {
@@ -166,44 +135,46 @@ class PlayServiceV2 : Service(), IReceiverListener {
             }
 
             override fun lock(locking: Boolean) {
-                Log.d("TAG", "lock: $locking")
                 lockActivity = locking
             }
 
             override fun playOrPause(playing: Boolean) {
                 this@PlayServiceV2.playing = playing
-//            mClickListener?.playOrPause(playing)
+                mActivityEventListener?.playOrPause(playing)
                 val options: MutableMap<String, Any?> = HashMap()
                 options[Global.KEY_PLAYING] = playing
-                service?.let { invoke(it, Global.KEY_PLAY_OR_PAUSE, options) }
+                invoke(this@PlayServiceV2, Global.KEY_PLAY_OR_PAUSE, options)
                 MusicNotificationV2.instance.playOrPause(playing)
             }
 
             override fun setFavour(favour: Boolean) {
                 if (songData != null) {
                     songData!![Global.KEY_FAVOUR] = favour
-                    service?.let { invoke(it, Global.KEY_FAVOUR, this@PlayServiceV2.songData!!) }
+                    invoke(this@PlayServiceV2, Global.KEY_FAVOUR, this@PlayServiceV2.songData!!)
                 }
-//            mClickListener?.favour(favour)
+                mActivityEventListener?.setFavour(favour)
                 MusicNotificationV2.instance.favour(favour)
             }
 
             override fun update(option: MutableMap<Any?, Any?>?) {
                 this@PlayServiceV2.songData = option as MutableMap<String, Any?>
-//            mClickListener?.update(option)
-                service?.let { invoke(it, Global.KEY_UPDATE, option) }
+                mActivityEventListener?.update(option)
+                invoke(this@PlayServiceV2, Global.KEY_UPDATE, option)
                 MusicNotificationV2.instance.updateSong(option)
             }
+
+            override fun sendMessage(eventName: String?, params: MutableMap<Any?, Any?>?) {
+                mServiceEventListener?.sendMessage(eventName, params)
+            }
         }
-        return mBinder!!
     }
 
     @SuppressLint("WrongConstant")
     override fun onDestroy() {
         super.onDestroy()
-        val data = JSONObject()
+        val data = hashMapOf<String, Any>()
         data["type"] = "destroy"
-        mEventListener?.sendMessage(Global.EVENT_MUSIC_LIFECYCLE, data)
+        mServiceEventListener?.sendMessage(Global.EVENT_MUSIC_LIFECYCLE, data)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             stopForeground(MusicNotificationV2.instance.iD)
         } else {
@@ -211,7 +182,9 @@ class PlayServiceV2 : Service(), IReceiverListener {
         }
         MusicNotificationV2.instance.cancel()
         unregisterReceiver(mReceiver)
-        service = null
+        if (!Utils.isMainProcess(this)) {
+            Process.killProcess(Process.myPid())
+        }
     }
 
     override fun onScreenReceive() {
@@ -223,22 +196,22 @@ class PlayServiceV2 : Service(), IReceiverListener {
     }
 
     override fun onHeadsetReceive(extra: Int) {
-        val data = JSONObject()
+        val data = hashMapOf<String, Any>()
         data["type"] = Global.MEDIA_BUTTON_HEADSET
         data["keyCode"] = extra
-        mEventListener?.sendMessage(Global.EVENT_MUSIC_MEDIA_BUTTON, data)
+        mServiceEventListener?.sendMessage(Global.EVENT_MUSIC_MEDIA_BUTTON, data)
     }
 
     override fun onBluetoothReceive(extra: Int) {
-        val data = JSONObject()
+        val data = hashMapOf<String, Any>()
         data["type"] = Global.MEDIA_BUTTON_BLUETOOTH
         data["keyCode"] = extra
-        mEventListener?.sendMessage(Global.EVENT_MUSIC_MEDIA_BUTTON, data)
+        mServiceEventListener?.sendMessage(Global.EVENT_MUSIC_MEDIA_BUTTON, data)
     }
 
     override fun onMusicReceive(extra: String?) {
         var eventName = Global.EVENT_MUSIC_NOTIFICATION_ERROR
-        val data = JSONObject()
+        val data = hashMapOf<String, Any>()
         data["message"] = "触发回调事件成功"
         data["code"] = 0
         when (extra) {
@@ -248,7 +221,7 @@ class PlayServiceV2 : Service(), IReceiverListener {
             NotificationReceiver.EXTRA_FAV -> eventName = Global.EVENT_MUSIC_NOTIFICATION_FAVOURITE
             NotificationReceiver.EXTRA_CLOSE -> eventName = Global.EVENT_MUSIC_NOTIFICATION_CLOSE
             "enabled" -> {
-                if (songData != null) service?.let {
+                if (songData != null) this@PlayServiceV2.let {
                     invoke(it, Global.KEY_UPDATE, songData!!)
                     val options: MutableMap<String, Any?> = HashMap()
                     options[Global.KEY_PLAYING] = playing
@@ -261,16 +234,22 @@ class PlayServiceV2 : Service(), IReceiverListener {
                 data["code"] = -7
             }
         }
-        mEventListener?.sendMessage(eventName, data)
+        mServiceEventListener?.sendMessage(eventName, data)
     }
 
-    interface OnClickListener {
-        fun update(options: JSONObject?)
-        fun favour(favour: Boolean)
-        fun playOrPause(playing: Boolean)
-    }
+    fun invoke(context: Context, type: String, options: MutableMap<String, Any?>) {
+        try {
+            val clazz = Class.forName("com.xzh.widget.MusicWidget")
 
-//    interface OnEventListener {
-//        fun sendMessage(eventName: String, params: Map<String, Any>)
-//    }
+            val method = clazz.getDeclaredMethod(
+                "invoke",
+                Context::class.java,
+                String::class.java,
+                MutableMap::class.java
+            )
+            method.invoke(clazz, context, type, options)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }

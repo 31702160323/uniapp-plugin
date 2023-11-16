@@ -11,13 +11,13 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
+import android.os.Looper
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.alibaba.fastjson.JSONObject
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.request.target.CustomTarget
@@ -27,12 +27,10 @@ import com.xzh.musicnotification.service.PlayServiceV2
 import com.xzh.musicnotification.utils.Utils
 import com.xzh.musicnotification.view.SlidingFinishLayout
 import com.xzh.musicnotification.view.SlidingFinishLayout.OnSlidingFinishListener
-import io.dcloud.feature.uniapp.utils.UniUtils
 import kotlin.math.max
 
 
-class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClickListener,
-    PlayServiceV2.OnClickListener {
+class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClickListener {
     private var mWidth = 0
     private var mHeight = 0
     private var tvAudio: TextView? = null
@@ -41,7 +39,8 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
     private var playView: ImageView? = null
     private var favouriteView: ImageView? = null
     private var connection: ServiceConnection? = null
-//    private var mBinder: ServiceBinder? = null
+    private var mBinder: IMusicServiceAidlInterface? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Utils.fullScreen(this)
@@ -57,27 +56,45 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
         initView()
         val windowManager = this.windowManager
         val displayMetrics = DisplayMetrics()
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             display?.getMetrics(displayMetrics)
-        }else {
+        } else {
             windowManager.defaultDisplay.getMetrics(displayMetrics)
         }
         mWidth = displayMetrics.widthPixels
         mHeight = displayMetrics.heightPixels
         connection = object : ServiceConnection {
             override fun onServiceConnected(componentName: ComponentName, iBinder: IBinder) {
-//                mBinder = IMusicServiceAidlInterface.Stub.asInterface(iBinder).service as ServiceBinder
-//                mBinder?.setClickListener(this@LockActivityV2)
-//                if (UniUtils.isUiThread()) {
-//                    this@LockActivityV2.update(mBinder?.getSongData())
-//                } else {
-//                    runOnUiThread { this@LockActivityV2.update(mBinder?.getSongData()) }
-//                }
+                mBinder = IMusicServiceAidlInterface.Stub.asInterface(iBinder)
+                mBinder?.setActivityEventListener(object : IMusicActivityCallbackAidlInterface.Stub() {
+                    override fun update(option: MutableMap<Any?, Any?>?) {
+                        this@LockActivityV2.update(option)
+                    }
+
+                    override fun setFavour(favour: Boolean) {
+                        this@LockActivityV2.favour(favour)
+                    }
+
+                    override fun playOrPause(playing: Boolean) {
+                        this@LockActivityV2.playOrPause(playing)
+                    }
+                })
+                if (isUiThread()) {
+                    this@LockActivityV2.update(mBinder?.songData)
+                } else {
+                    runOnUiThread { this@LockActivityV2.update(mBinder?.songData) }
+                }
             }
 
-            override fun onServiceDisconnected(componentName: ComponentName) {}
+            override fun onServiceDisconnected(componentName: ComponentName) {
+                mBinder = null
+            }
         }
-        bindService(Intent(this, PlayServiceV2::class.java), connection as ServiceConnection, BIND_AUTO_CREATE)
+        bindService(
+            Intent(this, PlayServiceV2::class.java),
+            connection as ServiceConnection,
+            BIND_AUTO_CREATE
+        )
     }
 
     private fun initView() {
@@ -100,10 +117,10 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
     }
 
     override fun onClick(view: View) {
-//        if (mBinder == null) return
+        if (mBinder == null) return
         var extraType = ""
         var eventName = Global.EVENT_MUSIC_NOTIFICATION_ERROR
-        val data = JSONObject()
+        val data = hashMapOf<String, Any>()
         data["message"] = "更新锁屏页成功"
         data["code"] = 0
         val viewId = view.id
@@ -119,30 +136,32 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
             if (viewId != ids[i]) continue
             extraType = extras[i]
         }
-//        when (extraType) {
-//            NotificationReceiver.EXTRA_PRE -> eventName = Global.EVENT_MUSIC_NOTIFICATION_PREVIOUS
-//            NotificationReceiver.EXTRA_NEXT -> eventName = Global.EVENT_MUSIC_NOTIFICATION_NEXT
-//            NotificationReceiver.EXTRA_FAV -> {
-//                mBinder?.favour?.let { mBinder?.favour(it) }
-//                eventName = Global.EVENT_MUSIC_NOTIFICATION_FAVOURITE
-//            }
-//            NotificationReceiver.EXTRA_PLAY -> {
-//                mBinder?.getPlaying()?.let { mBinder?.playOrPause(it) }
-//                eventName = Global.EVENT_MUSIC_NOTIFICATION_PAUSE
-//            }
-//            else -> {
-//                data["message"] = "更新锁屏页失败"
-//                data["code"] = -6
-//            }
-//        }
-//        mBinder?.sendMessage(eventName, data)
+        when (extraType) {
+            NotificationReceiver.EXTRA_PRE -> eventName = Global.EVENT_MUSIC_NOTIFICATION_PREVIOUS
+            NotificationReceiver.EXTRA_NEXT -> eventName = Global.EVENT_MUSIC_NOTIFICATION_NEXT
+            NotificationReceiver.EXTRA_FAV -> {
+                mBinder?.favour = !mBinder?.favour!!
+                eventName = Global.EVENT_MUSIC_NOTIFICATION_FAVOURITE
+            }
+            NotificationReceiver.EXTRA_PLAY -> {
+                mBinder?.playOrPause(!mBinder?.playing!!)
+                eventName = Global.EVENT_MUSIC_NOTIFICATION_PAUSE
+            }
+            else -> {
+                data["message"] = "更新锁屏页失败"
+                data["code"] = -6
+            }
+        }
+        mBinder?.sendMessage(eventName, data)
     }
 
     /**
      * 重写物理返回键，使不能回退
      */
     @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {}
+    override fun onBackPressed() {
+    }
+
     override fun onDestroy() {
         unbindService(connection!!)
         super.onDestroy()
@@ -155,7 +174,7 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
         finish()
     }
 
-    override fun playOrPause(playing: Boolean) {
+    fun playOrPause(playing: Boolean) {
         if (playing) {
             playView!!.setImageResource(R.drawable.note_btn_pause_white)
         } else {
@@ -163,7 +182,7 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
         }
     }
 
-    override fun favour(favour: Boolean) {
+    fun favour(favour: Boolean) {
         if (favour) {
             favouriteView!!.setImageResource(R.drawable.note_btn_loved)
         } else {
@@ -171,25 +190,25 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
         }
     }
 
-     override fun update(options: JSONObject?) {
-         if (options == null) return
-        if (UniUtils.isUiThread()) {
+    fun update(options: MutableMap<Any?, Any?>?) {
+        if (options == null) return
+        if (isUiThread()) {
             updateUI(options)
         } else {
             runOnUiThread { updateUI(options) }
         }
     }
 
-    private fun updateUI(options: JSONObject) {
-//        mBinder?.favour?.let { favour(it) }
-//        mBinder?.getPlaying()?.let { playOrPause(it) }
-        if (options.getString(Global.KEY_SONG_NAME) != null) {
-            tvAudioName!!.text = options.getString(Global.KEY_SONG_NAME)
+    private fun updateUI(options: MutableMap<Any?, Any?>) {
+        mBinder?.favour?.let { favour(it) }
+        mBinder?.playing?.let { playOrPause(it) }
+        if (options[Global.KEY_SONG_NAME] != null) {
+            tvAudioName!!.text = options[Global.KEY_SONG_NAME].toString()
         }
-        if (options.getString(Global.KEY_ARTISTS_NAME) != null) {
-            tvAudio!!.text = options.getString(Global.KEY_ARTISTS_NAME)
+        if (options[Global.KEY_ARTISTS_NAME] != null) {
+            tvAudio!!.text = options[Global.KEY_ARTISTS_NAME].toString()
         }
-        updatePicUrl(options.getString("picUrl"))
+        updatePicUrl(options["picUrl"]?.toString())
     }
 
     private fun updatePicUrl(picUrl: String?) {
@@ -205,7 +224,7 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
                     resource: Bitmap,
                     transition: Transition<in Bitmap?>?
                 ) {
-                    if (UniUtils.isUiThread()) {
+                    if (isUiThread()) {
                         lockDate!!.setImageBitmap(changeAlpha(resource))
                     } else {
                         runOnUiThread { lockDate!!.setImageBitmap(changeAlpha(resource)) }
@@ -256,5 +275,9 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
         } catch (e: Exception) {
             bitmap
         }
+    }
+
+    fun isUiThread(): Boolean {
+        return Thread.currentThread().id == Looper.getMainLooper().thread.id
     }
 }

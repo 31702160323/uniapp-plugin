@@ -12,7 +12,6 @@ import android.os.Build
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.view.KeyEvent
-import com.alibaba.fastjson.JSONObject
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.request.target.Target
@@ -28,19 +27,22 @@ abstract class BaseMusicNotification {
         internal const val CHANNEL_ID = "music_id_audio"
 
         internal const val CHANNEL_NAME = "music_name_audio"
-        internal var mConfig: JSONObject? = null
-
-        internal var showFavour = false
     }
 
     var iD = 0x111
         protected set
 
     @JvmField
+    protected var mConfig: MutableMap<Any?, Any?>? = null
+
+    @JvmField
     protected var position = 0L
 
     @JvmField
     protected var isPlay = false
+
+    @JvmField
+    protected var showFavour = false
 
     @JvmField
     protected var songInfo: MutableMap<String, Any?>? = null
@@ -82,6 +84,11 @@ abstract class BaseMusicNotification {
         }
     }
 
+    fun initConfig(config: MutableMap<Any?, Any?>?) {
+        mConfig = config
+        createNotification()
+    }
+
     /**
      * 创建Notification,
      *
@@ -89,7 +96,13 @@ abstract class BaseMusicNotification {
      */
     fun initNotification(service: Service, listener: OnMusicEventListener) {
         mContext = WeakReference(service)
-        mMusicEventListener = listener;
+
+        val info = Utils.getApplicationInfo(service)
+        if (info != null) {
+            showFavour = info.metaData.getBoolean(Global.SHOW_FAVOUR)
+        }
+
+        mMusicEventListener = listener
         iD += 1
         mMediaSession = MediaSessionCompat(service, CHANNEL_ID)
         mMediaSession!!.isActive = true
@@ -210,8 +223,8 @@ abstract class BaseMusicNotification {
 
     fun cancel() {
         if (mNotificationManager != null) {
+            mNotificationManager?.cancel(iD)
             mNotification = null
-            mNotificationManager!!.cancel(iD)
         }
     }
 
