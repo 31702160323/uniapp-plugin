@@ -12,17 +12,16 @@ import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import android.provider.Settings
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationManagerCompat
 import com.alibaba.fastjson.JSONArray
 import com.alibaba.fastjson.JSONObject
 import com.xzh.musicnotification.notification.MusicNotificationV2.Companion.initConfig
 import com.xzh.musicnotification.notification.MusicNotificationV2.Companion.setShowFavour
-import com.xzh.musicnotification.service.PlayServiceV2
 import com.xzh.musicnotification.service.PlayServiceV2.Companion.invoke
 import com.xzh.musicnotification.service.PlayServiceV2.Companion.startMusicService
 import com.xzh.musicnotification.service.PlayServiceV2.Companion.stopMusicService
-import com.xzh.musicnotification.service.PlayServiceV2.ServiceBinder
 import com.xzh.musicnotification.utils.MusicAsyncQueryHandler
 import com.xzh.musicnotification.utils.MusicAsyncQueryHandler.OnCallbackListener
 import com.xzh.musicnotification.utils.Utils.getApplicationInfo
@@ -63,7 +62,7 @@ class MusicNotificationModule : UniModule() {
     private var lockActivity = false
     private var systemStyle = false
     private var connection: ServiceConnection? = null
-    private var mBinder: ServiceBinder? = null
+    private var mBinder: IMusicServiceAidlInterface? = null
     private var createNotificationCallback: UniJSCallback? = null
 
     //    private UniJSCallback getLocalSongCallback;
@@ -113,14 +112,22 @@ class MusicNotificationModule : UniModule() {
         try {
             connection = object : ServiceConnection {
                 override fun onServiceConnected(componentName: ComponentName, iBinder: IBinder) {
-                    mBinder = IMusicServiceAidlInterface.Stub.asInterface(iBinder).service as ServiceBinder
-                    mBinder!!.lock(lockActivity)
-                    mBinder!!.switchNotification(systemStyle)
-                    mBinder!!.setEventListener(object : PlayServiceV2.OnEventListener {
-                        override fun sendMessage(eventName: String, params: Map<String, Any>) {
-                            mUniSDKInstance.fireGlobalEventCallback(eventName, params)
+                    mBinder = IMusicServiceAidlInterface.Stub.asInterface(iBinder)
+                    mBinder?.lock(lockActivity)
+                    mBinder?.switchNotification(systemStyle)
+                    mBinder?.setEventListener(object :
+                        IMusicServiceCallbackAidlInterface.Stub() {
+                        override fun sendMessage(eventName: String?, params: MutableMap<Any?, Any?>?
+                        ) {
+                            Log.d("TAG", "sendMessage: $eventName : $params")
+                            mUniSDKInstance.fireGlobalEventCallback(eventName, params as MutableMap<String, Any>)
                         }
                     })
+//                    mBinder!!.setEventListener(object : PlayServiceV2.OnEventListener {
+//                        override fun sendMessage(eventName: String, params: Map<String, Any>) {
+//                            mUniSDKInstance.fireGlobalEventCallback(eventName, params)
+//                        }
+//                    })
                     data["message"] = "设置歌曲信息成功"
                     data["code"] = 0
                     callback!!.invoke(data)
@@ -180,7 +187,7 @@ class MusicNotificationModule : UniModule() {
     fun favour(isFavour: Boolean) {
         if (!showFavour) return
         if (mBinder != null) {
-            mBinder!!.favour(isFavour)
+            mBinder?.favour = isFavour
             instance?.favour(isFavour)
         }
     }

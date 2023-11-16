@@ -110,7 +110,7 @@ open class MusicNotificationV2 : BaseMusicNotification() {
                 mNotification = builder.build()
             }
         }
-        updateSong(songInfo)
+        updateSong(songInfo!!)
         playOrPause(isPlay)
 
         // 设置为前台Service
@@ -129,17 +129,15 @@ open class MusicNotificationV2 : BaseMusicNotification() {
         if (this@MusicNotificationV2.mNotificationManager == null) createNotification()
         Utils.debounce({
             this@MusicNotificationV2.songInfo?.run {
-                val picUrl = this.getString("picUrl").toString()
-                val songName = this.getString(Global.KEY_SONG_NAME).toString()
-                val artistsName = this.getString(Global.KEY_ARTISTS_NAME).toString()
+                val picUrl = this["picUrl"].toString()
+                val songName = this[Global.KEY_SONG_NAME].toString()
+                val artistsName = this[Global.KEY_ARTISTS_NAME].toString()
                 val duration =
-                    if (this.getLong(Global.KEY_DURATION) == null) 0 else this.getLong(Global.KEY_DURATION)
+                    if (this[Global.KEY_DURATION] == null) 0 else this[Global.KEY_DURATION] as Long
                 val play =
                     if (this@MusicNotificationV2.isPlay) R.drawable.note_btn_pause_white else R.drawable.note_btn_play_white
                 val favour =
-                    if (this.getBoolean(Global.KEY_FAVOUR) != null && this.getBoolean(
-                            Global.KEY_FAVOUR
-                        )
+                    if (this[Global.KEY_FAVOUR] != null && this[Global.KEY_FAVOUR] as Boolean
                     ) R.drawable.note_btn_loved else R.drawable.note_btn_love_white
                 if (this@MusicNotificationV2.systemStyle) {
                     val dip64 = Utils.dip2px(64f)

@@ -24,7 +24,6 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.xzh.musicnotification.service.NotificationReceiver
 import com.xzh.musicnotification.service.PlayServiceV2
-import com.xzh.musicnotification.service.PlayServiceV2.ServiceBinder
 import com.xzh.musicnotification.utils.Utils
 import com.xzh.musicnotification.view.SlidingFinishLayout
 import com.xzh.musicnotification.view.SlidingFinishLayout.OnSlidingFinishListener
@@ -42,7 +41,7 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
     private var playView: ImageView? = null
     private var favouriteView: ImageView? = null
     private var connection: ServiceConnection? = null
-    private var mBinder: ServiceBinder? = null
+//    private var mBinder: ServiceBinder? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Utils.fullScreen(this)
@@ -67,13 +66,13 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
         mHeight = displayMetrics.heightPixels
         connection = object : ServiceConnection {
             override fun onServiceConnected(componentName: ComponentName, iBinder: IBinder) {
-                mBinder = IMusicServiceAidlInterface.Stub.asInterface(iBinder).service as ServiceBinder
-                mBinder?.setClickListener(this@LockActivityV2)
-                if (UniUtils.isUiThread()) {
-                    this@LockActivityV2.update(mBinder?.getSongData())
-                } else {
-                    runOnUiThread { this@LockActivityV2.update(mBinder?.getSongData()) }
-                }
+//                mBinder = IMusicServiceAidlInterface.Stub.asInterface(iBinder).service as ServiceBinder
+//                mBinder?.setClickListener(this@LockActivityV2)
+//                if (UniUtils.isUiThread()) {
+//                    this@LockActivityV2.update(mBinder?.getSongData())
+//                } else {
+//                    runOnUiThread { this@LockActivityV2.update(mBinder?.getSongData()) }
+//                }
             }
 
             override fun onServiceDisconnected(componentName: ComponentName) {}
@@ -101,7 +100,7 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
     }
 
     override fun onClick(view: View) {
-        if (mBinder == null) return
+//        if (mBinder == null) return
         var extraType = ""
         var eventName = Global.EVENT_MUSIC_NOTIFICATION_ERROR
         val data = JSONObject()
@@ -120,23 +119,23 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
             if (viewId != ids[i]) continue
             extraType = extras[i]
         }
-        when (extraType) {
-            NotificationReceiver.EXTRA_PRE -> eventName = Global.EVENT_MUSIC_NOTIFICATION_PREVIOUS
-            NotificationReceiver.EXTRA_NEXT -> eventName = Global.EVENT_MUSIC_NOTIFICATION_NEXT
-            NotificationReceiver.EXTRA_FAV -> {
-                mBinder?.favour?.let { mBinder?.favour(it) }
-                eventName = Global.EVENT_MUSIC_NOTIFICATION_FAVOURITE
-            }
-            NotificationReceiver.EXTRA_PLAY -> {
-                mBinder?.getPlaying()?.let { mBinder?.playOrPause(it) }
-                eventName = Global.EVENT_MUSIC_NOTIFICATION_PAUSE
-            }
-            else -> {
-                data["message"] = "更新锁屏页失败"
-                data["code"] = -6
-            }
-        }
-        mBinder?.sendMessage(eventName, data)
+//        when (extraType) {
+//            NotificationReceiver.EXTRA_PRE -> eventName = Global.EVENT_MUSIC_NOTIFICATION_PREVIOUS
+//            NotificationReceiver.EXTRA_NEXT -> eventName = Global.EVENT_MUSIC_NOTIFICATION_NEXT
+//            NotificationReceiver.EXTRA_FAV -> {
+//                mBinder?.favour?.let { mBinder?.favour(it) }
+//                eventName = Global.EVENT_MUSIC_NOTIFICATION_FAVOURITE
+//            }
+//            NotificationReceiver.EXTRA_PLAY -> {
+//                mBinder?.getPlaying()?.let { mBinder?.playOrPause(it) }
+//                eventName = Global.EVENT_MUSIC_NOTIFICATION_PAUSE
+//            }
+//            else -> {
+//                data["message"] = "更新锁屏页失败"
+//                data["code"] = -6
+//            }
+//        }
+//        mBinder?.sendMessage(eventName, data)
     }
 
     /**
@@ -182,8 +181,8 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
     }
 
     private fun updateUI(options: JSONObject) {
-        mBinder?.favour?.let { favour(it) }
-        mBinder?.getPlaying()?.let { playOrPause(it) }
+//        mBinder?.favour?.let { favour(it) }
+//        mBinder?.getPlaying()?.let { playOrPause(it) }
         if (options.getString(Global.KEY_SONG_NAME) != null) {
             tvAudioName!!.text = options.getString(Global.KEY_SONG_NAME)
         }

@@ -11,9 +11,11 @@ import android.os.Binder
 import android.os.Build
 import android.os.IBinder
 import android.util.ArrayMap
+import android.util.Log
 import com.alibaba.fastjson.JSONObject
 import com.xzh.musicnotification.Global
 import com.xzh.musicnotification.IMusicServiceAidlInterface
+import com.xzh.musicnotification.IMusicServiceCallbackAidlInterface
 import com.xzh.musicnotification.LockActivityV2
 import com.xzh.musicnotification.notification.BaseMusicNotification
 import com.xzh.musicnotification.notification.MusicNotificationV2
@@ -42,7 +44,7 @@ class PlayServiceV2 : Service(), IReceiverListener {
         }
 
         @JvmStatic
-        operator fun invoke(context: Context, type: String, options: MutableMap<String, Any>) {
+        operator fun invoke(context: Context, type: String, options: MutableMap<String, Any?>) {
             try {
                 val clazz = Class.forName("com.xzh.widget.MusicWidget")
 
@@ -61,9 +63,10 @@ class PlayServiceV2 : Service(), IReceiverListener {
 
     private var playing = false
     private var lockActivity = false
-    var songData: JSONObject? = null
-    private var mBinder: IMusicServiceAidlInterface.Stub? = null
+    var songData: MutableMap<String, Any?>? = null
     private var mReceiver: NotificationReceiver? = null
+    private var mEventListener: IMusicServiceCallbackAidlInterface? = null
+    private var mBinder: IMusicServiceAidlInterface.Stub? = null
 
     @SuppressLint("WrongConstant")
     override fun onCreate() {
@@ -76,41 +79,41 @@ class PlayServiceV2 : Service(), IReceiverListener {
                     val data = JSONObject()
                     data["type"] = Global.MEDIA_BUTTON
                     data["keyCode"] = keyCode
-                    sendMessage(Global.EVENT_MUSIC_MEDIA_BUTTON, data)
+                    mEventListener?.sendMessage(Global.EVENT_MUSIC_MEDIA_BUTTON, data)
                 }
 
                 override fun onPlay() {
                     val data = JSONObject()
                     data["message"] = "更新成功"
                     data["code"] = 0
-                    sendMessage(Global.EVENT_MUSIC_NOTIFICATION_PAUSE, data)
+                    mEventListener?.sendMessage(Global.EVENT_MUSIC_NOTIFICATION_PAUSE, data)
                 }
 
                 override fun onPause() {
                     val data = JSONObject()
                     data["message"] = "更新成功"
                     data["code"] = 0
-                    sendMessage(Global.EVENT_MUSIC_NOTIFICATION_PAUSE, data)
+                    mEventListener?.sendMessage(Global.EVENT_MUSIC_NOTIFICATION_PAUSE, data)
                 }
 
                 override fun onSkipToNext() {
                     val data = JSONObject()
                     data["message"] = "更新成功"
                     data["code"] = 0
-                    sendMessage(Global.EVENT_MUSIC_NOTIFICATION_NEXT, data)
+                    mEventListener?.sendMessage(Global.EVENT_MUSIC_NOTIFICATION_NEXT, data)
                 }
 
                 override fun onSkipToPrevious() {
                     val data = JSONObject()
                     data["message"] = "更新成功"
                     data["code"] = 0
-                    sendMessage(Global.EVENT_MUSIC_NOTIFICATION_PREVIOUS, data)
+                    mEventListener?.sendMessage(Global.EVENT_MUSIC_NOTIFICATION_PREVIOUS, data)
                 }
 
                 override fun onSeekTo(pos: Long) {
                     val data = JSONObject()
                     data["position"] = pos / 1000
-                    sendMessage(Global.EVENT_MUSIC_SEEK_TO, data)
+                    mEventListener?.sendMessage(Global.EVENT_MUSIC_SEEK_TO, data)
                 }
             })
 
@@ -133,15 +136,66 @@ class PlayServiceV2 : Service(), IReceiverListener {
         service = this
     }
 
-    override fun onBind(intent: Intent): IBinder? {
-//        mBinder = ServiceBinder()
-        mBinder = object : IMusicServiceAidlInterface.Stub() {
-            private var serviceBinder = ServiceBinder()
-            override fun getService(): IBinder {
-                return serviceBinder
+    override fun onBind(intent: Intent): IBinder {
+        this.mBinder = object : IMusicServiceAidlInterface.Stub() {
+            override fun setEventListener(listener: IMusicServiceCallbackAidlInterface?) {
+                mEventListener = listener
+                val data = JSONObject()
+                data["type"] = "destroy"
+                listener?.sendMessage("setEventListener", data)
+            }
+
+            override fun switchNotification(style: Boolean) {
+                MusicNotificationV2.instance.switchNotification(style)
+            }
+
+            override fun setPosition(position: Long) {
+                MusicNotificationV2.instance.setPosition(position)
+            }
+
+            override fun getFavour(): Boolean {
+                return if (songData != null) service?.songData!![Global.KEY_FAVOUR] as Boolean else false
+            }
+
+            override fun getPlaying(): Boolean {
+                return service!!.playing
+            }
+
+            override fun getSongData(): MutableMap<String, Any?>? {
+                return this@PlayServiceV2.songData
+            }
+
+            override fun lock(locking: Boolean) {
+                Log.d("TAG", "lock: $locking")
+                lockActivity = locking
+            }
+
+            override fun playOrPause(playing: Boolean) {
+                this@PlayServiceV2.playing = playing
+//            mClickListener?.playOrPause(playing)
+                val options: MutableMap<String, Any?> = HashMap()
+                options[Global.KEY_PLAYING] = playing
+                service?.let { invoke(it, Global.KEY_PLAY_OR_PAUSE, options) }
+                MusicNotificationV2.instance.playOrPause(playing)
+            }
+
+            override fun setFavour(favour: Boolean) {
+                if (songData != null) {
+                    songData!![Global.KEY_FAVOUR] = favour
+                    service?.let { invoke(it, Global.KEY_FAVOUR, this@PlayServiceV2.songData!!) }
+                }
+//            mClickListener?.favour(favour)
+                MusicNotificationV2.instance.favour(favour)
+            }
+
+            override fun update(option: MutableMap<Any?, Any?>?) {
+                this@PlayServiceV2.songData = option as MutableMap<String, Any?>
+//            mClickListener?.update(option)
+                service?.let { invoke(it, Global.KEY_UPDATE, option) }
+                MusicNotificationV2.instance.updateSong(option)
             }
         }
-        return mBinder
+        return mBinder!!
     }
 
     @SuppressLint("WrongConstant")
@@ -149,7 +203,7 @@ class PlayServiceV2 : Service(), IReceiverListener {
         super.onDestroy()
         val data = JSONObject()
         data["type"] = "destroy"
-        sendMessage(Global.EVENT_MUSIC_LIFECYCLE, data)
+        mEventListener?.sendMessage(Global.EVENT_MUSIC_LIFECYCLE, data)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             stopForeground(MusicNotificationV2.instance.iD)
         } else {
@@ -172,14 +226,14 @@ class PlayServiceV2 : Service(), IReceiverListener {
         val data = JSONObject()
         data["type"] = Global.MEDIA_BUTTON_HEADSET
         data["keyCode"] = extra
-        sendMessage(Global.EVENT_MUSIC_MEDIA_BUTTON, data)
+        mEventListener?.sendMessage(Global.EVENT_MUSIC_MEDIA_BUTTON, data)
     }
 
     override fun onBluetoothReceive(extra: Int) {
         val data = JSONObject()
         data["type"] = Global.MEDIA_BUTTON_BLUETOOTH
         data["keyCode"] = extra
-        sendMessage(Global.EVENT_MUSIC_MEDIA_BUTTON, data)
+        mEventListener?.sendMessage(Global.EVENT_MUSIC_MEDIA_BUTTON, data)
     }
 
     override fun onMusicReceive(extra: String?) {
@@ -196,7 +250,7 @@ class PlayServiceV2 : Service(), IReceiverListener {
             "enabled" -> {
                 if (songData != null) service?.let {
                     invoke(it, Global.KEY_UPDATE, songData!!)
-                    val options: MutableMap<String, Any> = ArrayMap()
+                    val options: MutableMap<String, Any?> = HashMap()
                     options[Global.KEY_PLAYING] = playing
                     invoke(it, Global.KEY_PLAY_OR_PAUSE, options)
                 }
@@ -207,80 +261,7 @@ class PlayServiceV2 : Service(), IReceiverListener {
                 data["code"] = -7
             }
         }
-        if (mBinder != null) {
-            (mBinder?.service as ServiceBinder).sendMessage(eventName, data)
-        }
-    }
-
-    fun sendMessage(eventName: String, params: Map<String, Any>) {
-        (mBinder?.service as ServiceBinder).sendMessage(eventName, params)
-    }
-
-    inner class ServiceBinder : Binder() {
-        private var mClickListener: OnClickListener? = null
-        private var mEventListener: OnEventListener? = null
-        fun setEventListener(eventListener: OnEventListener?) {
-            mEventListener = eventListener
-        }
-
-        fun setClickListener(clickListener: OnClickListener?) {
-            mClickListener = clickListener
-        }
-
-        fun switchNotification(style: Boolean) {
-            MusicNotificationV2.instance.switchNotification(style)
-        }
-
-        fun setPosition(position: Long) {
-            MusicNotificationV2.instance.setPosition(position)
-        }
-
-        val favour: Boolean
-            get() = if (songData != null) service?.songData!!.getBoolean(Global.KEY_FAVOUR) else false
-
-        fun getPlaying(): Boolean {
-            return service!!.playing
-        }
-
-        fun getSongData(): JSONObject? {
-            return songData
-        }
-
-        fun lock(locking: Boolean) {
-            lockActivity = locking
-        }
-
-        @SuppressLint("WrongConstant")
-        fun playOrPause(playing: Boolean) {
-            this@PlayServiceV2.playing = playing
-            mClickListener?.playOrPause(playing)
-            val options: MutableMap<String, Any> = ArrayMap()
-            options[Global.KEY_PLAYING] = playing
-            service?.let { invoke(it, Global.KEY_PLAY_OR_PAUSE, options) }
-            MusicNotificationV2.instance.playOrPause(playing)
-        }
-
-        @SuppressLint("WrongConstant")
-        fun favour(favour: Boolean) {
-            if (songData != null) {
-                songData!![Global.KEY_FAVOUR] = favour
-                service?.let { invoke(it, Global.KEY_FAVOUR, songData!!) }
-            }
-            mClickListener?.favour(favour)
-            MusicNotificationV2.instance.favour(favour)
-        }
-
-        @SuppressLint("WrongConstant")
-        fun update(option: JSONObject) {
-            songData = option
-            mClickListener?.update(option)
-            service?.let { invoke(it, Global.KEY_UPDATE, option) }
-            MusicNotificationV2.instance.updateSong(option)
-        }
-
-        fun sendMessage(eventName: String, params: Map<String, Any>) {
-            mEventListener?.sendMessage(eventName, params)
-        }
+        mEventListener?.sendMessage(eventName, data)
     }
 
     interface OnClickListener {
@@ -289,7 +270,7 @@ class PlayServiceV2 : Service(), IReceiverListener {
         fun playOrPause(playing: Boolean)
     }
 
-    interface OnEventListener {
-        fun sendMessage(eventName: String, params: Map<String, Any>)
-    }
+//    interface OnEventListener {
+//        fun sendMessage(eventName: String, params: Map<String, Any>)
+//    }
 }

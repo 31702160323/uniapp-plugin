@@ -43,7 +43,7 @@ abstract class BaseMusicNotification {
     protected var isPlay = false
 
     @JvmField
-    protected var songInfo: JSONObject? = null
+    protected var songInfo: MutableMap<String, Any?>? = null
 
     @JvmField
     protected var mContext: WeakReference<Context>? = null
@@ -178,7 +178,7 @@ abstract class BaseMusicNotification {
      *
      * @param options 歌曲信息
      */
-    fun updateSong(options: JSONObject?) {
+    fun updateSong(options: MutableMap<String, Any?>) {
         songInfo = options
         updateNotification()
     }
