@@ -4,10 +4,8 @@ package com.xzh.musicnotification.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.ActivityManager
 import android.app.PendingIntent
 import android.app.PendingIntent.CanceledException
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
@@ -16,7 +14,7 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
-import android.os.Process
+import android.os.Looper
 import android.provider.Settings
 import android.util.TypedValue
 import android.view.View
@@ -124,64 +122,64 @@ object Utils {
         window.statusBarColor = Color.TRANSPARENT
     }
 
-    /**
-     * 获取自启动管理页面的Intent
-     *
-     * @param context context
-     * @return 返回自启动管理页面的Intent
-     */
-    @JvmStatic
-    fun getAutostartSettingIntent(context: Context): Intent {
-        var componentName: ComponentName? = null
-        val brand = Build.MANUFACTURER
-        val intent = Intent()
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        when (brand.lowercase(Locale.getDefault())) {
-            "samsung" -> componentName = ComponentName(
-                "com.samsung.android.sm",
-                "com.samsung.android.sm.app.dashboard.SmartManagerDashBoardActivity"
-            )
-            "huawei" -> componentName = ComponentName(
-                "com.huawei.systemmanager",
-                "com.huawei.systemmanager.appcontrol.activity.StartupAppControlActivity"
-            )
-            "xiaomi" -> componentName = ComponentName(
-                "com.miui.securitycenter",
-                "com.miui.permcenter.autostart.AutoStartManagementActivity"
-            )
-            "vivo" -> //            componentName = new ComponentName("com.iqoo.secure", "com.iqoo.secure.safaguard.PurviewTabActivity");
-                componentName = ComponentName(
-                    "com.iqoo.secure",
-                    "com.iqoo.secure.ui.phoneoptimize.AddWhiteListActivity"
-                )
-            "oppo" -> //            componentName = new ComponentName("com.oppo.safe", "com.oppo.safe.permission.startup.StartupAppListActivity");
-                componentName = ComponentName(
-                    "com.coloros.oppoguardelf",
-                    "com.coloros.powermanager.fuelgaue.PowerUsageModelActivity"
-                )
-            "yulong", "360" -> componentName = ComponentName(
-                "com.yulong.android.coolsafe",
-                "com.yulong.android.coolsafe.ui.activity.autorun.AutoRunListActivity"
-            )
-            "meizu" -> componentName =
-                ComponentName("com.meizu.safe", "com.meizu.safe.permission.SmartBGActivity")
-            "oneplus" -> componentName = ComponentName(
-                "com.oneplus.security",
-                "com.oneplus.security.chainlaunch.view.ChainLaunchAppListActivity"
-            )
-            "letv" -> {
-                intent.action = "com.letv.android.permissionautoboot"
-                intent.action = "android.settings.APPLICATION_DETAILS_SETTINGS"
-                intent.data = Uri.fromParts("package", context.packageName, null)
-            }
-            else -> {
-                intent.action = "android.settings.APPLICATION_DETAILS_SETTINGS"
-                intent.data = Uri.fromParts("package", context.packageName, null)
-            }
-        }
-        intent.component = componentName
-        return intent
-    }
+//    /**
+//     * 获取自启动管理页面的Intent
+//     *
+//     * @param context context
+//     * @return 返回自启动管理页面的Intent
+//     */
+//    @JvmStatic
+//    fun getAutostartSettingIntent(context: Context): Intent {
+//        var componentName: ComponentName? = null
+//        val brand = Build.MANUFACTURER
+//        val intent = Intent()
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//        when (brand.lowercase(Locale.getDefault())) {
+//            "samsung" -> componentName = ComponentName(
+//                "com.samsung.android.sm",
+//                "com.samsung.android.sm.app.dashboard.SmartManagerDashBoardActivity"
+//            )
+//            "huawei" -> componentName = ComponentName(
+//                "com.huawei.systemmanager",
+//                "com.huawei.systemmanager.appcontrol.activity.StartupAppControlActivity"
+//            )
+//            "xiaomi" -> componentName = ComponentName(
+//                "com.miui.securitycenter",
+//                "com.miui.permcenter.autostart.AutoStartManagementActivity"
+//            )
+//            "vivo" -> //            componentName = new ComponentName("com.iqoo.secure", "com.iqoo.secure.safaguard.PurviewTabActivity");
+//                componentName = ComponentName(
+//                    "com.iqoo.secure",
+//                    "com.iqoo.secure.ui.phoneoptimize.AddWhiteListActivity"
+//                )
+//            "oppo" -> //            componentName = new ComponentName("com.oppo.safe", "com.oppo.safe.permission.startup.StartupAppListActivity");
+//                componentName = ComponentName(
+//                    "com.coloros.oppoguardelf",
+//                    "com.coloros.powermanager.fuelgaue.PowerUsageModelActivity"
+//                )
+//            "yulong", "360" -> componentName = ComponentName(
+//                "com.yulong.android.coolsafe",
+//                "com.yulong.android.coolsafe.ui.activity.autorun.AutoRunListActivity"
+//            )
+//            "meizu" -> componentName =
+//                ComponentName("com.meizu.safe", "com.meizu.safe.permission.SmartBGActivity")
+//            "oneplus" -> componentName = ComponentName(
+//                "com.oneplus.security",
+//                "com.oneplus.security.chainlaunch.view.ChainLaunchAppListActivity"
+//            )
+//            "letv" -> {
+//                intent.action = "com.letv.android.permissionautoboot"
+//                intent.action = "android.settings.APPLICATION_DETAILS_SETTINGS"
+//                intent.data = Uri.fromParts("package", context.packageName, null)
+//            }
+//            else -> {
+//                intent.action = "android.settings.APPLICATION_DETAILS_SETTINGS"
+//                intent.data = Uri.fromParts("package", context.packageName, null)
+//            }
+//        }
+//        intent.component = componentName
+//        return intent
+//    }
 
     @JvmStatic
     fun dip2px(dpValue: Float): Int {
@@ -205,38 +203,42 @@ object Utils {
         }, duration)
     }
 
-    private fun isPidOfProcessName(context: Context, pid: Int, name: String?): Boolean {
-        if (name == null) return false
-        var isMain = false
-        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        //遍历所有进程
-        for (process in am.runningAppProcesses) {
-            if (process.pid == pid) {
-                //进程ID相同时判断该进程名是否一致
-                if (process.processName.equals(name)) {
-                    isMain = true;
-                }
-                break
-            }
-        }
-        return isMain
-    }
+//    private fun isPidOfProcessName(context: Context, pid: Int, name: String?): Boolean {
+//        if (name == null) return false
+//        var isMain = false
+//        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+//        //遍历所有进程
+//        for (process in am.runningAppProcesses) {
+//            if (process.pid == pid) {
+//                //进程ID相同时判断该进程名是否一致
+//                if (process.processName.equals(name)) {
+//                    isMain = true
+//                }
+//                break
+//            }
+//        }
+//        return isMain
+//    }
+//
+//    /**
+//     * 获取主进程名
+//     * @param context 上下文
+//     * @return 主进程名
+//     */
+//    private fun getMainProcessName(context: Context): String {
+//        return context.packageManager.getApplicationInfo(context.packageName, 0).processName
+//    }
+//
+//    /**
+//     * 判断是否主进程
+//     * @param context 上下文
+//     * @return true是主进程
+//     */
+//    fun isMainProcess(context: Context): Boolean {
+//        return isPidOfProcessName(context, Process.myPid(), getMainProcessName(context))
+//    }
 
-    /**
-     * 获取主进程名
-     * @param context 上下文
-     * @return 主进程名
-     */
-    private fun getMainProcessName(context: Context): String {
-        return context.packageManager.getApplicationInfo(context.packageName, 0).processName;
-    }
-
-    /**
-     * 判断是否主进程
-     * @param context 上下文
-     * @return true是主进程
-     */
-    fun isMainProcess(context: Context): Boolean {
-        return isPidOfProcessName(context, Process.myPid(), getMainProcessName(context));
+    fun isUiThread(): Boolean {
+        return Thread.currentThread().id == Looper.getMainLooper().thread.id
     }
 }

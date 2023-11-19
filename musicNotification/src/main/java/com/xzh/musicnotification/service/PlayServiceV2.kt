@@ -9,13 +9,11 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
 import android.os.IBinder
-import android.os.Process
 import com.xzh.musicnotification.Global
 import com.xzh.musicnotification.IMusicActivityCallbackAidlInterface
 import com.xzh.musicnotification.IMusicServiceAidlInterface
 import com.xzh.musicnotification.IMusicServiceCallbackAidlInterface
 import com.xzh.musicnotification.LockActivityV2
-import com.xzh.musicnotification.notification.BaseMusicNotification
 import com.xzh.musicnotification.notification.MusicNotificationV2
 import com.xzh.musicnotification.service.NotificationReceiver.IReceiverListener
 import com.xzh.musicnotification.utils.Utils
@@ -23,7 +21,7 @@ import com.xzh.musicnotification.utils.Utils
 class PlayServiceV2 : Service(), IReceiverListener {
     private var playing = false
     private var lockActivity = false
-    var songData: MutableMap<String, Any?>? = null
+    var songData: MutableMap<Any?, Any?>? = null
     private var mReceiver: NotificationReceiver? = null
     private var mServiceEventListener: IMusicServiceCallbackAidlInterface? = null
     private var mActivityEventListener: IMusicActivityCallbackAidlInterface? = null
@@ -33,7 +31,7 @@ class PlayServiceV2 : Service(), IReceiverListener {
         super.onCreate()
         MusicNotificationV2.instance.initNotification(
             this,
-            object : BaseMusicNotification.OnMusicEventListener {
+            object : MusicNotificationV2.OnMusicEventListener {
                 override fun onMediaButtonEvent(keyCode: Int) {
                     val data = hashMapOf<String, Any>()
                     data["type"] = Global.MEDIA_BUTTON
@@ -130,7 +128,7 @@ class PlayServiceV2 : Service(), IReceiverListener {
                 return this@PlayServiceV2.playing
             }
 
-            override fun getSongData(): MutableMap<String, Any?>? {
+            override fun getSongData(): MutableMap<Any?, Any?>? {
                 return this@PlayServiceV2.songData
             }
 
@@ -141,7 +139,7 @@ class PlayServiceV2 : Service(), IReceiverListener {
             override fun playOrPause(playing: Boolean) {
                 this@PlayServiceV2.playing = playing
                 mActivityEventListener?.playOrPause(playing)
-                val options: MutableMap<String, Any?> = HashMap()
+                val options: MutableMap<Any?, Any?> = HashMap()
                 options[Global.KEY_PLAYING] = playing
                 invoke(this@PlayServiceV2, Global.KEY_PLAY_OR_PAUSE, options)
                 MusicNotificationV2.instance.playOrPause(playing)
@@ -157,7 +155,7 @@ class PlayServiceV2 : Service(), IReceiverListener {
             }
 
             override fun update(option: MutableMap<Any?, Any?>?) {
-                this@PlayServiceV2.songData = option as MutableMap<String, Any?>
+                this@PlayServiceV2.songData = option as MutableMap<Any?, Any?>
                 mActivityEventListener?.update(option)
                 invoke(this@PlayServiceV2, Global.KEY_UPDATE, option)
                 MusicNotificationV2.instance.updateSong(option)
@@ -169,6 +167,7 @@ class PlayServiceV2 : Service(), IReceiverListener {
         }
     }
 
+    @Suppress("DEPRECATION")
     @SuppressLint("WrongConstant")
     override fun onDestroy() {
         super.onDestroy()
@@ -182,9 +181,9 @@ class PlayServiceV2 : Service(), IReceiverListener {
         }
         MusicNotificationV2.instance.cancel()
         unregisterReceiver(mReceiver)
-        if (!Utils.isMainProcess(this)) {
-            Process.killProcess(Process.myPid())
-        }
+//        if (!Utils.isMainProcess(this)) {
+//            Process.killProcess(Process.myPid())
+//        }
     }
 
     override fun onScreenReceive() {
@@ -223,7 +222,7 @@ class PlayServiceV2 : Service(), IReceiverListener {
             "enabled" -> {
                 if (songData != null) this@PlayServiceV2.let {
                     invoke(it, Global.KEY_UPDATE, songData!!)
-                    val options: MutableMap<String, Any?> = HashMap()
+                    val options: MutableMap<Any?, Any?> = HashMap()
                     options[Global.KEY_PLAYING] = playing
                     invoke(it, Global.KEY_PLAY_OR_PAUSE, options)
                 }
@@ -237,7 +236,7 @@ class PlayServiceV2 : Service(), IReceiverListener {
         mServiceEventListener?.sendMessage(eventName, data)
     }
 
-    fun invoke(context: Context, type: String, options: MutableMap<String, Any?>) {
+    fun invoke(context: Context, type: String, options: MutableMap<Any?, Any?>) {
         try {
             val clazz = Class.forName("com.xzh.widget.MusicWidget")
 

@@ -13,10 +13,12 @@ class PendingIntentInfo(val id: Int, val index: Int, val EXTRA: String) {
     companion object {
         @SuppressLint("UnspecifiedImmutableFlag")
         fun addOnClickPendingIntents(
-            views: RemoteViews,
-            context: Context,
+            views: RemoteViews?,
+            context: Context?,
             vararg pendingIntentInfoList: PendingIntentInfo
         ) {
+            if (views === null) return
+            if (context === null) return
             for (item in pendingIntentInfoList) {
                 val intent = Intent(context.packageName + NotificationReceiver.ACTION_STATUS_BAR)
                 intent.putExtra(

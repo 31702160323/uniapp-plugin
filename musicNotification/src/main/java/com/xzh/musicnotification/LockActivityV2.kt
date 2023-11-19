@@ -11,7 +11,6 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
-import android.os.Looper
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
@@ -79,7 +78,7 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
                         this@LockActivityV2.playOrPause(playing)
                     }
                 })
-                if (isUiThread()) {
+                if (Utils.isUiThread()) {
                     this@LockActivityV2.update(mBinder?.songData)
                 } else {
                     runOnUiThread { this@LockActivityV2.update(mBinder?.songData) }
@@ -192,7 +191,7 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
 
     fun update(options: MutableMap<Any?, Any?>?) {
         if (options == null) return
-        if (isUiThread()) {
+        if (Utils.isUiThread()) {
             updateUI(options)
         } else {
             runOnUiThread { updateUI(options) }
@@ -224,7 +223,7 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
                     resource: Bitmap,
                     transition: Transition<in Bitmap?>?
                 ) {
-                    if (isUiThread()) {
+                    if (Utils.isUiThread()) {
                         lockDate!!.setImageBitmap(changeAlpha(resource))
                     } else {
                         runOnUiThread { lockDate!!.setImageBitmap(changeAlpha(resource)) }
@@ -275,9 +274,5 @@ class LockActivityV2 : AppCompatActivity(), OnSlidingFinishListener, View.OnClic
         } catch (e: Exception) {
             bitmap
         }
-    }
-
-    fun isUiThread(): Boolean {
-        return Thread.currentThread().id == Looper.getMainLooper().thread.id
     }
 }

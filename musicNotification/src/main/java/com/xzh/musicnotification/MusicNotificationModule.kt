@@ -84,9 +84,11 @@ class MusicNotificationModule : UniModule() {
                         IMusicServiceCallbackAidlInterface.Stub() {
                         override fun sendMessage(eventName: String?, params: MutableMap<Any?, Any?>?
                         ) {
-                            val data = JSONObject()
-                            data.putAll(params as Map<out String, Any>)
-                            mUniSDKInstance.fireGlobalEventCallback(eventName, data)
+                            val options = JSONObject()
+                            params?.forEach { (key, value) ->
+                                options[key as String] = value
+                            }
+                            if (eventName !== null) mUniSDKInstance.fireGlobalEventCallback(eventName, options)
                         }
                     })
                     data["message"] = "设置歌曲信息成功"
