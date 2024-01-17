@@ -39,7 +39,8 @@
             android:theme="@style/LockScreenTheme"
             tools:targetApi="o_mr1" />
 
-        <service android:exported="false" android:name=".service.PlayServiceV2" android:process=":music" />
+<!--        <service android:exported="false" android:name=".service.PlayServiceV2" android:process=":music" />-->
+        <service android:exported="false" android:name=".service.PlayServiceV2" />
     </application>
 
 </manifest>

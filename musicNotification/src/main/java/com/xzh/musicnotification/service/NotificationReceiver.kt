@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothHeadset
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 
 /**
  * 接收Notification发送的广播
@@ -12,12 +13,12 @@ class NotificationReceiver internal constructor(private val mListener: IReceiver
     BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         try {
-            if (Intent.ACTION_SCREEN_OFF == intent.action) {
+            if (intent.action.equals(Intent.ACTION_SCREEN_OFF)) {
                 mListener.onScreenReceive()
-            } else if (Intent.ACTION_HEADSET_PLUG == intent.action) {
+            } else if (intent.action.equals(Intent.ACTION_HEADSET_PLUG)) {
                 mListener.onHeadsetReceive(intent.getIntExtra("state", 0))
-            } else if (BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED == intent.action) {
-                mListener.onBluetoothReceive(intent.getIntExtra(BluetoothHeadset.EXTRA_STATE, 0))
+            } else if (intent.action.equals(BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED)) {
+                mListener.onBluetoothReceive(intent.getIntExtra(BluetoothHeadset.EXTRA_STATE, BluetoothHeadset.STATE_DISCONNECTING))
             } else {
                 mListener.onMusicReceive(intent.getStringExtra(EXTRA))
             }
