@@ -3,11 +3,12 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    namespace 'com.xzh.varydesktopicons'
+    compileSdk rootProject.ext.compileSdk
 
     defaultConfig {
-        minSdk 21
-        targetSdk 33
+        minSdk rootProject.ext.minSdk
+        targetSdk rootProject.ext.targetSdk
 
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
@@ -35,9 +36,9 @@ android {
 }
 
 dependencies {
-    compileOnly fileTree(include: ['*.?ar'], dir: '../app/libs')
     implementation fileTree(include: ['*.?ar'], dir: 'libs')
+    compileOnly fileTree(include: ['*.?ar'], dir: '../app/libs')
 
-    compileOnly 'com.alibaba:fastjson:1.1.46.android'
-    compileOnly 'com.facebook.fresco:fresco:1.13.0'
+    compileOnly rootProject.ext.supportDependencies.fastjson
+    compileOnly rootProject.ext.supportDependencies.fresco
 }

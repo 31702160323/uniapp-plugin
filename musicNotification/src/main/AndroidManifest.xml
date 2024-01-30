@@ -29,6 +29,7 @@
     <application>
 <!--        android:noHistory="true"-->
         <activity
+            android:process=":music"
             android:exported="false"
             android:name=".LockActivityV2"
             android:showWhenLocked="true"

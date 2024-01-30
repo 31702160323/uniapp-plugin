@@ -7,5 +7,9 @@
     android:minHeight="@dimen/dp_40"
     android:maxResizeWidth="@dimen/dp_320"
     android:maxResizeHeight="@dimen/dp_40"
+    android:minResizeWidth="@dimen/dp_320"
+    android:minResizeHeight="@dimen/dp_40"
+    android:targetCellWidth="5"
+    android:targetCellHeight="1"
     android:widgetCategory="home_screen"/>
 <!--    android:previewImage="@mipmap/icon"-->
