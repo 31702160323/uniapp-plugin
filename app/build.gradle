@@ -170,7 +170,6 @@ dependencies {
 //    implementation project(':calendar')
     implementation project(":musicNotification")
     implementation project(":widget")
-    implementation project(":varyDesktopIcons")
 //    implementation project(":pictureSelectorUni")
     implementation project(":shortcuts")
 }
